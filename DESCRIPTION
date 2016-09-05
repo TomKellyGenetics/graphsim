@@ -1,0 +1,14 @@
+Package: graphsim
+Type: Package
+Title: Simulate Expression data from iGraph networks 
+Version: 0.1.0
+Authors@R: person("Tom", "Tom Kelly", email = "tom.kelly@postgrad.otago.ac.nz", role = c("aut", "cre"))
+Description: Functions to develop simulated continuous data (e.g., gene expression) from a sigma covariance matrix derived from a graph structure in iGraph. Intended to extend mvtnorm to take iGraph structures rather than sigma matrices as input.
+License: GPL-3
+Imports:
+    igraph,
+    mvtnorm,
+    Matrix,
+    matrixcalc
+LazyData: TRUE
+RoxygenNote: 5.0.1

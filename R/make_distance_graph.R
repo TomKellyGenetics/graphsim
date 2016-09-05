@@ -9,7 +9,7 @@
 ##' @param absolute logical. Whether distances are scaled as the absolute difference from the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph adjacency
 ##' @import igraph
-make_distance.igraph <- function(g, directed = T, absolute = F){
+make_distance_graph <- function(g, directed = T, absolute = F){
   if(directed == F) g <- as.undirected(g)
   diam <-diameter(g)
   if (absolute){

@@ -19,12 +19,12 @@ generate_expression(n, graph, state = NULL, cor = 0.8, mean = 0,
 
 \item{mean}{mean value of each simulated gene. Defaults to 0. May be entered as a scalar applying to all genes or a vector with a separate value for each.}
 
-\item{comm, absolute}{logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist.igraph}} or \code{\link[graphsim]{make_sigma_mat.igraph}}.}
+\item{comm, absolute}{logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.}
 
 \item{dist}{logical. Whether a graph distance (\code{\link[graphsim]{make_sigma}}) is used to compute the sigma matrix.}
 }
 \description{
-Compute simulated continuous expression data from a graph network structure. Requires an \code{\link[igraph]{igraph}} pathway structure and a matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}. Uses graph structure to pass a sigma covariance matrix from \code{\link[graphsim]{make_sigma_mat_dist.igraph}} or \code{\link[graphsim]{make_sigma_mat.igraph}} on to \code{\link[mvtnorm]{rmvnorm}}
+Compute simulated continuous expression data from a graph network structure. Requires an \code{\link[igraph]{igraph}} pathway structure and a matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}. Uses graph structure to pass a sigma covariance matrix from \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}} on to \code{\link[mvtnorm]{rmvnorm}}
 }
 \keyword{graph}
 \keyword{igraph}

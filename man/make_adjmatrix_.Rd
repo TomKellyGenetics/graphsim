@@ -2,10 +2,10 @@
 % Please edit documentation in R/make_adjmatrix_graph.R
 \name{Generate Adjacency Matrix from Graph Structure}
 \alias{Generate Adjacency Matrix from Graph Structure}
-\alias{make_adjmatrix.igraph}
+\alias{make_adjmatrix_graph}
 \title{Generate Adjacency Matrix}
 \usage{
-make_adjmatrix.igraph(graph, directed = F)
+make_adjmatrix_graph(graph, directed = F)
 }
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}

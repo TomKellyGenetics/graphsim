@@ -23,8 +23,8 @@ make_sigma_mat.matrix <- function(mat, cor){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat.igraph <- function(graph, cor, comm = F, directed = F){
-  mat <- make_adjmatrix.igraph(graph, directed = directed)
+make_sigma_mat_graph <- function(graph, cor, comm = F, directed = F){
+  mat <- make_adjmatrix_graph(graph, directed = directed)
   if(comm) mat <- make_commonlink.matrix(mat)
   diag(mat) <- 1
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
@@ -47,8 +47,8 @@ make_sigma_mat_dist.matrix <- function(mat, cor, absolute = F){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist.igraph <- function(graph, cor, absolute = F){
-  mat <- make_distance.igraph(graph, absolute = absolute)
+make_sigma_mat_dist_graph <- function(graph, cor, absolute = F){
+  mat <- make_distance_graph(graph, absolute = absolute)
   sig <- make_sigma_mat_dist.matrix(mat, cor)
   return(sig)
 }

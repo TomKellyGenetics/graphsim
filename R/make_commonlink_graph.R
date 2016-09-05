@@ -22,7 +22,7 @@ make_commonlink.matrix <- function(adj_mat){
   return(comm_mat)
 }
 
-make_commonlink.igraph <- function(g, directed = F){
+make_commonlink_graph <- function(g, directed = F){
   adj_mat <- make_adjmatrix_graph(g, directed = directed)
   comm_mat <- make_commonlink_adjmat(adj_mat)
 }

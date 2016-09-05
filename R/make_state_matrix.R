@@ -9,6 +9,7 @@
 ##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferrfed directly from expect correlations for each edge.
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph
+##' @export
 make_state_matrix <- function(graph, state){
   state <- sign(state) # coerce to vector or 1 and -1 if not already
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])

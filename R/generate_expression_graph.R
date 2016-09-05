@@ -15,6 +15,7 @@
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph mvtnorm Matrix
 ##' @importFrom matrixcalc is.square.matrix is.symmetric.matrix is.positive.definite
+##' @export
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = F, dist = F, absolute = F){
   if(is.vector(state)) state <- make_state_matrix(graph, state)
   if(!(is.vector(mean))) mean <- rep(mean,length(V(graph)))

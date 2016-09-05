@@ -9,6 +9,7 @@
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.
 ##' @keywords graph network igraph adjacency
 ##' @import igraph
+##' @export
 make_adjmatrix_graph <- function(graph, directed = F){
   if(directed == F) graph <- as.undirected(graph)
   adj_mat <- as.matrix(as_adjacency_matrix(graph))

@@ -1,4 +1,4 @@
-##' @name Generate Simulated Expression from Graph Structure
+##' @name generate_expression
 ##' @rdname generate_expression
 ##'
 ##' @title Generate Simulated Expression
@@ -13,7 +13,8 @@
 ##' @param dist logical. Whether a graph distance (\code{\link[graphsim]{make_sigma}}) is used to compute the sigma matrix.
 ##' @param comm,absolute logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.
 ##' @keywords graph network igraph mvtnorm simulation
-##' @import igraph mvtnorm Matrix matrixcalc
+##' @import igraph mvtnorm Matrix
+##' @importFrom matrixcalc is.square.matrix is.symmetric.matrix
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = F, dist = F, absolute = F){
   if(is.vector(state)) state <- make_state_matrix(graph, state)
   if(!(is.vector(mean))) mean <- rep(mean,length(V(graph)))
@@ -25,11 +26,11 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
   if(!(is.null(state))) sig <- state * sig
   if(is.symmetric.matrix(sig) == F) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
-    sig <- as.matrix(nearPD(sig, corr=T, keepDiag = T)$mat) #postive definite correction
+    sig <- as_adjmat(nearPD(sig, corr=T, keepDiag = T)$mat) #postive definite correction
   }
   if(is.positive.definite(sig) == F) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
-    sig <- as.matrix(nearPD(sig, corr=T, keepDiag = T)$mat) #postive definite correction
+    sig <- as_adjmat(nearPD(sig, corr=T, keepDiag = T)$mat) #postive definite correction
   }
   expr_mat <- t(rmvnorm(n,mean=mean, sigma=sig))
   rownames(expr_mat)<-names(V(graph))

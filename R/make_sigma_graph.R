@@ -1,3 +1,4 @@
+##' @name make_sigma
 ##' @rdname make_sigma
 ##'
 ##' @title Generate Sigma Matrix
@@ -13,7 +14,7 @@
 ##' @keywords graph network igraph mvtnorm
 ##' @import igraph mvtnorm
 ##' @export
-make_sigma_mat.matrix <- function(mat, cor){
+make_sigma_mat_adjmat <- function(mat, cor){
   sig <- ifelse(mat>0, cor, 0)
   diag(sig)<-1
   rownames(sig) <- rownames(mat)
@@ -25,7 +26,7 @@ make_sigma_mat.matrix <- function(mat, cor){
 ##' @export
 make_sigma_mat_graph <- function(graph, cor, comm = F, directed = F){
   mat <- make_adjmatrix_graph(graph, directed = directed)
-  if(comm) mat <- make_commonlink.matrix(mat)
+  if(comm) mat <- make_commonlink_adjmat(mat)
   diag(mat) <- 1
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
   diag(sig)<-1
@@ -36,7 +37,7 @@ make_sigma_mat_graph <- function(graph, cor, comm = F, directed = F){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist.matrix <- function(mat, cor, absolute = F){
+make_sigma_mat_dist_adjmat <- function(mat, cor, absolute = F){
   sig <- mat/max(mat[mat!=1]) * cor
   sig <- ifelse(sig>0, sig, 0)
   diag(sig)<-1
@@ -49,6 +50,6 @@ make_sigma_mat_dist.matrix <- function(mat, cor, absolute = F){
 ##' @export
 make_sigma_mat_dist_graph <- function(graph, cor, absolute = F){
   mat <- make_distance_graph(graph, absolute = absolute)
-  sig <- make_sigma_mat_dist.matrix(mat, cor)
+  sig <- make_sigma_mat_dist_adjmat(mat, cor)
   return(sig)
 }

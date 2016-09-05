@@ -2,10 +2,10 @@
 % Please edit documentation in R/make_commonlink_graph.R
 \name{Generate Common Link Matrix from Graph Structure}
 \alias{Generate Common Link Matrix from Graph Structure}
-\alias{make_commonlink.matrix}
+\alias{make_commonlink_adjmat}
 \title{Generate Common Link Matrix}
 \usage{
-make_commonlink.matrix(adj_mat)
+make_commonlink_adjmat(adj_mat)
 }
 \arguments{
 \item{adj_mat}{precomputed adjacency matrix.}

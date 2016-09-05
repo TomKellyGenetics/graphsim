@@ -10,7 +10,7 @@
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.
 ##' @keywords graph network igraph neighbohood
 ##' @import igraph
-make_commonlink.matrix <- function(adj_mat){
+make_commonlink_adjmat <- function(adj_mat){
   comm_mat <- matrix(NA, nrow(adj_mat), ncol(adj_mat))
   for(ii in 1:nrow(adj_mat)){
     for(jj in 1:ncol(adj_mat)){
@@ -22,7 +22,7 @@ make_commonlink.matrix <- function(adj_mat){
   return(comm_mat)
 }
 
-make_commonlink_graph <- function(g, directed = F){
-  adj_mat <- make_adjmatrix_graph(g, directed = directed)
+make_commonlink_graph <- function(graph, directed = F){
+  adj_mat <- make_adjmatrix_graph(graph, directed = directed)
   comm_mat <- make_commonlink_adjmat(adj_mat)
 }

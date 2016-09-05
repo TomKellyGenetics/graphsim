@@ -12,7 +12,8 @@
 ##' @param absolute logical. Whether distances are scaled as the absolute difference from the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph mvtnorm
 ##' @import igraph mvtnorm
-make_sigma_mat_adjmat.matrix <- function(mat, cor){
+##' @export
+make_sigma_mat.matrix <- function(mat, cor){
   sig <- ifelse(mat>0, cor, 0)
   diag(sig)<-1
   rownames(sig) <- rownames(mat)
@@ -20,8 +21,10 @@ make_sigma_mat_adjmat.matrix <- function(mat, cor){
   return(sig)
 }
 
-make_sigma_mat.igraph <- function(g, cor, comm = F, directed = F){
-  mat <- make_adjmatrix.igraph(g, directed = directed)
+##' @rdname make_sigma
+##' @export
+make_sigma_mat.igraph <- function(graph, cor, comm = F, directed = F){
+  mat <- make_adjmatrix.igraph(graph, directed = directed)
   if(comm) mat <- make_commonlink.matrix(mat)
   diag(mat) <- 1
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
@@ -31,6 +34,8 @@ make_sigma_mat.igraph <- function(g, cor, comm = F, directed = F){
   return(sig)
 }
 
+##' @rdname make_sigma
+##' @export
 make_sigma_mat_dist.matrix <- function(mat, cor, absolute = F){
   sig <- mat/max(mat[mat!=1]) * cor
   sig <- ifelse(sig>0, sig, 0)
@@ -40,8 +45,10 @@ make_sigma_mat_dist.matrix <- function(mat, cor, absolute = F){
   return(sig)
 }
 
-make_sigma_mat_dist.igraph <- function(g, cor, absolute = F){
-  mat <- make_distance.igraph(g, absolute = absolute)
+##' @rdname make_sigma
+##' @export
+make_sigma_mat_dist.igraph <- function(graph, cor, absolute = F){
+  mat <- make_distance.igraph(graph, absolute = absolute)
   sig <- make_sigma_mat_dist.matrix(mat, cor)
   return(sig)
 }

@@ -18,7 +18,7 @@
 ##' @export
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = F, dist = F, absolute = F){
   if(is.vector(state)) state <- make_state_matrix(graph, state)
-  if(!(is.vector(mean))) mean <- rep(mean,length(V(graph)))
+  if(length(mean) != length(V(graph))) mean <- rep(mean,length(V(graph)))
   if(dist){
     sig <- make_sigma_mat_dist_graph(graph, cor, absolute = absolute)
   } else {

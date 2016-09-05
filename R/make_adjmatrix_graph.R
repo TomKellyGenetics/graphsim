@@ -10,8 +10,8 @@
 ##' @keywords graph network igraph adjacency
 ##' @import igraph
 make_adjmatrix_graph <- function(graph, directed = F){
-  if(directed == F) graph <- as.undirected(g)
-  adj_mat <- as_adjmat(as_adjacency_matrix(g))
-  rownames(adj_mat) <- colnames(adj_mat) <- names(V(g))
+  if(directed == F) graph <- as.undirected(graph)
+  adj_mat <- as.matrix(as_adjacency_matrix(graph))
+  rownames(adj_mat) <- colnames(adj_mat) <- names(V(graph))
   return(adj_mat)
 }

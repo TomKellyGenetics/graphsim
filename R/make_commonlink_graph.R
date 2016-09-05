@@ -23,6 +23,8 @@ make_commonlink_adjmat <- function(adj_mat){
   return(comm_mat)
 }
 
+##' @rdname make_commonlink
+##' @export
 make_commonlink_graph <- function(graph, directed = F){
   adj_mat <- make_adjmatrix_graph(graph, directed = directed)
   comm_mat <- make_commonlink_adjmat(adj_mat)

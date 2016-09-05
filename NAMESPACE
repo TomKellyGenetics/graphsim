@@ -3,6 +3,7 @@
 export(generate_expression)
 export(make_adjmatrix_graph)
 export(make_commonlink_adjmat)
+export(make_commonlink_graph)
 export(make_distance_graph)
 export(make_sigma_mat_adjmat)
 export(make_sigma_mat_dist_adjmat)

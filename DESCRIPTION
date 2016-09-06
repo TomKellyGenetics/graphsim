@@ -10,5 +10,12 @@ Imports:
     mvtnorm,
     Matrix,
     matrixcalc
+Suggests:
+    plot.igraph,
+    gplots,
+    heatmap.2x
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

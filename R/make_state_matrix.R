@@ -6,11 +6,22 @@
 ##' @description Functions to compute the matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}.
 ##'
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted as long as a shortest path can be computed.
-##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferrfed directly from expect correlations for each edge.
+##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expect correlations for each edge.  may also be entered as text for "activating" or "inhibiting". May be applied a scalar across all edges or as a vector for each edge respectively.
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph
 ##' @export
 make_state_matrix <- function(graph, state){
+  if(length(state) == 1) rep(state, length(E(graph)))
+  state[state == 2] <- -1
+  state[state == 1] <- 1
+  if(is.character(state)){
+    state[grep("inhibiting", rep(state, 3))] <- -1
+    state[grep("activating", rep(state, 3))] <- -1
+    state <- as.numeric(state)
+    } else {
+      warning("Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
+      stop()
+    }
   state <- sign(state) # coerce to vector or 1 and -1 if not already
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
   if(length(grep(-1, state))==1) edges <- t(edges)

@@ -15,8 +15,8 @@ make_state_matrix <- function(graph, state){
   state[state == 2] <- -1
   state[state == 1] <- 1
   if(is.character(state)){
-    state[grep("inhibiting", rep(state, 3))] <- -1
-    state[grep("activating", rep(state, 3))] <- 1
+    state[grep("inhibiting", state)] <- -1
+    state[grep("activating", state)] <- 1
     state <- as.numeric(state)
   }
   state <- sign(state) # coerce to vector or 1 and -1 if not already

@@ -14,6 +14,7 @@
 ##' @param comm,absolute logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph mvtnorm Matrix matrixcalc
+##' @export
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = F, dist = F, absolute = F){
   if(is.vector(state) || length(state) == 1) state <- make_state_matrix(graph, state)
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))

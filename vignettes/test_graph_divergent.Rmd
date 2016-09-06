@@ -1,0 +1,93 @@
+---
+title: "Simulating divergent graph structure in continous data"
+author: "Tom Kelly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_document
+vignette: >
+  %\VignetteIndexEntry{Simulating divergent graph structure in continous data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+##Install dependencies for Demonstration
+
+```{r, message=F}
+library('mvtnorm')
+library("igraph")
+library("devtools")
+devtools::install_github("TomKellyGenetics/plot.igraph")
+library("plot.igraph")
+devtools::install_github("TomKellyGenetics/heatmap.2x")
+library("heatmap.2x")
+devtools::install_github("TomKellyGenetics/graphsim")
+library("graphsim")
+```
+
+##set up simulated graphs
+
+```{r}
+graph_test2_edges <- rbind(c("C", "E"), c("D", "E"), c("E", "F"))
+graph_test2 <- graph.edgelist(graph_test2_edges, directed = T)
+plot_directed(graph_test2, layout = layout.kamada.kawai)
+```
+
+#Generated simulated expression data from graph
+
+##Adjacency matrix
+
+```{r}
+adj_mat <- make_adjmatrix_graph(graph_test2)
+heatmap.2x(make_adjmatrix_graph(graph_test2), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:4, rowsep = 1:4)
+heatmap.2x(make_adjmatrix_graph(graph_test2, directed = T), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:4, rowsep = 1:4)
+comm_mat <- make_commonlink_graph(graph_test2)
+heatmap.2x(make_commonlink_graph(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+```
+
+##Distance matrix
+
+```{r}
+shortest.paths(graph_test2)
+heatmap.2x(shortest.paths(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+(diameter(graph_test2)-shortest.paths(graph_test2))/diameter(graph_test2)
+heatmap.2x((diameter(graph_test2)-shortest.paths(graph_test2))/diameter(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+make_distance_graph(graph_test2, absolute = F)
+make_distance_graph(graph_test2, absolute = T)
+```
+
+##Sigma matrix
+
+```{r}
+#sigma from adj mat
+make_sigma_mat_graph(graph_test2, 0.8)
+heatmap.2x(make_sigma_mat_graph(graph_test2, 0.8), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+#sigma from comm mat
+make_sigma_mat_graph(graph_test2, 0.8, comm = T)
+heatmap.2x(make_sigma_mat_graph(graph_test2, 0.8, comm = T), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+# sigma from distance matrix
+make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = T)
+make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = F)
+heatmap.2x(make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = T), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2x(make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = F), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+```
+
+#Simulated expression and observed correlation
+
+```{r}
+#simulate expression data
+#adj mat
+expr <- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm =F) # unable to generate from adj mat ## fixed with positive definite correction
+heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+#comm mat
+expr <- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm =T) #expression from comm mat
+heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+#absolute dist
+expr<- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm = F, dist = T, absolute = T) # unable to generate from adj mat ## fixed PD
+heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+# relative dist
+expr<- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm = F, dist = T, absolute = F)
+heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+```

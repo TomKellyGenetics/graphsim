@@ -1,4 +1,4 @@
-##' @name generate_expression
+##' @name Generate Simulated Expression from Graph Structure
 ##' @rdname generate_expression
 ##'
 ##' @title Generate Simulated Expression
@@ -7,18 +7,16 @@
 ##'
 ##' @param n number of observations (simulated samples).
 ##' @param graph An \code{\link[igraph]{igraph}} object. May must be directed if states are used.
-##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expect correlations for each edge.  may also be entered as text for "activating" or "inhibiting". May be applied a scalar across all edges or as a vector for each edge respectively. Defaults to all edges activating (i.e., no adjusting for state).
+##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferrfed directly from expect correlations for each edge.
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
 ##' @param mean mean value of each simulated gene. Defaults to 0. May be entered as a scalar applying to all genes or a vector with a separate value for each.
-##' @param dist logical. Whether a graph distance (\code{\link[graphsim]{make_sigma}}) is used to compute the sigma matrix.
+##' @param dist logical. Whether a graph distance (\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix (\code{\link[graphsim]{make_sigma_mat_graph}}) is used to compute the sigma matrix.
 ##' @param comm,absolute logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.
 ##' @keywords graph network igraph mvtnorm simulation
-##' @import igraph mvtnorm Matrix
-##' @importFrom matrixcalc is.square.matrix is.symmetric.matrix is.positive.definite
-##' @export
+##' @import igraph mvtnorm Matrix matrixcalc
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = F, dist = F, absolute = F){
-  if(is.vector(state)) state <- make_state_matrix(graph, state)
-  if(length(mean) != length(V(graph))) mean <- rep(mean,length(V(graph)))
+  if(is.vector(state) || length(state) == 1) state <- make_state_matrix(graph, state)
+  if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))
   if(dist){
     sig <- make_sigma_mat_dist_graph(graph, cor, absolute = absolute)
   } else {

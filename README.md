@@ -18,9 +18,9 @@ devtools::install_github("TomKellyGenetics/graphsim")
 Please see the following demonstrations of this (and other iGraph extensions) on examples of simple simulated networks.
 
 
-* https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/test_graph_convergent.html
-* https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/test_graph_divergent.html
-* https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/test_graph_reconvergent.html
-* https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/test_graph_network.html
+* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_convergent.html
+* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_divergent.html
+* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_reconvergent.html
+* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_network.html
 
 

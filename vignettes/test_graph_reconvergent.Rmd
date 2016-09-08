@@ -25,7 +25,7 @@ library("graphsim")
 
 ##set up simulated graphs
 
-```{r}
+```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 graph_test3_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"),c("C", "E"), c("D", "E"), c("E", "F"))
 graph_test3 <- graph.edgelist(graph_test3_edges, directed = T)
 plot_directed(graph_test3, layout = layout.kamada.kawai)
@@ -35,7 +35,7 @@ plot_directed(graph_test3, layout = layout.kamada.kawai)
 
 ##Adjacency matrix
 
-```{r}
+```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 adj_mat <- make_adjmatrix_graph(graph_test3)
 heatmap.2x(make_adjmatrix_graph(graph_test3), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:6, rowsep = 1:6)
 heatmap.2x(make_adjmatrix_graph(graph_test3, directed = T), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:6, rowsep = 1:6)
@@ -45,7 +45,7 @@ heatmap.2x(make_commonlink_graph(graph_test3), scale = "none", trace = "none", c
 
 ##Distance matrix
 
-```{r}
+```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 shortest.paths(graph_test3)
 heatmap.2x(shortest.paths(graph_test3), scale = "none", trace = "none", col = bluered(50), colsep = 1:6, rowsep = 1:6)
 (diameter(graph_test3)-shortest.paths(graph_test3))/diameter(graph_test3)
@@ -56,7 +56,7 @@ make_distance_graph(graph_test3, absolute = T)
 
 ##Sigma matrix
 
-```{r}
+```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #sigma from adj mat
 make_sigma_mat_graph(graph_test3, 0.8)
 heatmap.2x(make_sigma_mat_graph(graph_test3, 0.8), scale = "none", trace = "none", col = bluered(50), colsep = 1:6, rowsep = 1:6)
@@ -72,7 +72,7 @@ heatmap.2x(make_sigma_mat_dist_graph(graph_test3, 0.8, absolute = F), scale = "n
 
 #Simulated expression and observed correlation
 
-```{r}
+```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #simulate expression data
 #adj mat
 expr <- generate_expression(100, graph_test3, cor = 0.8, mean = 0, comm =F) # unable to generate from adj mat ## fixed with positive definite correction

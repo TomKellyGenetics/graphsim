@@ -11,7 +11,7 @@ vignette: >
 
 ##Install dependencies for Demonstration
 
-```{r, message=F}
+```{r, message=F, warning=F}
 library('mvtnorm')
 library("igraph")
 library("devtools")
@@ -28,7 +28,7 @@ library("graphsim")
 ##set up simulated graphs
 
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 graph_test4_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"), c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph_test4 <- graph.edgelist(graph_test4_edges, directed = T)
 state_vec <- c(1, 1, 1, 1, -1, 1, 1, 1)
@@ -39,7 +39,7 @@ plot_directed(graph_test4, layout = layout.kamada.kawai, state = state_vec)
 
 ###Adjacency matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 adj_mat <- make_adjmatrix_graph(graph_test4)
 heatmap.2x(make_adjmatrix_graph(graph_test4), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
 heatmap.2x(make_adjmatrix_graph(graph_test4, directed = T), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
@@ -49,7 +49,7 @@ heatmap.2x(make_commonlink_graph(graph_test4), scale = "none", trace = "none", c
 
 ###Distance matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 shortest.paths(graph_test4)
 heatmap.2x(shortest.paths(graph_test4), scale = "none", trace = "none", col = bluered(50), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
 (diameter(graph_test4)-shortest.paths(graph_test4))/diameter(graph_test4)
@@ -60,7 +60,7 @@ make_distance_graph(graph_test4, absolute = T)
 
 ###Sigma matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #sigma from adj mat
 make_sigma_mat_graph(graph_test4, 0.8)
 heatmap.2x(make_sigma_mat_graph(graph_test4, 0.8), scale = "none", trace = "none", col = bluered(50), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
@@ -76,7 +76,7 @@ heatmap.2x(make_sigma_mat_dist_graph(graph_test4, 0.8, absolute = F), scale = "n
 
 ##Simulated expression and observed correlation
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #simulate expression data
 #adj mat
 expr <- generate_expression(100, graph_test4, cor = 0.8, mean = 0, comm =F, state = state_vec) # unable to generate from adj mat ## fixed with positive definite correction
@@ -101,7 +101,7 @@ heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), cols
 ##set up simulated graphs
 
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 graph_test4_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"), c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph_test4 <- graph.edgelist(graph_test4_edges, directed = T)
 state_vec <- c(1, 1, 1, -1, -1, -1, 1, 1)
@@ -112,7 +112,7 @@ plot_directed(graph_test4, layout = layout.kamada.kawai, state = state_vec)
 
 ###Adjacency matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 adj_mat <- make_adjmatrix_graph(graph_test4)
 heatmap.2x(make_adjmatrix_graph(graph_test4), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
 heatmap.2x(make_adjmatrix_graph(graph_test4, directed = T), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
@@ -122,7 +122,7 @@ heatmap.2x(make_commonlink_graph(graph_test4), scale = "none", trace = "none", c
 
 ###Distance matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 shortest.paths(graph_test4)
 heatmap.2x(shortest.paths(graph_test4), scale = "none", trace = "none", col = bluered(50), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
 (diameter(graph_test4)-shortest.paths(graph_test4))/diameter(graph_test4)
@@ -133,7 +133,7 @@ make_distance_graph(graph_test4, absolute = T)
 
 ###Sigma matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #sigma from adj mat
 make_sigma_mat_graph(graph_test4, 0.8)
 heatmap.2x(make_sigma_mat_graph(graph_test4, 0.8), scale = "none", trace = "none", col = bluered(50), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
@@ -149,7 +149,7 @@ heatmap.2x(make_sigma_mat_dist_graph(graph_test4, 0.8, absolute = F), scale = "n
 
 ##Simulated expression and observed correlation
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #simulate expression data
 #adj mat
 expr <- generate_expression(100, graph_test4, cor = 0.8, mean = 0, comm =F, state = state_vec) # unable to generate from adj mat ## fixed with positive definite correction
@@ -174,7 +174,7 @@ heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), cols
 ##set up simulated graphs
 
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 graph_test4_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"), c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph_test4 <- graph.edgelist(graph_test4_edges, directed = T)
 state_vec <- "inhibiting"
@@ -185,7 +185,7 @@ plot_directed(graph_test4, layout = layout.kamada.kawai, state = state_vec)
 
 ###Adjacency matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 adj_mat <- make_adjmatrix_graph(graph_test4)
 heatmap.2x(make_adjmatrix_graph(graph_test4), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
 heatmap.2x(make_adjmatrix_graph(graph_test4, directed = T), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
@@ -195,7 +195,7 @@ heatmap.2x(make_commonlink_graph(graph_test4), scale = "none", trace = "none", c
 
 ###Distance matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 shortest.paths(graph_test4)
 heatmap.2x(shortest.paths(graph_test4), scale = "none", trace = "none", col = bluered(50), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
 (diameter(graph_test4)-shortest.paths(graph_test4))/diameter(graph_test4)
@@ -206,7 +206,7 @@ make_distance_graph(graph_test4, absolute = T)
 
 ###Sigma matrix
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #sigma from adj mat
 make_sigma_mat_graph(graph_test4, 0.8)
 heatmap.2x(make_sigma_mat_graph(graph_test4, 0.8), scale = "none", trace = "none", col = bluered(50), colsep = 1:length(V(graph_test4)), rowsep = 1:length(V(graph_test4)))
@@ -222,7 +222,7 @@ heatmap.2x(make_sigma_mat_dist_graph(graph_test4, 0.8, absolute = F), scale = "n
 
 ##Simulated expression and observed correlation
 
-```{r}
+``````{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #simulate expression data
 #adj mat
 expr <- generate_expression(100, graph_test4, cor = 0.8, mean = 0, comm =F, state = state_vec) # unable to generate from adj mat ## fixed with positive definite correction

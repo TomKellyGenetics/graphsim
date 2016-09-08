@@ -22,5 +22,4 @@ Please see the following demonstrations of this (and other iGraph extensions) on
 * https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_divergent.html
 * https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_reconvergent.html
 * https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_network.html
-
-
+* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_network_inhibiting.html

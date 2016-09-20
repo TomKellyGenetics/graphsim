@@ -6,7 +6,7 @@
 ##' @description Functions to compute the matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}.
 ##'
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted as long as a shortest path can be computed.
-##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expect correlations for each edge.  may also be entered as text for "activating" or "inhibiting". May be applied a scalar across all edges or as a vector for each edge respectively.
+##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[plot.igraph]{plot_directed}}.
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph
 ##' @export
@@ -19,7 +19,10 @@ make_state_matrix <- function(graph, state){
     state[grep("activating", state)] <- 1
     state <- as.numeric(state)
   }
-  state <- sign(state) # coerce to vector or 1 and -1 if not already
+  if(!all(state %in% -1:2)){
+    state <- sign(state) # coerce to vector or 1 and -1 if not already
+    warning("state inferred from non-integer weighted edges")
+  }
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
   if(length(grep(-1, state))==1) edges <- t(edges)
   state_mat <- matrix(1, length(V(graph)), length(V(graph)))

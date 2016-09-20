@@ -10,7 +10,7 @@ make_state_matrix(graph, state)
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted as long as a shortest path can be computed.}
 
-\item{state}{numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expect correlations for each edge.  may also be entered as text for "activating" or "inhibiting". May be applied a scalar across all edges or as a vector for each edge respectively.}
+\item{state}{numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[plot.igraph]{plot_directed}}.}
 }
 \description{
 Functions to compute the matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}.

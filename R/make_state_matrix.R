@@ -27,8 +27,8 @@ make_state_matrix <- function(graph, state){
   if(length(grep(-1, state))==1) edges <- t(edges)
   state_mat <- matrix(1, length(V(graph)), length(V(graph)))
   if(length(edges) > 0){
-    rows <- apply(edges, 1, function(x) grep(unlist(as.list(x)[1]), names(V(graph))))
-    cols <- apply(edges, 1, function(x) grep(unlist(as.list(x)[2]), names(V(graph))))
+    rows <- apply(edges, 1, function(x) grep(unlist(as.list(x)[1], use.names = F), names(V(graph))))
+    cols <- apply(edges, 1, function(x) grep(unlist(as.list(x)[2], use.names = F), names(V(graph))))
     for(ii in 1:length(rows)){
       state_mat[rows[ii], cols[ii]] <- state_mat[rows[ii], cols[ii]] * -1
       sub_edge <- get.edgelist(graph)[setdiff(c(1:length(E(graph))),intersect(grep(names(V(graph))[rows[ii]], as.matrix(get.edgelist(graph))[,1]),  grep(names(V(graph))[cols[ii]], as.matrix(get.edgelist(graph))[,2]))),]

@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/TomKellyGenetics/graphsim.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/graphsim)
+
 ##Install
 
 To get the dependency package from CRAN:

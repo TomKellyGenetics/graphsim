@@ -3,9 +3,9 @@
 \name{make_sigma}
 \alias{make_sigma}
 \alias{make_sigma_mat_adjmat}
+\alias{make_sigma_mat_graph}
 \alias{make_sigma_mat_dist_adjmat}
 \alias{make_sigma_mat_dist_graph}
-\alias{make_sigma_mat_graph}
 \title{Generate Sigma Matrix}
 \usage{
 make_sigma_mat_adjmat(mat, cor)
@@ -36,4 +36,3 @@ Compute the Sigma matrix from an \code{\link[igraph]{igraph}} structure or pre-c
 \keyword{igraph}
 \keyword{mvtnorm}
 \keyword{network}
-

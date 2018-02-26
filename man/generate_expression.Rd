@@ -31,4 +31,3 @@ Compute simulated continuous expression data from a graph network structure. Req
 \keyword{mvtnorm}
 \keyword{network}
 \keyword{simulation}
-

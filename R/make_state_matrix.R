@@ -10,7 +10,7 @@
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph
 ##' @export
-make_state_matrix <- function(graph, state){
+make_state_matrix <- function(graph, state = "activating"){
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   state[state == 2] <- -1
   state[state == 1] <- 1
@@ -42,5 +42,7 @@ make_state_matrix <- function(graph, state){
       }
     }
   }
+  #ensure symmetric matrix
+  state_mat <- state_mat * t(state_mat)
   return(state_mat)
 }

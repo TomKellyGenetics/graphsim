@@ -20,4 +20,3 @@ Compute the distance matrix of using shortest paths of a (directed) \code{\link[
 \keyword{graph}
 \keyword{igraph}
 \keyword{network}
-

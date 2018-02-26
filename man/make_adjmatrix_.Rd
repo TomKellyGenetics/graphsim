@@ -19,4 +19,3 @@ Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph}} struct
 \keyword{graph}
 \keyword{igraph}
 \keyword{network}
-

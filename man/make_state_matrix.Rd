@@ -5,7 +5,7 @@
 \alias{make_state_matrix}
 \title{Make State Matrix}
 \usage{
-make_state_matrix(graph, state)
+make_state_matrix(graph, state = "activating")
 }
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted as long as a shortest path can be computed.}
@@ -20,4 +20,3 @@ Functions to compute the matrix of states (1 for activating and -1 for inhibitin
 \keyword{mvtnorm}
 \keyword{network}
 \keyword{simulation}
-

@@ -12,7 +12,7 @@ Imports:
     matrixcalc
 Suggests: knitr,
     rmarkdown,
-    testthat
+    testthat,
     plot.igraph,
     gplots,
     heatmap.2x

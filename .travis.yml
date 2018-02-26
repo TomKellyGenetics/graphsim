@@ -3,3 +3,6 @@
 language: R
 sudo: false
 cache: packages
+
+#override wait time to build vignettes
+install: travis_wait 30 mvn install

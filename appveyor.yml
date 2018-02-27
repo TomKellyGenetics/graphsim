@@ -51,3 +51,10 @@ USE_RTOOLS: true
 R_CHECK_ARGS: --no-vignettes --no-manual --as-cran
 
 R_BUILD_ARGS: --no-vignettes --no-manual
+
+# enable remotes
+r_github_packages:
+- TomKellyGenetics/plot.igraph
+- TomKellyGenetics/heatmap.2
+
+USE_RTOOLS: true

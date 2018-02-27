@@ -5,7 +5,10 @@ sudo: false
 cache: packages
 
 # enable remotes
-r_github_packages: TomKellyGenetics/plot.igraph TomKellyGenetics/heatmap.2
+r_github_packages:
+- TomKellyGenetics/plot.igraph
+- TomKellyGenetics/heatmap.2
+
 USE_RTOOLS: true
 
 #override wait time to build vignettes

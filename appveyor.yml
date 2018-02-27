@@ -43,3 +43,7 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+R_CHECK_ARGS: --no-vignettes --no-manual --as-cran
+
+R_BUILD_ARGS: --no-manual

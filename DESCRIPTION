@@ -10,12 +10,14 @@ Imports:
     mvtnorm,
     Matrix,
     matrixcalc
-Suggests: knitr,
+Suggests:
+    knitr,
     rmarkdown,
     testthat,
     plot.igraph,
     gplots,
-    heatmap.2x
+    heatmap.2x,
+    devtools
 Remotes:
     TomKellyGenetics/plot.igraph,
     TomKellyGenetics/heatmap.2

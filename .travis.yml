@@ -8,3 +8,6 @@ r_github_packages: TomKellyGenetics/plot.igraph TomKellyGenetics/heatmap.2
 
 #override wait time to build vignettes
 #install: travis_wait 30 mvn install
+
+#skip building vignettes
+r_check_args: "--no-vignettes"

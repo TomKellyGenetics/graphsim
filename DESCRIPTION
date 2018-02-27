@@ -16,6 +16,9 @@ Suggests: knitr,
     plot.igraph,
     gplots,
     heatmap.2x
+Remotes:
+    TomKellyGenetics/plot.igraph,
+    TomKellyGenetics/heatmap.2
 LazyData: TRUE
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

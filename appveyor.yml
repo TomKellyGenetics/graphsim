@@ -44,9 +44,6 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
-# enable remote repos
-USE_RTOOLS: true
-
 # skip vignettes in checks
 R_CHECK_ARGS: --no-vignettes --no-manual --as-cran
 

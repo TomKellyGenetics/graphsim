@@ -13,7 +13,7 @@ To get the dependency package from CRAN:
 install.packages(c("igraph", "Matrix", "mvtnorm", "matrixcalc"))
 ```
 
-To get the development verion of this package from github:
+To get the development version of this package from github:
 
 ```R
 # install.packages("devtools")

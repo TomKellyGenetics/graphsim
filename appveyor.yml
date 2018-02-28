@@ -49,5 +49,5 @@ environment:
   USE_RTOOLS: true
   # skip vignettes in checks
   R_CHECK_ARGS: '--no-vignettes --no-manual --as-cran'
-  R_BUILD_ARGS: '--no-vignettes --no-manual'
+  R_BUILD_ARGS: '--no-build-vignettes --no-manual'
 

@@ -20,7 +20,7 @@ Suggests:
     devtools
 Remotes:
     TomKellyGenetics/plot.igraph,
-    TomKellyGenetics/heatmap.2
+    TomKellyGenetics/heatmap.2x
 LazyData: TRUE
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

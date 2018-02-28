@@ -9,7 +9,8 @@ r_github_packages:
 - TomKellyGenetics/plot.igraph
 - TomKellyGenetics/heatmap.2
 
-USE_RTOOLS: true
+environment:
+  USE_RTOOLS: true
 
 #override wait time to build vignettes
 #install: travis_wait 30 mvn install

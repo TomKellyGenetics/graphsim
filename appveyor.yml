@@ -44,11 +44,10 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
-# skip vignettes in checks
-R_CHECK_ARGS: '--no-vignettes --no-manual --as-cran'
-
-R_BUILD_ARGS: '--no-vignettes --no-manual'
-
-# enable remotes
 environment:
+  # enable remotes 
   USE_RTOOLS: true
+  # skip vignettes in checks
+  R_CHECK_ARGS: '--no-vignettes --no-manual --as-cran'
+  R_BUILD_ARGS: '--no-vignettes --no-manual'
+

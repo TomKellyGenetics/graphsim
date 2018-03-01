@@ -1,5 +1,8 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
+#override wait time to build vignettes
+install: travis_wait 45 mvn install
+
 language: R
 sudo: false
 cache: packages
@@ -15,9 +18,6 @@ environment:
   # skip vignettes in checks
 #  R_CHECK_ARGS: '--no-vignettes --no-manual --as-cran'
 #  R_BUILD_ARGS: '--no-build-vignettes --no-manual'
-
-#override wait time to build vignettes
-#install: travis_wait 30 mvn install
 
 #skip building vignettes
 #r_check_args: "--no-vignettes --no-manual --as-cran"

@@ -8,7 +8,7 @@
 ##' @param adj_mat precomputed adjacency matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.
-##' @keywords graph network igraph neighbohood
+##' @keywords graph network igraph neighbourhood
 ##' @import igraph
 ##' @export
 make_commonlink_adjmat <- function(adj_mat){

@@ -22,5 +22,5 @@ Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}} stru
 }
 \keyword{graph}
 \keyword{igraph}
-\keyword{neighbohood}
+\keyword{neighbourhood}
 \keyword{network}

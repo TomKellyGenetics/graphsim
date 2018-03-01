@@ -10,15 +10,15 @@
 ##' @keywords graph network igraph adjacency
 ##' @import igraph
 ##' @export
-make_distance_graph <- function(g, directed = T, absolute = F){
-  if(directed == F) g <- as.undirected(g)
-  diam <-diameter(g)
+make_distance_graph <- function(graph, directed = T, absolute = F){
+  if(directed == F) graph <- as.undirected(graph)
+  diam <-diameter(graph)
   if (absolute){
-    mat <- (diam-shortest.paths(g))/diam
+    mat <- (diam-shortest.paths(graph))/diam
   } else {
-    mat <- 1^-diam/(diam*shortest.paths(g))
-    diag(mat) <- 1
+    mat <- 1^-diam/(diam*shortest.paths(graph))
+    diagraph(mat) <- 1
   }
-  rownames(mat) <- colnames(mat) <- names(V(g))
+  rownames(mat) <- colnames(mat) <- names(V(graph))
   return(mat)
 }

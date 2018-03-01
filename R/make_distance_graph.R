@@ -17,7 +17,7 @@ make_distance_graph <- function(graph, directed = T, absolute = F){
     mat <- (diam-shortest.paths(graph))/diam
   } else {
     mat <- 1^-diam/(diam*shortest.paths(graph))
-    diagraph(mat) <- 1
+    diag(mat) <- 1
   }
   rownames(mat) <- colnames(mat) <- names(V(graph))
   return(mat)

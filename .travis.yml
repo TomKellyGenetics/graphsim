@@ -17,7 +17,7 @@ environment:
 #  R_BUILD_ARGS: '--no-build-vignettes --no-manual'
 
 #override wait time to build vignettes
-install: travis_wait 30 mvn install
+#install: travis_wait 30 mvn install
 
 #skip building vignettes
 #r_check_args: "--no-vignettes --no-manual --as-cran"

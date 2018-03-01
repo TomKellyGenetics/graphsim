@@ -1,7 +1,9 @@
 [![Travis-CI Build Status](https://travis-ci.org/TomKellyGenetics/graphsim.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/graphsim)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/graphsim?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/graphsim)
 
-# graphsim: Simulate Expression data from iGraph networks
+# graphsim
+
+### Simulate Expression data from iGraph networks
 
 Functions to develop simulated continuous data (e.g., gene expression) from a sigma covariance matrix derived from a graph structure in iGraph. Intended to extend mvtnorm to take iGraph structures rather than sigma matrices as input.
 

@@ -12,3 +12,9 @@ r_github_packages:
 environment:
   # enable remotes
   USE_RTOOLS: true
+
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'

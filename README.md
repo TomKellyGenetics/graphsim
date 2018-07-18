@@ -36,3 +36,27 @@ Please see the following demonstrations of this (and other iGraph extensions) on
 * https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_reconvergent.html
 * https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_network.html
 * https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_network_inhibiting.html
+
+## Citation
+
+To cite the slipt package in publications use:
+
+  S. Thomas Kelly and Michael A. Black (2018). graphsim: Simulate Expression data from iGraph networks 
+  R package version 0.1.0. https://github.com/TomKellyGenetics/vioplot doi:10.5281/zenodo.1313986
+
+A BibTeX entry for LaTeX users is
+
+```
+  @Manual{,
+    title = {{graphsim}: Simulate Expression data from {iGraph} networks},
+    author = {S. Thomas Kelly and Michael A. Black},
+    year = {2018},
+    note = {R package version 0.1.0},
+    url = {https://github.com/TomKellyGenetics/graphsim},
+    doi = {10.5281/zenodo.1313986},
+  }
+```
+
+Please also acknowledge the manuscript describing use of this package (currently under review).
+
+

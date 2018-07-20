@@ -57,6 +57,6 @@ A BibTeX entry for LaTeX users is
   }
 ```
 
-Please also acknowledge the manuscript describing use of this package (currently under review).
+Please also acknowledge the manuscript describing use of this package (currently in final preparations for submission).
 
 

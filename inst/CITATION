@@ -1,20 +1,23 @@
+citHeader("To cite package 'graphsim' in publications use:")
 
-To cite the slipt package in publications use:
+     desc <- packageDescription("graphsim")
+     year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+     vers <- paste("R package version", desc$Version)
 
-  S. Thomas Kelly and Michael A. Black (2018). graphsim: Simulate Expression data from iGraph networks 
-  R package version 0.1.0. https://github.com/TomKellyGenetics/vioplot doi:10.5281/zenodo.1313986
+     citEntry(entry="Manual",
+              title = "graphsim: Simulate Expression data from iGraph networks",
+              author = personList(as.person("S. Thomas Kelly"),
+                                  as.person("Michael A. Black")),
+              year = year,
+              note = vers,
+              url = "https://github.com/TomKellyGenetics/graphsim",
+              doi = "10.5281/zenodo.1313986",
 
-A BibTeX entry for LaTeX users is
+              textVersion =
+              paste("S. Thomas Kelly and Michael A. Black (",
+                    year,
+                    "). graphsim: Simulate Expression data from iGraph networks. ",
+                    vers, ".", " https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986",
+                    sep=""))
 
-  @Manual{,
-    title = {{graphsim}: Simulate Expression data from {iGraph} networks},
-    author = {S. Thomas Kelly and Michael A. Black},
-    year = {2018},
-    note = {R package version 0.1.0},
-    url = {https://github.com/TomKellyGenetics/graphsim},
-    doi = {10.5281/zenodo.1313986},
-  }
-
-Please also acknowledge the manuscript describing use of this package (currently under review).
-
-
+citFooter("Please also acknowledge the manuscript describing use of this package (currently under review).")

@@ -6,6 +6,7 @@ Authors@R: person("Tom", "Tom Kelly", email = "tom.kelly@postgrad.otago.ac.nz", 
 Description: Functions to develop simulated continuous data (e.g., gene expression) from a sigma covariance matrix derived from a graph structure in iGraph. Intended to extend mvtnorm to take iGraph structures rather than sigma matrices as input.
 License: GPL-3
 Imports:
+    utils,
     igraph,
     mvtnorm,
     Matrix,

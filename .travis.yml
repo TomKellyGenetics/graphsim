@@ -11,7 +11,7 @@ before_install:
 
 r_github_packages:
 - TomKellyGenetics/plot.igraph
-- TomKellyGenetics/heatmap.2
+- TomKellyGenetics/heatmap.2x
 
 environment:
   # enable remotes

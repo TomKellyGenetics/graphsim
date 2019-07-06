@@ -7,7 +7,7 @@ cache: packages
 # enable remotes
 use_bioc: true
 before_install:
-  - Rscript -e 'source("https://bioconductor.org/biocLite.R");biocLite(c("multtest", "survival", "MASS"), ask = FALSE)'
+  - Rscript -e ' install.packages("biocManager");BiocManager::install(c("multtest", "survival", "MASS"), ask = FALSE)'
 
 r_github_packages:
 - TomKellyGenetics/plot.igraph

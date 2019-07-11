@@ -39,7 +39,7 @@ Please see the following demonstrations of this (and other iGraph extensions) on
 
 ## Citation
 
-To cite the slipt package in publications use:
+To cite the graphsim package in publications use:
 
   S. Thomas Kelly and Michael A. Black (2018). graphsim: Simulate Expression data from iGraph networks 
   R package version 0.1.0. https://github.com/TomKellyGenetics/vioplot doi:10.5281/zenodo.1313986

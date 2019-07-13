@@ -44,6 +44,10 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
+deploy:
+- provider: GitHub
+  auth_token: "656ad3b1e72f89c6168ff5dca2dd5cb9746a05f5"
+
 environment:
   # enable remotes 
   USE_RTOOLS: true

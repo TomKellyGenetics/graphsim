@@ -17,9 +17,9 @@ jobs:
             mkdir -p ~/R/Library
             Rscript -e 'install.packages(c("mvtnorm", "matrixcalc"))'
       - run:
-        name: Install dependencies
-        command: |
-          Rscript \
+          name: Install dependencies
+          command: |
+            Rscript \
             -e 'if (!requireNamespace("utils", quietly = TRUE)) install.packages("utils")' \
             -e 'if (!requireNamespace("igraph", quietly = TRUE)) install.packages("igraph")' \
             -e 'if (!requireNamespace("RColorBrewer", quietly = TRUE)) install.packages("RColorBrewer")' \

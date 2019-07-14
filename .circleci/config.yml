@@ -16,12 +16,6 @@ jobs:
           command: |
             export GITHUB_PAT="656ad3b1e72f89c6168ff5dca2dd5cb9746a05f5"
             mkdir -p ~/R/Library
-            Rscript -e 'install.packages("remotes")'
-            Rscript -e 'remotes::install_deps(dependencies = TRUE)'
-            Rscript -e 'install.packages("BiocManager");BiocManager::install(c("multtest", "survival", "MASS"), ask = FALSE)'
-r_github_packages:
-- TomKellyGenetics/plot.igraph
-- TomKellyGenetics/heatmap.2x
       - run:
           name: Session information and installed package versions
           command: |

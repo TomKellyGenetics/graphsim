@@ -14,12 +14,7 @@ vignette: >
 ```{r, message=F}
 library('mvtnorm')
 library("igraph")
-library("devtools")
-devtools::install_github("TomKellyGenetics/plot.igraph")
-library("plot.igraph")
-
 library("gplots")
-devtools::install_github("TomKellyGenetics/graphsim")
 library("graphsim")
 ```
 

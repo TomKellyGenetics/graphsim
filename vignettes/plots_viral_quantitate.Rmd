@@ -13,7 +13,7 @@ vignette: >
 
 R's igraph package provides a simple and flexible set of utilities for working with graphs.  In this post, we'll use this package to animate the simulated spread of a disease through a network.
 
-##Graphs
+## Graphs
 
 A graph is just a collection of nodes joined by edges:
 
@@ -204,7 +204,7 @@ sub=paste("Time = ",count), cex.main = 1.2, cex.sub = 1)
 ![](demo2.gif)
 
 
-###Sources
+### Sources
 
 Adapted from the following posts:
 

@@ -13,9 +13,7 @@ vignette: >
 
 ```{r, message=F}
 library("igraph")
-library("devtools")
-devtools::install_github("TomKellyGenetics/plot.igraph")
-library("plot.igraph")
+library("graphsim")
 ```
 
 ##Set up simulated graph

@@ -1,7 +1,7 @@
 Package: graphsim
 Type: Package
 Title: Simulate Expression data from iGraph networks 
-Version: 0.1.0
+Version: 0.1.1
 Date: 2019-02-05
 Authors@R: c(person("S. Thomas", "Kelly",email = "tom.kelly@postgrad.otago.ac.nz", role = c("ctb")),
              person("S. Thomas", "Kelly",email = "tom.kelly@riken.jp", role = c("aut", "cre")),
@@ -16,9 +16,9 @@ Imports:
     matrixcalc,
     graphics
 Suggests:
+    knitr,
     rmarkdown,
     animation,
-    knitr,
     testthat,
     gplots,
     devtools

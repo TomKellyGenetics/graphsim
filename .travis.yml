@@ -4,15 +4,6 @@ language: R
 sudo: false
 cache: packages
 
-# enable remotes
-use_bioc: true
-before_install:
-  - Rscript -e ' install.packages("BiocManager");BiocManager::install(c("multtest", "survival", "MASS"), ask = FALSE)'
-
-r_github_packages:
-- TomKellyGenetics/plot.igraph
-- TomKellyGenetics/heatmap.2x
-
 environment:
   # enable remotes
   USE_RTOOLS: true

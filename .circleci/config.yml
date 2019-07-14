@@ -16,7 +16,7 @@ jobs:
           command: |
             mkdir -p ~/R/Library
             Rscript -e 'install.packages(c("mvtnorm", "matrixcalc"))'
-    - run:
+      - run:
         name: Install dependencies
         command: |
           Rscript \

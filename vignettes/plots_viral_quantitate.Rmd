@@ -7,7 +7,7 @@ date: "2014-03-23"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{plots_viral_quantitate}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 

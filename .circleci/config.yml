@@ -14,8 +14,23 @@ jobs:
       - run:
           name: Install package dependencies
           command: |
-            export GITHUB_PAT="656ad3b1e72f89c6168ff5dca2dd5cb9746a05f5"
             mkdir -p ~/R/Library
+            Rscript -e 'install.packages(c("mvtnorm", "matrixcalc"))'
+    - run:
+        name: Install dependencies
+        command: |
+          Rscript \
+            -e 'if (!requireNamespace("utils", quietly = TRUE)) install.packages("utils")' \
+            -e 'if (!requireNamespace("igraph", quietly = TRUE)) install.packages("igraph")' \
+            -e 'if (!requireNamespace("RColorBrewer", quietly = TRUE)) install.packages("RColorBrewer")' \
+            -e 'if (!requireNamespace("mvtnorm", quietly = TRUE)) install.packages("mvtnorm")' \
+            -e 'if (!requireNamespace("matrixcalc", quietly = TRUE)) install.packages("matrixcalc")' \
+            -e 'if (!requireNamespace("knitr", quietly = TRUE)) install.packages("knitr")' \
+            -e 'if (!requireNamespace("rmarkdown", quietly = TRUE)) install.packages("rmarkdown")' \
+            -e 'if (!requireNamespace("animation", quietly = TRUE)) install.packages("animation")' \
+            -e 'if (!requireNamespace("testthat", quietly = TRUE)) install.packages("testthat")' \
+            -e 'if (!requireNamespace("gplots", quietly = TRUE)) install.packages("mgplots")' \
+            -e 'devtools::install_deps(dependencies = TRUE)'
       - run:
           name: Session information and installed package versions
           command: |

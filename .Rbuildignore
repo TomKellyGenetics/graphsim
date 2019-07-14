@@ -2,9 +2,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^appveyor\.yml$
-vignettes/*Rmd
+vignettes/*html
 ^\.circleci/config\.yml$
-^doc$
 ^Meta$
 demo.gif  
 demo2.gif  
+^doc$

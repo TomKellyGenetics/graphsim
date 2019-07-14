@@ -17,8 +17,8 @@ library("igraph")
 library("devtools")
 devtools::install_github("TomKellyGenetics/plot.igraph")
 library("plot.igraph")
-devtools::install_github("TomKellyGenetics/heatmap.2x")
-library("heatmap.2x")
+
+library("gplots")
 devtools::install_github("TomKellyGenetics/graphsim")
 library("graphsim")
 ```
@@ -37,19 +37,19 @@ plot_directed(graph_test2, layout = layout.kamada.kawai)
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 adj_mat <- make_adjmatrix_graph(graph_test2)
-heatmap.2x(make_adjmatrix_graph(graph_test2), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:4, rowsep = 1:4)
-heatmap.2x(make_adjmatrix_graph(graph_test2, directed = T), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:4, rowsep = 1:4)
+heatmap.2(make_adjmatrix_graph(graph_test2), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:4, rowsep = 1:4)
+heatmap.2(make_adjmatrix_graph(graph_test2, directed = T), scale = "none", trace = "none", col = colorpanel(3, "grey75", "white", "blue"), colsep = 1:4, rowsep = 1:4)
 comm_mat <- make_commonlink_graph(graph_test2)
-heatmap.2x(make_commonlink_graph(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(make_commonlink_graph(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 ```
 
 ##Distance matrix
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 shortest.paths(graph_test2)
-heatmap.2x(shortest.paths(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(shortest.paths(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 (diameter(graph_test2)-shortest.paths(graph_test2))/diameter(graph_test2)
-heatmap.2x((diameter(graph_test2)-shortest.paths(graph_test2))/diameter(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2((diameter(graph_test2)-shortest.paths(graph_test2))/diameter(graph_test2), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 make_distance_graph(graph_test2, absolute = F)
 make_distance_graph(graph_test2, absolute = T)
 ```
@@ -59,15 +59,15 @@ make_distance_graph(graph_test2, absolute = T)
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center'}
 #sigma from adj mat
 make_sigma_mat_graph(graph_test2, 0.8)
-heatmap.2x(make_sigma_mat_graph(graph_test2, 0.8), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(make_sigma_mat_graph(graph_test2, 0.8), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 #sigma from comm mat
 make_sigma_mat_graph(graph_test2, 0.8, comm = T)
-heatmap.2x(make_sigma_mat_graph(graph_test2, 0.8, comm = T), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(make_sigma_mat_graph(graph_test2, 0.8, comm = T), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 # sigma from distance matrix
 make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = T)
 make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = F)
-heatmap.2x(make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = T), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
-heatmap.2x(make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = F), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = T), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = F), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 ```
 
 #Simulated expression and observed correlation
@@ -76,18 +76,18 @@ heatmap.2x(make_sigma_mat_dist_graph(graph_test2, 0.8, absolute = F), scale = "n
 #simulate expression data
 #adj mat
 expr <- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm =F) # unable to generate from adj mat ## fixed with positive definite correction
-heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
-heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 #comm mat
 expr <- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm =T) #expression from comm mat
-heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
-heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 #absolute dist
 expr<- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm = F, dist = T, absolute = T) # unable to generate from adj mat ## fixed PD
-heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
-heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 # relative dist
 expr<- generate_expression(100, graph_test2, cor = 0.8, mean = 0, comm = F, dist = T, absolute = F)
-heatmap.2x(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
-heatmap.2x(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colsep = 1:4, rowsep = 1:4)
 ```

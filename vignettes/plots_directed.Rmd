@@ -1,0 +1,82 @@
+---
+title: "Directed Plots in iGraph"
+author: "Tom Kelly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Directed Plots in iGraph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Install
+
+```{r, message=F}
+library("igraph")
+library("devtools")
+devtools::install_github("TomKellyGenetics/plot.igraph")
+library("plot.igraph")
+```
+
+##Set up simulated graph
+
+```{r}
+graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"), c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+graph <- graph.edgelist(graph_edges, directed = T)
+```
+
+##Plotting
+
+`plot_directed` with default settings uses the `layout.fruchterman.reingold` as does the default `igraph::plot.igraph`.
+
+```{r}
+plot(graph)
+plot_directed(graph)
+```
+
+`plot_directed` supports customised layouts and colours:
+
+```{r}
+plot_directed(graph, layout = layout.kamada.kawai)
+plot_directed(graph, fill.node = "lightblue", border.node = "royalblue")
+```
+
+Colours may also be entered as a vector for each node in `V(graph)`:
+
+```{r}
+names(V(graph))
+colour_vector <- ifelse(names(V(graph)) %in% c("A", "D", "I"), 1, 2)
+plot_directed(graph, fill.node = c("lightblue", "grey")[colour_vector], border.node = c("royalblue", "black")[colour_vector])
+```
+
+##Arrow customisation
+
+The `state` parameter controls whether the links are "activating" or "inhibiting". These may be applied globally as a character or numeric:
+
+###Activating links
+* "activating"
+* 1
+* 0
+
+###Inhibiting links
+* "inhibiting"
+* -1
+* 2
+
+```{r}
+plot_directed(graph, state = "activating")
+plot_directed(graph, state = "inhibiting")
+plot_directed(graph, state = 1)
+plot_directed(graph, state = -1)
+plot_directed(graph, state = 0)
+plot_directed(graph, state = 2)
+```
+
+#Vectorisation
+
+The state parameter may also apply as a vector to each edge in E(graph) respectively.
+
+```{r}
+E(graph)
+plot_directed(graph, state = c(1, 1, -1, -1, 1, -1, 1, -1))
+```

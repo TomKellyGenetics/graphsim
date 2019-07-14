@@ -13,18 +13,15 @@ Imports:
     igraph,
     mvtnorm,
     Matrix,
-    matrixcalc
+    matrixcalc,
+    graphics
 Suggests:
-    knitr,
     rmarkdown,
+    animation,
+    knitr,
     testthat,
-    plot.igraph,
     gplots,
-    heatmap.2x,
     devtools
-Remotes:
-    TomKellyGenetics/plot.igraph,
-    TomKellyGenetics/heatmap.2x
 LazyData: TRUE
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

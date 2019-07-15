@@ -25,7 +25,7 @@ graph <- graph.edgelist(graph_edges, directed = T)
 
 ##Plotting
 
-`plot_directed` with default settings uses the `layout.fruchterman.reingold` as does the default `igraph::plot.igraph`.
+`plot_directed` with default settings uses the `layout.fruchterman.reingold` as does the default `igraph::graphsim`.
 
 ```{r}
 plot(graph)

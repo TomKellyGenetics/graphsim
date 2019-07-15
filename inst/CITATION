@@ -1,9 +1,15 @@
 citHeader("To cite package 'graphsim' in publications use:")
 
+     
      desc <- packageDescription("graphsim")
-     year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
-     vers <- paste("R package version", desc$Version)
-
+     if(is.na(desc)){
+             year <- "2019"
+             vers  <- "0.1.1"
+     } else {
+             year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+            vers <- paste("R package version", desc$Version)
+     }
+     
      citEntry(entry="Manual",
               title = "graphsim: Simulate Expression data from iGraph networks",
               author = personList(as.person("S. Thomas Kelly"),

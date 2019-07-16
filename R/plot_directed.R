@@ -7,7 +7,7 @@
 #   Build and Reload Package:  'Ctrl + Shift + B'
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
-##' @name graphsim
+##' @name plot_directed
 ##' @rdname plot_directed
 ##'
 ##' @title Extensions to iGraph for Customising plots

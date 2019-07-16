@@ -5,7 +5,7 @@
 \alias{plot_directed}
 \title{Extensions to iGraph for Customising plots}
 \usage{
-plot_directed(graph, state = "activating", labels = NULL,
+plot_directed(graph, state = NULL, labels = NULL,
   layout = layout.fruchterman.reingold, cex.node = 1,
   cex.label = 0.75, cex.arrow = 1.25, cex.main = 0.8,
   arrow_clip = 0.075, pch = 21, border.node = "grey33",
@@ -15,7 +15,7 @@ plot_directed(graph, state = "activating", labels = NULL,
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. Must be directed with known states.}
 
-\item{state}{character or integer. Defaults to "activating". May be applied a scalar across all edges or as a vector for each edge respectively. Accepts non-integer values for weighted edges provided that the sign indicates whether links are activating (positive) or inhibiting (negative). May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for make_state_matrix or generate_expression_graph in the graphsim package \url{https://github.com/TomKellyGenetics/graphsim}.}
+\item{state}{character or integer. Defaults to "activating" if no "state" edge attribute found. May be applied a scalar across all edges or as a vector for each edge respectively. Accepts non-integer values for weighted edges provided that the sign indicates whether links are activating (positive) or inhibiting (negative). May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for make_state_matrix or generate_expression_graph in the graphsim package \url{https://github.com/TomKellyGenetics/graphsim}.}
 
 \item{labels}{character vector. For labels to plot nodes. Defaults to vertex names in graph object. Entering "" would yield unlabelled nodes.}
 
@@ -67,6 +67,12 @@ plot_directed(graph_test4, state="inhibiting")
 #plots with vector states
 plot_directed(graph_test4, state=c(1, 1, 1, 1, -1, 1, 1, 1))
 plot_directed(graph_test4, state=c(1, 1, -1, 1, -1, 1, -1, 1))
+
+#plots states with graph attributes
+E(graph_test4)$state <- 1
+plot_directed(graph_test4)
+E(graph_test4)$state <- state=c(1, 1, -1, 1, -1, 1, -1, 1)
+plot_directed(graph_test4)
 
 #plot layout customised
 plot_directed(graph_test4, state=c(1, 1, -1, 1, -1, 1, -1, 1), layout = layout.kamada.kawai)

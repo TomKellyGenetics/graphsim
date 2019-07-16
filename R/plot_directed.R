@@ -15,7 +15,7 @@
 ##' @description Functions to plot_directed or graph structures including customised colors, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
 ##'
 ##' @param graph An \code{\link[igraph]{igraph}} object. Must be directed with known states.
-##' @param state character or integer. Defaults to "activating". May be applied a scalar across all edges or as a vector for each edge respectively. Accepts non-integer values for weighted edges provided that the sign indicates whether links are activating (positive) or inhibiting (negative). May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for make_state_matrix or generate_expression_graph in the graphsim package \url{https://github.com/TomKellyGenetics/graphsim}.
+##' @param state character or integer. Defaults to "activating" if no "state" edge attribute found. May be applied a scalar across all edges or as a vector for each edge respectively. Accepts non-integer values for weighted edges provided that the sign indicates whether links are activating (positive) or inhibiting (negative). May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for make_state_matrix or generate_expression_graph in the graphsim package \url{https://github.com/TomKellyGenetics/graphsim}.
 ##' @param labels character vector. For labels to plot nodes. Defaults to vertex names in graph object. Entering "" would yield unlabelled nodes.
 ##' @param layout function. Layout function as selected from \code{\link[igraph]{layout_}}. Defaults to layout.fruchterman.reingold. Alternatives include layout.kamada.kawai, layout.reingold.tilford, layout.sugiyama, and layout.davidson.harel.
 ##' @param cex.node numeric. Defaults to 1.
@@ -51,11 +51,17 @@
 ##' #plots with vector states
 ##' plot_directed(graph_test4, state=c(1, 1, 1, 1, -1, 1, 1, 1))
 ##' plot_directed(graph_test4, state=c(1, 1, -1, 1, -1, 1, -1, 1))
+##' 
+##' #plots states with graph attributes
+##' E(graph_test4)$state <- 1
+##' plot_directed(graph_test4)
+##' E(graph_test4)$state <- c(1, 1, -1, 1, -1, 1, -1, 1)
+##' plot_directed(graph_test4)
 ##'
 ##' #plot layout customised
 ##' plot_directed(graph_test4, state=c(1, 1, -1, 1, -1, 1, -1, 1), layout = layout.kamada.kawai)
 ##' @export
-plot_directed <- function(graph, state = "activating", labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=par("fg"), main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F){
+plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=NULL, main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F){
   L <- layout(graph)
   vs <- V(graph)
   es <- as.data.frame(get.edgelist(graph))
@@ -64,6 +70,15 @@ plot_directed <- function(graph, state = "activating", labels = NULL, layout = l
   Xn <- L[,1]
   Yn <- L[,2]
   plot(Xn, Yn, xaxt="n", yaxt="n", xlab=xlab, ylab=ylab, frame.plot=frame.plot, cex = 2 * cex.node, pch=1, col=par()$bg, main=main, sub=sub, cex.main=cex.main)
+  if(!is.null(get.edge.attribute(graph, "state"))){
+    state <- get.edge.attribute(graph, "state")
+  } else {
+    # add default state if not specified
+    if(is.null(state)){
+      state <- "activating"
+      col.arrow <-par("fg")
+    }
+  }
   if(is.numeric(state)){
     state <- as.integer(state)
     if(!all(state %in% -1:2)){
@@ -73,6 +88,9 @@ plot_directed <- function(graph, state = "activating", labels = NULL, layout = l
     if(all(state %in% -1:2)){
       state[state == -1] <- 2
       state[state == 0] <- 1
+      if(is.null(col.arrow)){
+        col.arrow <- c(par("fg"), "red")[state]
+      }
       state <- c("activating", "inhibiting")[state]
     } else {
       warning("Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")

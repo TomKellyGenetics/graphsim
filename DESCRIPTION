@@ -21,6 +21,7 @@ Suggests:
     animation,
     testthat,
     gplots,
+    scales,
     devtools
 LazyData: TRUE
 RoxygenNote: 6.1.1

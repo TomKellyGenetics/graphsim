@@ -1,0 +1,111 @@
+---
+title: "Simulating gene expression data from graph structures of biological pathways"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simulating gene expression data from graph structures of biological pathways}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library("igraph")
+library("graphsim")
+library("gplots")
+library("scales")
+data("TGFBeta_Smad_graph")
+```
+
+
+```{r,  fig.align='center'}
+summary(TGFBeta_Smad_graph)
+```
+
+```{r, fig.align='center'}
+state <- E(TGFBeta_Smad_graph)$state
+table(state)
+```
+
+```{r,  fig.align='center'}
+library("scales")
+plot_directed(TGFBeta_Smad_graph, border.node=alpha("black", 0.75), col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[state], cex.node = 0.5, cex.label = 0.5, cex.arrow = 1, fill.node="lightblue")
+```
+
+```{r,  fig.align='center'}
+plot_directed(TGFBeta_Smad_graph, border.node=alpha("black", 0.75), state = state, col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[state], cex.node = 0.5, cex.label = 0.5, cex.arrow = 1, fill.node="lightblue")
+```
+
+```{r,  fig.align='center'}
+plot_directed(TGFBeta_Smad_graph, border.node=alpha("black", 0.75), state = state, col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[state], cex.node = 0.5, cex.label = 0.5, cex.arrow = 1, fill.node="lightblue")
+```
+
+```{r, fig.align='center'}
+#TGFBeta_Smad_graph <- as.undirected(TGFBeta_Smad_graph)
+state_mat <- make_state_matrix(TGFBeta_Smad_graph, state)
+##make_symmetric
+for(i in 1:ncol(state_mat)) {for(j in 1:i) {state_mat[j,i]=state_mat[i,j] }}
+diag(state_mat) <- 1
+rownames(state_mat) <- colnames(state_mat) <- names(V(TGFBeta_Smad_graph))
+heatmap.2(state_mat, col="bluered", scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, symm=T, rowsep = 1:(nrow(state_mat)-1), colsep = 1:(ncol(state_mat)-1), sepcolor="grey85")
+```
+
+```{r, fig.align='center'}
+mat <- make_distance_graph(TGFBeta_Smad_graph, absolute = F)
+tree_mat <- as.dendrogram(hclust(dist(mat)))
+heatmap.2(mat, col=colorpanel(50, "white", "red"), scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, Colv=tree_mat, Rowv=tree_mat, rowsep = 1:(nrow(state_mat)-1), colsep = 1:(ncol(state_mat)-1), sepcolor="grey85")
+```
+
+```{r, fig.align='center'}
+sig <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor=0.8, absolute = F)
+tree_sig <- as.dendrogram(hclust(dist(sig)))
+heatmap.2(sig, col=colorpanel(50, "white", "red"), scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, Colv=tree_sig, Rowv=tree_sig, rowsep = 1:(nrow(state_mat)-1), colsep = 1:(ncol(state_mat)-1), sepcolor="grey85")
+```
+
+```{r, fig.align='center'}
+heatmap.2(sig*state_mat, col="bluered", scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, Colv=tree_sig, Rowv=tree_sig, rowsep = 1:(nrow(state_mat)-1), colsep = 1:(ncol(state_mat)-1), sepcolor="grey85")
+```
+
+```{r, fig.align='center'}
+N = 100
+cor = 0.8
+#generate simulated expression data for pathway nodes
+expr <- generate_expression(N, TGFBeta_Smad_graph, cor = cor, mean = 0, comm = F, dist = T, absolute = F, state = 1)
+tree_gene <- as.dendrogram(hclust(as.dist(1-cor(t(expr)))))
+tree_sample <- as.dendrogram(hclust(as.dist(1-cor(expr))))
+heatmap.2(expr, Colv=tree_sample, Rowv=tree_gene, distfun=function(x) as.dist(1-cor(t(x))), col="bluered", scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, labCol=NA, mar=c(0, 7))
+```
+
+```{r, fig.align='center'}
+tree_gene <- as.dendrogram(hclust(as.dist(1-cor(t(expr)))))
+tree_sample <- as.dendrogram(hclust(as.dist(1-cor(expr))))
+heatmap.2(expr, Colv=tree_sample, Rowv=tree_gene, distfun=function(x) as.dist(1-cor(t(x))), col="bluered", scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, labCol=NA, mar=c(0, 7))
+```
+
+```{r, fig.align='center'}
+heatmap.2(cor(t(expr)), Colv=tree_sig, Rowv=tree_sig, col=colorpanel(50, "white", "red"), rowsep = 1:(nrow(state_mat)-1), colsep = 1:(ncol(state_mat)-1), sepcolor="grey85", scale='none', trace='none', key=F, cexRow=0.5, cexCol=0.5)
+```
+
+```{r, fig.align='center'}
+#generate simulated expression data for pathway nodes
+expr_inhib<- generate_expression(N, TGFBeta_Smad_graph, cor = cor, mean = 0, comm = F, dist = T, absolute = F, state = state_mat)
+tree_gene_inhib <- as.dendrogram(hclust(as.dist(1-cor(t(expr_inhib)))))
+tree_sample_inhib <- as.dendrogram(hclust(as.dist(1-cor(expr_inhib))))
+heatmap.2(expr_inhib, Colv=tree_sample_inhib, Rowv=tree_gene_inhib, distfun=function(x) as.dist(1-cor(t(x))), col="bluered", scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, labCol=NA, mar=c(0, 7))
+```
+
+```{r, fig.align='center'}
+expr_inhib<- generate_expression(N, TGFBeta_Smad_graph, cor = cor, mean = 0, comm = F, dist = T, absolute = F, state = state_mat)
+tree_gene_inhib <- as.dendrogram(hclust(as.dist(1-cor(t(expr_inhib)))))
+tree_sample_inhib <- as.dendrogram(hclust(as.dist(1-cor(expr_inhib))))
+heatmap.2(expr_inhib, Colv=tree_sample_inhib, Rowv=tree_gene_inhib, distfun=function(x) as.dist(1-cor(t(x))), col="bluered", scale='none', trace='none', cexRow=0.5, cexCol=0.5, key = F, labCol=NA, mar=c(0, 7))
+```
+
+```{r, fig.align='center'}
+heatmap.2(cor(t(expr_inhib)), Colv=tree_sig, Rowv=tree_sig, col="bluered", rowsep = 1:(nrow(state_mat)-1), colsep = 1:(ncol(state_mat)-1), sepcolor="grey85", scale='none', trace='none', key=F, cexRow=0.5, cexCol=0.5)
+```

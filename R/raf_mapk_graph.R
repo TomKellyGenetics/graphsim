@@ -2,7 +2,7 @@
 #'
 #' Reactome pathway R-HSA-5673001 for the interactions in the RAF/MAP kinase cascade
 #' 
-#' @format A graph object of 17 verticies and 121 edges:
+#' @format A graph object of 17 verticess and 121 edges:
 #' \describe{
 #'   \item{V}{gene symbol (human)}
 #'   \item{E}{directed relationship for pathway}

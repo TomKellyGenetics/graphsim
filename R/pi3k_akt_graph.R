@@ -2,7 +2,7 @@
 #'
 #' Reactome pathway R-HSA-198203 for the interactions in the phosphoinositide-3-kinase activation of Protein kinase B (PKB), also known as Akt
 #' 
-#' @format A graph object of 275 verticies and 21106 edges:
+#' @format A graph object of 275 verticess and 21106 edges:
 #' \describe{
 #'   \item{V}{gene symbol (human)}
 #'   \item{E}{directed relationship for pathway}

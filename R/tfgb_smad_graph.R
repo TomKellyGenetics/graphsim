@@ -2,7 +2,7 @@
 #'
 #' Reactome pathway R-HSA-2173789 for the interactions in the TGF-\eqn{\beta} receptor signaling activates SMADs
 #' 
-#' @format A graph object of 32 verticies and 173 edges:
+#' @format A graph object of 32 verticess and 173 edges:
 #' \describe{
 #'   \item{V}{gene symbol (human)}
 #'   \item{E}{directed relationship for pathway}

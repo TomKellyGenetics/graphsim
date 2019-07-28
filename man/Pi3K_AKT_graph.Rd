@@ -4,7 +4,7 @@
 \name{Pi3K_AKT_graph}
 \alias{Pi3K_AKT_graph}
 \title{PI3K/AKT activation}
-\format{A graph object of 275 verticies and 21106 edges:
+\format{A graph object of 275 vertices and 21106 edges:
 \describe{
   \item{V}{gene symbol (human)}
   \item{E}{directed relationship for pathway}

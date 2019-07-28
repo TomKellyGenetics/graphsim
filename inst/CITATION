@@ -1,6 +1,6 @@
 citHeader("To cite package 'graphsim' in publications use:")
 
-     
+     desc <- NA
      desc <- packageDescription("graphsim")
      if(is.na(desc)){
              year <- "2019"
@@ -11,7 +11,7 @@ citHeader("To cite package 'graphsim' in publications use:")
      }
      
      citEntry(entry="Manual",
-              title = "graphsim: Simulate Expression data from iGraph networks",
+              title = "{graphsim}: Simulate Expression data from iGraph networks",
               author = personList(as.person("S. Thomas Kelly"),
                                   as.person("Michael A. Black")),
               year = year,
@@ -26,4 +26,22 @@ citHeader("To cite package 'graphsim' in publications use:")
                     vers, ".", " https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986",
                     sep=""))
 
-citFooter("Please also acknowledge the manuscript describing use of this package (currently under review).")
+citFooter("Please also acknowledge the manuscript describing use of this package once it is published.
+
+Kelly, S.T. and Black, M.A. (2019) graphsim: An R package for simulating gene expression data from graph structures of biological pathways. 
+
+  @Article{,
+    title = {{graphsim}: An {R} package for simulating gene expression data from graph structures of biological pathways},
+    journal = {},
+    author = {S. Thomas Kelly and Michael A. Black},
+    year = {2019},
+    volume = {},
+    number = {},
+    pages = {},
+    month = {},
+    note = {Submitted for peer-review},
+    url = {https://github.com/TomKellyGenetics/graphsim},
+    doi = {},
+  }
+  
+")

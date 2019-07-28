@@ -25,7 +25,7 @@
 ##' @param col.label character. Specfies the colours of node labels passed to plot. Defaults to par("fg").
 ##' @param arrow_clip numeric Defaults to 0.075 (7.5\%).
 ##' @param pch parameter passed to plot. Defaults to 21. Recommends using selecting between 21-25 to preserve colour behaviour. Otherwise entire node will inherit border.node as it's colour, in which case a light colour is recommended to see labels.
-##' @param border.node character. Specfies the colours of node border passed to plot. Defaults to grey33. Applies to whole node shape if pch has only one colour.
+##' @param border.node character. Specifies the colours of node border passed to plot. Defaults to grey33. Applies to whole node shape if pch has only one colour.
 ##' @param fill.node character. Specfies the colours of node fill passed to plot. Defaults to grey66.
 ##' @param col.arrow character. Specfies the colours of arrows passed to plot. Defaults to par("fg").  May take a scalar applied to all edges or a vector with colours for each edge respectively.
 ##' @param main,sub,xlab,ylab Plotting paramaters to specify plot titles or axes labels

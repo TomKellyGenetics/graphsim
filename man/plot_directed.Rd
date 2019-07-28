@@ -32,7 +32,7 @@ plot_directed(graph, state = NULL, labels = NULL,
 
 \item{pch}{parameter passed to plot. Defaults to 21. Recommends using selecting between 21-25 to preserve colour behaviour. Otherwise entire node will inherit border.node as it's colour, in which case a light colour is recommended to see labels.}
 
-\item{border.node}{character. Specfies the colours of node border passed to plot. Defaults to grey33. Applies to whole node shape if pch has only one colour.}
+\item{border.node}{character. Specifies the colours of node border passed to plot. Defaults to grey33. Applies to whole node shape if pch has only one colour.}
 
 \item{fill.node}{character. Specfies the colours of node fill passed to plot. Defaults to grey66.}
 

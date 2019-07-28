@@ -20,30 +20,30 @@ To get the dependency package from CRAN:
 install.packages(c("igraph", "Matrix", "mvtnorm", "matrixcalc"))
 ```
 
+To install the stable release of this package from github:
+
+```R
+# install.packages("devtools")
+devtools::install_github("TomKellyGenetics/graphsim", ref = "master")
+```
+
 To get the development version of this package from github:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("TomKellyGenetics/graphsim")
+devtools::install_github("TomKellyGenetics/graphsim", ref = "dev")
 ```
 
-## Vignettes
+## Usage
 
-Please see the following demonstrations of this (and other iGraph extensions) on examples of simple simulated networks.
-
-
-* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_convergent.html
-* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_divergent.html
-* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_reconvergent.html
-* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_network.html
-* https://rawgit.com/TomKellyGenetics/graphsim/master/vignettes/test_graph_network_inhibiting.html
+Please see the vignettes for demonstrations of this package on examples of simple simulated networks and the reactome pathway TGF-&beta; receptor signaling activates SMADs (R-HSA-2173789). A manuscript with further details has been submitted for peer-review.
 
 ## Citation
 
 To cite the graphsim package in publications use:
 
   S. Thomas Kelly and Michael A. Black (2018). graphsim: Simulate Expression data from iGraph networks 
-  R package version 0.1.0. https://github.com/TomKellyGenetics/vioplot doi:10.5281/zenodo.1313986
+  R package version 0.1.1. https://github.com/TomKellyGenetics/vioplot doi:10.5281/zenodo.1313986
 
 A BibTeX entry for LaTeX users is
 
@@ -52,12 +52,26 @@ A BibTeX entry for LaTeX users is
     title = {{graphsim}: Simulate Expression data from {iGraph} networks},
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2018},
-    note = {R package version 0.1.0},
+    note = {R package version 0.1.1},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.1313986},
   }
 ```
 
-Please also acknowledge the manuscript describing use of this package (currently in final preparations for submission).
+Please also acknowledge the manuscript describing use of this package once it is published.
 
-
+```
+  @Article{,
+    title = {{graphsim}: An R package for simulating gene expression data from graph structures of biological pathways},
+    journal = {},
+    author = {S. Thomas Kelly and Michael A. Black},
+    year = {2019},
+    volume = {},
+    number = {},
+    pages = {},
+    month = {},
+    note = {Submitted for peer-review},
+    url = {https://github.com/TomKellyGenetics/graphsim},
+    doi = {10.5281/zenodo.1313986},
+  }
+```

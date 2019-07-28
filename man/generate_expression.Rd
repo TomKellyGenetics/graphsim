@@ -13,7 +13,7 @@ generate_expression(n, graph, state = NULL, cor = 0.8, mean = 0,
 
 \item{graph}{An \code{\link[igraph]{igraph}} object. May must be directed if states are used.}
 
-\item{state}{numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferrfed directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.}
+\item{state}{numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.}
 
 \item{cor}{numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.}
 

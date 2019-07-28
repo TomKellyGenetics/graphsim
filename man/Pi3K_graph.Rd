@@ -4,7 +4,7 @@
 \name{Pi3K_graph}
 \alias{Pi3K_graph}
 \title{PI3K Cascade}
-\format{A graph object of 35 verticies and 251 edges:
+\format{A graph object of 35 vertices and 251 edges:
 \describe{
   \item{V}{gene symbol (human)}
   \item{E}{directed relationship for pathway}

@@ -4,7 +4,7 @@
 \name{RAF_MAP_graph}
 \alias{RAF_MAP_graph}
 \title{#' RAF/MAP kinase cascade}
-\format{A graph object of 17 verticies and 121 edges:
+\format{A graph object of 17 vertices and 121 edges:
 \describe{
   \item{V}{gene symbol (human)}
   \item{E}{directed relationship for pathway}

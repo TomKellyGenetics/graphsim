@@ -8,3 +8,4 @@ vignettes/*html
 demo.gif  
 demo2.gif  
 ^doc$
+^cran-comments\.md$

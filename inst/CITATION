@@ -3,7 +3,7 @@ citHeader("To cite package 'graphsim' in publications use:")
      desc <- NA
      desc <- packageDescription("graphsim")
      if(is.na(desc)){
-             year <- "2019"
+             year <- "2020"
              vers  <- "0.1.1"
      } else {
              year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
@@ -28,13 +28,13 @@ citHeader("To cite package 'graphsim' in publications use:")
 
 citFooter("Please also acknowledge the manuscript describing use of this package once it is published.
 
-Kelly, S.T. and Black, M.A. (2019) graphsim: An R package for simulating gene expression data from graph structures of biological pathways. 
+Kelly, S.T. and Black, M.A. (2020) graphsim: An R package for simulating gene expression data from graph structures of biological pathways. 
 
   @Article{,
     title = {{graphsim}: An {R} package for simulating gene expression data from graph structures of biological pathways},
     journal = {},
     author = {S. Thomas Kelly and Michael A. Black},
-    year = {2019},
+    year = {2020},
     volume = {},
     number = {},
     pages = {},

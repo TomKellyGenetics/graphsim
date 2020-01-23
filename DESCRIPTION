@@ -2,7 +2,7 @@ Package: graphsim
 Type: Package
 Title: Simulate Expression Data from iGraph Networks 
 Version: 0.1.1
-Date: 2019-07-28
+Date: 2020-01-24
 Authors@R: c(person("S. Thomas", "Kelly",email = "tom.kelly@postgrad.otago.ac.nz", role = c("ctb")),
              person("S. Thomas", "Kelly",email = "tom.kelly@riken.jp", role = c("aut", "cre")),
              person("Michael A.", "Black", email = "mik.black@otago.ac.nz", role = c("aut", "ths")))

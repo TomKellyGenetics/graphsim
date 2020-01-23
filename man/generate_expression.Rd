@@ -5,8 +5,16 @@
 \alias{generate_expression}
 \title{Generate Simulated Expression}
 \usage{
-generate_expression(n, graph, state = NULL, cor = 0.8, mean = 0,
-  comm = F, dist = F, absolute = F)
+generate_expression(
+  n,
+  graph,
+  state = NULL,
+  cor = 0.8,
+  mean = 0,
+  comm = F,
+  dist = F,
+  absolute = F
+)
 }
 \arguments{
 \item{n}{number of observations (simulated samples).}

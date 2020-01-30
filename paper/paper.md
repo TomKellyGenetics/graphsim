@@ -37,9 +37,6 @@ Transcriptomic analysis is used to capture the molecular state of a cell or samp
 Introduction: inference and modelling of biological networks {#sec:intro}
 ============================================================
 
-~~~
-\shortcites{Perou2000, Arner2015, Reactome, Komatsu2013, Yamaguchi2007, Shimamura2009, Hirose2008, Li2015, Genz2016}
-...
 Network analysis of molecular biological pathways has the potential to
 lead to new insights into biology and medical genetics
 `[@Barabasi2004; @Hu2016]`. Since gene expression profiles capture a
@@ -344,7 +341,6 @@ reference="fig:simulation_inhibiting:fourth"}). Here *SMAD7* exhibits
 negative correlations with the other SMADs consistent with it's
 functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
 
-~~~
 These simulated datasets could then be used for simulating synthetic
 lethal partners of a query gene within a graph network. The query gene
 was assumed to be separate from the graph network pathway and was added
@@ -353,9 +349,7 @@ Section [\[methods:simulating\_SL\]](#methods:simulating_SL){reference-type="re
 reference="methods:simulating_SL"}. Thus I can simulate known synthetic
 lethal partner genes within a synthetic lethal partner pathway
 structure.
-...
 
-~~~
 ![image](dist_mat.png) ![image](sigma_mat.png)
 ![image](expr_mat.png) ![image](expr_cor_mat.png)
 ![image](expr_disc_mat.png)
@@ -363,7 +357,6 @@ structure.
 ![image]({state_matrix_inhibiting.png) ![image](dist_mat.png)
 ![image](sigma_mat_inhibiting.png) ![image](expr_inhib_mat.png)
 ![image](expr_inhib_cor_mat.png) ![image](expr_inhib_disc_mat.png)
-... 
 
 Summary and discussion {#sec:summary}
 ======================

@@ -84,7 +84,7 @@ relationships from a known underlying network. These simulated datasets
 can be used to evaluate various bioinformatics methodologies, including
 statistical and network inference procedures.
 
-\iffalse
+~~~
 The introduction is in principle "as usual". However, it should usually
 embed both the implemented *methods* and the *software* into the
 respective relevant literature. For the latter both competing and
@@ -128,6 +128,7 @@ the package [@Jackman:2015]. Of course, much more software could be
 discussed here, including (but not limited to) generalized additive
 models for count data as available in the packages [@Wood:2006],
 [@Stasinopoulos+Rigby:2007], or [@Yee:2009].
+...
 
 Methodology and software {#sec:methods}
 ========================
@@ -386,7 +387,7 @@ reference="fig:simulation_inhibiting:fourth"}). Here *SMAD7* exhibits
 negative correlations with the other SMADs consistent with it's
 functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
 
-\iffalse
+~~~
 These simulated datasets could then be used for simulating synthetic
 lethal partners of a query gene within a graph network. The query gene
 was assumed to be separate from the graph network pathway and was added
@@ -395,8 +396,9 @@ Section [\[methods:simulating\_SL\]](#methods:simulating_SL){reference-type="re
 reference="methods:simulating_SL"}. Thus I can simulate known synthetic
 lethal partner genes within a synthetic lethal partner pathway
 structure.
+...
 
-\iffalse
+~~~
 ![image]({dist_mat.png}) ![image]({sigma_mat.png})
 ![image]({expr_mat.png}) ![image]({expr_cor_mat.png})
 ![image]({expr_disc_mat.png})
@@ -404,207 +406,4 @@ structure.
 ![image]({state_matrix_inhibiting.png}) ![image]({dist_mat.png})
 ![image]({sigma_mat_inhibiting.png}) ![image]({expr_inhib_mat.png})
 ![image]({expr_inhib_cor_mat.png}) ![image]({expr_inhib_disc_mat.png})
-
-\fi 
-\iffalse
-Illustrations {#sec:illustrations}
-=============
-
-For a simple illustration of basic Poisson and NB count regression the
-data from the package is used. This provides the number of that children
-were absent from school in Australia in a particular year, along with
-several covariates that can be employed as regressors. The data can be
-loaded by
-
-R\> data(\"quine\", package = \"MASS\")
-
-and a basic frequency distribution of the response variable is displayed
-in Figure [\[fig:quine\]](#fig:quine){reference-type="ref"
-reference="fig:quine"}.
-
-For code input and output, the style files provide dedicated
-environments. Either the "agnostic" `{CodeInput}` and `{CodeOutput}` can
-be used or, equivalently, the environments `{Sinput}` and `{Soutput}` as
-produced by or when using the hook. Please make sure that all code is
-properly spaced, e.g., using and *not* . Moreover, code input should use
-"the usual" command prompt in the respective software system. For code,
-the prompt should be used with as the continuation prompt. Generally,
-comments within the code chunks should be avoided - and made in the
-regular LaTeX text instead. Finally, empty lines before and after code
-input/output should be avoided (see above).
-
-\centering
-![[\[fig:quine\]]{#fig:quine label="fig:quine"} Frequency distribution
-for number of days absent from school.](article-visualization)
-
-As a first model for the data, we fit the basic Poisson regression
-model. (Note that JSS prefers when the second line of code is indented
-by two spaces.)
-
-R\> m\_pois \<- glm(Days   (Eth + Sex + Age + Lrn)\^2, data = quine, +
-family = poisson)
-
-To account for potential overdispersion we also consider a negative
-binomial GLM.
-
-R\> library(\"MASS\") R\> m\_nbin \<- glm.nb(Days   (Eth + Sex + Age +
-Lrn)\^2, data = quine)
-
-In a comparison with the BIC the latter model is clearly preferred.
-
-R\> BIC(m\_pois, m\_nbin)
-
-df BIC m\_pois 18 2046.851 m\_nbin 19 1157.235
-
-Hence, the full summary of that model is shown below.
-
-R\> summary(m\_nbin)
-
-Call: glm.nb(formula = Days   (Eth + Sex + Age + Lrn)\^2, data = quine,
-init.theta = 1.60364105, link = log)
-
-Deviance Residuals: Min 1Q Median 3Q Max -3.0857 -0.8306 -0.2620 0.4282
-2.0898
-
-Coefficients: (1 not defined because of singularities) Estimate Std.
-Error z value Pr(\>\|z\|) (Intercept) 3.00155 0.33709 8.904 \< 2e-16
-\*\*\* EthN -0.24591 0.39135 -0.628 0.52977 SexM -0.77181 0.38021 -2.030
-0.04236 \* AgeF1 -0.02546 0.41615 -0.061 0.95121 AgeF2 -0.54884 0.54393
--1.009 0.31296 AgeF3 -0.25735 0.40558 -0.635 0.52574 LrnSL 0.38919
-0.48421 0.804 0.42153 EthN:SexM 0.36240 0.29430 1.231 0.21818 EthN:AgeF1
--0.70000 0.43646 -1.604 0.10876 EthN:AgeF2 -1.23283 0.42962 -2.870
-0.00411 \*\* EthN:AgeF3 0.04721 0.44883 0.105 0.91622 EthN:LrnSL 0.06847
-0.34040 0.201 0.84059 SexM:AgeF1 0.02257 0.47360 0.048 0.96198
-SexM:AgeF2 1.55330 0.51325 3.026 0.00247 \*\* SexM:AgeF3 1.25227 0.45539
-2.750 0.00596 \*\* SexM:LrnSL 0.07187 0.40805 0.176 0.86019 AgeF1:LrnSL
--0.43101 0.47948 -0.899 0.36870 AgeF2:LrnSL 0.52074 0.48567 1.072
-0.28363 AgeF3:LrnSL NA NA NA NA - Signif. codes: 0 '\*\*\*' 0.001 '\*\*'
-0.01 '\*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for Negative Binomial(1.6036) family taken to be
-1)
-
-Null deviance: 235.23 on 145 degrees of freedom Residual deviance:
-167.53 on 128 degrees of freedom AIC: 1100.5
-
-Number of Fisher Scoring iterations: 1
-
-Theta: 1.604 Std. Err.: 0.214
-
-2 x log-likelihood: -1062.546
-
-\fi
-\FloatBarrier
-Summary and discussion {#sec:summary}
-======================
-
-Biological pathways are of fundamental importance to understanding
-molecular biology. In order to translate findings from genomics studies
-into real-world applications such as improved healthcare, the roles of
-genes must be studied in the context of molecular pathways. Here we
-present a statistical framework to simulate gene expression from
-biological pathways, and provide the package in to generate these
-simulated datasets. This approach is versatile and can be fine-tuned for
-modelling existing biological pathways or for testing whether
-constructed pathways can be detected by other means. In particular,
-methods to infer biological pathways and gene regulatory networks from
-gene expression data can be tested on simulated datasets using this
-framework. The package also enables simulation of complex gene
-expression datasets to test how these pathways impact on statistical
-analysis of gene expression data using existing methods or novel
-statistical methods being developed for gene expression data analysis.
-
-Computational details {#computational-details .unnumbered .unnumbered}
-=====================
-
-\iffalse
-If necessary or useful, information about certain computational details
-such as version numbers, operating systems, or compilers could be
-included in an unnumbered section. Also, auxiliary packages (say, for
-visualizations, maps, tables, ...) that are not cited in the main text
-can be credited here.
-
-\fi
-The results in this paper were obtained using  3.6.1 with the  1.2.4.1
- 1.2-17,  1.0-3, and  1.0-11 packages. itself and all dependent packages
-used are available from the Comprehensive Archive Network (CRAN) at
-<https://CRAN.R-project.org/>. The and packages presented can be
-installed from <https://github.com/TomKellyGenetics/graphsim> and
-<https://github.com/TomKellyGenetics/plot.igraph> respectively. These
-functions can also be installed using the library at
-<https://github.com/TomKellyGenetics/igraph.extensions> which includes
-other plotting functions used. This software is cross-platform and
-compatible with installations on Windows, Mac, and Linux operating
-systems. The package GitHub repository also contains Vignettes with more
-information and examples on running functions released in the package.
-The package ( 0.1.0) meets CRAN submission criteria and will be
-released.
-
-Acknowledgements {#acknowledgements .unnumbered .unnumbered}
-================
-
-This package was developed as part of a PhD research project funded by
-the Postgraduate Tassell Scholarship in Cancer Research Scholarship
-awarded to STK. We thank members of the Laboratory of Professor Satoru
-Miyano at the University of Tokyo, Institute for Medical Science,
-Professor Seiya Imoto, Associate Professor Rui Yamaguchi, and Dr Paul
-Sheridan (Assistant Professor at Hirosaki University,CSO at Tupac Bio)
-for helpful discussions in this field. We also thank Professor Parry
-Guilford at the University of Otago, Professor Cristin Print at the
-University of Auckland, and Dr Erik Arner at the RIKEN Center for
-Integrative Medical Sciences for their excellent advice during this
-project.
-
-\newpage
-\iffalse
-Appendices can be included after the bibliography (with a page break).
-Each section within the appendix should have a proper section title
-(rather than just *Appendix*).
-
-For more technical style details, please check out JSS's style FAQ at
-<https://www.jstatsoft.org/pages/view/style#frequently-asked-questions>
-which includes the following topics:
-
--   Title vs. sentence case.
-
--   Graphics formatting.
-
--   Naming conventions.
-
--   Turning JSS manuscripts into package vignettes.
-
--   Trouble shooting.
-
--   Many other potentially helpful details...
-
-\fi
-\iffalse
-Using [Bib]{.smallcaps}TeX {#app:bibtex}
-==========================
-
-References need to be provided in a [Bib]{.smallcaps}TeX file (). All
-references should be made with `\cite`, `\citet`, `\citep`, `\citealp`
-etc. (and never hard-coded). This commands yield different formats of
-author-year citations and allow to include additional details (e.g.,
-pages, chapters, ...) in brackets. In case you are not familiar with
-these commands see the JSS style FAQ for details.
-
-Cleaning up [Bib]{.smallcaps}TeX files is a somewhat tedious task -
-especially when acquiring the entries automatically from mixed online
-sources. However, it is important that informations are complete and
-presented in a consistent style to avoid confusions. JSS requires the
-following format.
-
--   JSS-specific markup (`\proglang`, `\pkg`, `\code`) should be used in
-    the references.
-
--   Titles should be in title case.
-
--   Journal titles should not be abbreviated and in title case.
-
--   DOIs should be included where available.
-
--   Software should be properly cited as well. For packages typically
-    provides a good starting point.
-
-\fi
+... 

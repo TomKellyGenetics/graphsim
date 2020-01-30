@@ -87,52 +87,6 @@ relationships from a known underlying network. These simulated datasets
 can be used to evaluate various bioinformatics methodologies, including
 statistical and network inference procedures.
 
-~~~
-The introduction is in principle "as usual". However, it should usually
-embed both the implemented *methods* and the *software* into the
-respective relevant literature. For the latter both competing and
-complementary software should be discussed (within the same software
-environment and beyond), bringing out relative (dis)advantages. All
-software mentioned should be properly `\cite{}`d. (See also
-Appendix [6](#app:bibtex){reference-type="ref" reference="app:bibtex"}
-for more details on [Bib]{.smallcaps}TeX.)
-
-For writing about software JSS requires authors to use the markup
-`\proglang{}` (programming languages and large programmable systems),
-`\pkg{}` (software packages), `\code{}` (functions, commands, arguments,
-etc.). If there is such markup in (sub)section titles (as above), a
-plain text version has to be provided in the LaTeX command as well.
-Below we also illustrate how abbreviations should be introduced and
-citation commands can be employed. See the LaTeX code for more details.
-
-Modeling count variables is a common task in economics and the social
-sciences. The classical Poisson regression model for count data is often
-of limited use in these disciplines because empirical count data sets
-typically exhibit overdispersion and/or an excess number of zeros. The
-former issue can be addressed by extending the plain Poisson regression
-model in various directions: e.g., using sandwich covariances or
-estimating an additional dispersion parameter (in a so-called
-quasi-Poisson model). Another more formal way is to use a negative
-binomial (NB) regression. All of these models belong to the family of
-generalized linear models (GLMs). However, although these models
-typically can capture overdispersion rather well, they are in many
-applications not sufficient for modeling excess zeros. Since
-[@Mullahy:1986] there is increased interest in zero-augmented models
-that address this issue by a second model component capturing zero
-counts. An overview of count data models in econometrics, including
-hurdle and zero-inflated models, is provided in [@Cameron+Trivedi:2013].
-
-In [@R], GLMs are provided by the model fitting functions in the package
-and in the package [@Venables+Ripley:2002 Chapter 7.4] along with
-associated methods for diagnostics and inference. The manuscript that
-this document is based on [@Zeileis+Kleiber+Jackman:2008] then
-introduced hurdle and zero-inflated count models in the functions and in
-the package [@Jackman:2015]. Of course, much more software could be
-discussed here, including (but not limited to) generalized additive
-models for count data as available in the packages [@Wood:2006],
-[@Stasinopoulos+Rigby:2007], or [@Yee:2009].
-...
-
 Methodology and software {#sec:methods}
 ========================
 
@@ -145,15 +99,15 @@ follow a log-normal distribution (i.e.,
 $log(X_{ij}) \sim MVN({\bf\mu}, \Sigma)$, where ${\bf\mu}$ and $\Sigma$
 are the mean vector and variance-covariance matrix respectively, for
 gene expression data derived from a biological pathway) after
-appropriate normalisation [@Law2014; @Li2015]. Log-normality of gene
+appropriate normalisation `[@Law2014; @Li2015]`. Log-normality of gene
 expression matches the assumptions of the popular package, which is
 often used for the analysis of intensity-based data from gene expression
 microarray studies and count-based data from RNA-Seq experiments. This
 approach has also been applied for modelling UMI-based count data from
-single-cell RNA-Seq experiments in the package [@Wang2018].
+single-cell RNA-Seq experiments in the package `[@Wang2018]`.
 
 In order to simulate transcriptomic data, a pathway is first constructed
-as a graph structure, using the package [@igraph], with the status of
+as a graph structure, using the package `[@igraph]`, with the status of
 the edge relationships defined (i.e, whether they activate or inhibit
 downstream pathway members). [This procedure uses]{style="color: black"}
 a graph structure such as that presented in
@@ -208,7 +162,7 @@ graph structures but this approach allows for the computation of a
 plausible correlation matrix when the graph structure given is
 incomplete or contains loops. When required, the nearest positive
 definite matrix is computed using the `nearPD` function of the package
-[@Matrix] to perform Higham's algorithm [@Higham2002] on
+`[@Matrix]` to perform Higham's algorithm `[@Higham2002]` on
 variance-covariance matrices. The package gives a warning when this
 occurs.
 
@@ -410,5 +364,58 @@ structure.
 ![image]({sigma_mat_inhibiting.png}) ![image]({expr_inhib_mat.png})
 ![image]({expr_inhib_cor_mat.png}) ![image]({expr_inhib_disc_mat.png})
 ... 
+
+\FloatBarrier
+Summary and discussion {#sec:summary}
+======================
+
+Biological pathways are of fundamental importance to understanding
+molecular biology. In order to translate findings from genomics studies
+into real-world applications such as improved healthcare, the roles of
+genes must be studied in the context of molecular pathways. Here we
+present a statistical framework to simulate gene expression from
+biological pathways, and provide the package in to generate these
+simulated datasets. This approach is versatile and can be fine-tuned for
+modelling existing biological pathways or for testing whether
+constructed pathways can be detected by other means. In particular,
+methods to infer biological pathways and gene regulatory networks from
+gene expression data can be tested on simulated datasets using this
+framework. The package also enables simulation of complex gene
+expression datasets to test how these pathways impact on statistical
+analysis of gene expression data using existing methods or novel
+statistical methods being developed for gene expression data analysis.
+
+Computational details {#computational-details .unnumbered .unnumbered}
+=====================
+
+The results in this paper were obtained using  3.6.1 with the  1.2.4.1
+ 1.2-17,  1.0-3, and  1.0-11 packages. itself and all dependent packages
+used are available from the Comprehensive Archive Network (CRAN) at
+<https://CRAN.R-project.org/>. The and packages presented can be
+installed from <https://github.com/TomKellyGenetics/graphsim> and
+<https://github.com/TomKellyGenetics/plot.igraph> respectively. These
+functions can also be installed using the library at
+<https://github.com/TomKellyGenetics/igraph.extensions> which includes
+other plotting functions used. This software is cross-platform and
+compatible with installations on Windows, Mac, and Linux operating
+systems. The package GitHub repository also contains Vignettes with more
+information and examples on running functions released in the package.
+The package ( 0.1.0) meets CRAN submission criteria and will be
+released.
+
+Acknowledgements {#acknowledgements .unnumbered .unnumbered}
+================
+
+This package was developed as part of a PhD research project funded by
+the Postgraduate Tassell Scholarship in Cancer Research Scholarship
+awarded to STK. We thank members of the Laboratory of Professor Satoru
+Miyano at the University of Tokyo, Institute for Medical Science,
+Professor Seiya Imoto, Associate Professor Rui Yamaguchi, and Dr Paul
+Sheridan (Assistant Professor at Hirosaki University,CSO at Tupac Bio)
+for helpful discussions in this field. We also thank Professor Parry
+Guilford at the University of Otago, Professor Cristin Print at the
+University of Auckland, and Dr Erik Arner at the RIKEN Center for
+Integrative Medical Sciences for their excellent advice during this
+project.
 
 # References

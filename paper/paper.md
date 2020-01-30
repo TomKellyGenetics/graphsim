@@ -124,12 +124,12 @@ inter-node relationships. A geometrically-decreasing (relative) distance
 weighting is used to achieve this: [ $$R_{ij} = 
 \begin{cases}
    1                            & if genes $i$ and $j$ are adjacent \\
-   (\sfrac{1}{2})^{d_{ij}}      & if a path can be found  between genes $i$ and $j$ \\
+   (\frac{1}{2})^{d_{ij}}      & if a path can be found  between genes $i$ and $j$ \\
    0                            & if no path exists between genes $i$ and $j$ 
 \end{cases}$$]{style="color: black"} where $d_{ij}$ is the length of
 the shortest path (i.e., minimum number of edges traversed) between
 genes (nodes) $i$ and $j$ in graph $G$. Each more distant node is thus
-related by $\sfrac{1}{2}$ compared to the next nearest, as shown in
+related by $\frac{1}{2}$ compared to the next nearest, as shown in
 Figure [\[fig:simulation\_activating:second\]](#fig:simulation_activating:second){reference-type="ref"
 reference="fig:simulation_activating:second"}. An
 arithmetically-decreasing (absolute) distance weighting is also

@@ -10,3 +10,5 @@ demo2.gif
 ^doc$
 ^cran-comments\.md$
 graphsim_0.1.1.tar.gz
+^paper\.(bib|html|md|Rmd)$
+^paper$

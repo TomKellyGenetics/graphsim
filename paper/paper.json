@@ -1,0 +1,30 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "https://orcid.org/0000-0003-3904-6690",
+      "@type": "Person",
+      "email": "tom.kelly@riken.jp",
+      "name": "S. Thomas Kelly",
+      "affiliation": "RIKEN IMS"
+    },
+    {
+      "@id": "https://orcid.org/0000-0003-1174-6054",
+      "@type": "Person",
+      "email": "mik.black@otago.ac.nz",
+      "name": "Michael A. Black",
+      "affiliation": "University of Otago"
+    }
+  ],
+  "identifier": "http://doi.org/10.5281/zenodo.3353470",
+  "codeRepository": "https://github.com/TomKellyGenetics/graphsim/",
+  "datePublished": "2020-01-30",
+  "dateModified": "2020-01-30",
+  "dateCreated": "2020-01-30",
+  "description": "Simulating gene expression from pathways in R",
+  "keywords": "gene-expression, simulation, genomics, pathway, network, \\proglang{R}",
+  "license": "GPL v3.0",
+  "title": "graphsim",
+  "version": "v0.1.1"
+}

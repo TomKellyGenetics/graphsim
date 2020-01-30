@@ -22,7 +22,9 @@ affiliations:
    index: 2
 date: 30 Janunary 2019
 bibliography: paper.bib
-
+header-includes:
+   - \usepackage{mathtools}
+   - \usepackage{xfrac}
 ---
 
 ### Statement of Need
@@ -354,7 +356,7 @@ structure.
 ![image](expr_mat.png) ![image](expr_cor_mat.png)
 ![image](expr_disc_mat.png)
 
-![image]({state_matrix_inhibiting.png) ![image](dist_mat.png)
+![image](state_matrix_inhibiting.png) ![image](dist_mat.png)
 ![image](sigma_mat_inhibiting.png) ![image](expr_inhib_mat.png)
 ![image](expr_inhib_cor_mat.png) ![image](expr_inhib_disc_mat.png)
 

@@ -37,12 +37,14 @@ Transcriptomic analysis is used to capture the molecular state of a cell or samp
 Introduction: inference and modelling of biological networks {#sec:intro}
 ============================================================
 
+~~~
 \shortcites{Perou2000, Arner2015, Reactome, Komatsu2013, Yamaguchi2007, Shimamura2009, Hirose2008, Li2015, Genz2016}
+...
 Network analysis of molecular biological pathways has the potential to
 lead to new insights into biology and medical genetics
-[@Barabasi2004; @Hu2016]. Since gene expression profiles capture a
+`[@Barabasi2004; @Hu2016]`. Since gene expression profiles capture a
 consistent signature of the regulatory state of a cell
-[@Perou2000; @Ozsolak2011; @Svensson2018], they can be used to analyse
+`[@Perou2000; @Ozsolak2011; @Svensson2018]`, they can be used to analyse
 complex molecular states with genome-scale data. However, biological
 pathways are often analysed in a reductionist paradigm as amorphous sets
 of genes involved in particular functions, despite the fact that the
@@ -56,19 +58,19 @@ pathways and aiding in the interpretation of genomics studies.
 Gene networks provide insights into how cells are regulated, by mapping
 regulatory interactions between target genes and transcription factors,
 enhancers, and sites of epigenetic marks or chromatin structures
-[@Barabasi2004; @Yamaguchi2007]. Inference of these regulatory
+`[@Barabasi2004; @Yamaguchi2007]`. Inference of these regulatory
 interactions for genomics investigations has the potential to radically
 expand the range of candidate biological pathways to be further
 explored, or to improve the accuracy of bioinformatics and functional
 genomic analysis. A number of methods have already been developed to
-utilise timecourse gene expression data [@Arner2015; @Yamaguchi2007]
+utilise timecourse gene expression data `[@Arner2015; @Yamaguchi2007]`
 using gene regulatory modules in state-space models and recursive vector
-autoregressive models [@Hirose2008; @Shimamura2009]. Various approaches
+autoregressive models `[@Hirose2008; @Shimamura2009]`. Various approaches
 to gene regulation and networks at the genome-wide scale have lead to
-novel biological insights [@Arner2015; @Komatsu2013]. However, inference
+novel biological insights `[@Arner2015; @Komatsu2013]`. However, inference
 of regulatory networks has thus far relied on experimental validation or
 resampling-based approaches to estimate the likelihood of specific
-network modules being predicted [@Markowetz2007; @Hawe2019].
+network modules being predicted `[@Markowetz2007; @Hawe2019]`.
 
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from

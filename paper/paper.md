@@ -107,7 +107,11 @@ statistical and network inference procedures.
 Methodology and software {#sec:methods}
 ========================
 
-[\[fig:simple_graph\]]{#fig:simple_graph label="fig:simple_graph"}
+![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
+structure used as an example to demonstrate the simulation procedure in
+Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.png)
+{#fig:graph_simple label="fig:graph_simple"}
 
 Here we present a procedure to simulate gene expression data with
 correlation structure derived from a known graph structure. This
@@ -128,42 +132,43 @@ as a graph structure, using the package [@igraph], with the status of
 the edge relationships defined (i.e, whether they activate or inhibit
 downstream pathway members). [This procedure uses]{style="color: black"}
 a graph structure such as that presented in
-Figure [\[fig:simple\_graph:first\]](#fig:simple_graph:first){reference-type="ref"
+Figure [1a](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
-[$A_{ij}$]{style="color: black"}), where [ $$A_{ij} = 
+$A_{ij}$), where $$A_{ij} = 
 \begin{cases}
-   1                            &  $if genes$ i $and$j $are adjacent$ \\
-   0                            &  $otherwise$
-\end{cases}$$ ]{style="color: black"} A matrix, **$R$**, with elements
+   1                         & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
+   0                         & \mbox{otherwise}
+\end{cases}$$
+A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that
 closer nodes are given more weight than more distant nodes, to define
 inter-node relationships. A geometrically-decreasing (relative) distance
 weighting is used to achieve this: [ $$R_{ij} = 
 \begin{cases}
-   1                            &  $if genes$ i $and$ j $are adjacent$ \\
-   (\frac{1}{2})^{d_{ij}}       &  $if a path can be found  between genes$ i $and$ j \\
-   0                            &  $if no path exists between genes$ i $and$ j 
-\end{cases}$$ ]{style="color: black"} where $d_{ij}$ is the length of
+   1                            & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
+   (\frac{1}{2})^{d_{ij}}      & \mbox{if a path can be found between genes } i \mbox{ and } j \\
+   0                            & \mbox{if no path exists between genes } i \mbox{ and } j 
+\end{cases}$$]{style="color: black"} where $d_{ij}$ is the length of
 the shortest path (i.e., minimum number of edges traversed) between
 genes (nodes) $i$ and $j$ in graph $G$. Each more distant node is thus
 related by $\frac{1}{2}$ compared to the next nearest, as shown in
-Figure [\[fig:simulation\_activating:second\]](#fig:simulation_activating:second){reference-type="ref"
+Figure [2b](#fig:simulation_activating:second){reference-type="ref"
 reference="fig:simulation_activating:second"}. An
 arithmetically-decreasing (absolute) distance weighting is also
 supported in the package which implements this procedure: [ $$R_{ij} = 
 \begin{cases}
-   1                            & $if genes$ i $and$ j $are adjacent$ \\
-   1-\frac{d_{ij}}{diam(G)}     & $if a path can be found  between genes $i$ and $j$ \\
-   0                            & $if no path exists between genes$ i $and$ j 
+   1                            & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
+   1-\frac{d_{ij}}{diam(G)}     & \mbox{if a path can be found between genes } i \mbox{ and } j \\
+   0                            & \mbox{if no path exists between genes } i \mbox{ and } j 
 \end{cases}$$ ]{style="color: black"}
 
 Assuming a unit variance for each gene, these values can be used to
 derive a $\Sigma$ matrix: $$\Sigma_{ij} = 
 \begin{cases}
-   1                            & $if$ i=j \\
-   \rho R_{ij}  & otherwise
+   1                            & \mbox{if } i=j \\
+   \rho R_{ij}  & \mbox{otherwise}
 \end{cases}$$ where $\rho$ is the correlation between adjacent nodes.
 Thus covariances between adjacent nodes are assigned by a correlation
 parameter ($\rho$) and the remaining off-diagonal values in the matrix
@@ -190,19 +195,19 @@ Generating a Graph Structure {#sec:plot_graph}
 ----------------------------
 
 The graph structure in
-Figure [\[fig:simple_graph:first\]](#fig:simple_graph:first){reference-type="ref"
+Figure [1a](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"} was used to simulate correlated gene
 expression data by sampling from a multivariate normal distribution
 using the package [@Genz2009; @mvtnorm]. The graph structure
 visualisation in
-Figure [\[fig:simple_graph\]](#fig:simple_graph){reference-type="ref"
+Figure [1](#fig:simple_graph){reference-type="ref"
 reference="fig:simple_graph"} was specifically developed for (directed)
 iGraph objects in and is available in the and packages. The
 `plot_directed` function enables customisation of plot parameters for
 each node or edge, and mixed (directed) edge types for indicating
 activation or inhibition. These inhibition links (which occur frequently
 in biological pathways) are demonstrated in
-Figure [\[fig:simple\_graph:second\]](#fig:simple_graph:second){reference-type="ref"
+Figure [1b](#fig:simple_graph:second){reference-type="ref"
 reference="fig:simple_graph:second"}.
 
 A graph structure can be generated and plotted using the following
@@ -237,8 +242,18 @@ arrow\_clip = 0.2)
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
 -----------------------------------------
 
-[\[fig:simulation_activating\]]{#fig:simulation_activating
-label="fig:simulation_activating"}
+
+![\small \textbf{\textbf{Simulating expression from a graph structure.}}
+Simulating expression from a graph structure.}} An example of a graph 
+structure (a) that has been used to derive a relationship matrix (b),
+$\Sigma$ matrix (c) and correlation structure (d) from the relative
+distances between the nodes. Non-negative values are coloured white
+to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate
+a simulated expression dataset of 100 samples (coloured blue to red from
+low to high) via sampling from the multivariate normal distribution.
+Here genes with closer relationships in the pathway structure show
+higher correlation between simulated values.](figure2.png)
+{#fig:simulation_activating label="fig:simulation_activating"}
 
 The correlation parameter of $\rho = 0.8$ is used to demonstrate the
 inter-correlated datasets using a geometrically-generated relationship
@@ -309,8 +324,15 @@ T, absolute = F, state = state)
 trace = \"none\", col = bluered(50), colsep = 1:length(V(graph)), rowsep
 = 1:length(V(graph)))
 
-[\[fig:simulation_inhibiting\]]{#fig:simulation_inhibiting
-label="fig:simulation_inhibiting"}
+![\small \textbf{\textbf{Simulating expression from graph structure with inhibitions.}}
+Simulating expression from graph structure with inhibitions.}} An example of a graph
+structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix
+(c), and correlation structure (d), from the relative distances between the nodes.
+These values are coloured blue to red from $-1$ to $1$. This has been used to generate
+a simulated expression dataset of 100 samples (coloured blue to red from low to high)
+via sampling from the multivariate normal distribution. Here the inhibitory relationships
+between genes are reflected in negatively correlated simulated  values.](figure3.png)
+{#fig:simulation_inhibiting label="fig:simulation_inhibiting"}
 
 The simulation procedure
 (Figure [\[fig:simulation_activating\]](#fig:simulation_activating){reference-type="ref"
@@ -335,8 +357,16 @@ simulated data
 (Figure [\[fig:simulation_inhibiting:fourth\]](#fig:simulation_inhibiting:fourth){reference-type="ref"
 reference="fig:simulation_inhibiting:fourth"}).
 
-[\[fig:simulation_smad\]]{#fig:simulation_smad
-label="fig:simulation_smad"}
+![\small \textbf{\textbf{Simulating expression from a biological pathway graph structure.}}
+Simulating expression from graph structure with inhibitions.}} The graph structure (a) of a
+known biological pathway, the TGF-$\beta$ receptor signaling activates SMADs (R-HSA-2173789),
+was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlation structure
+(d) from the relative distances between the nodes. These values are coloured blue to red from
+$-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
+(coloured blue to red from low to high) via sampling from the multivariate normal distribution.
+Here modules of genes with correlated expression can be clearly discerned.](figure4.png)
+[\[fig:simulation_smad\]]
+{#fig:simulation_smad label="fig:simulation_smad"}
 
 The simulation procedure is also demonstrated here
 (Figure [\[fig:simulation_smad\]](#fig:simulation_smad){reference-type="ref"

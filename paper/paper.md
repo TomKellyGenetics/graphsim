@@ -133,8 +133,8 @@ reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
 [$A_{ij}$]{style="color: black"}), where [ $$A_{ij} = 
 \begin{cases}
-   1                         & if genes $i$ and $j$ are adjacent \\
-   0                         & otherwise
+   1                         & if genes i and j are adjacent \\
+   0                         & $otherwise$
 \end{cases}$$]{style="color: black"} A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that

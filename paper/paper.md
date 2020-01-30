@@ -68,26 +68,26 @@ of genes involved in particular functions, despite the fact that the
 relationships defined by pathway structure could further inform gene
 expression analyses. In many cases, the pathway relationships are
 well-defined, experimentally-validated, and are available in public
-databases `[@Reactome]`. As a result, network analysis techniques could
+databases [@Reactome]. As a result, network analysis techniques could
 play an important role in furthering our understanding of biological
 pathways and aiding in the interpretation of genomics studies.
 
 Gene networks provide insights into how cells are regulated, by mapping
 regulatory interactions between target genes and transcription factors,
 enhancers, and sites of epigenetic marks or chromatin structures
-`[@Barabasi2004; @Yamaguchi2007]`. Inference of these regulatory
+[@Barabasi2004; @Yamaguchi2007]. Inference of these regulatory
 interactions for genomics investigations has the potential to radically
 expand the range of candidate biological pathways to be further
 explored, or to improve the accuracy of bioinformatics and functional
 genomic analysis. A number of methods have already been developed to
-utilise timecourse gene expression data `[@Arner2015; @Yamaguchi2007]`
+utilise timecourse gene expression data [@Arner2015; @Yamaguchi2007]
 using gene regulatory modules in state-space models and recursive vector
-autoregressive models `[@Hirose2008; @Shimamura2009]`. Various approaches
+autoregressive models [@Hirose2008; @Shimamura2009]. Various approaches
 to gene regulation and networks at the genome-wide scale have lead to
-novel biological insights `[@Arner2015; @Komatsu2013]`. However, inference
+novel biological insights [@Arner2015; @Komatsu2013]. However, inference
 of regulatory networks has thus far relied on experimental validation or
 resampling-based approaches to estimate the likelihood of specific
-network modules being predicted `[@Markowetz2007; @Hawe2019]`.
+network modules being predicted [@Markowetz2007; @Hawe2019].
 
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from
@@ -116,15 +116,15 @@ follow a log-normal distribution (i.e.,
 $log(X_{ij}) \sim MVN({\bf\mu}, \Sigma)$, where ${\bf\mu}$ and $\Sigma$
 are the mean vector and variance-covariance matrix respectively, for
 gene expression data derived from a biological pathway) after
-appropriate normalisation `[@Law2014; @Li2015]`. Log-normality of gene
+appropriate normalisation [@Law2014; @Li2015]. Log-normality of gene
 expression matches the assumptions of the popular package, which is
 often used for the analysis of intensity-based data from gene expression
 microarray studies and count-based data from RNA-Seq experiments. This
 approach has also been applied for modelling UMI-based count data from
-single-cell RNA-Seq experiments in the package `[@Wang2018]`.
+single-cell RNA-Seq experiments in the package [@Wang2018].
 
 In order to simulate transcriptomic data, a pathway is first constructed
-as a graph structure, using the package `[@igraph]`, with the status of
+as a graph structure, using the package [@igraph], with the status of
 the edge relationships defined (i.e, whether they activate or inhibit
 downstream pathway members). [This procedure uses]{style="color: black"}
 a graph structure such as that presented in
@@ -179,7 +179,7 @@ graph structures but this approach allows for the computation of a
 plausible correlation matrix when the graph structure given is
 incomplete or contains loops. When required, the nearest positive
 definite matrix is computed using the `nearPD` function of the package
-`[@Matrix]` to perform Higham's algorithm `[@Higham2002]` on
+[@Matrix] to perform Higham's algorithm [@Higham2002] on
 variance-covariance matrices. The package gives a warning when this
 occurs.
 
@@ -193,7 +193,7 @@ The graph structure in
 Figure [\[fig:simple\_graph:first\]](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"} was used to simulate correlated gene
 expression data by sampling from a multivariate normal distribution
-using the package `[@Genz2009; @mvtnorm]`. The graph structure
+using the package [@Genz2009; @mvtnorm]. The graph structure
 visualisation in
 Figure [\[fig:simple\_graph\]](#fig:simple_graph){reference-type="ref"
 reference="fig:simple_graph"} was specifically developed for (directed)
@@ -403,11 +403,11 @@ Computational details {#computational-details .unnumbered .unnumbered}
 The results in this paper were obtained using  3.6.1 with the  1.2.4.1
  1.2-17,  1.0-3, and  1.0-11 packages. itself and all dependent packages
 used are available from the Comprehensive Archive Network (CRAN) at
-<https://CRAN.R-project.org/>. The and packages presented can be
+\url{https://CRAN.R-project.org}. The and packages presented can be
 installed from <https://github.com/TomKellyGenetics/graphsim> and
-<https://github.com/TomKellyGenetics/plot.igraph> respectively. These
+\url{https://github.com/TomKellyGenetics/plot.igraph} respectively. These
 functions can also be installed using the library at
-<https://github.com/TomKellyGenetics/igraph.extensions> which includes
+\url{https://github.com/TomKellyGenetics/igraph.extensions} which includes
 other plotting functions used. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
 systems. The package GitHub repository also contains Vignettes with more

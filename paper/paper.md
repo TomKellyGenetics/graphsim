@@ -360,12 +360,11 @@ structure.
 ![image](expr_mat.png) ![image](expr_cor_mat.png)
 ![image](expr_disc_mat.png)
 
-![image]({tate_matrix_inhibiting.png) ![image](dist_mat.png)
+![image]({state_matrix_inhibiting.png) ![image](dist_mat.png)
 ![image](sigma_mat_inhibiting.png) ![image](expr_inhib_mat.png)
 ![image](expr_inhib_cor_mat.png) ![image](expr_inhib_disc_mat.png)
 ... 
 
-\FloatBarrier
 Summary and discussion {#sec:summary}
 ======================
 

@@ -113,20 +113,20 @@ Figure [\[fig:simple\_graph:first\]](#fig:simple_graph:first){reference-type="r
 reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
 [$A_{ij}$]{style="color: black"}), where [ $$A_{ij} = 
-\begin{dcases*}
+\begin{cases}
    1                         & if genes $i$ and $j$ are adjacent \\
    0                         & otherwise
-\end{dcases*}$$]{style="color: black"} A matrix, **$R$**, with elements
+\end{cases}$$]{style="color: black"} A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that
 closer nodes are given more weight than more distant nodes, to define
 inter-node relationships. A geometrically-decreasing (relative) distance
 weighting is used to achieve this: [ $$R_{ij} = 
-\begin{dcases*}
+\begin{cases}
    1                            & if genes $i$ and $j$ are adjacent \\
    (\sfrac{1}{2})^{d_{ij}}      & if a path can be found  between genes $i$ and $j$ \\
    0                            & if no path exists between genes $i$ and $j$ 
-\end{dcases*}$$]{style="color: black"} where $d_{ij}$ is the length of
+\end{cases}$$]{style="color: black"} where $d_{ij}$ is the length of
 the shortest path (i.e., minimum number of edges traversed) between
 genes (nodes) $i$ and $j$ in graph $G$. Each more distant node is thus
 related by $\sfrac{1}{2}$ compared to the next nearest, as shown in
@@ -134,18 +134,18 @@ Figure [\[fig:simulation\_activating:second\]](#fig:simulation_activating:secon
 reference="fig:simulation_activating:second"}. An
 arithmetically-decreasing (absolute) distance weighting is also
 supported in the package which implements this procedure: [ $$R_{ij} = 
-\begin{dcases*}
+\begin{cases}
    1                            & if genes $i$ and $j$ are adjacent \\
    1-\frac{d_{ij}}{diam(G)}     & if a path can be found  between genes $i$ and $j$ \\
    0                            & if no path exists between genes $i$ and $j$ 
-\end{dcases*}$$ ]{style="color: black"}
+\end{cases}$$ ]{style="color: black"}
 
 Assuming a unit variance for each gene, these values can be used to
 derive a $\Sigma$ matrix: $$\Sigma_{ij} = 
-\begin{dcases*}
+\begin{cases}
    1                            & if $i=j$ \\
    \rho R_{ij}  & otherwise
-\end{dcases*}$$ where $\rho$ is the correlation between adjacent nodes.
+\end{cases}$$ where $\rho$ is the correlation between adjacent nodes.
 Thus covariances between adjacent nodes are assigned by a correlation
 parameter ($\rho$) and the remaining off-diagonal values in the matrix
 are based on scaling these correlations by the geometrically weighted

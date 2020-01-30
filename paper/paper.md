@@ -110,8 +110,7 @@ Methodology and software {#sec:methods}
 ![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
 structure used as an example to demonstrate the simulation procedure in
 Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.png)
-{#fig:graph_simple label="fig:graph_simple"}
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.png){#fig:graph_simple label="fig:graph_simple"}
 
 Here we present a procedure to simulate gene expression data with
 correlation structure derived from a known graph structure. This
@@ -213,31 +212,52 @@ reference="fig:simple_graph:second"}.
 A graph structure can be generated and plotted using the following
 commands in R:
 
+```
 \#install packages required (once per machine)
-install.packages(\"igraph\") install.packages(\"devtools\")
+
+install.packages(\"igraph\")
+
+install.packages(\"devtools\")
+
 library(\"devtools\")
-devtools::install\_github(\"TomKellyGenetics/graphsim\") \#install
-custom plotting package
+
+devtools::install\_github(\"TomKellyGenetics/graphsim\")
+
+\#install custom plotting package
+
 devtools::install\_github(\"TomKellyGenetics/plot.igraph\")
 
-\#load required packages (once per R instance) library(\"igraph\")
-library(\"graphsim\") library(\"plot.igraph\")
+\#load required packages (once per R instance)
 
-\#generate graph structure graph\_edges \<- rbind(c(\"A\", \"C\"),
+library(\"igraph\")
+library(\"graphsim\")
+
+library(\"plot.igraph\")
+
+\#generate graph structure
+
+graph\_edges \<- rbind(c(\"A\", \"C\"),
 c(\"B\", \"C\"), c(\"C\", \"D\"), c(\"D\", \"E\"), c(\"D\", \"F\"),
 c(\"F\", \"G\"), c(\"F\", \"I\"), c(\"H\", \"I\")) graph \<-
 graph.edgelist(graph\_edges, directed = T)
 
-\#plot graph structure (Figure 1) plot\_directed(graph, state =
+\#plot graph structure (Figure 1)
+
+plot\_directed(graph, state =
 \"activating\", layout = layout.kamada.kawai, cex.node=3, cex.arrow=5,
 arrow\_clip = 0.2)
 
-\#generate parameters for inhibitions state \<- c(1, 1, -1, 1, 1, 1, 1,
+\#generate parameters for inhibitions
+
+state \<- c(1, 1, -1, 1, 1, 1, 1,
 -1, 1)
 
-\#plot graph structure with inhibitions (Figure 2) plot\_directed(graph,
+\#plot graph structure with inhibitions (Figure 2)
+
+plot\_directed(graph,
 state=state, layout = layout.kamada.kawai, cex.node=3, cex.arrow=5,
 arrow\_clip = 0.2)
+```
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
 -----------------------------------------
@@ -253,7 +273,6 @@ a simulated expression dataset of 100 samples (coloured blue to red from
 low to high) via sampling from the multivariate normal distribution.
 Here genes with closer relationships in the pathway structure show
 higher correlation between simulated values.](figure2.png)
-{#fig:simulation_activating label="fig:simulation_activating"}
 
 The correlation parameter of $\rho = 0.8$ is used to demonstrate the
 inter-correlated datasets using a geometrically-generated relationship
@@ -286,43 +305,63 @@ normalised on a log-scale.
 
 The simulated dataset can be generated using the following code:
 
-\#adjacency matrix adj\_mat \<- make\_adjmatrix\_graph(graph)
+```
+\#adjacency matrix
 
-\#relationship matrix dist\_mat \<- make\_distance\_graph(graph\_test4,
+adj\_mat \<- make\_adjmatrix\_graph(graph)
+
+\#relationship matrix
+
+dist\_mat \<- make\_distance\_graph(graph\_test4,
 absolute = F)
 
-\#sigma matrix directly from graph sigma\_mat \<-
-make\_sigma\_mat\_dist\_graph(graph, 0.8, absolute = F)
+\#sigma matrix directly from graph
 
-\#show shortest paths of graph shortest\_paths \<- shortest.paths(graph)
+sigma\_mat \<- make\_sigma\_mat\_dist\_graph(graph, 0.8, absolute = F)
 
-\#generate expression data directly from graph expr \<-
-generate\_expression(100, graph, cor = 0.8, mean = 0, comm = F, dist =
+\#show shortest paths of graph
+
+shortest\_paths \<- shortest.paths(graph)
+
+\#generate expression data directly from
+
+graph expr \<- generate\_expression(100, graph, cor = 0.8, mean = 0, comm = F, dist =
 T, absolute = F, state = state)
 
 \#\#plot steps
 
-\#plot adjacency matrix heatmap.2(make\_adjmatrix\_graph(graph), scale =
+\#plot adjacency matrix
+
+heatmap.2(make\_adjmatrix\_graph(graph), scale =
 \"none\", trace = \"none\", col = colorpanel(3, \"grey75\", \"white\",
 \"blue\"), colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-\#plot relationship matrix heatmap.2(make\_distance\_graph(graph\_test4,
+\#plot relationship matrix
+
+heatmap.2(make\_distance\_graph(graph\_test4,
 absolute = F), scale = \"none\", trace = \"none\", col = bluered(50),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-\#plot sigma matrix heatmap.2(make\_sigma\_mat\_dist\_graph(graph, 0.8,
+\#plot sigma matrix
+
+heatmap.2(make\_sigma\_mat\_dist\_graph(graph, 0.8,
 absolute = F), scale = \"none\", trace = \"none\", col = bluered(50),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph))) expr \<-
 generate\_expression(100, graph, cor = 0.8, mean = 0, comm = F, dist =
 T, absolute = F, state = state)
 
-\#plot simulated expression data heatmap.2(expr, scale = \"none\", trace
+\#plot simulated expression data
+
+heatmap.2(expr, scale = \"none\", trace
 = \"none\", col = bluered(50), colsep = 1:length(V(graph)), rowsep =
 1:length(V(graph)))
 
-\#plot simulated correlations heatmap.2(cor(t(expr)), scale = \"none\",
+\#plot simulated correlations
+
+heatmap.2(cor(t(expr)), scale = \"none\",
 trace = \"none\", col = bluered(50), colsep = 1:length(V(graph)), rowsep
 = 1:length(V(graph)))
+```
 
 ![\small \textbf{\textbf{Simulating expression from graph structure with inhibitions.}}
 Simulating expression from graph structure with inhibitions.}} An example of a graph
@@ -332,7 +371,6 @@ These values are coloured blue to red from $-1$ to $1$. This has been used to ge
 a simulated expression dataset of 100 samples (coloured blue to red from low to high)
 via sampling from the multivariate normal distribution. Here the inhibitory relationships
 between genes are reflected in negatively correlated simulated  values.](figure3.png)
-{#fig:simulation_inhibiting label="fig:simulation_inhibiting"}
 
 The simulation procedure
 (Figure [\[fig:simulation_activating\]](#fig:simulation_activating){reference-type="ref"
@@ -364,9 +402,7 @@ was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlatio
 (d) from the relative distances between the nodes. These values are coloured blue to red from
 $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
-Here modules of genes with correlated expression can be clearly discerned.](figure4.png)
-[\[fig:simulation_smad\]]
-{#fig:simulation_smad label="fig:simulation_smad"}
+Here modules of genes with correlated expression can be clearly discerned.](figure4.png){#fig:simulation_smad label="fig:simulation_smad"}
 
 The simulation procedure is also demonstrated here
 (Figure [\[fig:simulation_smad\]](#fig:simulation_smad){reference-type="ref"
@@ -399,14 +435,6 @@ Section [\[methods:simulating_SL\]](#methods:simulating_SL){reference-type="ref
 reference="methods:simulating_SL"}. Thus I can simulate known synthetic
 lethal partner genes within a synthetic lethal partner pathway
 structure.
-
-![image](dist_mat.png) ![image](sigma_mat.png)
-![image](expr_mat.png) ![image](expr_cor_mat.png)
-![image](expr_disc_mat.png)
-
-![image](state_matrix_inhibiting.png) ![image](dist_mat.png)
-![image](sigma_mat_inhibiting.png) ![image](expr_inhib_mat.png)
-![image](expr_inhib_cor_mat.png) ![image](expr_inhib_disc_mat.png)
 
 Summary and discussion {#sec:summary}
 ======================

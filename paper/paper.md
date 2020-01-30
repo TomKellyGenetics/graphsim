@@ -39,7 +39,7 @@ Introduction: inference and modelling of biological networks {#sec:intro}
 
 Network analysis of molecular biological pathways has the potential to
 lead to new insights into biology and medical genetics
-`[@Barabasi2004; @Hu2016]`. Since gene expression profiles capture a
+[@Barabasi2004; @Hu2016]. Since gene expression profiles capture a
 consistent signature of the regulatory state of a cell
 `[@Perou2000; @Ozsolak2011; @Svensson2018]`, they can be used to analyse
 complex molecular states with genome-scale data. However, biological

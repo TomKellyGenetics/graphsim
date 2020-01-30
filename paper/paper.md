@@ -134,11 +134,11 @@ a graph structure such as that presented in
 Figure [\[fig:simple\_graph:first\]](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
-$A_{ij}$), where $A_{ij} = 
+$A_{ij}$), where $$A_{ij} = 
 \begin{cases}
-   1                         & if genes i and j are adjacent \\
-   0                         & otherwise
-\end{cases}$
+   1                         & \mbox{if genes} i \mbox{and} j \mbox{are adjacent} \\
+   0                         & \mbox{otherwise}
+\end{cases}$$
 A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that

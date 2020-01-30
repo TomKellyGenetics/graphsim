@@ -107,7 +107,7 @@ statistical and network inference procedures.
 Methodology and software {#sec:methods}
 ========================
 
-[\[fig:simple_graph\]]{#fig:simple_graph label="fig:simple_graph"}
+![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph structure used as an example to demonstrate the simulation procedure in Figures~\ref{fig:simulation_activating} and~\ref{fig:simulation_inhibiting}. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.](simple_graph.png)
 
 Here we present a procedure to simulate gene expression data with
 correlation structure derived from a known graph structure. This

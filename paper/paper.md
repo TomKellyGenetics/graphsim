@@ -7,16 +7,18 @@ tags:
   - pathway
   - network
 authors:
-  - name: S. Thomas Kelly <tom.kelly@riken.jp>
+  - name: S. Thomas Kelly
+    email: "tom.kelly@postgrad.otago.ac.nz, tom.kelly@riken.jp"
     orcid: 0000-0003-3904-6690
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Michael A. Black <mik.black@otago.ac.nz>
+  - name: Michael A. Black
+    email: mik.black@otago.ac.nz
     orcid: 0000-0003-1174-6054
     affiliation: "1"
 affiliations:
  - name: Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand
    index: 1
- - name: Present address: RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan
+ - name: Present address\: RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan
    index: 2
 date: 30 Janunary 2019
 bibliography: paper.bib

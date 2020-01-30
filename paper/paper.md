@@ -31,7 +31,27 @@ bibliography: paper.bib
 Provides a flexible framework to simulate biological pathways from a graph structure based on a statistical model of gene expression.
 
 ### Summary
-Transcriptomic analysis is used to capture the molecular state of a cell or sample in many biological and medical applications. In addition to identifying alterations in activity at the level of individual genes, understanding changes in the gene networks that regulate fundamental biological mechanisms is also an important objective of molecular analysis. As a result, databases that describe biological pathways are increasingly relied on to assist with the interpretation of results from large-scale genomics studies. Incorporating information from biological pathways and gene regulatory networks into a genomic data analysis is a popular strategy, and there are many methods that provide this functionality for gene expression data. When developing or comparing such methods, it is important to gain an accurate assessment of their performance, with simulation-based validation studies a popular choice.  This necessitates the use of simulated data that correctly accounts for pathway relationships and correlations. Here we present a versatile statistical framework to simulate correlated gene expression data from biological pathways, by sampling from a multivariate normal distribution derived from a graph structure. This procedure has been released as the \pkg{graphsim} \proglang{R} package (\url{https://github.com/TomKellyGenetics/graphsim}) and is compatible with any graph structure that can be described using the \pkg{igraph} package.
+Transcriptomic analysis is used to capture the molecular state of a cell
+or sample in many biological and medical applications. In addition to 
+identifying alterations in activity at the level of individual genes, 
+understanding changes in the gene networks that regulate fundamental
+biological mechanisms is also an important objective of molecular 
+analysis. As a result, databases that describe biological pathways 
+are increasingly relied on to assist with the interpretation of results
+from large-scale genomics studies. Incorporating information from 
+biological pathways and gene regulatory networks into a genomic data
+analysis is a popular strategy, and there are many methods that provide
+this functionality for gene expression data. When developing or comparing
+such methods, it is important to gain an accurate assessment of their 
+performance, with simulation-based validation studies a popular choice.
+This necessitates the use of simulated data that correctly accounts for
+pathway relationships and correlations. Here we present a versatile
+statistical framework to simulate correlated gene expression data from
+biological pathways, by sampling from a multivariate normal distribution
+derived from a graph structure. This procedure has been released as the
+`graphsim` R} package (\url{https://github.com/TomKellyGenetics/graphsim})
+ and is compatible with any graph structure that can be described using
+the `igraph` package.
 
 
 Introduction: inference and modelling of biological networks {#sec:intro}
@@ -41,7 +61,7 @@ Network analysis of molecular biological pathways has the potential to
 lead to new insights into biology and medical genetics
 [@Barabasi2004; @Hu2016]. Since gene expression profiles capture a
 consistent signature of the regulatory state of a cell
-`[@Perou2000; @Ozsolak2011; @Svensson2018]`, they can be used to analyse
+[@Perou2000; @Ozsolak2011; @Svensson2018], they can be used to analyse
 complex molecular states with genome-scale data. However, biological
 pathways are often analysed in a reductionist paradigm as amorphous sets
 of genes involved in particular functions, despite the fact that the

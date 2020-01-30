@@ -408,3 +408,5 @@ structure.
 ![image]({sigma_mat_inhibiting.png}) ![image]({expr_inhib_mat.png})
 ![image]({expr_inhib_cor_mat.png}) ![image]({expr_inhib_disc_mat.png})
 ... 
+
+# References

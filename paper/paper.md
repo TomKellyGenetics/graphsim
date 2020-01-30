@@ -16,9 +16,9 @@ authors:
     orcid: 0000-0003-1174-6054
     affiliation: "1"
 affiliations:
- - name: Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand
+ - name: "Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand"
    index: 1
- - name: Present address\: RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan
+ - name: "Present address:RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan"
    index: 2
 date: 30 Janunary 2019
 bibliography: paper.bib

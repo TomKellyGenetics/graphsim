@@ -154,7 +154,7 @@ reference="fig:simulation_activating:second"}. An
 arithmetically-decreasing (absolute) distance weighting is also
 supported in the package which implements this procedure: [ $R_{ij}$ = 
 \begin{cases}
-   $1$                            & if genes $i$ and $j$ are adjacent$ \\
+   $1$                            & if genes $i$ and $j$ are adjacent \\
    $1-\frac{d_{ij}}{diam(G)}$     & if a path can be found  between genes $i$ and $j$ \\
    $0$                            & if no path exists between genes $i$ and $j$ 
 \end{cases}]{style="color: black"}

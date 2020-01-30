@@ -136,7 +136,7 @@ reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
 $A_{ij}$), where $A_{ij} = 
 \begin{cases}
-   1                         & $if genes $i$ and $j$ are adjacent$ \\
+   1                         & if genes i and j are adjacent \\
    0                         & otherwise
 \end{cases}$
 A matrix, **$R$**, with elements

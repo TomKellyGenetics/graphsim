@@ -23,9 +23,7 @@ affiliations:
    index: 2
 date: 30 Janunary 2019
 bibliography: paper.bib
-header-includes:
-   - \usepackage{mathtools}
-   - \usepackage{xfrac}
+
 ---
 
 ### Statement of Need

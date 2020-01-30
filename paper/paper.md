@@ -107,29 +107,10 @@ statistical and network inference procedures.
 Methodology and software {#sec:methods}
 ========================
 
-\begin{figure*}[!htb]
-%\begin{mdframed}
-%  \resizebox{\textwidth}{!}{
-         \begin{center}
-%
-        \subcaptionbox{Activating pathway structure  \label{fig:simple_graph:first}}{%
-            \fbox{
-            \includegraphics[width=0.45\textwidth]{{simple_graph.png}}
-            }
-        }%
-        \subcaptionbox{Pathway structure with inhibitions \label{fig:simple_graph:second}}{%
-            \fbox{
-           \includegraphics[width=0.45\textwidth]{{simple_graph_inhibiting.png}}
-           }
-        }%
-%
-    \end{center}
-   \caption[Simulated graph structures]{\small \textbf{\textbf{Simulated graph structures.}} A constructed graph structure used as an example to demonstrate the simulation procedure in Figures~\ref{fig:simulation_activating} and~\ref{fig:simulation_inhibiting}. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.}
-%}
-\label{fig:simple_graph}
-%\end{mdframed}
-\end{figure*}
-
+![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
+structure used as an example to demonstrate the simulation procedure in
+Figures~2 and~3. Activating links are denoted by black arrows and inhibiting
+links by red edges. Inhibiting edges have been highlighted in red.](simple_graph.png)
 
 Here we present a procedure to simulate gene expression data with
 correlation structure derived from a known graph structure. This

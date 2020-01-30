@@ -133,8 +133,8 @@ reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
 [$A_{ij}$]{style="color: black"}), where [ $$A_{ij} = 
 \begin{cases}
-   1                         & if genes $i$ and $j$ are adjacent \\
-   0                         & otherwise
+   1                            & $ if genes $i$ and $j$ are adjacent$ \\
+   0                            & $ otherwise$
 \end{cases}$$]{style="color: black"} A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that
@@ -142,9 +142,9 @@ closer nodes are given more weight than more distant nodes, to define
 inter-node relationships. A geometrically-decreasing (relative) distance
 weighting is used to achieve this: [ $$R_{ij} = 
 \begin{cases}
-   1                            & if genes $i$ and $j$ are adjacent \\
-   (\frac{1}{2})^{d_{ij}}      & if a path can be found  between genes $i$ and $j$ \\
-   0                            & if no path exists between genes $i$ and $j$ 
+   1                            & $ if genes $i$ and $j$ are adjacent$ \\
+   (\frac{1}{2})^{d_{ij}}       & $ if a path can be found  between genes $i$ and $j$ \\
+   0                            & $ if no path exists between genes $i$ and $j$ 
 \end{cases}$$]{style="color: black"} where $d_{ij}$ is the length of
 the shortest path (i.e., minimum number of edges traversed) between
 genes (nodes) $i$ and $j$ in graph $G$. Each more distant node is thus
@@ -154,15 +154,15 @@ reference="fig:simulation_activating:second"}. An
 arithmetically-decreasing (absolute) distance weighting is also
 supported in the package which implements this procedure: [ $$R_{ij} = 
 \begin{cases}
-   1                            & if genes $i$ and $j$ are adjacent \\
-   1-\frac{d_{ij}}{diam(G)}     & if a path can be found  between genes $i$ and $j$ \\
-   0                            & if no path exists between genes $i$ and $j$ 
+   1                            & $ if genes $i$ and $j$ are adjacent$ \\
+   1-\frac{d_{ij}}{diam(G)}     & $ if a path can be found  between genes $i$ and $j$ \\
+   0                            & $ if no path exists between genes $i$ and $j$ 
 \end{cases}$$ ]{style="color: black"}
 
 Assuming a unit variance for each gene, these values can be used to
 derive a $\Sigma$ matrix: $$\Sigma_{ij} = 
 \begin{cases}
-   1                            & if $i=j$ \\
+   1                            & $if $i=j$ \\
    \rho R_{ij}  & otherwise
 \end{cases}$$ where $\rho$ is the correlation between adjacent nodes.
 Thus covariances between adjacent nodes are assigned by a correlation

@@ -162,7 +162,7 @@ supported in the package which implements this procedure: [ $R_{ij}$ =
 Assuming a unit variance for each gene, these values can be used to
 derive a $\Sigma$ matrix: $$\Sigma_{ij} = 
 \begin{cases}
-   1                            & $if $i=j$ \\
+   1                            & $if$ i=j \\
    \rho R_{ij}  & otherwise
 \end{cases}$$ where $\rho$ is the correlation between adjacent nodes.
 Thus covariances between adjacent nodes are assigned by a correlation

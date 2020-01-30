@@ -134,18 +134,20 @@ a graph structure such as that presented in
 Figure [\[fig:simple\_graph:first\]](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
-[$A_{ij}$]{style="color: black"}), where [ $$A_{ij} = 
+[$A_{ij}$]{style="color: black"}), where 
+$A_{ij} =$ 
 \begin{cases}
-   1                         & _if genes $i$ and $j$ are adjacent_ \\
-   0                         & _otherwise_
-\end{cases}$$]{style="color: black"} A matrix, **$R$**, with elements
+   $1$                         & if genes $i$ and $j$ are adjacent \\
+   $0$                         & otherwise
+\end{cases}
+]{style="color: black"} A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that
 closer nodes are given more weight than more distant nodes, to define
 inter-node relationships. A geometrically-decreasing (relative) distance
 weighting is used to achieve this: [ $$R_{ij} = 
 \begin{cases}
-   1                            & _if genes $i$ and $j$ are adjacent_ \\
+   1                            & if genes $i$ and $j$ are adjacent \\
    (\frac{1}{2})^{d_{ij}}      & if a path can be found  between genes $i$ and $j$ \\
    0                            & if no path exists between genes $i$ and $j$ 
 \end{cases}$$]{style="color: black"} where $d_{ij}$ is the length of

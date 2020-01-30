@@ -48,7 +48,7 @@ of genes involved in particular functions, despite the fact that the
 relationships defined by pathway structure could further inform gene
 expression analyses. In many cases, the pathway relationships are
 well-defined, experimentally-validated, and are available in public
-databases [@Reactome]. As a result, network analysis techniques could
+databases `[@Reactome]`. As a result, network analysis techniques could
 play an important role in furthering our understanding of biological
 pathways and aiding in the interpretation of genomics studies.
 
@@ -173,7 +173,7 @@ The graph structure in
 Figure [\[fig:simple\_graph:first\]](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"} was used to simulate correlated gene
 expression data by sampling from a multivariate normal distribution
-using the package [@Genz2009; @mvtnorm]. The graph structure
+using the package `[@Genz2009; @mvtnorm]`. The graph structure
 visualisation in
 Figure [\[fig:simple\_graph\]](#fig:simple_graph){reference-type="ref"
 reference="fig:simple_graph"} was specifically developed for (directed)
@@ -325,7 +325,7 @@ biological pathway (from reactome R-HSA-2173789) of TGF-$\beta$ receptor
 signaling activates SMADs
 (Figure [\[fig:simulation\_smad:first\]](#fig:simulation_smad:first){reference-type="ref"
 reference="fig:simulation_smad:first"}) derived from the Reactome
-database version 52 [@Reactome]. Distances are calculated in the same
+database version 52 `[@Reactome]`. Distances are calculated in the same
 manner as before
 (Figure [\[fig:simulation\_smad:second\]](#fig:simulation_smad:second){reference-type="ref"
 reference="fig:simulation_smad:second"}) producing blocks of correlated

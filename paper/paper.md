@@ -103,6 +103,12 @@ relationships from a known underlying network. These simulated datasets
 can be used to evaluate various bioinformatics methodologies, including
 statistical and network inference procedures.
 
+
+![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
+structure used as an example to demonstrate the simulation procedure in
+Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=85% #fig:graph_simple label="fig:graph_simple"}
+
 Methodology and software {#sec:methods}
 ========================
 
@@ -134,18 +140,19 @@ $A_{ij}$), where $$A_{ij} =
    0                         & \mbox{otherwise}
 \end{cases}$$
 
-![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
-structure used as an example to demonstrate the simulation procedure in
-Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=85% }{#fig:graph_simple label="fig:graph_simple"}
-
-
 A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that
 closer nodes are given more weight than more distant nodes, to define
 inter-node relationships. A geometrically-decreasing (relative) distance
-weighting is used to achieve this: [ $$R_{ij} = 
+weighting is used to achieve this:
+
+![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
+structure used as an example to demonstrate the simulation procedure in
+Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=85% #fig:graph_simple label="fig:graph_simple"}
+
+[ $$R_{ij} = 
 \begin{cases}
    1                            & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
    (\frac{1}{2})^{d_{ij}}      & \mbox{if a path can be found between genes } i \mbox{ and } j \\

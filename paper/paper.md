@@ -147,11 +147,6 @@ closer nodes are given more weight than more distant nodes, to define
 inter-node relationships. A geometrically-decreasing (relative) distance
 weighting is used to achieve this:
 
-![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
-structure used as an example to demonstrate the simulation procedure in
-Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=85% #fig:graph_simple label="fig:graph_simple"}
-
 [ $$R_{ij} = 
 \begin{cases}
    1                            & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\

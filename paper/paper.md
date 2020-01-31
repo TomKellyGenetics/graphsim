@@ -120,11 +120,6 @@ microarray studies and count-based data from RNA-Seq experiments. This
 approach has also been applied for modelling UMI-based count data from
 single-cell RNA-Seq experiments in the package [@Wang2018].
 
-![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
-structure used as an example to demonstrate the simulation procedure in
-Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){#fig:graph_simple label="fig:graph_simple"}
-
 In order to simulate transcriptomic data, a pathway is first constructed
 as a graph structure, using the package [@igraph], with the status of
 the edge relationships defined (i.e, whether they activate or inhibit
@@ -138,6 +133,13 @@ $A_{ij}$), where $$A_{ij} =
    1                         & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
    0                         & \mbox{otherwise}
 \end{cases}$$
+
+![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
+structure used as an example to demonstrate the simulation procedure in
+Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=85% }{#fig:graph_simple label="fig:graph_simple"}
+
+
 A matrix, **$R$**, with elements
 [$R_{ij}$]{style="color: black"}, is calculated based on distance (i.e.,
 number of edges contained in the shortest path) between nodes, such that
@@ -243,7 +245,7 @@ used to generate a simulated expression dataset of 100 samples (coloured
 blue to red from low to high) via sampling from the multivariate
 normal distribution. Here genes with closer relationships in the pathway
 structure show higher correlation between simulated
-values.](figure2.pdf){ width=75% }
+values.](figure2.pdf){ width=85% }
 
 
 ```
@@ -354,7 +356,7 @@ structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ 
 These values are coloured blue to red from $-1$ to $1$. This has been used to generate
 a simulated expression dataset of 100 samples (coloured blue to red from low to high)
 via sampling from the multivariate normal distribution. Here the inhibitory relationships
-between genes are reflected in negatively correlated simulated  values.](figure3.png){ width=75% }
+between genes are reflected in negatively correlated simulated  values.](figure3.png){ width=85% }
 
 The simulation procedure
 (Figure [\[fig:simulation_activating\]](#fig:simulation_activating){reference-type="ref"

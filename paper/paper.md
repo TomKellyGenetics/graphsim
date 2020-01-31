@@ -124,7 +124,7 @@ single-cell RNA-Seq experiments in the package [@Wang2018].
 ![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
 structure used as an example to demonstrate the simulation procedure in
 Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.png){#fig:graph_simple label="fig:graph_simple"}
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){#fig:graph_simple label="fig:graph_simple"}
 
 In order to simulate transcriptomic data, a pathway is first constructed
 as a graph structure, using the package [@igraph], with the status of

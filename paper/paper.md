@@ -358,7 +358,7 @@ was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlatio
 (d) from the relative distances between the nodes. These values are coloured blue to red from
 $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
-Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf){ width=75% #fig:simulation_smad label="fig:simulation_smad"}
+Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf){ width=90% #fig:simulation_smad label="fig:simulation_smad"}
 
 
 ```

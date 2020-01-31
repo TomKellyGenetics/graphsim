@@ -314,7 +314,7 @@ dist_mat <- make_distance_graph(graph_test4, absolute = FALSE)
 
 sigma_mat <- make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE)
 
-\#show shortest paths of graph
+#show shortest paths of graph
 
 shortest_paths <- shortest.paths(graph)
 
@@ -358,7 +358,7 @@ was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlatio
 (d) from the relative distances between the nodes. These values are coloured blue to red from
 $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
-Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf}{ width=75% #fig:simulation_smad label="fig:simulation_smad"}
+Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf){ width=75% #fig:simulation_smad label="fig:simulation_smad"}
 
 
 ```

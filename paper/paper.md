@@ -107,11 +107,6 @@ statistical and network inference procedures.
 Methodology and software {#sec:methods}
 ========================
 
-![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
-structure used as an example to demonstrate the simulation procedure in
-Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.png){#fig:graph_simple label="fig:graph_simple"}
-
 Here we present a procedure to simulate gene expression data with
 correlation structure derived from a known graph structure. This
 procedure assumes that transcriptomic data have been generated and
@@ -125,6 +120,11 @@ often used for the analysis of intensity-based data from gene expression
 microarray studies and count-based data from RNA-Seq experiments. This
 approach has also been applied for modelling UMI-based count data from
 single-cell RNA-Seq experiments in the package [@Wang2018].
+
+![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
+structure used as an example to demonstrate the simulation procedure in
+Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.png){#fig:graph_simple label="fig:graph_simple"}
 
 In order to simulate transcriptomic data, a pathway is first constructed
 as a graph structure, using the package [@igraph], with the status of

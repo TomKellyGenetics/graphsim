@@ -107,7 +107,7 @@ statistical and network inference procedures.
 ![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
 structure used as an example to demonstrate the simulation procedure in
 Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=90% #fig:graph_simple label="fig:graph_simple"}
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=95% #fig:graph_simple label="fig:graph_simple"}
 
 Methodology and software {#sec:methods}
 ========================
@@ -267,7 +267,7 @@ are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been
 used to generate a simulated expression dataset of 100 samples (coloured
 blue to red from low to high) via sampling from the multivariate
 normal distribution. Here genes with closer relationships in the pathway
-structure show higher correlation between simulated values.](figure2.pdf){ width=90% #fig:simulation_activating label="simulation_activating"}
+structure show higher correlation between simulated values.](figure2.pdf){ width=95% #fig:simulation_activating label="simulation_activating"}
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
 -----------------------------------------
@@ -349,7 +349,7 @@ structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ 
 These values are coloured blue to red from $-1$ to $1$. This has been used to generate
 a simulated expression dataset of 100 samples (coloured blue to red from low to high)
 via sampling from the multivariate normal distribution. Here the inhibitory relationships
-between genes are reflected in negatively correlated simulated  values.](figure3.pdf){ width=90% #fig:simulation_inhibiting label="fig:simulation_inhibiting"}
+between genes are reflected in negatively correlated simulated  values.](figure3.pdf){ width=95% #fig:simulation_inhibiting label="fig:simulation_inhibiting"}
 
 ![\small \textbf{\textbf{Simulating expression from a biological pathway graph structure.}}
 Simulating expression from graph structure with inhibitions.}} The graph structure (a) of a
@@ -358,8 +358,9 @@ was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlatio
 (d) from the relative distances between the nodes. These values are coloured blue to red from
 $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
-Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf){ width=90% #fig:simulation_smad label="fig:simulation_smad"}
+Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf){ width=95% #fig:simulation_smad label="fig:simulation_smad"}
 
+ \newpage
 
 ```
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,

@@ -225,11 +225,13 @@ if(! require("devtools") ){
 }
 devtools::install_github("TomKellyGenetics/graphsim")
 ```
+
 ```
 #load required packages (once per R instance)
 
 library("igraph")
 library("graphsim")
+```
 
 ```
 #generate graph structure

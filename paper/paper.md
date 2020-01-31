@@ -213,50 +213,37 @@ A graph structure can be generated and plotted using the following
 commands in R:
 
 ```
-\#install packages required (once per machine)
+#install packages required (once per machine)
+install.packages("igraph")
+if(! require("devtools") ){
+install.packages("devtools")
+library("devtools")
+}
+devtools::install_github("TomKellyGenetics/graphsim")
 
-install.packages(\"igraph\")
+#load required packages (once per R instance)
 
-install.packages(\"devtools\")
+library("igraph")
+library("graphsim")
 
-library(\"devtools\")
+#generate graph structure
 
-devtools::install\_github(\"TomKellyGenetics/graphsim\")
+graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
+                     c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+graph <- graph.edgelist(graph_edges, directed = T)
 
-\#install custom plotting package
+#plot graph structure (Figure 1)
+plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
+              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
+```
 
-devtools::install\_github(\"TomKellyGenetics/plot.igraph\")
+```
+#generate parameters for inhibitions
+state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
 
-\#load required packages (once per R instance)
-
-library(\"igraph\")
-library(\"graphsim\")
-
-library(\"plot.igraph\")
-
-\#generate graph structure
-
-graph\_edges \<- rbind(c(\"A\", \"C\"),
-c(\"B\", \"C\"), c(\"C\", \"D\"), c(\"D\", \"E\"), c(\"D\", \"F\"),
-c(\"F\", \"G\"), c(\"F\", \"I\"), c(\"H\", \"I\")) graph \<-
-graph.edgelist(graph\_edges, directed = T)
-
-\#plot graph structure (Figure 1)
-
-plot\_directed(graph, state =
-\"activating\", layout = layout.kamada.kawai, cex.node=3, cex.arrow=5,
-arrow\_clip = 0.2)
-
-\#generate parameters for inhibitions
-
-state \<- c(1, 1, -1, 1, 1, 1, 1,
--1, 1)
-
-\#plot graph structure with inhibitions (Figure 2)
-
-plot\_directed(graph,
-state=state, layout = layout.kamada.kawai, cex.node=3, cex.arrow=5,
-arrow\_clip = 0.2)
+#plot graph structure with inhibitions (Figure 2)
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
 ```
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}

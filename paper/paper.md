@@ -358,8 +358,7 @@ was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlatio
 (d) from the relative distances between the nodes. These values are coloured blue to red from
 $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
-Here modules of genes with correlated expression can be clearly discerned.](figure4.png){ width=75% #fig:simulation_smad label="fig:simulation_smad"}
-
+Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf}{ width=75% #fig:simulation_smad label="fig:simulation_smad"}
 
 
 ```
@@ -432,16 +431,6 @@ Section [\[methods:simulating_SL\]](#methods:simulating_SL){reference-type="ref
 reference="methods:simulating_SL"}. Thus I can simulate known synthetic
 lethal partner genes within a synthetic lethal partner pathway
 structure.
-
-![\small \textbf{\textbf{Simulating expression from a biological pathway graph structure.}}
-Simulating expression from graph structure with inhibitions.}} The graph structure (a) of a
-known biological pathway, the TGF-$\beta$ receptor signaling activates SMADs (R-HSA-2173789),
-was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlation structure
-(d) from the relative distances between the nodes. These values are coloured blue to red from
-$-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
-(coloured blue to red from low to high) via sampling from the multivariate normal distribution.
-Here modules of genes with correlated expression can be clearly discerned.](figure4.png){ width=75% #fig:simulation_smad label="fig:simulation_smad"}
-
 
 
 Summary and discussion {#sec:summary}

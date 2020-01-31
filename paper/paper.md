@@ -23,7 +23,6 @@ affiliations:
    index: 2
 date: 30 Janunary 2019
 bibliography: paper.bib
-
 ---
 
 ### Statement of Need
@@ -222,12 +221,10 @@ library("devtools")
 devtools::install_github("TomKellyGenetics/graphsim")
 
 #load required packages (once per R instance)
-
 library("igraph")
 library("graphsim")
 
 #generate graph structure
-
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
                      c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph <- graph.edgelist(graph_edges, directed = T)
@@ -236,6 +233,18 @@ graph <- graph.edgelist(graph_edges, directed = T)
 plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
               cex.node=3, cex.arrow=5, arrow_clip = 0.2)
 ```
+
+![\small \textbf{\textbf{Simulating expression from a graph structure.}}
+An example of a graph structure (a) that has been used to derive a
+relationship matrix (b), $\Sigma$ matrix (c) and correlation structure 
+(d) from the relative distances between the nodes. Non-negative values 
+are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been 
+used to generate a simulated expression dataset of 100 samples (coloured
+blue to red from low to high) via sampling from the multivariate
+normal distribution. Here genes with closer relationships in the pathway
+structure show higher correlation between simulated
+values.](figure2.pdf){ width=75% }
+
 
 ```
 #generate parameters for inhibitions
@@ -248,18 +257,6 @@ plot_directed(graph, state=state, layout = layout.kamada.kawai,
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
 -----------------------------------------
-
-
-![\small \textbf{\textbf{Simulating expression from a graph structure.}}
-Simulating expression from a graph structure.}} An example of a graph 
-structure (a) that has been used to derive a relationship matrix (b),
-$\Sigma$ matrix (c) and correlation structure (d) from the relative
-distances between the nodes. Non-negative values are coloured white
-to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate
-a simulated expression dataset of 100 samples (coloured blue to red from
-low to high) via sampling from the multivariate normal distribution.
-Here genes with closer relationships in the pathway structure show
-higher correlation between simulated values.](figure2.pdf){ width=75% }
 
 The correlation parameter of $\rho = 0.8$ is used to demonstrate the
 inter-correlated datasets using a geometrically-generated relationship

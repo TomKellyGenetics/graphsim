@@ -107,7 +107,7 @@ statistical and network inference procedures.
 ![\small \textbf{\textbf{Simulated graph structures.}} A constructed graph
 structure used as an example to demonstrate the simulation procedure in
 Figures 2 and 3. Activating links are denoted by black arrows and inhibiting
-links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=85% #fig:graph_simple label="fig:graph_simple"}
+links by red edges. Inhibiting edges have been highlighted in red.](figure1.pdf){ width=90% #fig:graph_simple label="fig:graph_simple"}
 
 Methodology and software {#sec:methods}
 ========================
@@ -267,8 +267,7 @@ are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been
 used to generate a simulated expression dataset of 100 samples (coloured
 blue to red from low to high) via sampling from the multivariate
 normal distribution. Here genes with closer relationships in the pathway
-structure show higher correlation between simulated
-values.](figure2.pdf){ width=85% }
+structure show higher correlation between simulated values.](figure2.pdf){ width=90% #fig:simulation_activating label="simulation_activating"}
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
 -----------------------------------------
@@ -305,61 +304,57 @@ normalised on a log-scale.
 The simulated dataset can be generated using the following code:
 
 ```
-\#adjacency matrix
+#adjacency matrix
 
-adj\_mat \<- make\_adjmatrix\_graph(graph)
+adj_mat <- make_adjmatrix_graph(graph)
 
-\#relationship matrix
+#relationship matrix
 
-dist\_mat \<- make\_distance\_graph(graph\_test4,
-absolute = F)
+dist_mat <- make_distance_graph(graph_test4, absolute = FALSE)
 
-\#sigma matrix directly from graph
+#sigma matrix directly from graph
 
-sigma\_mat \<- make\_sigma\_mat\_dist\_graph(graph, 0.8, absolute = F)
+sigma_mat <- make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE)
 
 \#show shortest paths of graph
 
-shortest\_paths \<- shortest.paths(graph)
+shortest_paths <- shortest.paths(graph)
 
-\#generate expression data directly from
+#generate expression data directly from graph
 
-graph expr \<- generate\_expression(100, graph, cor = 0.8, mean = 0, comm = F, dist =
-T, absolute = F, state = state)
+expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = F,
+          dist = TRUE, absolute = FALSE, state = state)
 
-\#\#plot steps
+#plot adjacency matrix
 
-\#plot adjacency matrix
+heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
+          col = colorpanel(3, "grey75", "white", "blue"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-heatmap.2(make\_adjmatrix\_graph(graph), scale =
-\"none\", trace = \"none\", col = colorpanel(3, \"grey75\", \"white\",
-\"blue\"), colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+#plot relationship matrix
 
-\#plot relationship matrix
+heatmap.2(make_distance_graph(graph_test4, absolute = FALSE),
+          scale = "none", trace = "none\", col = bluered(50),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-heatmap.2(make\_distance\_graph(graph\_test4,
-absolute = F), scale = \"none\", trace = \"none\", col = bluered(50),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+#plot sigma matrix
 
-\#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-heatmap.2(make\_sigma\_mat\_dist\_graph(graph, 0.8,
-absolute = F), scale = \"none\", trace = \"none\", col = bluered(50),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph))) expr \<-
-generate\_expression(100, graph, cor = 0.8, mean = 0, comm = F, dist =
-T, absolute = F, state = state)
+expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
+          comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
 
-\#plot simulated expression data
+#plot simulated expression data
 
-heatmap.2(expr, scale = \"none\", trace
-= \"none\", col = bluered(50), colsep = 1:length(V(graph)), rowsep =
-1:length(V(graph)))
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-\#plot simulated correlations
+#plot simulated correlations
 
-heatmap.2(cor(t(expr)), scale = \"none\",
-trace = \"none\", col = bluered(50), colsep = 1:length(V(graph)), rowsep
-= 1:length(V(graph)))
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 ```
 
 ![\small \textbf{\textbf{Simulating expression from graph structure with inhibitions.}}
@@ -369,7 +364,7 @@ structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ 
 These values are coloured blue to red from $-1$ to $1$. This has been used to generate
 a simulated expression dataset of 100 samples (coloured blue to red from low to high)
 via sampling from the multivariate normal distribution. Here the inhibitory relationships
-between genes are reflected in negatively correlated simulated  values.](figure3.png){ width=85% }
+between genes are reflected in negatively correlated simulated  values.](figure3.png){ width=90% #fig:simulation_inhibiting label="fig:simulation_inhibiting"}
 
 The simulation procedure
 (Figure [\[fig:simulation_activating\]](#fig:simulation_activating){reference-type="ref"
@@ -401,7 +396,7 @@ was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlatio
 (d) from the relative distances between the nodes. These values are coloured blue to red from
 $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
-Here modules of genes with correlated expression can be clearly discerned.](figure4.png){ width=75% #fig:simulation_smad label="fig:simulation_smad"}
+Here modules of genes with correlated expression can be clearly discerned.](figure4.png){ width=90% #fig:simulation_smad label="fig:simulation_smad"}
 
 The simulation procedure is also demonstrated here
 (Figure [\[fig:simulation_smad\]](#fig:simulation_smad){reference-type="ref"

@@ -272,7 +272,7 @@ to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate
 a simulated expression dataset of 100 samples (coloured blue to red from
 low to high) via sampling from the multivariate normal distribution.
 Here genes with closer relationships in the pathway structure show
-higher correlation between simulated values.](figure2.png)
+higher correlation between simulated values.](figure2.pdf)
 
 The correlation parameter of $\rho = 0.8$ is used to demonstrate the
 inter-correlated datasets using a geometrically-generated relationship

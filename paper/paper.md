@@ -340,7 +340,29 @@ heatmap.2(make_distance_graph(graph_test4, absolute = FALSE),
 heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
           scale = "none", trace = "none", col = bluered(50),
           colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+```
 
+![\small \textbf{\textbf{Simulating expression from graph structure with inhibitions.}}
+Simulating expression from graph structure with inhibitions.}} An example of a graph
+structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix
+(c), and correlation structure (d), from the relative distances between the nodes.
+These values are coloured blue to red from $-1$ to $1$. This has been used to generate
+a simulated expression dataset of 100 samples (coloured blue to red from low to high)
+via sampling from the multivariate normal distribution. Here the inhibitory relationships
+between genes are reflected in negatively correlated simulated  values.](figure3.pdf){ width=90% #fig:simulation_inhibiting label="fig:simulation_inhibiting"}
+
+![\small \textbf{\textbf{Simulating expression from a biological pathway graph structure.}}
+Simulating expression from graph structure with inhibitions.}} The graph structure (a) of a
+known biological pathway, the TGF-$\beta$ receptor signaling activates SMADs (R-HSA-2173789),
+was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlation structure
+(d) from the relative distances between the nodes. These values are coloured blue to red from
+$-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples
+(coloured blue to red from low to high) via sampling from the multivariate normal distribution.
+Here modules of genes with correlated expression can be clearly discerned.](figure4.png){ width=75% #fig:simulation_smad label="fig:simulation_smad"}
+
+
+
+```
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
           comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
 
@@ -402,14 +424,14 @@ reference="fig:simulation_smad:fourth"}). Here *SMAD7* exhibits
 negative correlations with the other SMADs consistent with it's
 functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
 
-![\small \textbf{\textbf{Simulating expression from graph structure with inhibitions.}}
-Simulating expression from graph structure with inhibitions.}} An example of a graph
-structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix
-(c), and correlation structure (d), from the relative distances between the nodes.
-These values are coloured blue to red from $-1$ to $1$. This has been used to generate
-a simulated expression dataset of 100 samples (coloured blue to red from low to high)
-via sampling from the multivariate normal distribution. Here the inhibitory relationships
-between genes are reflected in negatively correlated simulated  values.](figure3.pdf){ width=90% #fig:simulation_inhibiting label="fig:simulation_inhibiting"}
+These simulated datasets could then be used for simulating synthetic
+lethal partners of a query gene within a graph network. The query gene
+was assumed to be separate from the graph network pathway and was added
+to the dataset using the procedure in
+Section [\[methods:simulating_SL\]](#methods:simulating_SL){reference-type="ref"
+reference="methods:simulating_SL"}. Thus I can simulate known synthetic
+lethal partner genes within a synthetic lethal partner pathway
+structure.
 
 ![\small \textbf{\textbf{Simulating expression from a biological pathway graph structure.}}
 Simulating expression from graph structure with inhibitions.}} The graph structure (a) of a
@@ -420,14 +442,7 @@ $-1$ to $1$. This has been used to generate a simulated expression dataset of 10
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
 Here modules of genes with correlated expression can be clearly discerned.](figure4.png){ width=75% #fig:simulation_smad label="fig:simulation_smad"}
 
-These simulated datasets could then be used for simulating synthetic
-lethal partners of a query gene within a graph network. The query gene
-was assumed to be separate from the graph network pathway and was added
-to the dataset using the procedure in
-Section [\[methods:simulating_SL\]](#methods:simulating_SL){reference-type="ref"
-reference="methods:simulating_SL"}. Thus I can simulate known synthetic
-lethal partner genes within a synthetic lethal partner pathway
-structure.
+
 
 Summary and discussion {#sec:summary}
 ======================

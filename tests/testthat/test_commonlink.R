@@ -13,10 +13,10 @@ test_that("Generate common link matrix from adjacency matrix", {
   expect_equal(nrow(common_link_matrix1), length(V(graph_test1)))
   expect_equal(ncol(common_link_matrix1), length(V(graph_test1)))
   expect_equal(sum(common_link_matrix1), length(E(graph_test1))*4)
+  expect_true(all(adjacency_matrix1 == cbind(c(0, 1, 0, 0), c(1, 0, 1, 1), c(0, 1, 0, 0), c(0, 1, 0, 0))))
   expect_equal(all(is.matrix(common_link_matrix1)), TRUE)
+  expect_true(all(common_link_matrix1 == cbind(c(1, 0, 1, 1), c(0, 3, 0, 0), c(1, 0, 1, 1), c(1, 0, 1, 1))))
 })
-
-
 
 test_that("Generate common link matrix from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
@@ -29,4 +29,5 @@ test_that("Generate common link matrix from graph structure", {
   expect_equal(ncol(common_link_matrix1), length(V(graph_test1)))
   expect_equal(sum(common_link_matrix1), length(E(graph_test1))*4)
   expect_equal(all(is.matrix(common_link_matrix1)), TRUE)
+  expect_true(all(common_link_matrix1 == cbind(c(1, 0, 1, 1), c(0, 3, 0, 0), c(1, 0, 1, 1), c(1, 0, 1, 1))))
 })

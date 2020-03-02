@@ -12,6 +12,8 @@ test_that("Default to activating matrix", {
   expect_equal(ncol(state_matrix1), length(V(graph_test1)))
   expect_equal(sum(state_matrix1), length(V(graph_test1))**2)
   expect_equal(all(state_matrix1 > 0), TRUE)
+  expect_equal(all(is.matrix(state_matrix1)), TRUE)
+  expect_true(all(state_matrix1 == 1))
 })
 
 test_that("text input to activating matrix", {
@@ -24,6 +26,7 @@ test_that("text input to activating matrix", {
   expect_equal(ncol(state_matrix1), length(V(graph_test1)))
   expect_equal(sum(state_matrix1), length(V(graph_test1))**2)
   expect_equal(all(state_matrix1 > 0), TRUE)
+  expect_true(all(state_matrix1 == 1))
 })
 
 test_that("text input to activating matrix", {
@@ -36,6 +39,7 @@ test_that("text input to activating matrix", {
   expect_equal(ncol(state_matrix1), length(V(graph_test1)))
   expect_equal(sum(state_matrix1), length(V(graph_test1))**2)
   expect_equal(all(state_matrix1 > 0), TRUE)
+  expect_true(all(state_matrix1 == 1))
   state_matrix1 <- make_state_matrix(graph_test1, state = 1)
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
@@ -43,6 +47,7 @@ test_that("text input to activating matrix", {
   expect_equal(ncol(state_matrix1), length(V(graph_test1)))
   expect_equal(sum(state_matrix1), length(V(graph_test1))**2)
   expect_equal(all(state_matrix1 > 0), TRUE)
+  expect_true(all(state_matrix1 == 1))
 })
 
 test_that("text input to inhibiting matrix", {
@@ -56,6 +61,8 @@ test_that("text input to inhibiting matrix", {
   expect_equal(sum(state_matrix1), length(V(graph_test1)))
   expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
   expect_equal(all(state_matrix1 > 0), FALSE)
+  expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
+  expect_true(all(diag(state_matrix1) == 1))
 })
 
 test_that("text input to inhibiting matrix", {
@@ -69,6 +76,8 @@ test_that("text input to inhibiting matrix", {
   expect_equal(sum(state_matrix1), length(V(graph_test1)))
   expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
   expect_equal(all(state_matrix1 > 0), FALSE)
+  expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
+  expect_true(all(diag(state_matrix1) == 1))
   state_matrix1 <- make_state_matrix(graph_test1, state = -1)
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
@@ -77,4 +86,6 @@ test_that("text input to inhibiting matrix", {
   expect_equal(sum(state_matrix1), length(V(graph_test1)))
   expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
   expect_equal(all(state_matrix1 > 0), FALSE)
+  expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
+  expect_true(all(diag(state_matrix1) == 1))
 })

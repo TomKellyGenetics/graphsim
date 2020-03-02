@@ -12,4 +12,5 @@ test_that("Generate adjacency matrix from graph structure", {
   expect_equal(ncol(adjacency_matrix1), length(V(graph_test1)))
   expect_equal(sum(adjacency_matrix1), length(E(graph_test1))*2)
   expect_equal(all(is.matrix(adjacency_matrix1)), TRUE)
+  expect_true(all(adjacency_matrix1 == cbind(c(0, 1, 0, 0), c(1, 0, 1, 1), c(0, 1, 0, 0), c(0, 1, 0, 0))))
 })

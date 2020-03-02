@@ -8,5 +8,5 @@
 #'   \item{E}{directed relationship for pathway}
 #'   \item{state}{type of relationship (activating or inhibiting) as edge attribute}
 #' }
-#' @source PathwayCommons \url{"https://reactome.org/content/detail/R-HSA-2173789"}
+#' @source PathwayCommons \url{https://reactome.org/content/detail/R-HSA-2173789}
 "TGFBeta_Smad_graph"

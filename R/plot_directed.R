@@ -17,7 +17,7 @@
 ##' @param graph An \code{\link[igraph]{igraph}} object. Must be directed with known states.
 ##' @param state character or integer. Defaults to "activating" if no "state" edge attribute found. May be applied a scalar across all edges or as a vector for each edge respectively. Accepts non-integer values for weighted edges provided that the sign indicates whether links are activating (positive) or inhibiting (negative). May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for make_state_matrix or generate_expression_graph in the graphsim package \url{https://github.com/TomKellyGenetics/graphsim}.
 ##' @param labels character vector. For labels to plot nodes. Defaults to vertex names in graph object. Entering "" would yield unlabelled nodes.
-##' @param layout function. Layout function as selected from \code{\link[igraph]{layout_}}. Defaults to layout.fruchterman.reingold. Alternatives include layout.kamada.kawai, layout.reingold.tilford, layout.sugiyama, and layout.davidson.harel.
+##' @param layout function. Layout function as selected from \code{\link[igraph]{layout_}}. Defaults to layout.fruchterman.reingold. Alternatives include layout.kamada.kawai, layout.reingold.tilford, layout.sugiyama, and layout.davidson.harel. A 2-column layout matrix giving x and y co-ordinates of each node can be given.
 ##' @param cex.node numeric. Defaults to 1.
 ##' @param cex.label numeric. Defaults to 0.75.
 ##' @param cex.main numeric. Defaults to 0.8.
@@ -62,7 +62,15 @@
 ##' plot_directed(graph_test4, state=c(1, 1, -1, 1, -1, 1, -1, 1), layout = layout.kamada.kawai)
 ##' @export
 plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=NULL, main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F){
-  L <- layout(graph)
+  if(is.function(layout)){
+    L <-  layout(graph)
+  } else {
+    if(is.matrix(layout) && nrow(layout) == length(V(graph)) && ncol(layout) == 2){
+      L <- as.matrix(layout)
+    } else {
+      warning(paste0("layout must be specified as an igraph function or ", length(V(graph)), " by 2 matrix"))
+    }
+  }
   vs <- V(graph)
   es <- as.data.frame(get.edgelist(graph))
   Nv <- length(vs)
@@ -76,7 +84,7 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
     # add default state if not specified
     if(is.null(state)){
       state <- "activating"
-      col.arrow <-par("fg")
+      if(is.null(col.arrow)) col.arrow <- par("fg")
     }
   }
   if(is.numeric(state)){

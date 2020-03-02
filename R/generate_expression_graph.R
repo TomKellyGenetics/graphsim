@@ -14,10 +14,25 @@
 ##' @param comm,absolute logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph mvtnorm
+##' @importFrom igraph is_igraph
 ##' @importFrom Matrix nearPD
 ##' @importFrom matrixcalc is.symmetric.matrix is.positive.definite
 ##' @export
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = F, dist = F, absolute = F){
+  if(!is.integer(n)){
+    if(is.numeric(n)){
+      if(floor(n) == n){
+        n <- as.integer(n)
+      } else{
+        n <- floor(n)
+        print(paste("rounding to sample size", n))
+      }
+    } else{
+      stop("sample size n must be an integer of length 1")
+    }
+  }
+  if(length(n) > 1) stop("sample size n must be an integer of length 1")
+  if(!is_igraph(graph)) stop("graph must be an igraph class")
   if(is.vector(state) || length(state) == 1) state <- make_state_matrix(graph, state)
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))
   if(dist){
@@ -35,7 +50,7 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
     sig <- as.matrix(nearPD(sig, corr=T, keepDiag = T)$mat) #postive definite correction
   }
   expr_mat <- t(rmvnorm(n,mean=mean, sigma=sig))
-  rownames(expr_mat)<-names(V(graph))
-  colnames(expr_mat)<-paste0("sample_", 1:n)
+  rownames(expr_mat) <-names(V(graph))
+  colnames(expr_mat) <-paste0("sample_", 1:n)
   return(expr_mat)
 }

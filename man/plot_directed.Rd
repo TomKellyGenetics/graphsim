@@ -55,12 +55,12 @@ plot_directed(
 
 \item{col.arrow}{character. Specfies the colours of arrows passed to plot. Defaults to par("fg").  May take a scalar applied to all edges or a vector with colours for each edge respectively.}
 
-\item{main, sub, xlab, ylab}{Plotting paramaters to specify plot titles or axes labels}
+\item{main, sub, xlab, ylab}{Plotting parameters to specify plot titles or axes labels}
 
 \item{frame.plot}{logical. Whether to frame plot with a box. Defaults to FALSE.}
 }
 \description{
-Functions to plot_directed or graph structures including customised colors, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
+Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
 }
 \examples{
 

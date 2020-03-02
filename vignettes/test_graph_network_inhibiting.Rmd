@@ -1,5 +1,5 @@
 ---
-title: "Simulating inhibiting network graph structure in continous data"
+title: "Simulating inhibiting network graph structure in continuous data"
 author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document

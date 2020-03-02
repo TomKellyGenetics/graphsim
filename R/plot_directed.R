@@ -12,7 +12,7 @@
 ##'
 ##' @title Extensions to iGraph for Customising plots
 ##'
-##' @description Functions to plot_directed or graph structures including customised colors, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
+##' @description Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
 ##'
 ##' @param graph An \code{\link[igraph]{igraph}} object. Must be directed with known states.
 ##' @param state character or integer. Defaults to "activating" if no "state" edge attribute found. May be applied a scalar across all edges or as a vector for each edge respectively. Accepts non-integer values for weighted edges provided that the sign indicates whether links are activating (positive) or inhibiting (negative). May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for make_state_matrix or generate_expression_graph in the graphsim package \url{https://github.com/TomKellyGenetics/graphsim}.
@@ -28,7 +28,7 @@
 ##' @param border.node character. Specifies the colours of node border passed to plot. Defaults to grey33. Applies to whole node shape if pch has only one colour.
 ##' @param fill.node character. Specfies the colours of node fill passed to plot. Defaults to grey66.
 ##' @param col.arrow character. Specfies the colours of arrows passed to plot. Defaults to par("fg").  May take a scalar applied to all edges or a vector with colours for each edge respectively.
-##' @param main,sub,xlab,ylab Plotting paramaters to specify plot titles or axes labels
+##' @param main,sub,xlab,ylab Plotting parameters to specify plot titles or axes labels
 ##' @param frame.plot logical. Whether to frame plot with a box. Defaults to FALSE.
 ##' @keywords graph igraph igraph plot
 ##' @import igraph graphics

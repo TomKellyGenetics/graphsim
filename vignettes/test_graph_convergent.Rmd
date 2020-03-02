@@ -1,10 +1,10 @@
 ---
-title: "Simulating convergent graph structure in continous data"
+title: "Simulating convergent graph structure in continuous data"
 author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{Simulating convergent graph structure in continous data}
+  %\VignetteIndexEntry{Simulating convergent graph structure in continuous data}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---

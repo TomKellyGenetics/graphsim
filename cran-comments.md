@@ -8,11 +8,17 @@
 * MacOS 8.6.0 R 3.6.1 
 * MacOC 10.14.6 R 3.6.2
 
-## R CMD check results
+## Local R CMD check results
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 * This is a new release.
+
+## Possible issues
+
+reactome.org urls have been checked and direct to the correct database. These are only needed for documentation.
+
+graphsim/tests/figs is used exclusively for testing plotting functions.
 
 ## Release
 

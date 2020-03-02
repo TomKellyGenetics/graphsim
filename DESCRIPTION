@@ -1,8 +1,8 @@
 Package: graphsim
 Type: Package
 Title: Simulate Expression Data from iGraph Networks 
-Version: 0.1.1
-Date: 2020-01-24
+Version: 0.1.2
+Date: 2020-03-02
 Authors@R: c(person("S. Thomas", "Kelly",email = "tom.kelly@postgrad.otago.ac.nz", role = c("ctb")),
              person("S. Thomas", "Kelly",email = "tom.kelly@riken.jp", role = c("aut", "cre")),
              person("Michael A.", "Black", email = "mik.black@otago.ac.nz", role = c("aut", "ths")))
@@ -24,7 +24,8 @@ Suggests:
     testthat,
     gplots,
     scales,
-    devtools
+    devtools,
+    vdiffr
 LazyData: TRUE
 RoxygenNote: 7.0.2
 Encoding: UTF-8

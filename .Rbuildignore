@@ -12,3 +12,5 @@ demo2.gif
 graphsim_0.1.1.tar.gz
 ^paper\.(bib|html|md|Rmd)$
 ^paper$
+^tests/testthat/test-cpp.R$
+^tests/figs

@@ -127,7 +127,7 @@ approach has also been applied for modelling UMI-based count data from
 single-cell RNA-Seq experiments in the package [@Wang2018].
 
 In order to simulate transcriptomic data, a pathway is first constructed
-as a graph structure, using the package [@igraph], with the status of
+as a graph structure, using the R package [@igraph], with the status of
 the edge relationships defined (i.e, whether they activate or inhibit
 downstream pathway members). [This procedure uses]{style="color: black"}
 a graph structure such as that presented in
@@ -200,7 +200,7 @@ The graph structure in
 Figure [1a](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"} was used to simulate correlated gene
 expression data by sampling from a multivariate normal distribution
-using the package [@Genz2009; @mvtnorm]. The graph structure
+using the R package [@Genz2009; @mvtnorm]. The graph structure
 visualisation in
 Figure [1](#fig:simple_graph){reference-type="ref"
 reference="fig:simple_graph"} was specifically developed for (directed)
@@ -456,8 +456,8 @@ statistical methods being developed for gene expression data analysis.
 Computational details {#computational-details .unnumbered .unnumbered}
 =====================
 
-The results in this paper were obtained using  3.6.1 with the  1.2.4.1
- 1.2-17,  1.0-3, and  1.0-11 packages. itself and all dependent packages
+The results in this paper were obtained using R~3.6.1 with the igraph~1.2.4.1
+Matrix~1.2-17, matrixcalc~1.0-3, and mvtnorm~1.0-11 packages. R itself and all dependent packages
 used are available from the Comprehensive Archive Network (CRAN) at
 \url{https://CRAN.R-project.org}. The and packages presented can be
 installed from <https://github.com/TomKellyGenetics/graphsim> and
@@ -468,7 +468,7 @@ other plotting functions used. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
 systems. The package GitHub repository also contains Vignettes with more
 information and examples on running functions released in the package.
-The package ( 0.1.0) meets CRAN submission criteria and will be
+The package (graphsim~0.1.2) meets CRAN submission criteria and will be
 released.
 
 Acknowledgements {#acknowledgements .unnumbered .unnumbered}

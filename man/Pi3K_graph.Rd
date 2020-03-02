@@ -11,7 +11,7 @@
   \item{state}{type of relationship (activating or inhibiting) as edge attribute}
 }}
 \source{
-PathwayCommons \url{"https://reactome.org/content/detail/R-HSA-109704"}
+PathwayCommons \url{https://reactome.org/content/detail/R-HSA-109704}
 }
 \usage{
 Pi3K_graph

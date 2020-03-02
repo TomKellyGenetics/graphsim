@@ -33,7 +33,7 @@ plot_directed(
 
 \item{labels}{character vector. For labels to plot nodes. Defaults to vertex names in graph object. Entering "" would yield unlabelled nodes.}
 
-\item{layout}{function. Layout function as selected from \code{\link[igraph]{layout_}}. Defaults to layout.fruchterman.reingold. Alternatives include layout.kamada.kawai, layout.reingold.tilford, layout.sugiyama, and layout.davidson.harel.}
+\item{layout}{function. Layout function as selected from \code{\link[igraph]{layout_}}. Defaults to layout.fruchterman.reingold. Alternatives include layout.kamada.kawai, layout.reingold.tilford, layout.sugiyama, and layout.davidson.harel. A 2-column layout matrix giving x and y co-ordinates of each node can be given.}
 
 \item{cex.node}{numeric. Defaults to 1.}
 

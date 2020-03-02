@@ -2,9 +2,12 @@
 % Please edit documentation in R/make_distance_graph.R
 \name{make_distance_graph}
 \alias{make_distance_graph}
+\alias{make_distance_adjmat}
 \title{Generate Distance Matrix}
 \usage{
 make_distance_graph(graph, directed = T, absolute = F)
+
+make_distance_adjmat(mat, directed = T, absolute = F)
 }
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}
@@ -12,6 +15,8 @@ make_distance_graph(graph, directed = T, absolute = F)
 \item{directed}{logical. Whether directed information is passed to the distance matrix.}
 
 \item{absolute}{logical. Whether distances are scaled as the absolute difference from the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a relative difference from the diameter for a geometric decay in distance.}
+
+\item{mat}{precomputed adjacency or commonlink matrix.}
 }
 \description{
 Compute the distance matrix of using shortest paths of a (directed) \code{\link[igraph]{igraph}} structure, normalising by the diameter of the network, preserving node/column/row names (and direction).

@@ -58,20 +58,18 @@ A BibTeX entry for LaTeX users is
   }
 ```
 
-Please also acknowledge the manuscript describing use of this package once it is published.
+Please also acknowledge the manuscript describing use of this package once it is published. It is current avaliable as a preprint.
 
 ```
-  @Article{,
-    title = {{graphsim}: An R package for simulating gene expression data from graph structures of biological pathways},
-    journal = {},
-    author = {S. Thomas Kelly and Michael A. Black},
-    year = {2020},
-    volume = {},
-    number = {},
-    pages = {},
-    month = {},
-    note = {Submitted for peer-review},
-    url = {https://github.com/TomKellyGenetics/graphsim},
-    doi = {10.5281/zenodo.1313986},
-  }
+@article {Kelly2020.03.02.972471,
+	author = {Kelly, S Thomas and Black, Michael A},
+	title = {graphsim: An R package for simulating gene expression data from graph structures of biological pathways},
+	elocation-id = {2020.03.02.972471},
+	year = {2020},
+	doi = {10.1101/2020.03.02.972471},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2020/03/04/2020.03.02.972471},
+	eprint = {https://www.biorxiv.org/content/early/2020/03/04/2020.03.02.972471.full.pdf},
+	journal = {bioRxiv}
+}
 ```

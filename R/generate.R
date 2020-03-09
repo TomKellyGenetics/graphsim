@@ -1,6 +1,6 @@
-##' @name generate_expression_graph
-##' @aliases  generate_expression
-##' @rdname generate_expression_graph
+##' @name generate_expression
+##' @aliases  generate_expression_graph
+##' @rdname generate_expression
 ##'
 ##' @title Generate Simulated Expression
 ##'
@@ -20,6 +20,7 @@
 ##' @importFrom matrixcalc is.symmetric.matrix is.positive.definite
 ##' @examples
 ##' 
+##' library("igraph")
 ##' graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 ##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 ##' adjacency_matrix <- make_adjmatrix_graph(graph_test)

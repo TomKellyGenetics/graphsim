@@ -27,6 +27,7 @@ in \code{\link[graphsim]{generate_expression}}.
 }
 \examples{
 
+library("igraph")
 graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 state_matrix <- make_state_matrix(graph_test)

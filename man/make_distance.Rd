@@ -26,6 +26,8 @@ A numeric matrix of values in the range [0, 1] where lower values are closer
 Compute the distance matrix of using shortest paths of a (directed) \code{\link[igraph]{igraph}} structure, normalising by the diameter of the network, preserving node/column/row names (and direction).
 }
 \examples{
+
+library("igraph")
 graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 adjacency_matrix <- make_adjmatrix_graph(graph_test)

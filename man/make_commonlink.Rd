@@ -25,6 +25,7 @@ Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}} stru
 }
 \examples{
 
+library("igraph")
 graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 adjacency_matrix <- make_adjmatrix_graph(graph_test)

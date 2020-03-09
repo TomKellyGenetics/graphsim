@@ -59,6 +59,9 @@ plot_directed(
 
 \item{frame.plot}{logical. Whether to frame plot with a box. Defaults to FALSE.}
 }
+\value{
+base R graphics
+}
 \description{
 Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
 }
@@ -90,6 +93,7 @@ plot_directed(graph_test4)
 
 #plot layout customised
 plot_directed(graph_test4, state=c(1, 1, -1, 1, -1, 1, -1, 1), layout = layout.kamada.kawai)
+
 }
 \keyword{graph}
 \keyword{igraph}

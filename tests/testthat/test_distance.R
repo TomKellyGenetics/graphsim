@@ -4,7 +4,7 @@ context("Make Distance Matrix")
 
 test_that("Generate distance relation matrix from adjacency matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   distance_matrix1 <- make_distance_adjmat(adjacency_matrix1)
   expect_equal(isSymmetric(distance_matrix1), TRUE)
@@ -19,7 +19,7 @@ test_that("Generate distance relation matrix from adjacency matrix", {
 
 test_that("Generate distance relation matrix from commonlink matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_adjmat(adjacency_matrix1)
   distance_matrix1 <- make_distance_adjmat(common_link_matrix1)
@@ -37,7 +37,7 @@ test_that("Generate distance relation matrix from commonlink matrix", {
 
 test_that("Generate distance relation matrix matrix from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_graph(graph_test1)
   distance_matrix1 <- make_distance_graph(graph_test1)

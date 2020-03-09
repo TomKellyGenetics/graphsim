@@ -4,7 +4,7 @@ context("Make State Matrix")
 
 test_that("Default to activating matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   state_matrix1 <- make_state_matrix(graph_test1)
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
@@ -18,7 +18,7 @@ test_that("Default to activating matrix", {
 
 test_that("text input to activating matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   state_matrix1 <- make_state_matrix(graph_test1, state = "activating")
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
@@ -31,7 +31,7 @@ test_that("text input to activating matrix", {
 
 test_that("text input to activating matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   state_matrix1 <- make_state_matrix(graph_test1, state = 0)
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
@@ -52,7 +52,7 @@ test_that("text input to activating matrix", {
 
 test_that("text input to inhibiting matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   state_matrix1 <- make_state_matrix(graph_test1, state = "inhibiting")
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
@@ -67,7 +67,7 @@ test_that("text input to inhibiting matrix", {
 
 test_that("text input to inhibiting matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   state_matrix1 <- make_state_matrix(graph_test1, state = 2)
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))

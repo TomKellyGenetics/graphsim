@@ -4,7 +4,7 @@ context("Make Sigma Matrix")
 
 test_that("Generate Sigma matrix from adjacency matrix", {
     graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-    graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+    graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
     adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
     sigma_matrix1 <- make_sigma_mat_adjmat(adjacency_matrix1, cor = 0.8)
     expect_equal(isSymmetric(sigma_matrix1), TRUE)
@@ -19,7 +19,7 @@ test_that("Generate Sigma matrix from adjacency matrix", {
 
 test_that("Generate Sigma matrix from distances derived from adjacency matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("C", "D"), c("A", "D"), c("D", "C"), c("A", "C"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   expect_error(make_sigma_mat_dist_adjmat(adjacency_matrix1, cor = 0.8, absolute = TRUE), "distance matrix must have diagonal of zero")
   diag(adjacency_matrix1) <- 1
@@ -28,7 +28,7 @@ test_that("Generate Sigma matrix from distances derived from adjacency matrix", 
 
 test_that("Generate Sigma matrix from commonlink matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_adjmat(adjacency_matrix1)
   sigma_matrix1 <- make_sigma_mat_adjmat(common_link_matrix1, cor = 0.8)
@@ -46,7 +46,7 @@ test_that("Generate Sigma matrix from commonlink matrix", {
 
 test_that("Generate Sigma matrix from distances derived from commonlink matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("C", "D"), c("A", "D"), c("D", "C"), c("A", "C"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_adjmat(adjacency_matrix1)
   expect_error(make_sigma_mat_dist_adjmat(common_link_matrix1, cor = 0.8, absolute = TRUE), "distance matrix must have diagonal of zero")
@@ -56,7 +56,7 @@ test_that("Generate Sigma matrix from distances derived from commonlink matrix",
 
 test_that("Generate Sigma matrix from distance matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   distance_matrix1 <- make_distance_adjmat(adjacency_matrix1)
   sigma_matrix1 <- make_sigma_mat_dist_adjmat(distance_matrix1, cor = 0.8)
@@ -76,7 +76,7 @@ test_that("Generate Sigma matrix from distance matrix", {
 
 test_that("Generate distance relation matrix matrix from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_graph(graph_test1)
   distance_matrix1 <- make_distance_graph(graph_test1)
@@ -94,7 +94,7 @@ test_that("Generate distance relation matrix matrix from graph structure", {
 
 test_that("Generate distance relation matrix matrix from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_graph(graph_test1)
   distance_matrix1 <- make_distance_graph(graph_test1)
@@ -111,7 +111,7 @@ test_that("Generate distance relation matrix matrix from graph structure", {
 
 test_that("Generate distance relation matrix matrix from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_graph(graph_test1)
   distance_matrix1 <- make_distance_graph(graph_test1)

@@ -1,4 +1,5 @@
 ##' @rdname make_distance
+##' @aliases make_relationship
 ##'
 ##' @title Generate Distance Matrix
 ##'
@@ -10,9 +11,17 @@
 ##' @param absolute logical. Whether distances are scaled as the absolute difference from the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph adjacency
 ##' @import igraph
+##' @examples 
+##' graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
+##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
+##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
+##' distance_matrix <- make_distance_adjmat(adjacency_matrix)
+##' 
+##' @return A numeric matrix of values in the range [0, 1] where lower values are closer
+##' 
 ##' @export
-make_distance_graph <- function(graph, directed = T, absolute = F){
-  if(directed == F) graph <- as.undirected(graph)
+make_distance_graph <- function(graph, directed = TRUE, absolute = FALSE){
+  if(directed == FALSE) graph <- as.undirected(graph)
   diam <- diameter(graph)
   if (absolute){
     mat <- (diam-shortest.paths(graph))/diam
@@ -27,7 +36,7 @@ make_distance_graph <- function(graph, directed = T, absolute = F){
 ##' @rdname make_distance
 ##' @importFrom igraph graph_from_adjacency_matrix
 ##' @export
-make_distance_adjmat <- function(mat, directed = T, absolute = F){
+make_distance_adjmat <- function(mat, directed = TRUE, absolute = FALSE){
   diag(mat) <- 0
   graph <- graph_from_adjacency_matrix(mat, weighted = NULL, mode = "undirected")
   diam <- diameter(graph)

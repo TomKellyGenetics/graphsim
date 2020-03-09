@@ -4,6 +4,7 @@
 ^appveyor\.yml$
 vignettes/*html
 ^\.circleci/config\.yml$
+^.circleci
 ^Meta$
 demo.gif  
 demo2.gif  
@@ -16,3 +17,5 @@ graphsim_0.1.2.tar.gz
 ^tests/testthat/test-cpp.R$
 ^tests/figs
 ^CRAN-RELEASE$
+x
+^LICENSE$

@@ -60,6 +60,9 @@
 ##'
 ##' #plot layout customised
 ##' plot_directed(graph_test4, state=c(1, 1, -1, 1, -1, 1, -1, 1), layout = layout.kamada.kawai)
+##' 
+##' @return base R graphics
+##' 
 ##' @export
 plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=NULL, main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F){
   if(is.function(layout)){

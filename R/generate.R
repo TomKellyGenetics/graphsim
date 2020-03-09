@@ -1,9 +1,10 @@
-##' @name Generate Simulated Expression from Graph Structure
-##' @rdname generate_expression
+##' @name generate_expression_graph
+##' @aliases  generate_expression
+##' @rdname generate_expression_graph
 ##'
 ##' @title Generate Simulated Expression
 ##'
-##' @description Compute simulated continuous expression data from a graph network structure. Requires an \code{\link[igraph]{igraph}} pathway structure and a matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}. Uses graph structure to pass a sigma covariance matrix from \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}} on to \code{\link[mvtnorm]{rmvnorm}}
+##' @description Compute simulated continuous expression data from a graph network structure. Requires an \code{\link[igraph]{igraph}} pathway structure and a matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}. Uses graph structure to pass a sigma covariance matrix from \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}} on to \code{\link[mvtnorm]{rmvnorm}}.
 ##'
 ##' @param n number of observations (simulated samples).
 ##' @param graph An \code{\link[igraph]{igraph}} object. May must be directed if states are used.
@@ -17,8 +18,18 @@
 ##' @importFrom igraph is_igraph
 ##' @importFrom Matrix nearPD
 ##' @importFrom matrixcalc is.symmetric.matrix is.positive.definite
+##' @examples
+##' 
+##' graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
+##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
+##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
+##' n <- 100
+##' generate_expression(n, graph_test1, cor = 0.8)
+##' 
+##' @return numeric matrix of simulated data (log-normalised counts)
+##' 
 ##' @export
-generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = F, dist = F, absolute = F){
+generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE){
   if(!is.integer(n)){
     if(is.numeric(n)){
       if(floor(n) == n){
@@ -41,13 +52,13 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
     sig <- make_sigma_mat_graph(graph, cor, comm = comm)
   }
   if(!(is.null(state))) sig <- state * sig
-  if(is.symmetric.matrix(sig) == F) {
+  if(is.symmetric.matrix(sig) == FALSE) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
-    sig <- as.matrix(nearPD(sig, corr=T, keepDiag = T)$mat) #postive definite correction
+    sig <- as.matrix(nearPD(sig, corr=T, keepDiag = TRUE)$mat) #postive definite correction
   }
-  if(is.positive.definite(sig) == F) {
+  if(is.positive.definite(sig) == FALSE) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
-    sig <- as.matrix(nearPD(sig, corr=T, keepDiag = T)$mat) #postive definite correction
+    sig <- as.matrix(nearPD(sig, corr=T, keepDiag = TRUE)$mat) #postive definite correction
   }
   expr_mat <- t(rmvnorm(n,mean=mean, sigma=sig))
   rownames(expr_mat) <-names(V(graph))

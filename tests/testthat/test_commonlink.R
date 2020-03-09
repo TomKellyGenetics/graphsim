@@ -4,7 +4,7 @@ context("Make Commonlink Matrix")
 
 test_that("Generate common link matrix from adjacency matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   common_link_matrix1 <- make_commonlink_adjmat(adjacency_matrix1)
   expect_equal(isSymmetric(common_link_matrix1), TRUE)
@@ -20,7 +20,7 @@ test_that("Generate common link matrix from adjacency matrix", {
 
 test_that("Generate common link matrix from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   common_link_matrix1 <- make_commonlink_graph(graph_test1)
   expect_equal(isSymmetric(common_link_matrix1), TRUE)
   expect_equal(diag(common_link_matrix1), degree(graph_test1))

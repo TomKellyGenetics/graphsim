@@ -320,7 +320,7 @@ shortest_paths <- shortest.paths(graph)
 
 #generate expression data directly from graph
 
-expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = F,
+expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
           dist = TRUE, absolute = FALSE, state = state)
 
 #plot adjacency matrix

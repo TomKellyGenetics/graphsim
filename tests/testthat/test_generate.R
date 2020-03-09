@@ -4,7 +4,7 @@ context("Generate Expression Data")
 
 test_that("Generate Expression matrix from graph object", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   n <- 100
   suppressWarnings(expression_matrix1 <- generate_expression(n, graph_test1, cor = 0.8))
@@ -17,7 +17,7 @@ test_that("Generate Expression matrix from graph object", {
 
 test_that("Generate Expression matrix from graph object by commonlinks", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   n <- 100
   suppressWarnings(expression_matrix1 <- generate_expression(n, graph_test1, cor = 0.8, comm = TRUE))
@@ -30,7 +30,7 @@ test_that("Generate Expression matrix from graph object by commonlinks", {
 
 test_that("Generate Expression matrix from graph object by relative distance", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   n <- 100
   suppressWarnings(expression_matrix1 <- generate_expression(n, graph_test1, cor = 0.8, dist = TRUE))
@@ -43,7 +43,7 @@ test_that("Generate Expression matrix from graph object by relative distance", {
 
 test_that("Generate Expression matrix from graph object by absolute distance", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-  graph_test1 <- graph.edgelist(graph_test1_edges, directed = T)
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
   n <- 100
   suppressWarnings(expression_matrix1 <- generate_expression(n, graph_test1, cor = 0.8, dist = TRUE, absolute = TRUE))

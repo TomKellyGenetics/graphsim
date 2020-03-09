@@ -8,7 +8,7 @@ Authors@R: c(person("S. Thomas", "Kelly",email = "tom.kelly@postgrad.otago.ac.nz
              person("Michael A.", "Black", email = "mik.black@otago.ac.nz", role = c("aut", "ths")))
 Description: Functions to develop simulated continuous data (e.g., gene expression) from a sigma covariance matrix derived from a graph structure in 'igraph' objects. Intended to extend 'mvtnorm' to take 'igraph' structures rather than sigma matrices as input.
 Language: en-GB
-License: GPL-3 | file LICENSE
+License: GPL-3
 Depends:
     R (>= 2.10.0)
 Imports:

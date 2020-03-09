@@ -1,5 +1,4 @@
 ##' @name generate_expression
-##' @aliases  generate_expression_graph
 ##' @rdname generate_expression
 ##'
 ##' @title Generate Simulated Expression
@@ -25,7 +24,7 @@
 ##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 ##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
 ##' n <- 100
-##' generate_expression(n, graph_test1, cor = 0.8)
+##' generate_expression(n, graph_test, cor = 0.8)
 ##' 
 ##' @return numeric matrix of simulated data (log-normalised counts)
 ##' 

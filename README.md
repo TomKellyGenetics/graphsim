@@ -7,10 +7,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/graphsim)](https://cran.r-project.org/package=graphsim)
 [![DOI](https://zenodo.org/badge/67395230.svg)](https://zenodo.org/badge/latestdoi/67395230)
 [![bioRxiv](https://img.shields.io/badge/biorXiv-10.1101%2F2020.03.02.972471-blue)](https://doi.org/10.1101/2020.03.02.972471)
-
-<div class="altmetric-embed" data-badge-type="medium-donut"  data-doi="10.1101/2020.03.02.972471" data-altmetric-id="77053356" />
-
-<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+[![](https://img.shields.io/badge/Altmetric-57-blue.svg)](https://www.altmetric.com/details/77053356)
 
 # graphsim
 

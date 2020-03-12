@@ -120,7 +120,7 @@ $log(X_{ij}) \sim MVN({\bf\mu}, \Sigma)$, where ${\bf\mu}$ and $\Sigma$
 are the mean vector and variance-covariance matrix respectively, for
 gene expression data derived from a biological pathway) after
 appropriate normalisation [@Law2014; @Li2015]. Log-normality of gene
-expression matches the assumptions of the popular package, which is
+expression matches the assumptions of the popular `limma` package [@limma], which is
 often used for the analysis of intensity-based data from gene expression
 microarray studies and count-based data from RNA-Seq experiments. This
 approach has also been applied for modelling UMI-based count data from

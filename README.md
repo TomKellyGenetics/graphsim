@@ -68,7 +68,7 @@ A BibTeX entry for LaTeX users is
   }
 ```
 
-Please also acknowledge the manuscript describing use of this package once it is published. It is current avaliable as a preprint.
+Please also acknowledge the manuscript describing use of this package once it is published. It is currently avaliable as a preprint.
 
 ```
 @article {Kelly2020.03.02.972471,

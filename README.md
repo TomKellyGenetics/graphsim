@@ -53,7 +53,7 @@ Please see the vignettes for demonstrations of this package on examples of simpl
 To cite the graphsim package in publications use:
 
   S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression data from iGraph networks 
-  R package version 0.1.1. https://github.com/TomKellyGenetics/vioplot doi:10.5281/zenodo.1313986
+  R package version 0.1.2. https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986
 
 A BibTeX entry for LaTeX users is
 
@@ -62,7 +62,7 @@ A BibTeX entry for LaTeX users is
     title = {{graphsim}: Simulate Expression data from {iGraph} networks},
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version 0.1.1},
+    note = {R package version 0.1.2},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.1313986},
   }

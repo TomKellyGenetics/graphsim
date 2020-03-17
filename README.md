@@ -3,6 +3,7 @@
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/graphsim?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/graphsim)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![codecov](https://codecov.io/gh/TomKellyGenetics/graphsim/branch/master/graph/badge.svg)](https://codecov.io/gh/TomKellyGenetics/graphsim)
+[![GitHub Views](http://hits.dwyl.com/tomkellygenetics/graphsim.svg)](http://hits.dwyl.com/tomkellygenetics/graphsim)
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/graphsim)](https://cran.r-project.org/package=graphsim)
 [![Downloads](https://cranlogs.r-pkg.org/badges/graphsim)](https://CRAN.R-project.org/package=graphsim)

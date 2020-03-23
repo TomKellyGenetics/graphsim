@@ -215,7 +215,7 @@ reference="fig:simple_graph:second"}.
 A graph structure can be generated and plotted using the following
 commands in R:
 
-```
+```r
 #install packages required (once per machine)
 
 install.packages("igraph")
@@ -226,14 +226,14 @@ if(! require("devtools") ){
 devtools::install_github("TomKellyGenetics/graphsim")
 ```
 
-```
+```r
 #load required packages (once per R instance)
 
 library("igraph")
 library("graphsim")
 ```
 
-```
+```r
 #generate graph structure
 
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
@@ -241,14 +241,14 @@ graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
 graph <- graph.edgelist(graph_edges, directed = TRUE)
 ```
 
-```
+```r
 #plot graph structure (Figure 1)
 
 plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
               cex.node=3, cex.arrow=5, arrow_clip = 0.2)
 ```
 
-```
+```r
 #generate parameters for inhibitions
 
 state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
@@ -301,7 +301,7 @@ normalised on a log-scale.
 
 The simulated dataset can be generated using the following code:
 
-```
+```r
 #adjacency matrix
 
 adj_mat <- make_adjmatrix_graph(graph)
@@ -362,7 +362,7 @@ Here modules of genes with correlated expression can be clearly discerned.](figu
 
  \newpage
 
-```
+```r
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
           comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
 

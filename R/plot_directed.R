@@ -87,7 +87,6 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
     # add default state if not specified
     if(is.null(state)){
       state <- "activating"
-      if(is.null(col.arrow)) col.arrow <- par("fg")
     }
   }
   if(is.numeric(state)){
@@ -110,11 +109,13 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
   }
   if(length(state) == 1){
     if(state == "activating"){
+      if(is.null(col.arrow)) col.arrow <- par("fg")
       arrows(x0 = (1-arrow_clip) * Xn[match(as.character(es$V1), names(vs))] + arrow_clip * Xn[match(as.character(es$V2), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(es$V1), names(vs))] + arrow_clip * Yn[match(as.character(es$V2), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(es$V2), names(vs))] + arrow_clip * Xn[match(as.character(es$V1), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(es$V2), names(vs))]  + arrow_clip * Yn[match(as.character(es$V1), names(vs))], lwd=cex.arrow, col=col.arrow, length=0.15)
     } else if (state =="inhibiting"){
+      if(is.null(col.arrow)) col.arrow <- "red"
       arrows(x0 = (1-arrow_clip) * Xn[match(as.character(es$V1), names(vs))] + arrow_clip * Xn[match(as.character(es$V2), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(es$V1), names(vs))] + arrow_clip * Yn[match(as.character(es$V2), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(es$V2), names(vs))] + arrow_clip * Xn[match(as.character(es$V1), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(es$V2), names(vs))]  + arrow_clip * Yn[match(as.character(es$V1), names(vs))], lwd=cex.arrow, col=col.arrow, length=0.1, angle=90)
     } else{
-      warning("please give state as a scalar or vector of length(E(graph))")
+      warning("please give state as a scalar or vector of length(E(graph)): input must be 'activating', 'inhibiting' or an integer")
       stop()
     }
   } else{
@@ -124,8 +125,10 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
       v0 <- es[i, ]$V1
       v1 <- es[i, ]$V2
       if(state[i] == "activating"){
+        if(is.null(col.arrow[i])) col.arrow[i] <- par("fg")
         arrows(x0 = (1-arrow_clip) * Xn[match(as.character(v0), names(vs))] + arrow_clip * Xn[match(as.character(v1), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(v0), names(vs))] + arrow_clip * Yn[match(as.character(v1), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(v1), names(vs))] + arrow_clip * Xn[match(as.character(v0), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(v1), names(vs))]  + arrow_clip * Yn[match(as.character(v0), names(vs))], lwd=cex.arrow[i], col=col.arrow[i], length=0.15)
       } else if (state[i] =="inhibiting"){
+        if(is.null(col.arrow[i])) col.arrow[i] <- "red"
         arrows(x0 = (1-arrow_clip) * Xn[match(as.character(v0), names(vs))] + arrow_clip * Xn[match(as.character(v1), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(v0), names(vs))] + arrow_clip * Yn[match(as.character(v1), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(v1), names(vs))] + arrow_clip * Xn[match(as.character(v0), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(v1), names(vs))]  + arrow_clip * Yn[match(as.character(v0), names(vs))], lwd=cex.arrow[i], col=col.arrow[i], length=0.1, angle=90)
       } else{
         warning("please give state as a scalar or vector of length(E(graph))")

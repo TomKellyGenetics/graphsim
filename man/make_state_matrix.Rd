@@ -4,7 +4,7 @@
 \alias{make_state_matrix}
 \title{Make State Matrix}
 \usage{
-make_state_matrix(graph, state = "activating")
+make_state_matrix(graph, state = NULL)
 }
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted as long as
@@ -14,7 +14,10 @@ a shortest path can be computed.}
 may be an integer state or inferred directly from expected correlations for each edge. May be
 applied a scalar across all edges or as a vector for each edge respectively. May also be
 entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or
-inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}.}
+inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Vector 
+input is supported either directly calling the function with a value for each edge in 
+ \code{E(graph)} or as an edge "attribute" in the igraph object (using 
+ \code{E(g)$state <- states}).}
 }
 \value{
 An integer matrix indicating the resolved state

@@ -12,7 +12,10 @@
 ##' may be an integer state or inferred directly from expected correlations for each edge. May be
 ##' applied a scalar across all edges or as a vector for each edge respectively. May also be
 ##' entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or
-##' inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}.
+##' inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Vector 
+##' input is supported either directly calling the function with a value for each edge in 
+##'  \code{E(graph)} or as an edge "attribute" in the igraph object (using 
+##'  \code{E(g)$state <- states}).
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @import igraph
 ##' @examples 
@@ -25,13 +28,29 @@
 ##' @return An integer matrix indicating the resolved state
 ##' (activating or inhibiting for each edge or path between nodes)
 ##' @export
-make_state_matrix <- function(graph, state = "activating"){
+make_state_matrix <- function(graph, state = NULL){
+  if(!is.null(get.edge.attribute(graph, "state"))){
+    state <- get.edge.attribute(graph, "state")
+  } else {
+    # add default state if not specified
+    if(is.null(state)){
+      state <- "activating"
+    }
+  }
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   state[state == 2] <- -1
   state[state == 1] <- 1
   if(is.character(state)){
-    state[grep("inhibiting", state)] <- -1
     state[grep("activating", state)] <- 1
+    state[grep("activation", state)] <- 1
+    state[grep("activate", state)] <- 1
+    state[grep("active", state)] <- 1
+    state[grep("positive", state)] <- 1
+    state[grep("inhibiting", state)] <- -1
+    state[grep("inhibition", state)] <- -1
+    state[grep("inhibitory", state)] <- -1
+    state[grep("inhibit", state)] <- -1
+    state[grep("negative", state)] <- -1
     state <- as.numeric(state)
   }
   if(!all(state %in% -1:2)){

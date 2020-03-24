@@ -121,8 +121,8 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
       }
       state <- c("activating", "inhibiting")[state]
     } else {
+      state <- sign(state) # coerce to vector or 1 and -1 if not already
       warning("Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
-      stop()
     }
   }
   if(length(state) == 1){
@@ -139,7 +139,7 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
       if(is.null(col.arrow)) col.arrow <- "red"
       arrows(x0 = (1-arrow_clip) * Xn[match(as.character(es$V1), names(vs))] + arrow_clip * Xn[match(as.character(es$V2), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(es$V1), names(vs))] + arrow_clip * Yn[match(as.character(es$V2), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(es$V2), names(vs))] + arrow_clip * Xn[match(as.character(es$V1), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(es$V2), names(vs))]  + arrow_clip * Yn[match(as.character(es$V1), names(vs))], lwd=cex.arrow, col=col.arrow, length=0.1, angle=90)
     } else{
-      warning("please give state as a scalar or vector of length(E(graph)): input must be 'activating', 'inhibiting' or an integer")
+      warning("Please give state as a scalar or vector of length(E(graph)): input must be 'activating', 'inhibiting' or an integer")
       stop()
     }
   } else{

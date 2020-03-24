@@ -51,11 +51,14 @@ make_state_matrix <- function(graph, state = NULL){
     state[grep("inhibitory", state)] <- -1
     state[grep("inhibit", state)] <- -1
     state[grep("negative", state)] <- -1
+    if(is.character(state)){
+      warning("Please give state as a scalar or vector of length(E(graph)): input must be 'activating', 'inhibiting' or an integer")
+    }
     state <- as.numeric(state)
   }
   if(!all(state %in% -1:2)){
     state <- sign(state) # coerce to vector or 1 and -1 if not already
-    warning("state inferred from non-integer weighted edges")
+    warning("State inferred from non-integer weighted edges: Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
   }
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
   if(length(grep(-1, state))==1) edges <- t(edges)

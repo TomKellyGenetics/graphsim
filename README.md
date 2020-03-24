@@ -3,12 +3,16 @@
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/graphsim?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/graphsim)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![codecov](https://codecov.io/gh/TomKellyGenetics/graphsim/branch/master/graph/badge.svg)](https://codecov.io/gh/TomKellyGenetics/graphsim)
+[![GitHub Views](http://hits.dwyl.com/tomkellygenetics/graphsim.svg)](http://hits.dwyl.com/tomkellygenetics/graphsim)
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/graphsim)](https://cran.r-project.org/package=graphsim)
+[![Downloads](https://cranlogs.r-pkg.org/badges/graphsim)](https://CRAN.R-project.org/package=graphsim)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/graphsim?color=orange)](https://CRAN.R-project.org/package=graphsim)
+
 [![DOI](https://zenodo.org/badge/67395230.svg)](https://zenodo.org/badge/latestdoi/67395230)
 [![bioRxiv](https://img.shields.io/badge/biorXiv-10.1101%2F2020.03.02.972471-blue)](https://doi.org/10.1101/2020.03.02.972471)
 [![status](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6/status.svg)](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6)
-[![](https://img.shields.io/badge/Altmetric-57-blue.svg)](https://www.altmetric.com/details/77053356)
+[![](https://img.shields.io/badge/Altmetric-68-blue.svg)](https://www.altmetric.com/details/77053356)
 
 # graphsim
 
@@ -53,7 +57,7 @@ Please see the vignettes for demonstrations of this package on examples of simpl
 To cite the graphsim package in publications use:
 
   S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression data from iGraph networks 
-  R package version 0.1.1. https://github.com/TomKellyGenetics/vioplot doi:10.5281/zenodo.1313986
+  R package version 0.1.2. https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986
 
 A BibTeX entry for LaTeX users is
 
@@ -62,13 +66,13 @@ A BibTeX entry for LaTeX users is
     title = {{graphsim}: Simulate Expression data from {iGraph} networks},
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version 0.1.1},
+    note = {R package version 0.1.2},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.1313986},
   }
 ```
 
-Please also acknowledge the manuscript describing use of this package once it is published. It is current avaliable as a preprint.
+Please also acknowledge the manuscript describing use of this package once it is published. It is currently avaliable as a preprint.
 
 ```
 @article {Kelly2020.03.02.972471,

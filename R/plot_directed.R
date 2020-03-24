@@ -108,6 +108,12 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
     }
   }
   if(length(state) == 1){
+    if(state == "activate" || state == "activation" || state == "active" || state == "positive"){
+      state <- "activating"
+    }
+    if(state == "inhibit" || state == "inhibition" || state == "inhibitory" || state == "negative"){
+      state <- "inhibiting"
+    }
     if(state == "activating"){
       if(is.null(col.arrow)) col.arrow <- par("fg")
       arrows(x0 = (1-arrow_clip) * Xn[match(as.character(es$V1), names(vs))] + arrow_clip * Xn[match(as.character(es$V2), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(es$V1), names(vs))] + arrow_clip * Yn[match(as.character(es$V2), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(es$V2), names(vs))] + arrow_clip * Xn[match(as.character(es$V1), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(es$V2), names(vs))]  + arrow_clip * Yn[match(as.character(es$V1), names(vs))], lwd=cex.arrow, col=col.arrow, length=0.15)
@@ -124,6 +130,12 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
     for(i in 1:Ne){
       v0 <- es[i, ]$V1
       v1 <- es[i, ]$V2
+      if(state[i] == "activate" || state[i] == "activation" || state[i] == "active" || state[i] == "positive"){
+        state[i] <- "activating"
+      }
+      if(state[i] == "inhibit" || state[i] == "inhibition" || state[i] == "inhibitory" || state[i] == "negative"){
+        state[i] <- "inhibiting"
+      }
       if(state[i] == "activating"){
         if(is.null(col.arrow[i])) col.arrow[i] <- par("fg")
         arrows(x0 = (1-arrow_clip) * Xn[match(as.character(v0), names(vs))] + arrow_clip * Xn[match(as.character(v1), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(v0), names(vs))] + arrow_clip * Yn[match(as.character(v1), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(v1), names(vs))] + arrow_clip * Xn[match(as.character(v0), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(v1), names(vs))]  + arrow_clip * Yn[match(as.character(v0), names(vs))], lwd=cex.arrow[i], col=col.arrow[i], length=0.15)

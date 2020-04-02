@@ -325,6 +325,8 @@ expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
 
 #plot adjacency matrix
 
+library("gplots")
+
 heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
           col = colorpanel(3, "grey75", "white", "blue"),
           colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
@@ -332,7 +334,7 @@ heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
 #plot relationship matrix
 
 heatmap.2(make_distance_graph(graph_test4, absolute = FALSE),
-          scale = "none", trace = "none\", col = bluered(50),
+          scale = "none", trace = "none", col = bluered(50),
           colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 #plot sigma matrix

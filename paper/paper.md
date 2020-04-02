@@ -21,7 +21,7 @@ affiliations:
    index: 1
  - name: "Present address:RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan"
    index: 2
-date: 30 Janunary 2019
+date: 30 January 2019
 bibliography: paper.bib
 ---
 
@@ -82,7 +82,7 @@ genomic analysis. A number of methods have already been developed to
 utilise timecourse gene expression data [@Arner2015; @Yamaguchi2007]
 using gene regulatory modules in state-space models and recursive vector
 autoregressive models [@Hirose2008; @Shimamura2009]. Various approaches
-to gene regulation and networks at the genome-wide scale have lead to
+to gene regulation and networks at the genome-wide scale have led to
 novel biological insights [@Arner2015; @Komatsu2013]. However, inference
 of regulatory networks has thus far relied on experimental validation or
 resampling-based approaches to estimate the likelihood of specific
@@ -90,7 +90,7 @@ network modules being predicted [@Markowetz2007; @Hawe2019].
 
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from
-hypothetical, inferred or known gene networks. Here we present an
+hypothetical, inferred or known gene networks. Here we present a
 package to achieve this, where samples from a multivariate normal
 distribution are used to generate normally-distributed log-expression
 data, with correlations between genes derived from the structure of the
@@ -183,7 +183,7 @@ parameter in multivariate normal simulations, particularly when negative
 correlations are included for inhibitions (as shown below). Matrices
 that could not be inverted occurred rarely with biologically plausible
 graph structures but this approach allows for the computation of a
-plausible correlation matrix when the graph structure given is
+plausible correlation matrix when the given graph structure is
 incomplete or contains loops. When required, the nearest positive
 definite matrix is computed using the `nearPD` function of the package
 [@Matrix] to perform Higham's algorithm [@Higham2002] on
@@ -215,7 +215,7 @@ reference="fig:simple_graph:second"}.
 A graph structure can be generated and plotted using the following
 commands in R:
 
-```
+```r
 #install packages required (once per machine)
 
 install.packages("igraph")
@@ -226,14 +226,14 @@ if(! require("devtools") ){
 devtools::install_github("TomKellyGenetics/graphsim")
 ```
 
-```
+```r
 #load required packages (once per R instance)
 
 library("igraph")
 library("graphsim")
 ```
 
-```
+```r
 #generate graph structure
 
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
@@ -241,14 +241,14 @@ graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
 graph <- graph.edgelist(graph_edges, directed = TRUE)
 ```
 
-```
+```r
 #plot graph structure (Figure 1)
 
 plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
               cex.node=3, cex.arrow=5, arrow_clip = 0.2)
 ```
 
-```
+```r
 #generate parameters for inhibitions
 
 state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
@@ -267,7 +267,7 @@ are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been
 used to generate a simulated expression dataset of 100 samples (coloured
 blue to red from low to high) via sampling from the multivariate
 normal distribution. Here genes with closer relationships in the pathway
-structure show higher correlation between simulated values.](figure2.pdf){ width=95% #fig:simulation_activating label="simulation_activating"}
+structure show a higher correlation between simulated values.](figure2.pdf){ width=95% #fig:simulation_activating label="simulation_activating"}
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
 -----------------------------------------
@@ -301,7 +301,7 @@ normalised on a log-scale.
 
 The simulated dataset can be generated using the following code:
 
-```
+```r
 #adjacency matrix
 
 adj_mat <- make_adjmatrix_graph(graph)
@@ -362,7 +362,7 @@ Here modules of genes with correlated expression can be clearly discerned.](figu
 
  \newpage
 
-```
+```r
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
           comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
 

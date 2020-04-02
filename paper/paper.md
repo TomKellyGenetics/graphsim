@@ -27,7 +27,6 @@ bibliography: paper.bib
 
 ### Statement of Need
 
-Provides a flexible framework to simulate biological pathways from a graph structure based on a statistical model of gene expression.
 
 ### Summary
 Transcriptomic analysis is used to capture the molecular state of a cell
@@ -50,7 +49,8 @@ biological pathways, by sampling from a multivariate normal distribution
 derived from a graph structure. This procedure has been released as the
 \texttt{graphsim} R package on CRAN and GitHub (\url{https://github.com/TomKellyGenetics/graphsim})
  and is compatible with any graph structure that can be described using
-the `igraph` package.
+the `igraph` package. This package allows the simulation of biological
+pathways from a graph structure based on a statistical model of gene expression.
 
 
 Introduction: inference and modelling of biological networks {#sec:intro}

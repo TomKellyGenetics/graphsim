@@ -424,14 +424,11 @@ reference="fig:simulation_smad:fourth"}). Here *SMAD7* exhibits
 negative correlations with the other SMADs consistent with it's
 functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
 
-These simulated datasets could then be used for simulating synthetic
-lethal partners of a query gene within a graph network. The query gene
-was assumed to be separate from the graph network pathway and was added
-to the dataset using the procedure in
-Section [\[methods:simulating_SL\]](#methods:simulating_SL){reference-type="ref"
-reference="methods:simulating_SL"}. Thus I can simulate known synthetic
-lethal partner genes within a synthetic lethal partner pathway
-structure.
+These simulated datasets can also be used for simulating gene 
+expression data within a graph network to test genomic analysis techniques.
+Correlation structure can be included into datasets generated
+when testing whether true positive genes or samples can be detected
+in a sample with the background of complex pathway structure.
 
 
 Summary and discussion {#sec:summary}

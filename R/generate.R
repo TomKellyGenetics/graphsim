@@ -17,6 +17,7 @@
 ##' @importFrom igraph is_igraph
 ##' @importFrom Matrix nearPD
 ##' @importFrom matrixcalc is.symmetric.matrix is.positive.definite
+##' @importFrom gplots heatmap.2
 ##' @examples
 ##' 
 ##' library("igraph")

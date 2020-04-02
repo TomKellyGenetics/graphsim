@@ -11,6 +11,7 @@ License: GPL-3
 BugReports: https://github.com/TomKellyGenetics/graphsim/issues/
 Imports:
     utils,
+    gplots,
     igraph,
     mvtnorm,
     Matrix,
@@ -21,7 +22,6 @@ Suggests:
     rmarkdown,
     animation,
     testthat,
-    gplots,
     scales,
     devtools
 LazyData: TRUE

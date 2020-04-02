@@ -48,7 +48,7 @@ pathway relationships and correlations. Here we present a versatile
 statistical framework to simulate correlated gene expression data from
 biological pathways, by sampling from a multivariate normal distribution
 derived from a graph structure. This procedure has been released as the
-`graphsim` R} package (\url{https://github.com/TomKellyGenetics/graphsim})
+\texttt{graphsim} R package on CRAN and GitHub (\url{https://github.com/TomKellyGenetics/graphsim})
  and is compatible with any graph structure that can be described using
 the `igraph` package.
 
@@ -120,14 +120,14 @@ $log(X_{ij}) \sim MVN({\bf\mu}, \Sigma)$, where ${\bf\mu}$ and $\Sigma$
 are the mean vector and variance-covariance matrix respectively, for
 gene expression data derived from a biological pathway) after
 appropriate normalisation [@Law2014; @Li2015]. Log-normality of gene
-expression matches the assumptions of the popular `limma` package [@limma], which is
+expression matches the assumptions of the popular \texttt{limma} package [@limma], which is
 often used for the analysis of intensity-based data from gene expression
 microarray studies and count-based data from RNA-Seq experiments. This
 approach has also been applied for modelling UMI-based count data from
 single-cell RNA-Seq experiments in the package [@Wang2018].
 
 In order to simulate transcriptomic data, a pathway is first constructed
-as a graph structure, using the R package [@igraph], with the status of
+as a graph structure, using the \texttt{igraph} R package [@igraph], with the status of
 the edge relationships defined (i.e, whether they activate or inhibit
 downstream pathway members). [This procedure uses]{style="color: black"}
 a graph structure such as that presented in
@@ -159,7 +159,7 @@ related by $\frac{1}{2}$ compared to the next nearest, as shown in
 Figure [2b](#fig:simulation_activating:second){reference-type="ref"
 reference="fig:simulation_activating:second"}. An
 arithmetically-decreasing (absolute) distance weighting is also
-supported in the package which implements this procedure: [ $$R_{ij} = 
+supported in the \texttt{graphsim} R package which implements this procedure: [ $$R_{ij} = 
 \begin{cases}
    1                            & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
    1-\frac{d_{ij}}{diam(G)}     & \mbox{if a path can be found between genes } i \mbox{ and } j \\
@@ -185,9 +185,9 @@ that could not be inverted occurred rarely with biologically plausible
 graph structures but this approach allows for the computation of a
 plausible correlation matrix when the given graph structure is
 incomplete or contains loops. When required, the nearest positive
-definite matrix is computed using the `nearPD` function of the package
+definite matrix is computed using the `nearPD` function of the \texttt{Matrix} R package
 [@Matrix] to perform Higham's algorithm [@Higham2002] on
-variance-covariance matrices. The package gives a warning when this
+variance-covariance matrices. The \texttt{graphsim} package gives a warning when this
 occurs.
 
 Illustrations {#sec:illustrations}
@@ -204,8 +204,8 @@ using the R package [@Genz2009; @mvtnorm]. The graph structure
 visualisation in
 Figure [1](#fig:simple_graph){reference-type="ref"
 reference="fig:simple_graph"} was specifically developed for (directed)
-iGraph objects in and is available in the and packages. The
-`plot_directed` function enables customisation of plot parameters for
+\texttt{igraph} objects in and is available in the and packages. The
+\texttt{plot_directed} function enables customisation of plot parameters for
 each node or edge, and mixed (directed) edge types for indicating
 activation or inhibition. These inhibition links (which occur frequently
 in biological pathways) are demonstrated in
@@ -223,7 +223,7 @@ if(! require("devtools") ){
     install.packages("devtools")
     library("devtools")
 }
-devtools::install_github("TomKellyGenetics/graphsim")
+install.packages("graphsim")
 ```
 
 ```r
@@ -442,7 +442,7 @@ molecular biology. In order to translate findings from genomics studies
 into real-world applications such as improved healthcare, the roles of
 genes must be studied in the context of molecular pathways. Here we
 present a statistical framework to simulate gene expression from
-biological pathways, and provide the package in to generate these
+biological pathways, and provide the \texttt{graphsim} package in R to generate these
 simulated datasets. This approach is versatile and can be fine-tuned for
 modelling existing biological pathways or for testing whether
 constructed pathways can be detected by other means. In particular,
@@ -456,20 +456,17 @@ statistical methods being developed for gene expression data analysis.
 Computational details {#computational-details .unnumbered .unnumbered}
 =====================
 
-The results in this paper were obtained using R~3.6.1 with the igraph~1.2.4.1
-Matrix~1.2-17, matrixcalc~1.0-3, and mvtnorm~1.0-11 packages. R itself and all dependent packages
+The results in this paper were obtained using R 3.6.1 with the \texttt{igraph} 1.2.4.1
+\texttt{Matrix} 1.2-17, \texttt{matrixcalc} 1.0-3, and \texttt{mvtnorm} 1.0-11 packages. R itself and all dependent packages
 used are available from the Comprehensive Archive Network (CRAN) at
-\url{https://CRAN.R-project.org}. The and packages presented can be
-installed from <https://github.com/TomKellyGenetics/graphsim> and
-\url{https://github.com/TomKellyGenetics/plot.igraph} respectively. These
-functions can also be installed using the library at
-\url{https://github.com/TomKellyGenetics/igraph.extensions} which includes
-other plotting functions used. This software is cross-platform and
+\url{https://CRAN.R-project.org}. The \texttt{graphsim} package presented can be
+installed from CRAN and the issues can  be reported to the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}). These
+functions can also be installed using the library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions}) which includes
+additional tools for \texttt{igraph} used. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
 systems. The package GitHub repository also contains Vignettes with more
 information and examples on running functions released in the package.
-The package (graphsim~0.1.2) meets CRAN submission criteria and will be
-released.
+The package (\texttt{graphsim} 0.1.2) has been released on CRAN and will be updated.
 
 Acknowledgements {#acknowledgements .unnumbered .unnumbered}
 ================

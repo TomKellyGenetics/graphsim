@@ -8,13 +8,13 @@
 \alias{make_sigma_mat_dist_graph}
 \title{Generate Sigma Matrix}
 \usage{
-make_sigma_mat_adjmat(mat, cor)
+make_sigma_mat_adjmat(mat, cor = 0.8)
 
-make_sigma_mat_graph(graph, cor, comm = FALSE, directed = FALSE)
+make_sigma_mat_graph(graph, cor = 0.8, comm = FALSE, directed = FALSE)
 
-make_sigma_mat_dist_adjmat(mat, cor, absolute = FALSE)
+make_sigma_mat_dist_adjmat(mat, cor = 0.8, absolute = FALSE)
 
-make_sigma_mat_dist_graph(graph, cor, absolute = FALSE)
+make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE)
 }
 \arguments{
 \item{mat}{precomputed adjacency, commonlink, or scaled distance matrix.}

@@ -27,7 +27,7 @@
 ##' 
 ##' @return a numeric covariance matrix of values in the range [-1, 1]
 ##' @export
-make_sigma_mat_adjmat <- function(mat, cor){
+make_sigma_mat_adjmat <- function(mat, cor = 0.8){
   sig <- ifelse(mat >0, cor, 0)
   diag(sig) <- 1
   rownames(sig) <- rownames(mat)
@@ -37,7 +37,7 @@ make_sigma_mat_adjmat <- function(mat, cor){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_graph <- function(graph, cor, comm = FALSE, directed = FALSE){
+make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, directed = FALSE){
   mat <- make_adjmatrix_graph(graph, directed = directed)
   if(comm) mat <- make_commonlink_adjmat(mat)
   diag(mat) <- 1
@@ -50,7 +50,7 @@ make_sigma_mat_graph <- function(graph, cor, comm = FALSE, directed = FALSE){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_adjmat <- function(mat, cor, absolute = FALSE){
+make_sigma_mat_dist_adjmat <- function(mat, cor = 0.8, absolute = FALSE){
   if(!(all(diag(mat) == 1))) stop("distance matrix must have diagonal of zero")
   if(!(max(mat[mat != 1]) > 0) || !(max(mat[mat!=1]) <= 1)) stop("distance matrix expected, not adjacency matrix")
   sig <- mat/max(mat[mat != 1]) * cor
@@ -63,7 +63,7 @@ make_sigma_mat_dist_adjmat <- function(mat, cor, absolute = FALSE){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_graph <- function(graph, cor, absolute = FALSE){
+make_sigma_mat_dist_graph <- function(graph, cor = 0.8, absolute = FALSE){
   mat <- make_distance_graph(graph, absolute = absolute)
   sig <- make_sigma_mat_dist_adjmat(mat, cor)
   return(sig)

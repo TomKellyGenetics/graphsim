@@ -456,7 +456,7 @@ The results in this paper were obtained using R 3.6.1 with the \texttt{igraph} 1
 \texttt{Matrix} 1.2-17, \texttt{matrixcalc} 1.0-3, and \texttt{mvtnorm} 1.0-11 packages. R itself and all dependent packages
 used are available from the Comprehensive Archive Network (CRAN) at
 \url{https://CRAN.R-project.org}. The \texttt{graphsim} package presented can be
-installed from CRAN and the issues can  be reported to the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}). This pacakge is included in the library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions}) which installs various
+installed from CRAN and the issues can  be reported to the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}). This package is included in the library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions}) which installs various
 tools for \texttt{igraph} analysis. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
 systems. The package GitHub repository also contains vignettes with more

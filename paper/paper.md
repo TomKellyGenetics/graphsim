@@ -25,9 +25,6 @@ date: 30 January 2019
 bibliography: paper.bib
 ---
 
-### Statement of Need
-
-
 ### Summary
 Transcriptomic analysis is used to capture the molecular state of a cell
 or sample in many biological and medical applications. In addition to 
@@ -308,7 +305,7 @@ adj_mat <- make_adjmatrix_graph(graph)
 
 #relationship matrix
 
-dist_mat <- make_distance_graph(graph_test4, absolute = FALSE)
+dist_mat <- make_distance_graph(graph, absolute = FALSE)
 
 #sigma matrix directly from graph
 
@@ -333,7 +330,7 @@ heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
 
 #plot relationship matrix
 
-heatmap.2(make_distance_graph(graph_test4, absolute = FALSE),
+heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = bluered(50),
           colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
@@ -459,11 +456,10 @@ The results in this paper were obtained using R 3.6.1 with the \texttt{igraph} 1
 \texttt{Matrix} 1.2-17, \texttt{matrixcalc} 1.0-3, and \texttt{mvtnorm} 1.0-11 packages. R itself and all dependent packages
 used are available from the Comprehensive Archive Network (CRAN) at
 \url{https://CRAN.R-project.org}. The \texttt{graphsim} package presented can be
-installed from CRAN and the issues can  be reported to the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}). These
-functions can also be installed using the library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions}) which includes
-additional tools for \texttt{igraph} used. This software is cross-platform and
+installed from CRAN and the issues can  be reported to the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}). This pacakge is included in the library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions}) which installs various
+tools for \texttt{igraph} analysis. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
-systems. The package GitHub repository also contains Vignettes with more
+systems. The package GitHub repository also contains vignettes with more
 information and examples on running functions released in the package.
 The package (\texttt{graphsim} 0.1.2) has been released on CRAN and will be updated.
 
@@ -481,5 +477,11 @@ Guilford at the University of Otago, Professor Cristin Print at the
 University of Auckland, and Dr Erik Arner at the RIKEN Center for
 Integrative Medical Sciences for their excellent advice during this
 project.
+
+Author Contributions  {#contributions .unnumbered .unnumbered}
+================
+
+S.T.K. and M.A.B. conceived of the presented methodology. S.T.K. developed the theory and performed the computations.
+M.A.B. provided guidance throughout the project and gave feedback on the package. All authors discussed the package and contributed to the final manuscript.
 
 # References

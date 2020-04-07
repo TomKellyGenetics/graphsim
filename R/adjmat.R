@@ -9,6 +9,7 @@
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.
 ##' @keywords graph network igraph adjacency
+##' @importFrom igraph as_adjacency_matrix graph.edgelist as.undirected
 ##' @import igraph
 ##' @examples 
 ##' 

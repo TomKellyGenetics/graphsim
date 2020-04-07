@@ -3,12 +3,15 @@
 \name{make_sigma}
 \alias{make_sigma}
 \alias{make_sigma_mat_adjmat}
+\alias{make_sigma_mat_laplacian}
 \alias{make_sigma_mat_graph}
 \alias{make_sigma_mat_dist_adjmat}
 \alias{make_sigma_mat_dist_graph}
 \title{Generate Sigma Matrix}
 \usage{
 make_sigma_mat_adjmat(mat, cor = 0.8)
+
+make_sigma_mat_laplacian(mat, cor = 0.8)
 
 make_sigma_mat_graph(graph, cor = 0.8, comm = FALSE, directed = FALSE)
 

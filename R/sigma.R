@@ -16,7 +16,8 @@
 ##' the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a
 ##' relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph mvtnorm
-##' @import igraph mvtnorm
+##' @importFrom igraph as_adjacency_matrix
+##' @import igraph
 ##' @examples 
 ##' 
 ##' library("igraph")
@@ -28,7 +29,17 @@
 ##' @return a numeric covariance matrix of values in the range [-1, 1]
 ##' @export
 make_sigma_mat_adjmat <- function(mat, cor = 0.8){
-  sig <- ifelse(mat >0, cor, 0)
+  sig <- ifelse(mat > 0, cor, 0)
+  diag(sig) <- 1
+  rownames(sig) <- rownames(mat)
+  colnames(sig) <- colnames(mat)
+  return(sig)
+}
+
+##' @rdname make_sigma
+##' @export
+make_sigma_mat_laplacian <- function(mat, cor = 0.8){
+  sig <- ifelse(mat < 0, mat*cor/min(mat), 0)
   diag(sig) <- 1
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
@@ -60,6 +71,7 @@ make_sigma_mat_dist_adjmat <- function(mat, cor = 0.8, absolute = FALSE){
   colnames(sig) <- colnames(mat)
   return(sig)
 }
+
 
 ##' @rdname make_sigma
 ##' @export

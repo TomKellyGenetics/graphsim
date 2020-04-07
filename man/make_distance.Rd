@@ -4,11 +4,14 @@
 \alias{make_distance_graph}
 \alias{make_relationship}
 \alias{make_distance_adjmat}
+\alias{make_distance_laplacian}
 \title{Generate Distance Matrix}
 \usage{
 make_distance_graph(graph, directed = TRUE, absolute = FALSE)
 
 make_distance_adjmat(mat, directed = TRUE, absolute = FALSE)
+
+make_distance_laplacian(mat, directed = TRUE, absolute = FALSE)
 }
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}
@@ -32,6 +35,9 @@ graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 adjacency_matrix <- make_adjmatrix_graph(graph_test)
 distance_matrix <- make_distance_adjmat(adjacency_matrix)
+
+laplacian_matrix <- make_laplacian_graph(graph_test)
+distance_matrix <- make_distance_adjmat(laplacian_matrix)
 
 }
 \keyword{adjacency}

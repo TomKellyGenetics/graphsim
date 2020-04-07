@@ -10,6 +10,7 @@
 ##' @param directed logical. Whether directed information is passed to the distance matrix.
 ##' @param absolute logical. Whether distances are scaled as the absolute difference from the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph adjacency
+##' @importFrom igraph as_adjacency_matrix
 ##' @import igraph
 ##' @examples 
 ##' 
@@ -18,6 +19,9 @@
 ##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 ##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
 ##' distance_matrix <- make_distance_adjmat(adjacency_matrix)
+##' 
+##' laplacian_matrix <- make_laplacian_graph(graph_test)
+##' distance_matrix <- make_distance_adjmat(laplacian_matrix)
 ##' 
 ##' @return A numeric matrix of values in the range [0, 1] where lower values are closer
 ##' 
@@ -40,7 +44,26 @@ make_distance_graph <- function(graph, directed = TRUE, absolute = FALSE){
 ##' @export
 make_distance_adjmat <- function(mat, directed = TRUE, absolute = FALSE){
   diag(mat) <- 0
-  graph <- graph_from_adjacency_matrix(mat, weighted = NULL, mode = "undirected")
+  graph <- graph_from_adjacency_matrix(mat, weighted = NULL, mode = ifelse(directed, "directed", "undirected"))
+  diam <- diameter(graph)
+  if (absolute){
+    mat <- (diam-shortest.paths(graph))/diam
+  } else {
+    mat <- 1^-diam/(diam*shortest.paths(graph))
+    diag(mat) <- 1
+  }
+  rownames(mat) <- colnames(mat) <- names(V(graph))
+  return(mat)
+}
+
+##' @rdname make_distance
+##' @importFrom igraph graph_from_adjacency_matrix laplacian_matrix
+##' @export
+make_distance_laplacian <- function(mat, directed = TRUE, absolute = FALSE){
+  diag(mat) <- 0
+  adj_mat <- ifelse(mat < 0, 1, 0)
+  if(directed == FALSE) mat <- abs(mat)
+  graph <- graph_from_adjacency_matrix(adj_mat, weighted = NULL, mode = ifelse(directed, "directed", "undirected"))
   diam <- diameter(graph)
   if (absolute){
     mat <- (diam-shortest.paths(graph))/diam

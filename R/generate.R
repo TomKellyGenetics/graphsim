@@ -11,9 +11,11 @@
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
 ##' @param mean mean value of each simulated gene. Defaults to 0. May be entered as a scalar applying to all genes or a vector with a separate value for each.
 ##' @param dist logical. Whether a graph distance (\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix (\code{\link[graphsim]{make_sigma_mat_graph}}) is used to compute the sigma matrix.
-##' @param comm,absolute logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.
+##' @param comm,absolute,laplacian logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.
 ##' @keywords graph network igraph mvtnorm simulation
-##' @import igraph mvtnorm
+##' @importFrom  mvtnorm rmvnorm
+##' @importFrom igraph as_adjacency_matrix graph.edgelist
+##' @import igraph
 ##' @importFrom igraph is_igraph
 ##' @importFrom Matrix nearPD
 ##' @importFrom matrixcalc is.symmetric.matrix is.positive.definite
@@ -30,7 +32,7 @@
 ##' @return numeric matrix of simulated data (log-normalised counts)
 ##' 
 ##' @export
-generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE){
+generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
   if(!is.integer(n)){
     if(is.numeric(n)){
       if(floor(n) == n){
@@ -48,7 +50,7 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
   if(is.vector(state) || length(state) == 1) state <- make_state_matrix(graph, state)
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))
   if(dist){
-    sig <- make_sigma_mat_dist_graph(graph, cor, absolute = absolute)
+    sig <- make_sigma_mat_dist_graph(graph, cor, absolute = absolute) ## LAPLACIAN? -> derive weights
   } else {
     sig <- make_sigma_mat_graph(graph, cor, comm = comm)
   }

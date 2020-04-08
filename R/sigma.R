@@ -39,8 +39,25 @@ make_sigma_mat_adjmat <- function(mat, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
+make_sigma_mat_comm <- function(mat, cor = 0.8){
+  mat <- abs(mat)
+  mat <- apply(mat, 1, function(x) x/max(x))
+  mat <- apply(mat, 2, function(x) x/max(x))
+  sig <- ifelse(mat>0, cor*mat/max(mat), 0)
+  diag(sig) <- 1
+  rownames(sig) <- rownames(mat)
+  colnames(sig) <- colnames(mat)
+  return(sig)
+}
+
+##' @rdname make_sigma
+##' @export
 make_sigma_mat_laplacian <- function(mat, cor = 0.8){
-  sig <- ifelse(mat < 0, mat*cor/min(mat), 0)
+  mat <- abs(mat)
+  diag(mat)[diag(mat) == 0] <- 1
+  mat <- apply(mat, 1, function(x) x/max(x))
+  mat <- apply(mat, 2, function(x) x/max(x))
+  sig <- ifelse(mat>0, cor*mat/max(mat), 0)
   diag(sig) <- 1
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
@@ -55,7 +72,10 @@ make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, laplacian = FAL
     stop()
   }
   if(!comm && !laplacian) mat <- make_adjmatrix_graph(graph, directed = directed)
-  if(comm) mat <- make_commonlink_adjmat(mat)
+  if(comm){
+    mat <- make_commonlink_adjmat(mat)
+    diag(mat) <-  max(mat) +1
+  }
   if(laplacian){
     mat <- make_laplacian_graph(graph, directed = directed)
     mat <- abs(mat)

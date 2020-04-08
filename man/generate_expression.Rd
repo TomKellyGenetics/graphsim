@@ -2,11 +2,24 @@
 % Please edit documentation in R/generate.R
 \name{generate_expression}
 \alias{generate_expression}
+\alias{generate_expression_mat}
 \title{Generate Simulated Expression}
 \usage{
 generate_expression(
   n,
   graph,
+  state = NULL,
+  cor = 0.8,
+  mean = 0,
+  comm = FALSE,
+  dist = FALSE,
+  absolute = FALSE,
+  laplacian = FALSE
+)
+
+generate_expression_mat(
+  n,
+  mat,
   state = NULL,
   cor = 0.8,
   mean = 0,

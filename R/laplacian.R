@@ -1,6 +1,6 @@
 ##' @name make_laplacian
 ##' @aliases make_laplacian_graph
-##' @rdname make_laplacian_graph
+##' @rdname make_laplacian
 ##'
 ##' @title Generate Laplacian Matrix
 ##' 
@@ -9,7 +9,7 @@
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the Laplacian matrix.
 ##' @keywords graph network igraph Laplacian
-##' @importFrom igraph laplacian_matrix graph.edgelist as.undirected
+##' @importFrom igraph laplacian_matrix graph.edgelist as.undirected graph_from_adjacency_matrix
 ##' @import igraph
 ##' @importFrom Matrix Matrix
 ##' @importClassesFrom Matrix dgCMatrix
@@ -22,7 +22,16 @@
 ##' 
 ##' @return An Laplacian matrix compatible with generating an expression matrix
 ##' 
-##' @export make_laplacian_graph
+##' @export
+make_laplacian_adjmat <- function(adj_mat, directed = FALSE){
+  graph <- graph_from_adjacency_matrix(adj_mat, weighted = TRUE, mode = ifelse(directed, "directed", "undirected"))
+  laplacian <- as.matrix(laplacian_matrix(graph))
+  rownames(laplacian) <- colnames(laplacian) <- names(V(graph))
+  return(laplacian)
+}
+
+##' @rdname make_laplacian
+##' @export
 make_laplacian_graph <- function(graph, directed = FALSE){
   if(directed == FALSE) graph <- as.undirected(graph)
   laplacian <- as.matrix(laplacian_matrix(graph))

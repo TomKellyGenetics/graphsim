@@ -3,6 +3,7 @@
 \name{make_sigma}
 \alias{make_sigma}
 \alias{make_sigma_mat_adjmat}
+\alias{make_sigma_mat_comm}
 \alias{make_sigma_mat_laplacian}
 \alias{make_sigma_mat_graph}
 \alias{make_sigma_mat_dist_adjmat}
@@ -11,9 +12,17 @@
 \usage{
 make_sigma_mat_adjmat(mat, cor = 0.8)
 
+make_sigma_mat_comm(mat, cor = 0.8)
+
 make_sigma_mat_laplacian(mat, cor = 0.8)
 
-make_sigma_mat_graph(graph, cor = 0.8, comm = FALSE, directed = FALSE)
+make_sigma_mat_graph(
+  graph,
+  cor = 0.8,
+  comm = FALSE,
+  laplacian = FALSE,
+  directed = FALSE
+)
 
 make_sigma_mat_dist_adjmat(mat, cor = 0.8, absolute = FALSE)
 
@@ -27,6 +36,8 @@ make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE)
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}
 
 \item{comm}{logical whether a common link matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).}
+
+\item{laplacian}{logical whether a Laplacian matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).}
 
 \item{directed}{logical. Whether directed information is passed to the distance matrix.}
 

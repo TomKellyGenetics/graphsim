@@ -12,6 +12,7 @@
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
 ##' @param directed logical. Whether directed information is passed to the distance matrix.
 ##' @param comm logical whether a common link matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).
+##' @param laplacian logical whether a Laplacian matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).
 ##' @param absolute logical. Whether distances are scaled as the absolute difference from
 ##' the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a
 ##' relative difference from the diameter for a geometric decay in distance.
@@ -48,10 +49,22 @@ make_sigma_mat_laplacian <- function(mat, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, directed = FALSE){
-  mat <- make_adjmatrix_graph(graph, directed = directed)
+make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, laplacian = FALSE, directed = FALSE){
+  if(comm && laplacian){
+    warning("Error: only one of commonlink or laplacian can be used")
+    stop()
+  }
+  if(!comm && !laplacian) mat <- make_adjmatrix_graph(graph, directed = directed)
   if(comm) mat <- make_commonlink_adjmat(mat)
-  diag(mat) <- 1
+  if(laplacian){
+    mat <- make_laplacian_graph(graph, directed = directed)
+    mat <- abs(mat)
+    diag(mat)[diag(mat) == 0] <- 1
+    mat <- apply(mat, 1, function(x) x/max(x))
+    mat <- apply(mat, 2, function(x) x/max(x))
+  } else{
+    diag(mat) <- 1
+  }
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
   diag(sig) <- 1
   rownames(sig) <- rownames(mat)

@@ -61,9 +61,8 @@ make_distance_adjmat <- function(mat, directed = TRUE, absolute = FALSE){
 ##' @export
 make_distance_laplacian <- function(mat, directed = TRUE, absolute = FALSE){
   diag(mat) <- 0
-  adj_mat <- ifelse(mat < 0, 1, 0)
-  if(directed == FALSE) mat <- abs(mat)
-  graph <- graph_from_adjacency_matrix(adj_mat, weighted = NULL, mode = ifelse(directed, "directed", "undirected"))
+  adj_mat <- ifelse(mat < 0, abs(mat), 0)
+  graph <- graph_from_adjacency_matrix(adj_mat, weighted = TRUE, mode = ifelse(directed, "directed", "undirected"))
   diam <- diameter(graph)
   if (absolute){
     mat <- (diam-shortest.paths(graph))/diam

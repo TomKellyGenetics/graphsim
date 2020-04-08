@@ -50,9 +50,9 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
   if(is.vector(state) || length(state) == 1) state <- make_state_matrix(graph, state)
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))
   if(dist){
-    sig <- make_sigma_mat_dist_graph(graph, cor, absolute = absolute) ## LAPLACIAN? -> derive weights
+    sig <- make_sigma_mat_dist_graph(graph, cor, absolute = absolute)
   } else {
-    sig <- make_sigma_mat_graph(graph, cor, comm = comm)
+    sig <- make_sigma_mat_graph(graph, cor, comm = comm, laplacian = laplacian)
   }
   if(!(is.null(state))) sig <- state * sig
   if(is.symmetric.matrix(sig) == FALSE) {
@@ -64,7 +64,7 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
     sig <- as.matrix(nearPD(sig, corr=T, keepDiag = TRUE)$mat) #postive definite correction
   }
   expr_mat <- t(rmvnorm(n,mean=mean, sigma=sig))
-  rownames(expr_mat) <-names(V(graph))
-  colnames(expr_mat) <-paste0("sample_", 1:n)
+  rownames(expr_mat) <- names(V(graph))
+  colnames(expr_mat) <- paste0("sample_", 1:n)
   return(expr_mat)
 }

@@ -18,3 +18,6 @@ graphsim_0.1.2.tar.gz
 ^tests/figs
 ^CRAN-RELEASE$
 ^LICENSE$
+^CODE_OF_CONDUCT.md$
+^CONTRIBUTING.md$ 
+^ISSUE_TEMPLATE.md$

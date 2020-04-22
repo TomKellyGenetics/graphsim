@@ -26,7 +26,7 @@
 ##' @return A numeric matrix of values in the range [0, 1] where lower values are closer
 ##' 
 ##' @export
-make_distance_graph <- function(graph, directed = TRUE, absolute = FALSE){
+make_distance_graph <- function(graph, directed = FALSE, absolute = FALSE){
   if(directed == FALSE) graph <- as.undirected(graph)
   diam <- diameter(graph)
   if (absolute){
@@ -42,7 +42,7 @@ make_distance_graph <- function(graph, directed = TRUE, absolute = FALSE){
 ##' @rdname make_distance
 ##' @importFrom igraph graph_from_adjacency_matrix
 ##' @export
-make_distance_adjmat <- function(mat, directed = TRUE, absolute = FALSE){
+make_distance_adjmat <- function(mat, directed = FALSE, absolute = FALSE){
   diag(mat) <- 0
   graph <- graph_from_adjacency_matrix(mat, weighted = NULL, mode = ifelse(directed, "directed", "undirected"))
   diam <- diameter(graph)
@@ -59,7 +59,7 @@ make_distance_adjmat <- function(mat, directed = TRUE, absolute = FALSE){
 ##' @rdname make_distance
 ##' @importFrom igraph graph_from_adjacency_matrix laplacian_matrix
 ##' @export
-make_distance_laplacian <- function(mat, directed = TRUE, absolute = FALSE){
+make_distance_laplacian <- function(mat, directed = FALSE, absolute = FALSE){
   diag(mat) <- 0
   adj_mat <- ifelse(mat < 0, abs(mat), 0)
   graph <- graph_from_adjacency_matrix(adj_mat, weighted = TRUE, mode = ifelse(directed, "directed", "undirected"))

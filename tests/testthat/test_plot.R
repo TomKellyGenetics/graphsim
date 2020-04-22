@@ -3,8 +3,6 @@ library("igraph")
 library("vdiffr")
 context("Plot Directed Graphs")
 
-use_catch("../..")
-
 #generate fixed layout
 graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)

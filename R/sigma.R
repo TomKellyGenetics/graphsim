@@ -7,7 +7,7 @@
 ##' or pre-computed matrix. These are compatible with \code{\link[mvtnorm]{rmvnorm}} and
 ##' \code{\link[graphsim]{generate_expression}}.
 ##'
-##' @param mat precomputed adjacency, commonlink, or scaled distance matrix.
+##' @param mat precomputed adjacency, laplacian, commonlink, or scaled distance matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
 ##' @param directed logical. Whether directed information is passed to the distance matrix.

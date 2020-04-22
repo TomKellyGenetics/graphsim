@@ -7,11 +7,11 @@
 \alias{make_distance_laplacian}
 \title{Generate Distance Matrix}
 \usage{
-make_distance_graph(graph, directed = TRUE, absolute = FALSE)
+make_distance_graph(graph, directed = FALSE, absolute = FALSE)
 
-make_distance_adjmat(mat, directed = TRUE, absolute = FALSE)
+make_distance_adjmat(mat, directed = FALSE, absolute = FALSE)
 
-make_distance_laplacian(mat, directed = TRUE, absolute = FALSE)
+make_distance_laplacian(mat, directed = FALSE, absolute = FALSE)
 }
 \arguments{
 \item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}

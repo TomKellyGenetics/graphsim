@@ -6,6 +6,7 @@
 ##' 
 ##' @description Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph}} structure, preserving node/column/row names (and direction).
 ##'
+##' @param mat precomputed adjacency matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the Laplacian matrix.
 ##' @keywords graph network igraph Laplacian
@@ -23,8 +24,8 @@
 ##' @return An Laplacian matrix compatible with generating an expression matrix
 ##' 
 ##' @export
-make_laplacian_adjmat <- function(adj_mat, directed = FALSE){
-  graph <- graph_from_adjacency_matrix(adj_mat, weighted = TRUE, mode = ifelse(directed, "directed", "undirected"))
+make_laplacian_adjmat <- function(mat, directed = FALSE){
+  graph <- graph_from_adjacency_matrix(mat, weighted = TRUE, mode = ifelse(directed, "directed", "undirected"))
   laplacian <- as.matrix(laplacian_matrix(graph))
   rownames(laplacian) <- colnames(laplacian) <- names(V(graph))
   return(laplacian)

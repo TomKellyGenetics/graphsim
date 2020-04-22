@@ -43,6 +43,8 @@ generate_expression_mat(
 \item{comm, absolute, laplacian}{logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.}
 
 \item{dist}{logical. Whether a graph distance (\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix (\code{\link[graphsim]{make_sigma_mat_graph}}) is used to compute the sigma matrix.}
+
+\item{mat}{precomputed adjacency, laplacian, commonlink, or scaled distance matrix.}
 }
 \value{
 numeric matrix of simulated data (log-normalised counts)

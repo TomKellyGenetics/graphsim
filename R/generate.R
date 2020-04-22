@@ -6,6 +6,7 @@
 ##' @description Compute simulated continuous expression data from a graph network structure. Requires an \code{\link[igraph]{igraph}} pathway structure and a matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}. Uses graph structure to pass a sigma covariance matrix from \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}} on to \code{\link[mvtnorm]{rmvnorm}}.
 ##'
 ##' @param n number of observations (simulated samples).
+##' @param mat precomputed adjacency, laplacian, commonlink, or scaled distance matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May must be directed if states are used.
 ##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.

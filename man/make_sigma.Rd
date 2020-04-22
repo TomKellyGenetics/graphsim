@@ -29,7 +29,7 @@ make_sigma_mat_dist_adjmat(mat, cor = 0.8, absolute = FALSE)
 make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE)
 }
 \arguments{
-\item{mat}{precomputed adjacency, commonlink, or scaled distance matrix.}
+\item{mat}{precomputed adjacency, laplacian, commonlink, or scaled distance matrix.}
 
 \item{cor}{numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.}
 

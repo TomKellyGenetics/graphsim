@@ -61,72 +61,83 @@ make_state_matrix <- function(graph, state = NULL){
     state <- sign(state) # coerce to vector or 1 and -1 if not already
     warning("State inferred from non-integer weighted edges: Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
   }
-  # define shortest paths to all possible nodes
-  #check if connected or use connected subgraphs
-  compute_paths <- function(graph){
-    if(is.connected(graph)){
-      #define paths from 1st node
-      paths <- shortest_paths(graph, V(graph)$name[1])$vpath
-    } else {
-      subgraphs <- decompose(graph)
-      nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
-      paths <- as.list(rep(NA, length(V(graph))))
-      jj <- 0
-      for(ii in 1:length(nodes)){
-        subpaths <- shortest_paths(subgraphs[[ii]], V(subgraphs[[ii]])$name[1])$vpath
-        paths[jj+1:length(subpaths)] <- subpaths
-        jj <- jj + length(subpaths)
-      }
-    }
-    paths
-  }
-  paths <- compute_paths(graph)
-  #check for cycles
-  is.cyclic <- function(paths){
-    cylic_paths <- sapply(paths, function(path){
-      if(length(path) <= 1){
-        FALSE
-      } else if (path[1] == path[length(path)]){
-        TRUE
+  # check for inhibiting edges
+  if(all(state == 1)){
+    #return without resolving for activations
+    state_mat <- matrix(1, length(V(graph)), length(V(graph)))
+    return(state_mat)
+  } else {
+    #resolve inhibitions downstream
+    # define shortest paths to all possible nodes
+    #check if connected or use connected subgraphs
+    compute_paths <- function(graph){
+      if(is.connected(graph)){
+        #define paths from 1st node
+        paths <- shortest_paths(graph, V(graph)$name[1])$vpath
       } else {
-        FALSE
+        subgraphs <- decompose(graph)
+        nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
+        paths <- as.list(rep(NA, length(V(graph))))
+        jj <- 0
+        for(ii in 1:length(nodes)){
+          subpaths <- shortest_paths(subgraphs[[ii]], V(subgraphs[[ii]])$name[1])$vpath
+          paths[jj+1:length(subpaths)] <- subpaths
+          jj <- jj + length(subpaths)
+        }
       }
-    })
-    any(cylic_paths)
-  }
-  if(is.cyclic(paths)){
-    warning("Graph contains a cycle, computing minimal spanning tree. This may result in unresolved inhibitions.")
-    tree <- minimum.spanning.tree(graph)
-    paths <- compute_paths(tree)
+      paths
+    }
+    paths <- compute_paths(graph)
+    #check for cycles
+    is.cyclic <- function(paths){
+      cylic_paths <- sapply(paths, function(path){
+        if(length(path) <= 1){
+          FALSE
+        } else if (path[1] == path[length(path)]){
+          TRUE
+        } else {
+          FALSE
+        }
+      })
+      any(cylic_paths)
+    }
     if(is.cyclic(paths)){
-      warning("Graph contains cycles and cannot compute a minimal spanning tree. This will result in unresolved inhibitions.")
-      stop()
-    }
-  }
- 
-  edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
-  if(length(grep(-1, state))==1) edges <- t(edges)
-  state_mat <- matrix(1, length(V(graph)), length(V(graph)))
-  if(length(edges) > 0){
-    rows <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[1], use.names = FALSE), names(V(graph)))))
-    cols <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[2], use.names = FALSE), names(V(graph)))))
-    for(ii in 1:length(rows)){
-      state_mat[rows[ii], cols[ii]] <- state_mat[rows[ii], cols[ii]] * -1
-      sub_edge <- get.edgelist(graph)[setdiff(c(1:length(E(graph))),
-                                              intersect(grep(names(V(graph))[rows[ii]],as.matrix(get.edgelist(graph))[,1]), 
-                                                        grep(names(V(graph))[cols[ii]], as.matrix(get.edgelist(graph))[,2]))),]
-      sub_graph <- graph.edgelist(sub_edge)
-      clust <- clusters(sub_graph)
-      down_ind <- grep(clust$membership[match(names(V(graph))[cols[ii]], names(clust$membership))], clust$membership) #find downstream genes
-      if(all(is.na(down_ind))==F){ #if downstream genes
-        down_genes <- names(clust$membership[down_ind])
-        ind <- match(down_genes, names(V(graph)))
-        state_mat[ind, ind] <- state_mat[ind, ind] * -1
+      warning("Graph contains a cycle, computing minimal spanning tree. This may result in unresolved inhibitions.")
+      tree <- minimum.spanning.tree(graph)
+      paths <- compute_paths(tree)
+      if(is.cyclic(paths)){
+        warning("Graph contains cycles and cannot compute a minimal spanning tree. This will result in unresolved inhibitions.")
+        stop()
       }
     }
+    
+    # check inhibition state through
+    state_mat <- matrix(1, length(V(graph)), length(V(graph)))
+    
+    edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
+    if(length(grep(-1, state))==1) edges <- t(edges)
+    state_mat <- matrix(1, length(V(graph)), length(V(graph)))
+    if(length(edges) > 0){
+      rows <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[1], use.names = FALSE), names(V(graph)))))
+      cols <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[2], use.names = FALSE), names(V(graph)))))
+      for(ii in 1:length(rows)){
+        state_mat[rows[ii], cols[ii]] <- state_mat[rows[ii], cols[ii]] * -1
+        sub_edge <- get.edgelist(graph)[setdiff(c(1:length(E(graph))),
+                                                intersect(grep(names(V(graph))[rows[ii]],as.matrix(get.edgelist(graph))[,1]), 
+                                                          grep(names(V(graph))[cols[ii]], as.matrix(get.edgelist(graph))[,2]))),]
+        sub_graph <- graph.edgelist(sub_edge)
+        clust <- clusters(sub_graph)
+        down_ind <- grep(clust$membership[match(names(V(graph))[cols[ii]], names(clust$membership))], clust$membership) #find downstream genes
+        if(all(is.na(down_ind))==F){ #if downstream genes
+          down_genes <- names(clust$membership[down_ind])
+          ind <- match(down_genes, names(V(graph)))
+          state_mat[ind, ind] <- state_mat[ind, ind] * -1
+        }
+      }
+    }
+    #ensure symmetric matrix
+    state_mat <- state_mat * t(state_mat)
+    rownames(state_mat) <- colnames(state_mat) <- names(V(graph))
+    return(state_mat)
   }
-  #ensure symmetric matrix
-  state_mat <- state_mat * t(state_mat)
-  rownames(state_mat) <- colnames(state_mat) <- names(V(graph))
-  return(state_mat)
 }

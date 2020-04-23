@@ -84,5 +84,6 @@ make_state_matrix <- function(graph, state = NULL){
   }
   #ensure symmetric matrix
   state_mat <- state_mat * t(state_mat)
+  rownames(state_mat) <- colnames(state_mat) <- names(V(graph))
   return(state_mat)
 }

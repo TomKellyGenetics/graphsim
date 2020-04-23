@@ -63,6 +63,8 @@ test_that("text input to inhibiting matrix", {
   expect_equal(all(state_matrix1 > 0), FALSE)
   expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
   expect_true(all(diag(state_matrix1) == 1))
+  # expect only adjacent nodes to be inhibiting
+  expect_true(all(state_matrix1 == (as_adjacency_matrix(as.undirected(graph_test1), sparse = FALSE) - 0.5) / - 0.5))
 })
 
 test_that("text input to inhibiting matrix", {
@@ -88,4 +90,7 @@ test_that("text input to inhibiting matrix", {
   expect_equal(all(state_matrix1 > 0), FALSE)
   expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
   expect_true(all(diag(state_matrix1) == 1))
+  # expect only adjacent nodes to be inhibiting
+  expect_true(all(state_matrix1 == (as_adjacency_matrix(as.undirected(graph_test1), sparse = FALSE) - 0.5) / - 0.5))
 })
+

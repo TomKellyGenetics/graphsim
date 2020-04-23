@@ -69,18 +69,13 @@ make_state_matrix <- function(graph, state = NULL){
   } else {
     subgraphs <- decompose(graph)
     nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
-    paths <- list()
-    jj <- 1
+    paths <- as.list(rep(NA, length(V(graph))))
+    jj <- 0
     for(ii in 1:length(nodes)){
       subpaths <- shortest_paths(subgraphs[[ii]], V(subgraphs[[ii]])$name[1])$vpath
-      paths[[jj:(jj+length(subpaths))]] <- subpaths
+      paths[jj+1:length(subpaths)] <- subpaths
       jj <- jj + length(subpaths)
     }
-    paths <- lapply(decompose(graph), function(subgraph){
-      shortest_paths(subgraph, V(subgraph)$name[1])$vpath}
-    )
-  }
-  
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
   if(length(grep(-1, state))==1) edges <- t(edges)
   state_mat <- matrix(1, length(V(graph)), length(V(graph)))

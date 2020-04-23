@@ -9,6 +9,7 @@
 ##'
 ##' @param mat precomputed adjacency, commonlink, or scaled distance matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
+##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
 ##' @param directed logical. Whether directed information is passed to the distance matrix.
 ##' @param comm logical whether a common link matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).

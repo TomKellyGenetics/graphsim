@@ -52,6 +52,7 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
   } else {
     sig <- make_sigma_mat_graph(graph, cor, comm = comm)
   }
+  ## migrate state to calling sigma ##
   if(!(is.null(state))) sig <- state * sig
   if(is.symmetric.matrix(sig) == FALSE) {
     warning("sigma matrix was not positive definite, nearest approximation used.")

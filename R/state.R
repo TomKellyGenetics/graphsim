@@ -61,10 +61,12 @@ make_state_matrix <- function(graph, state = NULL){
     state <- sign(state) # coerce to vector or 1 and -1 if not already
     warning("State inferred from non-integer weighted edges: Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
   }
+  #define starting states
+  state_mat <- matrix(1, length(V(graph)), length(V(graph)))
+  rownames(state_mat) <- colnames(state_mat) <- names(V(graph))
   # check for inhibiting edges
   if(all(state == 1)){
     #return without resolving for activations
-    state_mat <- matrix(1, length(V(graph)), length(V(graph)))
     return(state_mat)
   } else {
     #resolve inhibitions downstream
@@ -110,9 +112,31 @@ make_state_matrix <- function(graph, state = NULL){
         stop()
       }
     }
+    #sort paths into longest to shortest
+    paths <- paths[order(sapply(paths, length), decreasing = TRUE)]
+    #remove subpaths
+    for(ii in 2:length(paths)){
+      remove <- FALSE
+      for(jj in 1:(ii-1)){
+        # test if all nodes in path in a larger path above
+        if(all(as.character(paths[[ii]]) %in% as.character(paths[[1]]))){
+          remove <- TRUE
+        }
+      }
+      if(remove){
+        paths[[ii]] <- NA
+      }
+    }
+    na.omit.list <- function(y) { return(y[!sapply(y, function(x) all(is.na(x)))]) }
+    paths <- na.omit.list(paths)
+    # check inhibition state through graph paths
+    state_mat
+    #cumulative product changes state along a path (*-1)
+    state_path <- cumprod(state[paths[[3]]])
+    state_path %*% t(state_path)
+    cumprod(state[paths[[3]]]) %*%  cumprod(state[paths[[3]]])
     
-    # check inhibition state through
-    state_mat <- matrix(1, length(V(graph)), length(V(graph)))
+    state_mat[paths[[2]][1],paths[[2]][2]]
     
     edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
     if(length(grep(-1, state))==1) edges <- t(edges)
@@ -137,7 +161,6 @@ make_state_matrix <- function(graph, state = NULL){
     }
     #ensure symmetric matrix
     state_mat <- state_mat * t(state_mat)
-    rownames(state_mat) <- colnames(state_mat) <- names(V(graph))
     return(state_mat)
   }
 }

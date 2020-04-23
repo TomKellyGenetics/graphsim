@@ -61,8 +61,25 @@ make_state_matrix <- function(graph, state = NULL){
     state <- sign(state) # coerce to vector or 1 and -1 if not already
     warning("State inferred from non-integer weighted edges: Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
   }
-  #define paths from 1st node
-  paths <- shortest_paths(graph, V(graph)$name[1])$vpath
+  # define shortest paths to all possible nodes
+  #check if connected or use connected subgraphs
+  if(is.connected(graph)){
+    #define paths from 1st node
+    paths <- shortest_paths(graph, V(graph)$name[1])$vpath
+  } else {
+    subgraphs <- decompose(graph)
+    nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
+    paths <- list()
+    jj <- 1
+    for(ii in 1:length(nodes)){
+      subpaths <- shortest_paths(subgraphs[[ii]], V(subgraphs[[ii]])$name[1])$vpath
+      paths[[jj:(jj+length(subpaths))]] <- subpaths
+      jj <- jj + length(subpaths)
+    }
+    paths <- lapply(decompose(graph), function(subgraph){
+      shortest_paths(subgraph, V(subgraph)$name[1])$vpath}
+    )
+  }
   
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
   if(length(grep(-1, state))==1) edges <- t(edges)

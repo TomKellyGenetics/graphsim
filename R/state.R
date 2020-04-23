@@ -130,37 +130,32 @@ make_state_matrix <- function(graph, state = NULL){
     na.omit.list <- function(y) { return(y[!sapply(y, function(x) all(is.na(x)))]) }
     paths <- na.omit.list(paths)
     # check inhibition state through graph paths
-    state_mat
-    #cumulative product changes state along a path (*-1)
-    state_path <- cumprod(state[paths[[3]]])
-    state_path %*% t(state_path)
-    cumprod(state[paths[[3]]]) %*%  cumprod(state[paths[[3]]])
-    
-    state_mat[paths[[2]][1],paths[[2]][2]]
-    
-    edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
-    if(length(grep(-1, state))==1) edges <- t(edges)
-    state_mat <- matrix(1, length(V(graph)), length(V(graph)))
-    if(length(edges) > 0){
-      rows <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[1], use.names = FALSE), names(V(graph)))))
-      cols <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[2], use.names = FALSE), names(V(graph)))))
-      for(ii in 1:length(rows)){
-        state_mat[rows[ii], cols[ii]] <- state_mat[rows[ii], cols[ii]] * -1
-        sub_edge <- get.edgelist(graph)[setdiff(c(1:length(E(graph))),
-                                                intersect(grep(names(V(graph))[rows[ii]],as.matrix(get.edgelist(graph))[,1]), 
-                                                          grep(names(V(graph))[cols[ii]], as.matrix(get.edgelist(graph))[,2]))),]
-        sub_graph <- graph.edgelist(sub_edge)
-        clust <- clusters(sub_graph)
-        down_ind <- grep(clust$membership[match(names(V(graph))[cols[ii]], names(clust$membership))], clust$membership) #find downstream genes
-        if(all(is.na(down_ind))==F){ #if downstream genes
-          down_genes <- names(clust$membership[down_ind])
-          ind <- match(down_genes, names(V(graph)))
-          state_mat[ind, ind] <- state_mat[ind, ind] * -1
+    edges <- as.matrix(get.edgelist(graph))
+    for(ii in 1:length(paths)){
+      if(length(paths[[ii]]) > 1){
+        state_path <- c(1, rep(NA, length(paths[[ii]])-1))
+        for(jj in 2:length(paths[[ii]])){
+          #find edges
+          kk <- which(
+          edges[,1] == names(paths[[ii]])[jj-1] & edges[,2] == names(paths[[ii]])[jj] |
+          edges[,2] == names(paths[[ii]])[jj-1] & edges[,1] == names(paths[[ii]])[jj]
+          )
+          #state for edges
+          state_path[jj] <- state[kk]
+        }
+        #cumulative product changes state along a path (*-1)
+        state_path <- cumprod(state_path)
+        #skip if activating path
+        if(any(state_path != 1)){
+          #cross-product produces a matrix form
+          state_cross <- state_path %*% t(state_path)
+          #add to state_matrix (all adjusted to start of path)
+          state_mat[names(paths[[ii]]), names(paths[[ii]])] <- state_cross
         }
       }
     }
     #ensure symmetric matrix
-    state_mat <- state_mat * t(state_mat)
+    state_mat[t(state_mat) == -1] <- -1
     return(state_mat)
   }
 }

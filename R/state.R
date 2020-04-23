@@ -119,7 +119,7 @@ make_state_matrix <- function(graph, state = NULL){
       remove <- FALSE
       for(jj in 1:(ii-1)){
         # test if all nodes in path in a larger path above
-        if(all(as.character(paths[[ii]]) %in% as.character(paths[[1]]))){
+        if(all(names(paths[[ii]]) %in% names(paths[[jj]]))){
           remove <- TRUE
         }
       }

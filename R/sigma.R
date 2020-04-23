@@ -37,12 +37,17 @@ make_sigma_mat_adjmat <- function(mat, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, directed = FALSE){
+make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, comm = FALSE, directed = FALSE){
   mat <- make_adjmatrix_graph(graph, directed = directed)
   if(comm) mat <- make_commonlink_adjmat(mat)
   diag(mat) <- 1
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
   diag(sig) <- 1
+  if(!is.null(state)){
+    #pass state parameters sign of sigma
+    state_mat <- make_state_matrix(graph, state)
+    sig <- sig * sign(state_mat)
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -50,12 +55,20 @@ make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, directed = FALS
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_adjmat <- function(mat, cor = 0.8, absolute = FALSE){
+make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, absolute = FALSE){
   if(!(all(diag(mat) == 1))) stop("distance matrix must have diagonal of zero")
   if(!(max(mat[mat != 1]) > 0) || !(max(mat[mat!=1]) <= 1)) stop("distance matrix expected, not adjacency matrix")
   sig <- mat/max(mat[mat != 1]) * cor
   sig <- ifelse(sig > 0, sig, 0)
   diag(sig) <- 1
+  if(!is.null(state)){
+    #adjacency matrix from distance
+    adjmat <- ifelse(mat >= max(mat[mat != 1]), 1, 0)
+    graph <- graph_from_adjacency_matrix(adjmat)
+    #pass state parameters sign of sigma
+    state_mat <- make_state_matrix(graph, state)
+    sig <- sig * sign(state_mat)
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -63,8 +76,8 @@ make_sigma_mat_dist_adjmat <- function(mat, cor = 0.8, absolute = FALSE){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_graph <- function(graph, cor = 0.8, absolute = FALSE){
+make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, absolute = FALSE){
   mat <- make_distance_graph(graph, absolute = absolute)
-  sig <- make_sigma_mat_dist_adjmat(mat, cor)
+  sig <- make_sigma_mat_dist_adjmat(mat, state, cor)
   return(sig)
 }

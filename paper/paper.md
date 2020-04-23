@@ -228,6 +228,7 @@ install.packages("graphsim")
 
 library("igraph")
 library("graphsim")
+library("gplots")
 ```
 
 ```r
@@ -299,6 +300,11 @@ normalised on a log-scale.
 The simulated dataset can be generated using the following code:
 
 ```r
+# activating graph
+state <- rep(length(E(graph)), 1)
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
+              
 #adjacency matrix
 
 adj_mat <- make_adjmatrix_graph(graph)
@@ -331,13 +337,13 @@ heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
 #plot relationship matrix
 
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
-          scale = "none", trace = "none", col = bluered(50),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
           colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 #plot sigma matrix
 
 heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
-          scale = "none", trace = "none", col = bluered(50),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
           colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 ```
 
@@ -372,7 +378,7 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 
 #plot simulated correlations
 
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = bluered(50),
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
           colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 ```
 

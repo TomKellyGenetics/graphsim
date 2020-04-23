@@ -61,6 +61,9 @@ make_state_matrix <- function(graph, state = NULL){
     state <- sign(state) # coerce to vector or 1 and -1 if not already
     warning("State inferred from non-integer weighted edges: Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
   }
+  #define paths from 1st node
+  paths <- shortest_paths(graph, V(graph)$name[1])$vpath
+  
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
   if(length(grep(-1, state))==1) edges <- t(edges)
   state_mat <- matrix(1, length(V(graph)), length(V(graph)))

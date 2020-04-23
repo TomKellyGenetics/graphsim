@@ -63,19 +63,47 @@ make_state_matrix <- function(graph, state = NULL){
   }
   # define shortest paths to all possible nodes
   #check if connected or use connected subgraphs
-  if(is.connected(graph)){
-    #define paths from 1st node
-    paths <- shortest_paths(graph, V(graph)$name[1])$vpath
-  } else {
-    subgraphs <- decompose(graph)
-    nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
-    paths <- as.list(rep(NA, length(V(graph))))
-    jj <- 0
-    for(ii in 1:length(nodes)){
-      subpaths <- shortest_paths(subgraphs[[ii]], V(subgraphs[[ii]])$name[1])$vpath
-      paths[jj+1:length(subpaths)] <- subpaths
-      jj <- jj + length(subpaths)
+  compute_paths <- function(graph){
+    if(is.connected(graph)){
+      #define paths from 1st node
+      paths <- shortest_paths(graph, V(graph)$name[1])$vpath
+    } else {
+      subgraphs <- decompose(graph)
+      nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
+      paths <- as.list(rep(NA, length(V(graph))))
+      jj <- 0
+      for(ii in 1:length(nodes)){
+        subpaths <- shortest_paths(subgraphs[[ii]], V(subgraphs[[ii]])$name[1])$vpath
+        paths[jj+1:length(subpaths)] <- subpaths
+        jj <- jj + length(subpaths)
+      }
     }
+    paths
+  }
+  paths <- compute_paths(graph)
+  #check for cycles
+  is.cyclic <- function(paths){
+    cylic_paths <- sapply(paths, function(path){
+      if(length(path) <= 1){
+        FALSE
+      } else if (path[1] == path[length(path)]){
+        TRUE
+      } else {
+        FALSE
+      }
+    })
+    any(cylic_paths)
+  }
+  if(is.cyclic(paths)){
+    warning("Graph contains a cycle, computing minimal spanning tree. This may result in unresolved inhibitions.")
+    tree <- minimum.spanning.tree(graph)
+    paths <- compute_paths(tree)
+    if(is.cyclic(paths)){
+      warning("Graph contains cycles and cannot compute a minimal spanning tree. This will result in unresolved inhibitions.")
+      stop()
+    }
+  }
+ 
   edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
   if(length(grep(-1, state))==1) edges <- t(edges)
   state_mat <- matrix(1, length(V(graph)), length(V(graph)))

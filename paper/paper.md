@@ -215,11 +215,6 @@ commands in R:
 ```r
 #install packages required (once per machine)
 
-install.packages("igraph")
-if(! require("devtools") ){
-    install.packages("devtools")
-    library("devtools")
-}
 install.packages("graphsim")
 ```
 

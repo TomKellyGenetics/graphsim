@@ -64,7 +64,7 @@ make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, absolute = 
   diag(sig) <- 1
   if(!is.null(state)){
     #adjacency matrix from distance
-    adjmat <- ifelse(mat >= max(mat[mat != 1]), 1, 0)
+    adjmat <- ifelse(mat == max(mat[mat != 1]), 1, 0)
     graph <- graph_from_adjacency_matrix(adjmat)
     #pass state parameters sign of sigma
     state_mat <- make_state_matrix(graph, state)

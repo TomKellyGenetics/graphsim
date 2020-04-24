@@ -39,7 +39,7 @@ make_state_matrix <- function(graph, state = NULL){
   }
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   state[state == 2] <- -1
-  state[state == 1] <- 1
+  state[state == 1 || state == 0] <- 1
   if(is.character(state)){
     state <- as.list(state)
     state[grep("activating", state)] <- 1
@@ -68,6 +68,16 @@ make_state_matrix <- function(graph, state = NULL){
   if(all(state == 1)){
     #return without resolving for activations
     return(state_mat)
+  } else if (length(V(graph)) == 1){
+    state_mat <- 1
+    return(state_mat)
+  } else if (length(V(graph)) == 2){
+    if(length(state) == 1){
+      state_mat[row(state_mat) != col(state_mat)] <- state # one edge
+      return(state_mat)
+    } else{
+      warning("only one edge state expected")
+    }
   } else {
     #resolve inhibitions downstream
     # define shortest paths to all possible nodes
@@ -75,14 +85,14 @@ make_state_matrix <- function(graph, state = NULL){
     compute_paths <- function(graph){
       if(is.connected(graph)){
         #define paths from 1st node
-        paths <- shortest_paths(graph, V(graph)$name[1])$vpath
+        paths <- shortest_paths(as.undirected(graph), V(graph)$name[1])$vpath
       } else {
         subgraphs <- decompose(graph)
         nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
         paths <- as.list(rep(NA, length(V(graph))))
         jj <- 0
         for(ii in 1:length(nodes)){
-          subpaths <- shortest_paths(subgraphs[[ii]], V(subgraphs[[ii]])$name[1])$vpath
+          subpaths <- shortest_paths(as.undirected(subgraphs[[ii]]), V(subgraphs[[ii]])$name[1])$vpath
           paths[jj+1:length(subpaths)] <- subpaths
           jj <- jj + length(subpaths)
         }
@@ -151,6 +161,34 @@ make_state_matrix <- function(graph, state = NULL){
           state_cross <- state_path %*% t(state_path)
           #add to state_matrix (all adjusted to start of path)
           state_mat[names(paths[[ii]]), names(paths[[ii]])] <- state_cross
+        }
+      }
+    }
+    #check for negative and positive links not in paths (against the 1st node)
+    neg_nodes <- colnames(state_mat)[which(state_mat[1,] == -1)]
+    pos_nodes <- colnames(state_mat)[2:ncol(state_mat)][which(state_mat[1,2:ncol(state_mat)] == 1)] # can assume at least 3 nodes due to checks above
+    #check for if not computed in shorted paths already
+    ##paths <- compute_paths(tree) # not minimal spanning tree
+    for(aa in neg_nodes){
+      for(bb in pos_nodes){
+        aa_in_path <- sapply(paths, function(path) aa %in% names(path))
+        bb_in_path <- sapply(paths, function(path) bb %in% names(path))
+        #check if in ANY same path
+        if(!any(aa_in_path & bb_in_path)){
+          #if not invert
+          state_mat[aa, bb] <- state_mat[bb, aa] <- -1
+        }
+      }
+    }
+    # check if same sign (to do: allow disconnected)
+    for(aa in pos_nodes){
+      for(bb in pos_nodes){
+        aa_in_path <- sapply(paths, function(path) aa %in% names(path))
+        bb_in_path <- sapply(paths, function(path) bb %in% names(path))
+        #check if in ANY same path
+        if(!any(aa_in_path & bb_in_path)){
+          #if not invert
+          state_mat[aa, bb] <- state_mat[bb, aa] <- 1
         }
       }
     }

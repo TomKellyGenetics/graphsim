@@ -94,12 +94,26 @@ test_that("text input to inhibiting matrix", {
   expect_true(all(state_matrix1 == (as_adjacency_matrix(as.undirected(graph_test1), sparse = FALSE) - 0.5) / - 0.5))
 })
 
-test_that("text input to inhibiting matrix as vector", {
+test_that("text input to inhibiting matrix as vector edge attributes", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
   graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   # test passing state attribute
   E(graph_test1)$state <-  c(1, -1, 1)
   state_matrix1 <- make_state_matrix(graph_test1)
+  expect_equal(isSymmetric(state_matrix1), TRUE)
+  expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
+  expect_equal(nrow(state_matrix1), length(V(graph_test1)))
+  expect_equal(ncol(state_matrix1), length(V(graph_test1)))
+  expect_equal(sum(state_matrix1), length(V(graph_test1)))
+  expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
+  expect_equal(all(state_matrix1 > 0), FALSE)
+  expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
+  expect_true(all(diag(state_matrix1) == 1))
+})
+
+test_that("text input to inhibiting matrix as vector args", {
+  graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   # test passing args
   state_matrix1 <- make_state_matrix(graph_test1, state = c(1, -1, 1))
   expect_equal(isSymmetric(state_matrix1), TRUE)
@@ -121,8 +135,6 @@ test_that("text input to inhibiting matrix as vector", {
   expect_equal(all(state_matrix1 > 0), FALSE)
   expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
   expect_true(all(diag(state_matrix1) == 1))
-  # expect only adjacent nodes to be inhibiting
-  expect_true(all(state_matrix1 == (as_adjacency_matrix(as.undirected(graph_test1), sparse = FALSE) - 0.5) / - 0.5))
 })
 
 test_that("text input to inhibiting matrix as vector with loop", {
@@ -131,8 +143,6 @@ test_that("text input to inhibiting matrix as vector with loop", {
   # test passing state attribute
   E(graph_test1)$state <-  c(1, -1, 1, 1)
   state_matrix1 <- make_state_matrix(graph_test1)
-  # test passing args
-  state_matrix1 <- make_state_matrix(graph_test1, state = c(1, -1, 1))
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
   expect_equal(nrow(state_matrix1), length(V(graph_test1)))
@@ -142,18 +152,6 @@ test_that("text input to inhibiting matrix as vector with loop", {
   expect_equal(all(state_matrix1 > 0), FALSE)
   expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
   expect_true(all(diag(state_matrix1) == 1))
-  state_matrix1 <- make_state_matrix(graph_test1, state = -1)
-  expect_equal(isSymmetric(state_matrix1), TRUE)
-  expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
-  expect_equal(nrow(state_matrix1), length(V(graph_test1)))
-  expect_equal(ncol(state_matrix1), length(V(graph_test1)))
-  expect_equal(sum(state_matrix1), length(V(graph_test1)))
-  expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
-  expect_equal(all(state_matrix1 > 0), FALSE)
-  expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
-  expect_true(all(diag(state_matrix1) == 1))
-  # expect only adjacent nodes to be inhibiting
-  expect_true(all(state_matrix1 == (as_adjacency_matrix(as.undirected(graph_test1), sparse = FALSE) - 0.5) / - 0.5))
 })
 
 test_that("text input to inhibiting matrix as vector with conflicting loop", {
@@ -162,29 +160,17 @@ test_that("text input to inhibiting matrix as vector with conflicting loop", {
   # test passing state attribute
   E(graph_test1)$state <-  c(1, -1, 1, -1)
   state_matrix1 <- make_state_matrix(graph_test1)
-  # test passing args
-  state_matrix1 <- make_state_matrix(graph_test1, state = c(1, -1, 1))
   expect_equal(isSymmetric(state_matrix1), TRUE)
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
   expect_equal(nrow(state_matrix1), length(V(graph_test1)))
   expect_equal(ncol(state_matrix1), length(V(graph_test1)))
-  expect_equal(sum(state_matrix1), length(V(graph_test1)))
-  expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
+  #not expected for conflict
+  #expect_equal(sum(state_matrix1), length(V(graph_test1)))
+  #not expected for conflict
+  #expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
   expect_equal(all(state_matrix1 > 0), FALSE)
   expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
   expect_true(all(diag(state_matrix1) == 1))
-  state_matrix1 <- make_state_matrix(graph_test1, state = -1)
-  expect_equal(isSymmetric(state_matrix1), TRUE)
-  expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
-  expect_equal(nrow(state_matrix1), length(V(graph_test1)))
-  expect_equal(ncol(state_matrix1), length(V(graph_test1)))
-  expect_equal(sum(state_matrix1), length(V(graph_test1)))
-  expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
-  expect_equal(all(state_matrix1 > 0), FALSE)
-  expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
-  expect_true(all(diag(state_matrix1) == 1))
-  # expect only adjacent nodes to be inhibiting
-  expect_true(all(state_matrix1 == (as_adjacency_matrix(as.undirected(graph_test1), sparse = FALSE) - 0.5) / - 0.5))
 })
 
 test_that("text input to inhibiting matrix as vector with disconnected graph", {
@@ -199,22 +185,12 @@ test_that("text input to inhibiting matrix as vector with disconnected graph", {
   expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
   expect_equal(nrow(state_matrix1), length(V(graph_test1)))
   expect_equal(ncol(state_matrix1), length(V(graph_test1)))
-  expect_equal(sum(state_matrix1), length(V(graph_test1)))
-  expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
+  #not expected for disconnected graph
+  #expect_equal(sum(state_matrix1), length(V(graph_test1)))
+  #not expected for disconnected graph
+  #expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
   expect_equal(all(state_matrix1 > 0), FALSE)
   expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
   expect_true(all(diag(state_matrix1) == 1))
-  state_matrix1 <- make_state_matrix(graph_test1, state = -1)
-  expect_equal(isSymmetric(state_matrix1), TRUE)
-  expect_equal(sum(diag(state_matrix1)), length(V(graph_test1)))
-  expect_equal(nrow(state_matrix1), length(V(graph_test1)))
-  expect_equal(ncol(state_matrix1), length(V(graph_test1)))
-  expect_equal(sum(state_matrix1), length(V(graph_test1)))
-  expect_equal(length(V(graph_test1))+sum(state_matrix1 < 0)-sum(state_matrix1 > 0) == 0, TRUE)
-  expect_equal(all(state_matrix1 > 0), FALSE)
-  expect_true(all(state_matrix1 == 1 || state_matrix1 == -1))
-  expect_true(all(diag(state_matrix1) == 1))
-  # expect only adjacent nodes to be inhibiting
-  expect_true(all(state_matrix1 == (as_adjacency_matrix(as.undirected(graph_test1), sparse = FALSE) - 0.5) / - 0.5))
 })
 

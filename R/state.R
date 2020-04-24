@@ -29,9 +29,6 @@
 ##' (activating or inhibiting for each edge or path between nodes)
 ##' @export
 make_state_matrix <- function(graph, state = NULL){
-  graph <- as.undirected(graph, mode = "collapse")
-  # remove duplicate edges
-  graph <- as.directed(graph, mode = "arbitrary")
   if(!is.null(get.edge.attribute(graph, "state"))){
     state <- get.edge.attribute(graph, "state")
   } else {
@@ -40,6 +37,11 @@ make_state_matrix <- function(graph, state = NULL){
       state <- "activating"
     }
   }
+  graph <- as.undirected(graph, mode = "collapse")
+  E(graph)$state <-  state
+  # remove duplicate edges (and corresponding states)
+  graph <- as.directed(graph, mode = "arbitrary")
+  state <- get.edge.attribute(graph, "state")
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   state[state == 2] <- -1
   state[state == 1 | state == 0] <- 1

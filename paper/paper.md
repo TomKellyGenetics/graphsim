@@ -406,6 +406,50 @@ simulated data
 (Figure [3e](#fig:simulation_inhibiting:fourth){reference-type="ref"
 reference="fig:simulation_inhibiting:fourth"}).
 
+```r
+state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
+
+#adjacency matrix
+adj_mat <- make_adjmatrix_graph(graph)
+#relationship matrix
+dist_mat <- make_distance_graph(graph, absolute = FALSE)
+#state matrix
+state_mat <- make_state_matrix(graph, state)
+#sigma matrix directly from graph
+sigma_mat <- make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE)
+#show shortest paths of graph
+shortest_paths <- shortest.paths(graph)
+#generate expression data directly from graph
+expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
+                            dist = TRUE, absolute = FALSE, state = state)
+#plot adjacency matrix
+heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
+          col = colorpanel(3, "grey75", "white", "blue"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+#plot state matrix
+heatmap.2(make_state_matrix(graph, state),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+```
+
 The simulation procedure is also demonstrated here
 (Figure [4](#fig:simulation_smad){reference-type="ref"
 reference="fig:simulation_smad"}) on a pathway structure for a known

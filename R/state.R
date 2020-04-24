@@ -39,7 +39,7 @@ make_state_matrix <- function(graph, state = NULL){
   }
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   state[state == 2] <- -1
-  state[state == 1 || state == 0] <- 1
+  state[state == 1 | state == 0] <- 1
   if(is.character(state)){
     state <- as.list(state)
     state[grep("activating", state)] <- 1

@@ -30,12 +30,6 @@ data to test the performance of genomics analyses.
 
 ## Installation
 
-To get the dependency package from CRAN:
-
-```R
-install.packages(c("igraph", "Matrix", "mvtnorm", "matrixcalc"))
-```
-
 To install the latest release from CRAN:
 
 ```R

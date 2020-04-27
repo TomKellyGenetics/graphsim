@@ -57,9 +57,11 @@ Compute simulated continuous expression data from a graph network structure. Req
 library("igraph")
 graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
-adjacency_matrix <- make_adjmatrix_graph(graph_test)
 n <- 100
 generate_expression(n, graph_test, cor = 0.8)
+
+adjacency_matrix <- make_adjmatrix_graph(graph_test)
+generate_expression_mat(n, adjacency_matrix, cor = 0.8)
 
 }
 \keyword{graph}

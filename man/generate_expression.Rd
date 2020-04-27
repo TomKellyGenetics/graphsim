@@ -2,6 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{generate_expression}
 \alias{generate_expression}
+\alias{generate_expression_mat}
 \title{Generate Simulated Expression}
 \usage{
 generate_expression(
@@ -12,7 +13,20 @@ generate_expression(
   mean = 0,
   comm = FALSE,
   dist = FALSE,
-  absolute = FALSE
+  absolute = FALSE,
+  laplacian = FALSE
+)
+
+generate_expression_mat(
+  n,
+  mat,
+  state = NULL,
+  cor = 0.8,
+  mean = 0,
+  comm = FALSE,
+  dist = FALSE,
+  absolute = FALSE,
+  laplacian = FALSE
 )
 }
 \arguments{
@@ -26,9 +40,11 @@ generate_expression(
 
 \item{mean}{mean value of each simulated gene. Defaults to 0. May be entered as a scalar applying to all genes or a vector with a separate value for each.}
 
-\item{comm, absolute}{logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.}
+\item{comm, absolute, laplacian}{logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.}
 
 \item{dist}{logical. Whether a graph distance (\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix (\code{\link[graphsim]{make_sigma_mat_graph}}) is used to compute the sigma matrix.}
+
+\item{mat}{precomputed adjacency, laplacian, commonlink, or scaled distance matrix.}
 }
 \value{
 numeric matrix of simulated data (log-normalised counts)
@@ -41,9 +57,11 @@ Compute simulated continuous expression data from a graph network structure. Req
 library("igraph")
 graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
-adjacency_matrix <- make_adjmatrix_graph(graph_test)
 n <- 100
 generate_expression(n, graph_test, cor = 0.8)
+
+adjacency_matrix <- make_adjmatrix_graph(graph_test)
+generate_expression_mat(n, adjacency_matrix, cor = 0.8)
 
 }
 \keyword{graph}

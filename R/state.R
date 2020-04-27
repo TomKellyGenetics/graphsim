@@ -17,6 +17,7 @@
 ##'  \code{E(graph)} or as an edge "attribute" in the igraph object (using 
 ##'  \code{E(g)$state <- states}).
 ##' @keywords graph network igraph mvtnorm simulation
+##' @importFrom igraph graph.edgelist get.edge.attribute get.edgelist
 ##' @import igraph
 ##' @examples 
 ##' 

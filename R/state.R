@@ -42,7 +42,10 @@ make_state_matrix <- function(graph, state = NULL){
   state[state == 2] <- -1
   state[state == 1] <- 1
   if(is.character(state)){
+<<<<<<< HEAD
     state <- as.list(state)
+=======
+>>>>>>> dev
     state[grep("activating", state)] <- 1
     state[grep("activation", state)] <- 1
     state[grep("activate", state)] <- 1
@@ -53,10 +56,14 @@ make_state_matrix <- function(graph, state = NULL){
     state[grep("inhibitory", state)] <- -1
     state[grep("inhibit", state)] <- -1
     state[grep("negative", state)] <- -1
+<<<<<<< HEAD
     if(is.character(state)){
       warning("Please give state as a scalar or vector of length(E(graph)): input must be 'activating', 'inhibiting' or an integer")
     }
     state <- unlist(as.numeric(state))
+=======
+    state <- as.numeric(state)
+>>>>>>> dev
   }
   if(!all(state %in% -1:2)){
     state <- sign(state) # coerce to vector or 1 and -1 if not already

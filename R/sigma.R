@@ -68,12 +68,12 @@ make_sigma_mat_laplacian <- function(mat, cor = 0.8){
 ##' @rdname make_sigma
 ##' @export
 ##' 
-make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, laplacian = FALSE, directed = FALSE){
+make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, comm = FALSE, laplacian = FALSE, directed = FALSE){
   if(comm && laplacian){
     warning("Error: only one of commonlink or laplacian can be used")
     stop()
   }
-  if(!comm && !laplacian) mat <- make_adjmatrix_graph(graph, directed = directed)
+  if(!laplacian) mat <- make_adjmatrix_graph(graph, directed = directed)
   if(comm){
     mat <- make_commonlink_adjmat(mat)
     diag(mat) <-  max(mat) +1

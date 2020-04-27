@@ -38,14 +38,16 @@ make_state_matrix <- function(graph, state = NULL){
       state <- "activating"
     }
   }
+  graph <- as.undirected(graph, mode = "collapse")
+  E(graph)$state <-  state
+  # remove duplicate edges (and corresponding states)
+  graph <- as.directed(graph, mode = "arbitrary")
+  state <- get.edge.attribute(graph, "state")
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   state[state == 2] <- -1
-  state[state == 1] <- 1
+  state[state == 1 | state == 0] <- 1
   if(is.character(state)){
-<<<<<<< HEAD
     state <- as.list(state)
-=======
->>>>>>> dev
     state[grep("activating", state)] <- 1
     state[grep("activation", state)] <- 1
     state[grep("activate", state)] <- 1
@@ -56,41 +58,148 @@ make_state_matrix <- function(graph, state = NULL){
     state[grep("inhibitory", state)] <- -1
     state[grep("inhibit", state)] <- -1
     state[grep("negative", state)] <- -1
-<<<<<<< HEAD
     if(is.character(state)){
       warning("Please give state as a scalar or vector of length(E(graph)): input must be 'activating', 'inhibiting' or an integer")
     }
     state <- unlist(as.numeric(state))
-=======
-    state <- as.numeric(state)
->>>>>>> dev
   }
   if(!all(state %in% -1:2)){
     state <- sign(state) # coerce to vector or 1 and -1 if not already
     warning("State inferred from non-integer weighted edges: Please give numeric states as integers: 0 or 1 for activating, -1 or 2 for inhibiting")
   }
-  edges <- as.matrix(get.edgelist(graph)[grep(-1, state),])
-  if(length(grep(-1, state))==1) edges <- t(edges)
+  #define starting states
   state_mat <- matrix(1, length(V(graph)), length(V(graph)))
-  if(length(edges) > 0){
-    rows <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[1], use.names = FALSE), names(V(graph)))))
-    cols <- unlist(apply(edges, 1, function(x) grep(unlist(as.list(x)[2], use.names = FALSE), names(V(graph)))))
-    for(ii in 1:length(rows)){
-      state_mat[rows[ii], cols[ii]] <- state_mat[rows[ii], cols[ii]] * -1
-      sub_edge <- get.edgelist(graph)[setdiff(c(1:length(E(graph))),
-                                              intersect(grep(names(V(graph))[rows[ii]],as.matrix(get.edgelist(graph))[,1]), 
-                                                        grep(names(V(graph))[cols[ii]], as.matrix(get.edgelist(graph))[,2]))),]
-      sub_graph <- graph.edgelist(sub_edge)
-      clust <- clusters(sub_graph)
-      down_ind <- grep(clust$membership[match(names(V(graph))[cols[ii]], names(clust$membership))], clust$membership) #find downstream genes
-      if(all(is.na(down_ind))==F){ #if downstream genes
-        down_genes <- names(clust$membership[down_ind])
-        ind <- match(down_genes, names(V(graph)))
-        state_mat[ind, ind] <- state_mat[ind, ind] * -1
+  rownames(state_mat) <- colnames(state_mat) <- names(V(graph))
+  # check for inhibiting edges
+  if(all(state == 1)){
+    #return without resolving for activations
+    return(state_mat)
+  } else if (length(V(graph)) == 1){
+    state_mat <- 1
+    return(state_mat)
+  } else if (length(V(graph)) == 2){
+    if(length(state) == 1){
+      state_mat[row(state_mat) != col(state_mat)] <- state # one edge
+      return(state_mat)
+    } else{
+      warning("only one edge state expected")
+    }
+  } else {
+    #resolve inhibitions downstream
+    # define shortest paths to all possible nodes
+    #check if connected or use connected subgraphs
+    compute_paths <- function(graph){
+      if(is.connected(graph)){
+        #define paths from 1st node
+        paths <- shortest_paths(as.undirected(graph), V(graph)$name[1])$vpath
+      } else {
+        subgraphs <- decompose(graph)
+        nodes <- sapply(subgraphs, function(subgraph) V(subgraph)$name[1])
+        paths <- as.list(rep(NA, length(V(graph))))
+        jj <- 0
+        for(ii in 1:length(nodes)){
+          subpaths <- shortest_paths(as.undirected(subgraphs[[ii]]), V(subgraphs[[ii]])$name[1])$vpath
+          paths[jj+1:length(subpaths)] <- subpaths
+          jj <- jj + length(subpaths)
+        }
+      }
+      paths
+    }
+    paths <- compute_paths(graph)
+    #check for cycles
+    is.cyclic <- function(paths){
+      cylic_paths <- sapply(paths, function(path){
+        if(length(path) <= 1){
+          FALSE
+        } else if (path[1] == path[length(path)]){
+          TRUE
+        } else {
+          FALSE
+        }
+      })
+      any(cylic_paths)
+    }
+    if(is.cyclic(paths)){
+      warning("Graph contains a cycle, computing minimal spanning tree. This may result in unresolved inhibitions.")
+      tree <- minimum.spanning.tree(graph)
+      paths <- compute_paths(tree)
+      if(is.cyclic(paths)){
+        warning("Graph contains cycles and cannot compute a minimal spanning tree. This will result in unresolved inhibitions.")
+        stop()
       }
     }
+    #sort paths into longest to shortest
+    paths <- paths[order(sapply(paths, length), decreasing = TRUE)]
+    #remove subpaths
+    for(ii in 2:length(paths)){
+      remove <- FALSE
+      for(jj in 1:(ii-1)){
+        # test if all nodes in path in a larger path above
+        if(all(names(paths[[ii]]) %in% names(paths[[jj]]))){
+          remove <- TRUE
+        }
+      }
+      if(remove){
+        paths[[ii]] <- NA
+      }
+    }
+    na.omit.list <- function(y) { return(y[!sapply(y, function(x) all(is.na(x)))]) }
+    paths <- na.omit.list(paths)
+    # check inhibition state through graph paths
+    edges <- as.matrix(get.edgelist(graph))
+    for(ii in 1:length(paths)){
+      if(length(paths[[ii]]) > 1){
+        state_path <- c(1, rep(NA, length(paths[[ii]])-1))
+        for(jj in 2:length(paths[[ii]])){
+          #find edges
+          kk <- which(
+          edges[,1] == names(paths[[ii]])[jj-1] & edges[,2] == names(paths[[ii]])[jj] |
+          edges[,2] == names(paths[[ii]])[jj-1] & edges[,1] == names(paths[[ii]])[jj]
+          )
+          #state for edges
+          state_path[jj] <- state[kk]
+        }
+        #cumulative product changes state along a path (*-1)
+        state_path <- cumprod(state_path)
+        #skip if activating path
+        if(any(state_path != 1)){
+          #cross-product produces a matrix form
+          state_cross <- state_path %*% t(state_path)
+          #add to state_matrix (all adjusted to start of path)
+          state_mat[names(paths[[ii]]), names(paths[[ii]])] <- state_cross
+        }
+      }
+    }
+    #check for negative and positive links not in paths (against the 1st node)
+    neg_nodes <- colnames(state_mat)[which(state_mat[1,] == -1)]
+    pos_nodes <- colnames(state_mat)[2:ncol(state_mat)][which(state_mat[1,2:ncol(state_mat)] == 1)] # can assume at least 3 nodes due to checks above
+    #check for if not computed in shorted paths already
+    ##paths <- compute_paths(tree) # not minimal spanning tree
+    for(aa in neg_nodes){
+      for(bb in pos_nodes){
+        aa_in_path <- sapply(paths, function(path) aa %in% names(path))
+        bb_in_path <- sapply(paths, function(path) bb %in% names(path))
+        #check if in ANY same path
+        if(!any(aa_in_path & bb_in_path)){
+          #if not invert
+          state_mat[aa, bb] <- state_mat[bb, aa] <- -1
+        }
+      }
+    }
+    # check if same sign (to do: allow disconnected)
+    for(aa in pos_nodes){
+      for(bb in pos_nodes){
+        aa_in_path <- sapply(paths, function(path) aa %in% names(path))
+        bb_in_path <- sapply(paths, function(path) bb %in% names(path))
+        #check if in ANY same path
+        if(!any(aa_in_path & bb_in_path)){
+          #if not invert
+          state_mat[aa, bb] <- state_mat[bb, aa] <- 1
+        }
+      }
+    }
+    #ensure symmetric matrix
+    state_mat[t(state_mat) == -1] <- -1
+    return(state_mat)
   }
-  #ensure symmetric matrix
-  state_mat <- state_mat * t(state_mat)
-  return(state_mat)
 }

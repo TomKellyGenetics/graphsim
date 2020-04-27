@@ -1,10 +1,6 @@
 Package: graphsim
 Type: Package
-<<<<<<< HEAD
 Title: Simulate Expression Data from 'igraph' Networks 
-=======
-Title: Simulate Expression Data from iGraph Networks 
->>>>>>> dev
 Version: 0.1.2.9001
 Date: 2019-07-15
 Authors@R: c(person("S. Thomas", "Kelly",email = "tom.kelly@postgrad.otago.ac.nz", role = c("ctb")),
@@ -13,6 +9,7 @@ Authors@R: c(person("S. Thomas", "Kelly",email = "tom.kelly@postgrad.otago.ac.nz
 Description: Functions to develop simulated continuous data (e.g., gene expression) from a sigma covariance matrix derived from a graph structure in 'igraph' objects. Intended to extend 'mvtnorm' to take 'igraph'  structures rather than sigma matrices as input. This allows the use of simulated data that correctly accounts for pathway relationships and correlations. This allows the use of simulated data that correctly accounts for pathway relationships and correlations. Here we present a versatile statistical framework to simulate  correlated gene expression data from biological pathways, by sampling from a multivariate normal distribution derived from a graph structure. This package allows the simulation of biological pathways from a graph structure based on a statistical model of gene expression. For example methods to infer biological pathways and gene regulatory networks from gene expression data can be tested on simulated datasets using this framework. This also allows for pathway structures to be considered as a confounding variable when simulating gene expression data to test the performance of genomics analyses.
 License: GPL-3
 BugReports: https://github.com/TomKellyGenetics/graphsim/issues/
+Depends: R (>= 2.10)
 Imports:
     utils,
     gplots,

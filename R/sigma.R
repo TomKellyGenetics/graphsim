@@ -9,6 +9,7 @@
 ##'
 ##' @param mat precomputed adjacency, laplacian, commonlink, or scaled distance matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
+##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
 ##' @param directed logical. Whether directed information is passed to the distance matrix.
 ##' @param comm logical whether a common link matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).
@@ -66,6 +67,7 @@ make_sigma_mat_laplacian <- function(mat, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
+##' 
 make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, laplacian = FALSE, directed = FALSE){
   if(comm && laplacian){
     warning("Error: only one of commonlink or laplacian can be used")
@@ -87,6 +89,11 @@ make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, laplacian = FAL
   }
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
   diag(sig) <- 1
+  if(!is.null(state)){
+    #pass state parameters sign of sigma
+    state_mat <- make_state_matrix(graph, state)
+    sig <- sig * sign(state_mat)
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -94,12 +101,21 @@ make_sigma_mat_graph <- function(graph, cor = 0.8, comm = FALSE, laplacian = FAL
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_adjmat <- function(mat, cor = 0.8, absolute = FALSE){
+make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, absolute = FALSE){
   if(!(all(diag(mat) == 1))) stop("distance matrix must have diagonal of zero")
   if(!(max(mat[mat != 1]) > 0) || !(max(mat[mat!=1]) <= 1)) stop("distance matrix expected, not adjacency matrix")
   sig <- mat/max(mat[mat != 1]) * cor
   sig <- ifelse(sig > 0, sig, 0)
   diag(sig) <- 1
+  if(!is.null(state)){
+    #adjacency matrix from distance
+    adjmat <- ifelse(mat == max(mat[mat != 1]), 1, 0)
+    graph <- graph_from_adjacency_matrix(adjmat, mode = "undirected")
+    graph <- as.directed(graph, mode = "arbitrary")
+    #pass state parameters sign of sigma
+    state_mat <- make_state_matrix(graph, state)
+    sig <- sig * sign(state_mat)
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -108,8 +124,8 @@ make_sigma_mat_dist_adjmat <- function(mat, cor = 0.8, absolute = FALSE){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_graph <- function(graph, cor = 0.8, absolute = FALSE){
+make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, absolute = FALSE){
   mat <- make_distance_graph(graph, absolute = absolute)
-  sig <- make_sigma_mat_dist_adjmat(mat, cor)
+  sig <- make_sigma_mat_dist_adjmat(mat, state, cor)
   return(sig)
 }

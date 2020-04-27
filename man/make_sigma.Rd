@@ -24,9 +24,9 @@ make_sigma_mat_graph(
   directed = FALSE
 )
 
-make_sigma_mat_dist_adjmat(mat, cor = 0.8, absolute = FALSE)
+make_sigma_mat_dist_adjmat(mat, state = NULL, cor = 0.8, absolute = FALSE)
 
-make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE)
+make_sigma_mat_dist_graph(graph, state = NULL, cor = 0.8, absolute = FALSE)
 }
 \arguments{
 \item{mat}{precomputed adjacency, laplacian, commonlink, or scaled distance matrix.}
@@ -40,6 +40,8 @@ make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE)
 \item{laplacian}{logical whether a Laplacian matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).}
 
 \item{directed}{logical. Whether directed information is passed to the distance matrix.}
+
+\item{state}{numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.}
 
 \item{absolute}{logical. Whether distances are scaled as the absolute difference from
 the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a

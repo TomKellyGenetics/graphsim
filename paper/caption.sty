@@ -1,0 +1,50 @@
+%% %% This is file `caption.sty', %% generated with the docstrip utility. %% %% The original source files were: %% %% 
+caption.dtx (with options: `package') %% %% Copyright (C) 1994-95 Harald Axel Sommerfeldt %% 
+\NeedsTeXFormat{LaTeX2e}[1994/06/01] \ProvidesPackage{caption}[1995/04/05 v1.4b caption package (HS)] 
+\typeout{Package: caption v1.4b <1995/04/05> (Harald Sommerfeldt)} \newcommand{\captionsize}{} 
+\newcommand{\captionfont}{\captionsize} \newcommand{\captionlabelfont}{} \newlength{\captionmargin} 
+\newcommand{\as@normalcaption}[2]{%
+  #1 #2\par}
+\newcommand{\as@isucaption}[2]{%
+  \sbox{\as@captionbox}{#1\space}%
+  \addtolength{\as@captionwidth}{-\wd\as@captionbox}%
+  \usebox{\as@captionbox}\parbox[t]{\as@captionwidth}{\leavevmode#2}} \newcommand{\as@centercaption}[2]{%
+  \parbox[t]{\as@captionwidth}{{\centering#1 #2\par}}} \newcommand{\as@annecaption}[2]{%
+  \addtolength{\leftskip}{0pt plus 1fil}%
+  \addtolength{\rightskip}{0pt plus -1fil}%
+  \setlength{\parfillskip}{0pt plus 2fil}%
+  #1 #2\par}
+\let\as@shortcaption\as@centercaption \ifpace\space\space\space\space\space\space
+           `subfigure' package detected}
+  \let\as@subcad{\@thesubfigure}{{\captionlabelfont\thesubfigure}\space}
+  \renewcommand{\@thesubtable}{{\captionlabelfont\thesubtable}\space} \fi 
+\DeclareOption{normal}{\let\as@caption\as@normalcaption} \DeclareOption{isu}{\let\as@caption\as@isucaption} 
+\DeclareOption{hang}{\ExecuteOptions{isu}} \DeclareOption{center}{\let\as@caption\as@centercaption} 
+\DeclareOption{anne}{\let\as@caption\as@annecaption} \DeclareOption{centerlast}{\ExecuteOptions{anne}} \Declption}} 
+\DeclareOption{scriptsize}{%
+  \renewcootnotesize}{%
+  \renewcommand{\capt
+  \as@subcapsize{\footnotesize}} \DeclareOption{large}{%
+  \renewcommand{\captionsize}{\large}
+  \as@subcapsize{\normalsize}} \belfont}{\slfont}{\mdseries}} 
+\DeclareOption{bf}{\renewcommand{\captionlabelfont}{\ttfamily}} \DeclareOpbox} \newlength{\as@captionwidth} 
+\newcommand{\skip}{\captionmargin}%
+  \addtollfont #1:} #2}%
+  \ifdim \wd\as@captionbox >\as@captionwidth
+    \as@caption{{\captionlabelfont #1:}}{#2}%
+  \else%
+    \as@shortcaption{{\captionlabelfont #1:}}{#2}%
+  \fi} \renewcommand{\@makecaption}[2]{%
+  \vskip\abovecaptionskip%
+  \setlength{\as@captionwidth}{\linewidth}%
+  \as@makecaption{#1}{#2}%
+  \vskip\belowcaptionskip} \ifx\@makerotcaption\undefined \else
+  \typeout{\space\space\space\space\space\space\space\space\space
+           `rotating' package detect{%
+    \captionfont%ebox{90}{%
+        \setlength{\as@captionwin{{\captionlabelfont #1:}}{#2}%
+        \end{minipag \hspace{12pt}} \fi \ifx\floatc@plain `float' package detected}
+  \ren{#1}{#2}}
+  \ifx\as@ruled\undefin
+      \captionfont%
+      \as@cap

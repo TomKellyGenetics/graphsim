@@ -19,7 +19,7 @@ Imports:
     matrixcalc,
     graphics
 Suggests:
-    knitr,
+    knitr (>= 1.5),
     rmarkdown,
     animation,
     testthat,

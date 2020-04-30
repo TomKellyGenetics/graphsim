@@ -34,7 +34,14 @@ header-includes:
 ---
 
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", width = 68)
+knitr::opts_chunk$set(fig.cap = "", fig.path = "Plot")
+options(width = 68, cli.unicode = FALSE, cli.width = 68)
+par(mai=c(1.02, 0.82, 0.82, 0.82)-0.82)
+par(bty="o")
+captioner::captioner()
+```
 
 ### Summary
 Transcriptomic analysis is used to capture the molecular state of a cell
@@ -217,37 +224,21 @@ reference="fig:simple_graph:second"}.
 A graph structure can be generated and plotted using the following
 commands in R:
 
-
-```r
+```{r, eval = FALSE}
 #install packages required (once per machine)
 
 install.packages("graphsim")
 ```
 
-
-```r
+```{r}
 #load required packages (once per R instance)
 
 library("igraph")
-#> 
-#> Attaching package: 'igraph'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     decompose, spectrum
-#> The following object is masked from 'package:base':
-#> 
-#>     union
 library("graphsim")
 library("gplots")
-#> 
-#> Attaching package: 'gplots'
-#> The following object is masked from 'package:stats':
-#> 
-#>     lowess
 ```
 
-
-```r
+```{r, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.455\\linewidth', out.width='.455\\linewidth', fig.retina=20, fig.margin = FALSE, fig.cap = '\\textbf{Simulated graph structures.}. A constructed graph structure used as an example to demonstrate the simulation procedure inFigures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.', fig.subcap=c("Activating pathway structure", "Inhibiting pathway structure")}
 #generate graph structure
 
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
@@ -268,15 +259,6 @@ state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
               cex.node=3, cex.arrow=5, arrow_clip = 0.2)
 ```
-
-\begin{figure}
-
-{\centering \subfloat[Activating pathway structure\label{fig:unnamed-chunk-41}]{\includegraphics[width=.455\linewidth,height=.455\linewidth]{Plotunnamed-chunk-4-1} }\subfloat[Inhibiting pathway structure\label{fig:unnamed-chunk-42}]{\includegraphics[width=.455\linewidth,height=.455\linewidth]{Plotunnamed-chunk-4-2} }
-
-}
-
-\caption{\textbf{Simulated graph structures.}. A constructed graph structure used as an example to demonstrate the simulation procedure inFigures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.}\label{fig:unnamed-chunk-4}
-\end{figure}
 
 ![\small \textbf{\textbf{Simulating expression from a graph structure.}}
 An example of a graph structure (a) that has been used to derive a

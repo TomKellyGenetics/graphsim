@@ -273,11 +273,11 @@ plot_directed(graph, state=state, layout = layout.kamada.kawai,
 
 \begin{figure}
 
-{\centering \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-4-1} \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-4-2} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimple_graph-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimple_graph-2} 
 
 }
 
-\caption{\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure inFigures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.}\label{fig:unnamed-chunk-4}
+\caption{\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure in Figures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.}\label{fig:simple_graph}
 \end{figure}
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
@@ -326,17 +326,11 @@ adj_mat <- make_adjmatrix_graph(graph)
 dist_mat <- make_distance_graph(graph, absolute = FALSE)
 #sigma matrix directly from graph
 sigma_mat <- make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE)
-#> Warning in make_state_matrix(graph, state): State inferred from non-
-#> integer weighted edges: Please give numeric states as integers: 0 or
-#> 1 for activating, -1 or 2 for inhibiting
 #show shortest paths of graph
 shortest_paths <- shortest.paths(graph)
 #generate expression data directly from graph
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
                             dist = TRUE, absolute = FALSE, state = state)
-#> Warning in make_state_matrix(graph, state): State inferred from non-
-#> integer weighted edges: Please give numeric states as integers: 0 or
-#> 1 for activating, -1 or 2 for inhibiting
 #> Warning in generate_expression(100, graph, cor = 0.8, mean = 0,
 #> comm = FALSE, : sigma matrix was not positive definite, nearest
 #> approximation used.
@@ -355,21 +349,15 @@ heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
 scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
               sub = expression(paste("(c) ", Sigma, " matrix")), cex.sub = 1.5)
-#> Warning in make_state_matrix(graph, state): State inferred from non-
-#> integer weighted edges: Please give numeric states as integers: 0 or
-#> 1 for activating, -1 or 2 for inhibiting
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
 comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
-#> Warning in make_state_matrix(graph, state): State inferred from non-
-#> integer weighted edges: Please give numeric states as integers: 0 or
-#> 1 for activating, -1 or 2 for inhibiting
-
-#> Warning in make_state_matrix(graph, state): sigma matrix was not
-#> positive definite, nearest approximation used.
+#> Warning in generate_expression(100, graph, cor = 0.8, mean = 0,
+#> comm = FALSE, : sigma matrix was not positive definite, nearest
+#> approximation used.
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
-              sub = "(e) Simulated expressino data (log scale)", cex.sub = 1.5)
+              sub = "(e) Simulated expression data (log scale)", cex.sub = 1.5)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
@@ -377,31 +365,74 @@ colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 \begin{figure}
 
-{\centering \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-5-1} \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-5-2} \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-5-3} \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-5-4} \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-5-5} \includegraphics[width=.400\linewidth,height=.400\linewidth]{Plotunnamed-chunk-5-6} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-5} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-6} 
 
 }
 
-\caption{\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.}\label{fig:unnamed-chunk-5}
+\caption{\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.}\label{fig:simulation_activating}
 \end{figure}
 
-%![\small \textbf{\textbf{Simulating expression from a graph structure.}}
-%An example of a graph structure (a) that has been used to derive a
-%relationship matrix (b), $\Sigma$ matrix (c) and correlation structure
-%(d) from the relative distances between the nodes. Non-negative values
-%are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been
-%used to generate a simulated expression dataset of 100 samples (coloured
-%blue to red from low to high) via sampling from the multivariate
-%normal distribution. Here genes with closer relationships in the pathway
-%structure show a higher correlation between simulated values.](figure2.pdf){ width=95% #fig:simulation_activating %label="simulation_activating"}
 
-![\small \textbf{\textbf{Simulating expression from graph structure with inhibitions.}}
-Simulating expression from graph structure with inhibitions.}} An example of a graph
-structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix
-(c), and correlation structure (d), from the relative distances between the nodes.
-These values are coloured blue to red from $-1$ to $1$. This has been used to generate
-a simulated expression dataset of 100 samples (coloured blue to red from low to high)
-via sampling from the multivariate normal distribution. Here the inhibitory relationships
-between genes are reflected in negatively correlated simulated  values.](figure3.pdf){ width=95% #fig:simulation_inhibiting label="fig:simulation_inhibiting"}
+```r
+
+#generate parameters for inhibitions
+state <- c(1, 1, -1, 1, 1, 1, 1, -1)
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+              cex.node=3, cex.arrow=5, arrow_clip = 0.2,
+              sub = "(a) Inhitibing pathway structure", cex.sub = 1.5)
+
+#adjacency matrix
+adj_mat <- make_adjmatrix_graph(graph)
+#relationship matrix
+dist_mat <- make_distance_graph(graph, absolute = FALSE)
+#sigma matrix directly from graph
+sigma_mat <- make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE)
+#show shortest paths of graph
+shortest_paths <- shortest.paths(graph)
+#generate expression data directly from graph
+expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm = FALSE,
+                            dist = TRUE, absolute = FALSE)
+#> Warning in generate_expression(100, graph, state = state, cor =
+#> 0.8, mean = 0, : sigma matrix was not positive definite, nearest
+#> approximation used.
+#plot adjacency matrix
+heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
+          col = colorpanel(3, "grey75", "white", "blue"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = "Adjacency matrix", cex.sub = 1.5)
+# #plot relationship matrix
+heatmap.2(make_distance_graph(graph, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = "(b) relationship matrix", cex.sub = 1.5)
+# #plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
+scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = expression(paste("(c) ", Sigma, " matrix")), cex.sub = 1.5)
+expr <- generate_expression(100, graph,  state = state, cor = 0.8, mean = 0,
+comm = FALSE, dist =TRUE, absolute = FALSE)
+#> Warning in generate_expression(100, graph, state = state, cor =
+#> 0.8, mean = 0, : sigma matrix was not positive definite, nearest
+#> approximation used.
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = "(e) Simulated expressinon data (log scale)", cex.sub = 1.5)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+```
+
+\begin{figure}
+
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-5} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-6} 
+
+}
+
+\caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
+\end{figure}
+
 
 ![\small \textbf{\textbf{Simulating expression from a biological pathway graph structure.}}
 Simulating expression from graph structure with inhibitions.}} The graph structure (a) of a
@@ -435,50 +466,6 @@ distribution with these negative correlations can be sampled to generate
 simulated data
 (Figure [3e](#fig:simulation_inhibiting:fourth){reference-type="ref"
 reference="fig:simulation_inhibiting:fourth"}).
-
-```r
-state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
-plot_directed(graph, state=state, layout = layout.kamada.kawai,
-              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
-
-#adjacency matrix
-adj_mat <- make_adjmatrix_graph(graph)
-#relationship matrix
-dist_mat <- make_distance_graph(graph, absolute = FALSE)
-#state matrix
-state_mat <- make_state_matrix(graph, state)
-#sigma matrix directly from graph
-sigma_mat <- make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE)
-#show shortest paths of graph
-shortest_paths <- shortest.paths(graph)
-#generate expression data directly from graph
-expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
-                            dist = TRUE, absolute = FALSE, state = state)
-#plot adjacency matrix
-heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
-          col = colorpanel(3, "grey75", "white", "blue"),
-          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-#plot state matrix
-heatmap.2(make_state_matrix(graph, state),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
-          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-#plot relationship matrix
-heatmap.2(make_distance_graph(graph, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
-          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-#plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
-          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
-                            comm = FALSE, dist =TRUE, absolute = FALSE)
-#plot simulated expression data
-heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
-          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-#plot simulated correlations
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
-          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-```
 
 The simulation procedure is also demonstrated here
 (Figure [4](#fig:simulation_smad){reference-type="ref"

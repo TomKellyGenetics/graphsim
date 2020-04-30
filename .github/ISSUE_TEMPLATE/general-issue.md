@@ -1,6 +1,15 @@
+---
+name: New Issue
+about: Open an Issue for discussion
+title: "[NEW FEATURE] Please add <functionality> because <reasons>"
+labels: question
+assignees: ''
+
+---
+
 Please briefly describe your problem and what output you expect. If you have a question,
-please check that it has not already been addressed but a previous issue or
-asked on stackoverflow <http://stackoverflow.com>.
+please check that it has not already been addressed by a previous issue or
+asked before.
 
 Please include a minimal reprex. The goal of a reprex is to make it as easy as possible
 for me to recreate your problem so that I can fix it. If you've never heard of a reprex

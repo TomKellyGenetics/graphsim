@@ -29,8 +29,8 @@ affiliations:
 date: 30 April 2020
 bibliography: paper.bib
 header-includes:
-- \usepackage{caption}
-- \usepackage{subfig}
+  - \usepackage{caption}
+  - \usepackage{subfig}
 ---
 
 

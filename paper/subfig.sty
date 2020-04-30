@@ -1,14 +1,72 @@
-%%% ====================================================================== %%% @LaTeX-style-file{ %%% filename = 
-"subfig.sty", %%% version = "1.2", %%% date = "28 January 1992", %%% time = "15:32:11.25 EST", %%% author = "Mauro 
-Orlandini", %%% address = "NASA/Goddard Space Flight Center - Code 666.0 %%% Laboratory for High Energy Astrophysics 
-%%% Greenbelt, MD 20771 - USA", %%% Email = "orlandini@lheavx.gsfc.nasa.gov (Internet) %%% 
-orlandini@lheavx.span.nasa.gov (Bitnet) %%% 15426::ORLANDINI (DECnet)", %%% telephone = "(301) 286-1128", %%% FAX = 
-"(301) 286-9240", %%% supported = "yes", %%% keywords = "LaTeX, floats, figures", %%% abstract = "This LaTeX style 
-automatically redefines the %%% figure number as 2a, 2b, etc, by means of a %%% subfigure environment. Notetable = 
-"ISO/ASCII", %%% checksum = "02721 70 314 3644", %%% docstring = "Use: If you have already 3 (floats) figures in %%% 
-your LaTeX file, then the commands %%% \begin{subfigure} %%% ption[Short Caption]{Long caption.} %%% bfigure} %%% will 
-generate the correct %%% If the next figure is another sub % the case you have two subfigure In this case you have to 
-r{0} %%%
- checksum as the first value, followed by the %%% count) utility outpu Solovay's===== \typeout{Style Option: `subgure] 
-\def\thesubfigure{\@arabic\f} \def\fnum@subfigure{Figure \toat{subfigure}} \let\endsubfigurfi 
-\@dblfloat{subfigure}ndfigure*}{\global\sub@@figuretrue\end@dblfloat} \endinput %%% End: subfig.sty
+%%% ======================================================================
+%%%  @LaTeX-style-file{
+%%%     filename        = "subfig.sty",
+%%%     version         = "1.2",
+%%%     date            = "28 January 1992",
+%%%     time            = "15:32:11.25 EST",
+%%%     author          = "Mauro Orlandini",
+%%%     address         = "NASA/Goddard Space Flight Center - Code 666.0
+%%%                        Laboratory for High Energy Astrophysics
+%%%                        Greenbelt, MD 20771 - USA",
+%%%     Email          =  "orlandini@lheavx.gsfc.nasa.gov (Internet)
+%%%                        orlandini@lheavx.span.nasa.gov (Bitnet)
+%%%                        15426::ORLANDINI (DECnet)",
+%%%     telephone       = "(301) 286-1128",
+%%%     FAX             = "(301) 286-9240",
+%%%     supported       = "yes",
+%%%     keywords        = "LaTeX, floats, figures",
+%%%     abstract        = "This LaTeX style automatically redefines the
+%%%                        figure number as 2a, 2b, etc, by means of a
+%%%                        subfigure environment. Note that this style
+%%%                        changes ONLY the figure number.",
+%%%     codetable       = "ISO/ASCII",
+%%%     checksum        = "02721 70 314 3644",
+%%%     docstring       = "Use: If you have already 3 (floats) figures in
+%%%                        your LaTeX file, then the commands
+%%%                           \begin{subfigure}
+%%%                           \vspace{8cm} 
+%%%                           \special{file.ps}
+%%%                           \caption[Short Caption]{Long caption.}
+%%%                           \label{ThisIsASubfigure}
+%%%                           \end{subfigure}
+%%%                        will create Figure 4a. A reference to
+%%%                        \label{ThisIsASubfigure} will generate the correct
+%%%                           Figure~\ref{ThisIsASubfigure}  ===>  Figure~4a
+%%%                        If the next figure is another subfigure, it will
+%%%                        labeled as 4b, otherwise as 5.
+%%%                                                
+%%%  30-JAN-1992 (MO): Added the subfigure* environment.
+%%%  14-APR-1992 (MO): There is a bug in the case you have two subfigure
+%%%                    environments following each other (as 1a, 1b, 2a, 2b).
+%%%                    In this case you have to restore the counters manually
+%%%                      \stepcounter{figure}\setcounter{subfigure}{0}
+%%%                        
+%%%                        The checksum field above contains a CRC-16
+%%%                        checksum as the first value, followed by the
+%%%                        equivalent of the standard UNIX wc (word 
+%%%                        count) utility output of lines, words, and
+%%%                        characters.  This is produced by Robert 
+%%%                        Solovay's checksum utility."
+%%% }
+%%% ======================================================================
+\typeout{Style Option: `subfig' v1.2 <28 Jan 92> (M.O.)}
+\newif\ifsub@@figure   \sub@@figuretrue
+\newcounter{subfigure}[figure]
+\def\thesubfigure{\@arabic\c@figure\alph{subfigure}}
+\def\fps@subfigure{tbp}
+\def\ftype@subfigure{1}
+\def\ext@subfigure{lof}
+\def\fnum@subfigure{Figure \thesubfigure}
+\def\subfigure{\ifsub@@figure\global\sub@@figurefalse\stepcounter{figure}\fi%
+ \@float{subfigure}}
+\let\endsubfigure\end@float
+\@namedef{subfigure*}{\ifsub@@figure\global\sub@@figurefalse%
+ \stepcounter{figure}\fi \@dblfloat{subfigure}}
+\@namedef{endsubfigure*}{\end@dblfloat}
+
+\def\endfigure{\global\sub@@figuretrue\end@float}
+\@namedef{endfigure*}{\global\sub@@figuretrue\end@dblfloat}
+
+\endinput
+%%% End: subfig.sty
+

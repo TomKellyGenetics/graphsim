@@ -29,8 +29,8 @@ affiliations:
 date: 30 April 2020
 bibliography: paper.bib
 header-includes:
-- \usepackage{caption}
-- \usepackage{subfig}
+  - \usepackage{caption}
+ # - \usepackage{subfig}
 ---
 
 
@@ -248,6 +248,7 @@ library("gplots")
 
 
 ```r
+#, fig.subcap=c("Activating pathway structure", "Inhibiting pathway structure")}
 #generate graph structure
 
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
@@ -257,7 +258,8 @@ graph <- graph.edgelist(graph_edges, directed = TRUE)
 #plot graph structure (Figure 1a)
 
 plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
-              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
+              cex.node = 2, cex.arrow = 4, arrow_clip = 0.2,
+              sub = "(a) Activating pathway structure", cex.sub = 1.5)
 
 #generate parameters for inhibitions
 
@@ -266,12 +268,13 @@ state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
 #plot graph structure with inhibitions (Figure 1b)
 
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
-              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
+              cex.node = 2, cex.arrow = 4, arrow_clip = 0.2,
+              sub = "(b) Inhibiting pathway structure", cex.sub = 1.5)
 ```
 
 \begin{figure}
 
-{\centering \subfloat[Activating pathway structure\label{fig:unnamed-chunk-41}]{\includegraphics[width=.455\linewidth,height=.455\linewidth]{Plotunnamed-chunk-4-1} }\subfloat[Inhibiting pathway structure\label{fig:unnamed-chunk-42}]{\includegraphics[width=.455\linewidth,height=.455\linewidth]{Plotunnamed-chunk-4-2} }
+{\centering \includegraphics[width=.455\linewidth,height=.455\linewidth]{Plotunnamed-chunk-4-1} \includegraphics[width=.455\linewidth,height=.455\linewidth]{Plotunnamed-chunk-4-2} 
 
 }
 

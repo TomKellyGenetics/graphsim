@@ -30,7 +30,7 @@ date: 30 April 2020
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
-  - \usepackage{subfig}
+ # - \usepackage{subfig}
 ---
 
 
@@ -238,7 +238,8 @@ library("graphsim")
 library("gplots")
 ```
 
-```{r, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.455\\linewidth', out.width='.455\\linewidth', fig.retina=20, fig.margin = FALSE, fig.cap = '\\textbf{Simulated graph structures.}. A constructed graph structure used as an example to demonstrate the simulation procedure inFigures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.', fig.subcap=c("Activating pathway structure", "Inhibiting pathway structure")}
+```{r, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.455\\linewidth', out.width='.455\\linewidth', fig.retina=10, fig.margin = FALSE, fig.cap = '\\textbf{Simulated graph structures.}. A constructed graph structure used as an example to demonstrate the simulation procedure inFigures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.'}
+#, fig.subcap=c("Activating pathway structure", "Inhibiting pathway structure")}
 #generate graph structure
 
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
@@ -248,7 +249,8 @@ graph <- graph.edgelist(graph_edges, directed = TRUE)
 #plot graph structure (Figure 1a)
 
 plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
-              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
+              cex.node = 2, cex.arrow = 4, arrow_clip = 0.2,
+              sub = "(a) Activating pathway structure", cex.sub = 1.5)
 
 #generate parameters for inhibitions
 
@@ -257,7 +259,8 @@ state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
 #plot graph structure with inhibitions (Figure 1b)
 
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
-              cex.node=3, cex.arrow=5, arrow_clip = 0.2)
+              cex.node = 2, cex.arrow = 4, arrow_clip = 0.2,
+              sub = "(b) Inhibiting pathway structure", cex.sub = 1.5)
 ```
 
 ![\small \textbf{\textbf{Simulating expression from a graph structure.}}

@@ -31,6 +31,7 @@
 ##' @param cex.node numeric. Defaults to 1.
 ##' @param cex.label numeric. Defaults to 0.75.
 ##' @param cex.main numeric. Defaults to 0.8.
+##' @param cex.sub numeric. Defaults to 0.8.
 ##' @param cex.arrow numeric Defaults to 1.25. May take a scalar applied to all edges 
 ##' or a vector with values for each edge respectively.
 ##' @param col.label character. Specfies the colours of node labels passed to plot. 
@@ -82,7 +83,7 @@
 ##' @return base R graphics
 ##' 
 ##' @export
-plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=NULL, main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F){
+plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, cex.sub=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=NULL, main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F){
   if(is.function(layout)){
     L <-  layout(graph)
   } else {
@@ -98,7 +99,7 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
   Ne <- length(es[1]$V1)
   Xn <- L[,1]
   Yn <- L[,2]
-  plot(Xn, Yn, xaxt="n", yaxt="n", xlab=xlab, ylab=ylab, frame.plot=frame.plot, cex = 2 * cex.node, pch=1, col=par()$bg, main=main, sub=sub, cex.main=cex.main)
+  plot(Xn, Yn, xaxt="n", yaxt="n", xlab=xlab, ylab=ylab, frame.plot=frame.plot, cex = 2 * cex.node, pch=1, col=par()$bg, main=main, sub=sub, cex.main=cex.main, cex.sub=cex.sub)
   if(!is.null(get.edge.attribute(graph, "state"))){
     state <- get.edge.attribute(graph, "state")
   } else {

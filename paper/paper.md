@@ -443,6 +443,98 @@ $-1$ to $1$. This has been used to generate a simulated expression dataset of 10
 (coloured blue to red from low to high) via sampling from the multivariate normal distribution.
 Here modules of genes with correlated expression can be clearly discerned.](figure4.pdf){ width=95% #fig:simulation_smad label="fig:simulation_smad"}
 
+
+```r
+
+#import graph from data
+graph <- identity(TGFBeta_Smad_graph)
+
+#generate parameters for inhibitions
+state <- rep(1, length(E(graph)))
+pathway <- get.edgelist(graph)
+state[pathway[,1] %in% c("SMAD6", "SMAD7", "BAMBI", "SMURF1", "SMURF2", "UCHL5", "USP15", "UBB", "UBC", "PMEPA1", "PPP1CA", "PPP1CB", "PPP1CC", "PPP1R15A")] <- 2
+state[is.na(state)] <- 1
+
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+              cex.node=3, cex.arrow=5, arrow_clip = 0.2,
+              sub = expression(paste("(a) TFG-", Beta, " activates SMADs")), cex.sub = 1.5)
+
+#adjacency matrix
+adj_mat <- make_adjmatrix_graph(graph)
+#relationship matrix
+dist_mat <- make_distance_graph(graph, absolute = FALSE)
+#sigma matrix directly from graph
+sigma_mat <- make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE)
+#> Warning in eattrs[[name]][index] <- value: number of items to
+#> replace is not a multiple of replacement length
+#show shortest paths of graph
+shortest_paths <- shortest.paths(graph)
+#generate expression data directly from graph
+expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm = FALSE,
+                            dist = TRUE, absolute = FALSE)
+#> Warning in eattrs[[name]][index] <- value: number of items to
+#> replace is not a multiple of replacement length
+#> Warning in state_path[jj] <- state[kk]: number of items to replace
+#> is not a multiple of replacement length
+
+#> Warning in state_path[jj] <- state[kk]: number of items to replace
+#> is not a multiple of replacement length
+
+#> Warning in state_path[jj] <- state[kk]: number of items to replace
+#> is not a multiple of replacement length
+#> Warning in generate_expression(100, graph, state = state, cor =
+#> 0.8, mean = 0, : sigma matrix was not positive definite, nearest
+#> approximation used.
+#plot adjacency matrix
+heatmap.2(make_adjmatrix_graph(graph), scale = "none", trace = "none",
+          col = colorpanel(3, "grey75", "white", "blue"),
+          colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = "Adjacency matrix", cex.sub = 1.5)
+# #plot relationship matrix
+heatmap.2(make_distance_graph(graph, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = "(b) relationship matrix", cex.sub = 1.5)
+# #plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
+scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = expression(paste("(c) ", Sigma, " matrix")), cex.sub = 1.5)
+#> Warning in eattrs[[name]][index] <- value: number of items to
+#> replace is not a multiple of replacement length
+expr <- generate_expression(100, graph,  state = state, cor = 0.8, mean = 0,
+comm = FALSE, dist =TRUE, absolute = FALSE)
+#> Warning in eattrs[[name]][index] <- value: number of items to
+#> replace is not a multiple of replacement length
+#> Warning in state_path[jj] <- state[kk]: number of items to replace
+#> is not a multiple of replacement length
+
+#> Warning in state_path[jj] <- state[kk]: number of items to replace
+#> is not a multiple of replacement length
+
+#> Warning in state_path[jj] <- state[kk]: number of items to replace
+#> is not a multiple of replacement length
+#> Warning in generate_expression(100, graph, state = state, cor =
+#> 0.8, mean = 0, : sigma matrix was not positive definite, nearest
+#> approximation used.
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
+              sub = "(e) Simulated expressinon data (log scale)", cex.sub = 1.5)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+```
+
+\begin{figure}
+
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-5} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-6} 
+
+}
+
+\caption{\textbf{Simulating expression from a biological pathway graph structure}. The graph structure (a) of a known biological pathway, the TGF-$\beta$ receptor signaling activates SMADs (R-HSA-2173789), was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlation structure (d) from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here modules of genes with correlated expression can be clearly discerned.}\label{fig:simulation_smad}
+\end{figure}
+
 The simulation procedure
 (Figure [2](#fig:simulation_activating){reference-type="ref"
 reference="fig:simulation_activating"}) can similarly be used for

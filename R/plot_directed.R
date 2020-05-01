@@ -99,7 +99,7 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
   Ne <- length(es[1]$V1)
   Xn <- L[,1]
   Yn <- L[,2]
-  plot(Xn, Yn, xaxt="n", yaxt="n", xlab=xlab, ylab=ylab, frame.plot=frame.plot, cex = 2 * cex.node, pch=1, col=par()$bg, main=main, sub=sub, cex.main=cex.main, cex.sub=cex.sub)
+  plot(Xn, Yn, xaxt="n", yaxt="n", xlab=xlab, ylab=ylab, xlim = mean(Xn)+c(-1,1 )*1.2*(max(Xn)-min(Xn))/2, ylim = mean(Yn)+c(-1,1 )*1.2*(max(Yn)-min(Yn))/2, frame.plot=frame.plot, cex = 2 * cex.node, pch=1, col=par()$bg, main=main, sub=sub, cex.main=cex.main, cex.sub=cex.sub)
   if(!is.null(get.edge.attribute(graph, "state"))){
     state <- get.edge.attribute(graph, "state")
   } else {

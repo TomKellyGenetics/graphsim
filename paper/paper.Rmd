@@ -296,6 +296,10 @@ normalised on a log-scale.
 
 The simulated dataset can be generated using the following code:
 
+```{r, include=FALSE, eval=FALSE}
+graphics::layout(matrix(c(1:5, 5), nrow = 3, byrow = TRUE))
+```
+
 ```{r simulation_activating, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.'}
 # activating graph
 state <- rep(1, length(E(graph)))
@@ -344,7 +348,8 @@ mtext(text = "(d) Simulated correlation", side=1, line=3, at=0.075, adj=0.5, cex
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
-              sub = "(e) Simulated expression data (log scale)", cex.sub = 1.75)
+sub = "(e) Simulated expression data (log scale)", cex.sub = 1.75,
+xlim = c(-0.5, 1.5))
 ```
 
 The simulation procedure

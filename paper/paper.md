@@ -315,6 +315,8 @@ normalised on a log-scale.
 The simulated dataset can be generated using the following code:
 
 
+
+
 ```r
 # activating graph
 state <- rep(1, length(E(graph)))
@@ -369,7 +371,8 @@ mtext(text = "(d) Simulated correlation", side=1, line=3, at=0.075, adj=0.5, cex
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
-              sub = "(e) Simulated expression data (log scale)", cex.sub = 1.75)
+sub = "(e) Simulated expression data (log scale)", cex.sub = 1.75,
+lwid = c(3, 8))
 ```
 
 \begin{figure}

@@ -4,6 +4,7 @@ output:
   rmarkdown::pdf_document:
     fig_crop: no
     keep_md: TRUE
+    keep_tex: TRUE
     fig_caption: yes
 tags:
   - R
@@ -344,6 +345,7 @@ expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
 #> comm = FALSE, : sigma matrix was not positive definite, nearest
 #> approximation used.
 
+op <- par(mfrow=c(2,2), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
 #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
@@ -368,11 +370,12 @@ heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "wh
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 mtext(text = "(d) Simulated correlation", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
 
+op <- par(mfrow=c(1,1), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
-sub = "(e) Simulated expression data (log scale)", cex.sub = 1.75,
-lwid = c(3, 8))
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+par(op)
 ```
 
 \begin{figure}
@@ -594,7 +597,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3, at=0.0
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-5} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.813\linewidth,height=.415\linewidth]{Plotsimulation_smad-5} 
 
 }
 

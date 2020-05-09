@@ -334,7 +334,7 @@ expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
@@ -368,8 +368,9 @@ mtext(text = "samples", side=1, line=1.5, at=0.55, adj=0.5, cex=1.5)
 mtext(text = "genes", side=4, line=1, at=0.45, adj=0.5, cex=1.5)
 mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0.5, adj=0.5, cex=1.75)
 dev.off()
-system("sed -i.bak '/Plotsimulation_activating-5/s/\\\\(.*\\\\)width=[.]415/\1width=.830/g' paper.md && rm paper.md.bak")
-system("sed -i.bak '/Plotsimulation_activating-5/s/\\\\(.*\\\\)width=[.]415/\1width=.830/g' paper.tex && rm paper.tex.bak")
+#system("sed -i.bak '/Plotsimulation_activating-5/s/\\(.*\\)width=[.]415/\1width=.830/g' paper.md && rm paper.md.bak")
+#system("sed -i.bak '/Plotsimulation_activating-5/s/\\(.*\\)width=[.]415/\1width=.830/g' paper.tex && rm paper.tex.bak")
+#sed -i '/Plot.*-5/s/\(.*\)width=[.]415/\1width=.830/g' paper.md paper.tex
 ```
 
 The simulation procedure
@@ -429,7 +430,7 @@ expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 # #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
@@ -463,8 +464,9 @@ mtext(text = "samples", side=1, line=1.5, at=0.55, adj=0.5, cex=1.5)
 mtext(text = "genes", side=4, line=1, at=0.45, adj=0.5, cex=1.5)
 mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0.5, adj=0.5, cex=1.75)
 dev.off()
-system("sed -i.bak '/Plotsimulation_inhibiting-5/s/\\\\(.*\\\\)width=[.]415/\1width=.830/g' paper.md && rm paper.md.bak")
-system("sed -i.bak '/Plotsimulation_inhibiting-5/s/\\\\(.*\\\\)width=[.]415/\1width=.830/g' paper.tex && rm paper.tex.bak")
+#("sed -i.bak '/Plotsimulation_inhibiting-5/s/\\(.*\\)width=[.]415/\1width=.830/g' paper.md && rm paper.md.bak")
+#system("sed -i.bak '/Plotsimulation_inhibiting-5/s/\\(.*\\)width=[.]415/\1width=.830/g' paper.tex && rm paper.tex.bak")
+#sed -i '/Plot.*-5/s/\(.*\)width=[.]415/\1width=.830/g' paper.md paper.tex
 ```
 
 The simulation procedure is also demonstrated here
@@ -509,7 +511,7 @@ plot_directed(graph, state = state, layout = layout.kamada.kawai,
               border.node=scales::alpha("black", 0.75), fill.node="lightblue",
               col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
               cex.node = 1.5, cex.label = 0.8, cex.arrow = 2, 
-              sub = expression(paste("(a) TFG-", Beta, " activates SMADs")), cex.sub = 1.75)
+              sub = expression(paste("(a) TFG-", beta, " activates SMADs")), cex.sub = 1.75)
 box()
 
 #adjacency matrix
@@ -532,7 +534,7 @@ expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
-mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 # #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
@@ -568,8 +570,9 @@ mtext(text = "samples", side=1, line=1.5, at=0.55, adj=0.5, cex=1.5)
 mtext(text = "genes", side=4, line=1, at=0.45, adj=0.5, cex=1.5)
 mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0.5, adj=0.5, cex=1.75)
 dev.off()
-system("sed -i.bak '/Plotsimulation_smad-5/s/\\\\(.*\\\\)width=[.]415/\1width=.830/g' paper.md && rm paper.md.bak")
-system("sed -i.bak '/Plotsimulation_smad-5/s/\\\\(.*\\\\)width=[.]415/\1width=.830/g' paper.tex && rm paper.tex.bak")
+#system("sed -i.bak '/Plotsimulation_smad-5/s/\\(.*\\)width=[.]415/\1width=.830/g' paper.md && rm paper.md.bak")
+#system("sed -i.bak '/Plotsimulation_smad-5/s/\\(.*\\)width=[.]415/\1width=.830/g' paper.tex && rm paper.tex.bak")
+#sed -i '/Plot.*-5/s/\(.*\)width=[.]415/\1width=.830/g' paper.md paper.tex
 ```
 
 These simulated datasets can also be used for simulating gene 

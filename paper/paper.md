@@ -351,7 +351,7 @@ expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
@@ -449,7 +449,7 @@ expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 # #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
@@ -529,7 +529,7 @@ plot_directed(graph, state = state, layout = layout.kamada.kawai,
               border.node=scales::alpha("black", 0.75), fill.node="lightblue",
               col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
               cex.node = 1.5, cex.label = 0.8, cex.arrow = 2, 
-              sub = expression(paste("(a) TFG-", Beta, " activates SMADs")), cex.sub = 1.75)
+              sub = expression(paste("(a) TFG-", beta, " activates SMADs")), cex.sub = 1.75)
 box()
 
 #adjacency matrix
@@ -567,7 +567,7 @@ expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
-mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 # #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),

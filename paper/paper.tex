@@ -427,7 +427,7 @@ The simulated dataset can be generated using the following code:
 \KeywordTok{heatmap.2}\NormalTok{(}\KeywordTok{make_distance_graph}\NormalTok{(graph, }\DataTypeTok{absolute =} \OtherTok{FALSE}\NormalTok{),}
           \DataTypeTok{scale =} \StringTok{"none"}\NormalTok{, }\DataTypeTok{trace =} \StringTok{"none"}\NormalTok{, }\DataTypeTok{col =} \KeywordTok{colorpanel}\NormalTok{(}\DecValTok{50}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
 \DataTypeTok{colsep =} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(}\KeywordTok{V}\NormalTok{(graph)), }\DataTypeTok{rowsep =} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(}\KeywordTok{V}\NormalTok{(graph)))}
-\KeywordTok{mtext}\NormalTok{(}\DataTypeTok{text =} \StringTok{"(b) relationship matrix"}\NormalTok{, }\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{line=}\FloatTok{3.5}\NormalTok{, }\DataTypeTok{at=}\DecValTok{0}\NormalTok{, }\DataTypeTok{adj=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.75}\NormalTok{)}
+\KeywordTok{mtext}\NormalTok{(}\DataTypeTok{text =} \StringTok{"(b) Relationship matrix"}\NormalTok{, }\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{line=}\FloatTok{3.5}\NormalTok{, }\DataTypeTok{at=}\DecValTok{0}\NormalTok{, }\DataTypeTok{adj=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.75}\NormalTok{)}
 
 \CommentTok{#plot sigma matrix}
 \KeywordTok{heatmap.2}\NormalTok{(}\KeywordTok{make_sigma_mat_dist_graph}\NormalTok{(graph, }\FloatTok{0.8}\NormalTok{, }\DataTypeTok{absolute =} \OtherTok{FALSE}\NormalTok{),}
@@ -514,7 +514,7 @@ sampled to generate simulated data
 \KeywordTok{heatmap.2}\NormalTok{(}\KeywordTok{make_distance_graph}\NormalTok{(graph, }\DataTypeTok{absolute =} \OtherTok{FALSE}\NormalTok{),}
           \DataTypeTok{scale =} \StringTok{"none"}\NormalTok{, }\DataTypeTok{trace =} \StringTok{"none"}\NormalTok{, }\DataTypeTok{col =} \KeywordTok{colorpanel}\NormalTok{(}\DecValTok{50}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
 \DataTypeTok{colsep =} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(}\KeywordTok{V}\NormalTok{(graph)), }\DataTypeTok{rowsep =} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(}\KeywordTok{V}\NormalTok{(graph)))}
-\KeywordTok{mtext}\NormalTok{(}\DataTypeTok{text =} \StringTok{"(b) relationship matrix"}\NormalTok{, }\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{line=}\FloatTok{3.5}\NormalTok{, }\DataTypeTok{at=}\DecValTok{0}\NormalTok{, }\DataTypeTok{adj=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.75}\NormalTok{)}
+\KeywordTok{mtext}\NormalTok{(}\DataTypeTok{text =} \StringTok{"(b) Relationship matrix"}\NormalTok{, }\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{line=}\FloatTok{3.5}\NormalTok{, }\DataTypeTok{at=}\DecValTok{0}\NormalTok{, }\DataTypeTok{adj=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.75}\NormalTok{)}
 
 \CommentTok{# #plot sigma matrix}
 \KeywordTok{heatmap.2}\NormalTok{(}\KeywordTok{make_sigma_mat_dist_graph}\NormalTok{(graph, }\DataTypeTok{state =}\NormalTok{ state, }\FloatTok{0.8}\NormalTok{, }\DataTypeTok{absolute =} \OtherTok{FALSE}\NormalTok{),}
@@ -586,7 +586,7 @@ competitively inhibits \emph{SMAD4}.
               \DataTypeTok{border.node=}\NormalTok{scales}\OperatorTok{::}\KeywordTok{alpha}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\FloatTok{0.75}\NormalTok{), }\DataTypeTok{fill.node=}\StringTok{"lightblue"}\NormalTok{,}
               \DataTypeTok{col.arrow =} \KeywordTok{c}\NormalTok{(scales}\OperatorTok{::}\KeywordTok{alpha}\NormalTok{(}\StringTok{"navyblue"}\NormalTok{, }\FloatTok{0.25}\NormalTok{), scales}\OperatorTok{::}\KeywordTok{alpha}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\FloatTok{0.25}\NormalTok{))[state], }
               \DataTypeTok{cex.node =} \FloatTok{1.5}\NormalTok{, }\DataTypeTok{cex.label =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{cex.arrow =} \DecValTok{2}\NormalTok{, }
-              \DataTypeTok{sub =} \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"(a) TFG-"}\NormalTok{, Beta, }\StringTok{" activates SMADs"}\NormalTok{)), }\DataTypeTok{cex.sub =} \FloatTok{1.75}\NormalTok{)}
+              \DataTypeTok{sub =} \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"(a) TFG-"}\NormalTok{, beta, }\StringTok{" activates SMADs"}\NormalTok{)), }\DataTypeTok{cex.sub =} \FloatTok{1.75}\NormalTok{)}
 \KeywordTok{box}\NormalTok{()}
 
 \CommentTok{#adjacency matrix}
@@ -624,7 +624,7 @@ competitively inhibits \emph{SMAD4}.
 \KeywordTok{heatmap.2}\NormalTok{(}\KeywordTok{make_distance_graph}\NormalTok{(graph, }\DataTypeTok{absolute =} \OtherTok{FALSE}\NormalTok{),}
           \DataTypeTok{scale =} \StringTok{"none"}\NormalTok{, }\DataTypeTok{trace =} \StringTok{"none"}\NormalTok{, }\DataTypeTok{col =} \KeywordTok{colorpanel}\NormalTok{(}\DecValTok{50}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
 \DataTypeTok{colsep =} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(}\KeywordTok{V}\NormalTok{(graph)), }\DataTypeTok{rowsep =} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(}\KeywordTok{V}\NormalTok{(graph)), }\DataTypeTok{labCol =} \StringTok{""}\NormalTok{)}
-\KeywordTok{mtext}\NormalTok{(}\DataTypeTok{text =} \StringTok{"(b) relationship matrix"}\NormalTok{, }\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{line=}\FloatTok{3.5}\NormalTok{, }\DataTypeTok{at=}\DecValTok{0}\NormalTok{, }\DataTypeTok{adj=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.75}\NormalTok{)}
+\KeywordTok{mtext}\NormalTok{(}\DataTypeTok{text =} \StringTok{"(b) Relationship matrix"}\NormalTok{, }\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{line=}\FloatTok{3.5}\NormalTok{, }\DataTypeTok{at=}\DecValTok{0}\NormalTok{, }\DataTypeTok{adj=}\FloatTok{0.5}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.75}\NormalTok{)}
 
 \CommentTok{# #plot sigma matrix}
 \KeywordTok{heatmap.2}\NormalTok{(}\KeywordTok{make_sigma_mat_dist_graph}\NormalTok{(graph, }\DataTypeTok{state =}\NormalTok{ state, }\FloatTok{0.8}\NormalTok{, }\DataTypeTok{absolute =} \OtherTok{FALSE}\NormalTok{),}

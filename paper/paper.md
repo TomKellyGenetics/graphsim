@@ -259,7 +259,7 @@ graph <- graph.edgelist(graph_edges, directed = TRUE)
 
 plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
               cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
-mtext(text = "(a) Activating pathway structure", side=1, line=3, at=0.05, adj=0.5, cex=1.75)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.05, adj=0.5, cex=1.75)
 box()
 
 #generate parameters for inhibitions
@@ -270,7 +270,7 @@ state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
 
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
               cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
-mtext(text = "(b) Inhibiting pathway structure", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = "(b) Inhibiting pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
 box()
 ```
 
@@ -318,12 +318,14 @@ The simulated dataset can be generated using the following code:
 
 
 
+
+
 ```r
 # activating graph
 state <- rep(1, length(E(graph)))
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
               cex.node=2, cex.arrow=4, arrow_clip = 0.2)
-mtext(text = "(a) Activating pathway structure", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
 box()
 
 #adjacency matrix
@@ -345,18 +347,17 @@ expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
 #> comm = FALSE, : sigma matrix was not positive definite, nearest
 #> approximation used.
 
-op <- par(mfrow=c(2,2), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
 #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(b) relationship matrix", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
 scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #simulated data
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
@@ -368,24 +369,26 @@ comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(d) Simulated correlation", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
-op <- par(mfrow=c(1,1), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
-par(op)
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 ```
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-5} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_activating-5} 
 
 }
 
 \caption{\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.}\label{fig:simulation_activating}
 \end{figure}
+
+
 
 The simulation procedure
 (Figure [2](#fig:simulation_activating){reference-type="ref"
@@ -413,13 +416,14 @@ reference="fig:simulation_inhibiting:fourth"}).
 
 
 
+
 ```r
 
 #generate parameters for inhibitions
 state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
               cex.node=2, cex.arrow=4, arrow_clip = 0.2)
-mtext(text = "(a) Inhibiting pathway structure", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = "(a) Inhibiting pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
 box()
 
 #adjacency matrix
@@ -441,17 +445,17 @@ expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm
 #> 0.8, mean = 0, : sigma matrix was not positive definite, nearest
 #> approximation used.
 
-# #plot relationship matrix
+#plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(b) relationship matrix", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 # #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
 scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #simulated data
 expr <- generate_expression(100, graph,  state = state, cor = 0.8, mean = 0,
@@ -463,22 +467,26 @@ comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(d) Simulated correlation", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 ```
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-5} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-5} 
 
 }
 
 \caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
 \end{figure}
+
+
 
 The simulation procedure is also demonstrated here
 (Figure [4](#fig:simulation_smad){reference-type="ref"
@@ -502,6 +510,8 @@ data to represent expression with the complexity of a biological pathway
 reference="fig:simulation_smad:fourth"}). Here *SMAD7* exhibits
 negative correlations with the other SMADs consistent with it's
 functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
+
+
 
 
 ```r
@@ -556,16 +566,16 @@ expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm
 # #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
           scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)),
-              sub = "(b) relationship matrix", cex.sub = 1.75)
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+mtext(text = "(b) relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 # #plot sigma matrix
 heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
 scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 #> Warning in eattrs[[name]][index] <- value: number of items to
 #> replace is not a multiple of replacement length
-mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #simulated data
 expr <- generate_expression(100, graph,  state = state, cor = 0.8, mean = 0,
@@ -586,23 +596,28 @@ comm = FALSE, dist =TRUE, absolute = FALSE)
 
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(d) Simulated correlation", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3, at=0.075, adj=0.5, cex=1.75)
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 ```
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.813\linewidth,height=.415\linewidth]{Plotsimulation_smad-5} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_smad-5} 
 
 }
 
 \caption{\textbf{Simulating expression from a biological pathway graph structure}. The graph structure (a) of a known biological pathway, the TGF-$\beta$ receptor signaling activates SMADs (R-HSA-2173789), was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlation structure (d) from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here modules of genes with correlated expression can be clearly discerned.}\label{fig:simulation_smad}
 \end{figure}
+
+
+
 
 
 These simulated datasets can also be used for simulating gene 

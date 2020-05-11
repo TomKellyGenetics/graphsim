@@ -13,6 +13,7 @@ plot_directed(
   cex.label = 0.75,
   cex.arrow = 1.25,
   cex.main = 0.8,
+  cex.sub = 0.8,
   arrow_clip = 0.075,
   pch = 21,
   border.node = "grey33",
@@ -53,6 +54,8 @@ layout matrix giving x and y co-ordinates of each node can be given.}
 or a vector with values for each edge respectively.}
 
 \item{cex.main}{numeric. Defaults to 0.8.}
+
+\item{cex.sub}{numeric. Defaults to 0.8.}
 
 \item{arrow_clip}{numeric Defaults to 0.075 (7.5\%).}
 

@@ -458,7 +458,7 @@ colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #simulated data
-expr <- generate_expression(100, graph,  state = state, cor = 0.8, mean = 0,
+expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
 comm = FALSE, dist =TRUE, absolute = FALSE)
 #> Warning in generate_expression(100, graph, state = state, cor =
 #> 0.8, mean = 0, : sigma matrix was not positive definite, nearest
@@ -578,7 +578,7 @@ colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 
 #simulated data
-expr <- generate_expression(100, graph,  state = state, cor = 0.8, mean = 0,
+expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
 comm = FALSE, dist =TRUE, absolute = FALSE)
 #> Warning in eattrs[[name]][index] <- value: number of items to
 #> replace is not a multiple of replacement length

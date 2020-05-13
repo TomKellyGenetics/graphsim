@@ -36,6 +36,14 @@
 ##' 
 ##' @export
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
+  if(!is.null(get.edge.attribute(graph, "state"))){
+    state <- get.edge.attribute(graph, "state")
+  } else {
+    # add default state if not specified
+    if(is.null(state)){
+      state <- rep(1, length(E(graph)))
+    }
+  }
   if(!is.integer(n)){
     if(is.numeric(n)){
       if(floor(n) == n){
@@ -50,15 +58,19 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
   }
   if(length(n) > 1) stop("sample size n must be an integer of length 1")
   if(!is_igraph(graph)) stop("graph must be an igraph class")
-  if(is.vector(state) || length(state) == 1) state <- make_state_matrix(graph, state)
+  if(length(state) == 1) state <- rep(state, length(E(graph)))
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))
   if(dist){
-    sig <- make_sigma_mat_dist_graph(graph, cor, absolute = absolute)
+    sig <- make_sigma_mat_dist_graph(graph, state = state, cor, absolute = absolute)
   } else {
-    sig <- make_sigma_mat_graph(graph, cor, comm = comm, laplacian = laplacian)
+    sig <- make_sigma_mat_graph(graph, state = state, cor, comm = comm, laplacian = laplacian)
   }
   ## migrate state to calling sigma ##
-  if(!(is.null(state))) sig <- state * sig
+  if(!(is.null(state))){
+    if(all(sig >= 0)){
+      sig <- state * sig
+    }
+  }
   if(is.symmetric.matrix(sig) == FALSE) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
     sig <- as.matrix(nearPD(sig, corr=T, keepDiag = TRUE)$mat) #postive definite correction
@@ -77,6 +89,9 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
 ##' @rdname generate_expression
 ##' @export
 generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
+  if(is.null(state)){
+    state <- 1
+  }
   if(!is.integer(n)){
     if(is.numeric(n)){
       if(floor(n) == n){
@@ -95,23 +110,27 @@ generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, c
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,ncol(mat))
   if(dist){
     distmat <- make_distance_adjmat(mat)
-    sig <- make_sigma_mat_dist_adjmat(distmat, cor, absolute = absolute)
+    sig <- make_sigma_mat_dist_adjmat(distmat, state = state, cor, absolute = absolute)
   } else {
     if(comm && laplacian){
       warning("Error: only one of commonlink or laplacian can be used")
       stop()
     }
-    if(!comm && !laplacian) sig <- make_sigma_mat_adjmat(mat, cor)
+    if(!comm && !laplacian) sig <- make_sigma_mat_adjmat(mat, state = state, cor)
     if(comm){
       mat <- make_commonlink_adjmat(mat)
-      sig <- make_sigma_mat_comm(mat, cor)
+      sig <- make_sigma_mat_comm(mat, state = state, cor)
     }
     if(laplacian){
       mat <- make_laplacian_adjmat(mat)
-      sig <- make_sigma_mat_laplacian(mat, cor)
+      sig <- make_sigma_mat_laplacian(mat, state = state, cor)
     }
   }
-  if(!(is.null(state))) sig <- state * sig
+  if(!(is.null(state))){
+    if(all(sig >= 0)){
+      sig <- state * sig
+    }
+  }
   if(is.symmetric.matrix(sig) == FALSE) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
     sig <- as.matrix(nearPD(sig, corr=T, keepDiag = TRUE)$mat) #postive definite correction

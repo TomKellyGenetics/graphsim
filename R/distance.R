@@ -30,9 +30,13 @@ make_distance_graph <- function(graph, directed = FALSE, absolute = FALSE){
   if(directed == FALSE) graph <- as.undirected(graph)
   diam <- diameter(graph)
   if (absolute){
-    mat <- (diam-shortest.paths(graph))/diam
+    paths <- shortest.paths(graph)
+    diam <- max(diam, max(paths))
+    mat <- (diam-paths)/diam
   } else {
-    mat <- 1^-diam/(diam*shortest.paths(graph))
+    paths <- shortest.paths(graph)
+    diam <- max(diam, max(paths))
+    mat <- 1^-diam/(diam*paths)
     diag(mat) <- 1
   }
   rownames(mat) <- colnames(mat) <- names(V(graph))
@@ -47,9 +51,13 @@ make_distance_adjmat <- function(mat, directed = FALSE, absolute = FALSE){
   graph <- graph_from_adjacency_matrix(mat, weighted = NULL, mode = ifelse(directed, "directed", "undirected"))
   diam <- diameter(graph)
   if (absolute){
-    mat <- (diam-shortest.paths(graph))/diam
+    paths <- shortest.paths(graph)
+    diam <- max(diam, max(paths))
+    mat <- (diam-paths)/diam
   } else {
-    mat <- 1^-diam/(diam*shortest.paths(graph))
+    paths <- shortest.paths(graph)
+    diam <- max(diam, max(paths))
+    mat <- 1^-diam/(diam*paths)
     diag(mat) <- 1
   }
   rownames(mat) <- colnames(mat) <- names(V(graph))
@@ -65,9 +73,13 @@ make_distance_laplacian <- function(mat, directed = FALSE, absolute = FALSE){
   graph <- graph_from_adjacency_matrix(adj_mat, weighted = TRUE, mode = ifelse(directed, "directed", "undirected"))
   diam <- diameter(graph)
   if (absolute){
-    mat <- (diam-shortest.paths(graph))/diam
+    paths <- shortest.paths(graph)
+    diam <- max(diam, max(paths))
+    mat <- (diam-paths)/diam
   } else {
-    mat <- 1^-diam/(diam*shortest.paths(graph))
+    paths <- shortest.paths(graph)
+    diam <- max(diam, max(paths))
+    mat <- 1^-diam/(diam*paths)
     diag(mat) <- 1
   }
   rownames(mat) <- colnames(mat) <- names(V(graph))

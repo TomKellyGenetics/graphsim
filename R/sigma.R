@@ -30,9 +30,14 @@
 ##' 
 ##' @return a numeric covariance matrix of values in the range [-1, 1]
 ##' @export
-make_sigma_mat_adjmat <- function(mat, cor = 0.8){
+make_sigma_mat_adjmat <- function(mat, state = NULL, cor = 0.8){
   sig <- ifelse(mat > 0, cor, 0)
   diag(sig) <- 1
+  if(!is.null(state)){
+    #pass state parameters sign of sigma
+    state_mat <- make_state_matrix(graph, state)
+    sig <- sig * sign(state_mat)
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -40,12 +45,17 @@ make_sigma_mat_adjmat <- function(mat, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_comm <- function(mat, cor = 0.8){
+make_sigma_mat_comm <- function(mat, state = NULL, cor = 0.8){
   mat <- abs(mat)
   mat <- apply(mat, 1, function(x) x/max(x))
   mat <- apply(mat, 2, function(x) x/max(x))
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
   diag(sig) <- 1
+  if(!is.null(state)){
+    #pass state parameters sign of sigma
+    state_mat <- make_state_matrix(graph, state)
+    sig <- sig * sign(state_mat)
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -53,13 +63,18 @@ make_sigma_mat_comm <- function(mat, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_laplacian <- function(mat, cor = 0.8){
+make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8){
   mat <- abs(mat)
   diag(mat)[diag(mat) == 0] <- 1
   mat <- apply(mat, 1, function(x) x/max(x))
   mat <- apply(mat, 2, function(x) x/max(x))
   sig <- ifelse(mat>0, cor*mat/max(mat), 0)
   diag(sig) <- 1
+  if(!is.null(state)){
+    #pass state parameters sign of sigma
+    state_mat <- make_state_matrix(graph, state)
+    sig <- sig * sign(state_mat)
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -125,6 +140,14 @@ make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, absolute = 
 ##' @rdname make_sigma
 ##' @export
 make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, absolute = FALSE){
+  if(!is.null(get.edge.attribute(graph, "state"))){
+    state <- get.edge.attribute(graph, "state")
+  } else {
+    # add default state if not specified
+    if(is.null(state)){
+      state <- "activating"
+    }
+  }
   mat <- make_distance_graph(graph, absolute = absolute)
   sig <- make_sigma_mat_dist_adjmat(mat, state, cor)
   return(sig)

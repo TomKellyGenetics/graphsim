@@ -139,8 +139,8 @@ reference="fig:simple_graph:first"}. The graph can be defined by an
 adjacency matrix, **$A$** (with elements
 $A_{ij}$), where $$A_{ij} = 
 \begin{cases}
-   1                         & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
-   0                         & \mbox{otherwise}
+   1   & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
+   0   & \mbox{otherwise}
 \end{cases}$$
 
 A matrix, **$R$**, with elements
@@ -152,9 +152,9 @@ weighting is used to achieve this:
 
 [ $$R_{ij} = 
 \begin{cases}
-   1                            & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
-   (\frac{1}{2})^{d_{ij}}      & \mbox{if a path can be found between genes } i \mbox{ and } j \\
-   0                            & \mbox{if no path exists between genes } i \mbox{ and } j 
+   1  & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
+   (\frac{1}{2})^{d_{ij}}  & \mbox{if a path can be found between genes } i \mbox{ and } j \\
+   0  & \mbox{if no path exists between genes } i \mbox{ and } j 
 \end{cases}$$]{style="color: black"} where $d_{ij}$ is the length of
 the shortest path (i.e., minimum number of edges traversed) between
 genes (nodes) $i$ and $j$ in graph $G$. Each more distant node is thus
@@ -164,15 +164,15 @@ reference="fig:simulation_activating:second"}. An
 arithmetically-decreasing (absolute) distance weighting is also
 supported in the \texttt{graphsim} R package which implements this procedure: [ $$R_{ij} = 
 \begin{cases}
-   1                            & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
-   1-\frac{d_{ij}}{diam(G)}     & \mbox{if a path can be found between genes } i \mbox{ and } j \\
-   0                            & \mbox{if no path exists between genes } i \mbox{ and } j 
+   1  & \mbox{if genes } i \mbox{ and } j \mbox{ are adjacent} \\
+   1-\frac{d_{ij}}{diam(G)}   & \mbox{if a path can be found between genes } i \mbox{ and } j \\
+   0  & \mbox{if no path exists between genes } i \mbox{ and } j 
 \end{cases}$$ ]{style="color: black"}
 
 Assuming a unit variance for each gene, these values can be used to
 derive a $\Sigma$ matrix: $$\Sigma_{ij} = 
 \begin{cases}
-   1                            & \mbox{if } i=j \\
+   1  & \mbox{if } i=j \\
    \rho R_{ij}  & \mbox{otherwise}
 \end{cases}$$ where $\rho$ is the correlation between adjacent nodes.
 Thus covariances between adjacent nodes are assigned by a correlation
@@ -246,12 +246,12 @@ library("graphsim"); library("igraph"); library("gplots")
 ```r
 #generate graph structure
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
-                     c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+   c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph <- graph.edgelist(graph_edges, directed = TRUE)
 
 #plot graph structure (Figure 1a)
 plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
-              cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
+  cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
 mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.05, adj=0.5, cex=1.75)
 box()
 
@@ -259,7 +259,7 @@ box()
 state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
 #plot graph structure with inhibitions (Figure 1b)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
-              cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
+  cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
 mtext(text = "(b) Inhibiting pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
 box()
 ```
@@ -314,36 +314,12 @@ The simulated dataset can be generated using the following code:
 # activating graph
 state <- rep(1, length(E(graph)))
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
-              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+  cex.node=2, cex.arrow=4, arrow_clip = 0.2)
 mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
 box()
-#adjacency matrix
-adj_mat <- make_adjmatrix_graph(graph)
-#relationship matrix
-dist_mat <- make_distance_graph(graph, absolute = FALSE)
-#sigma matrix directly from graph
-sigma_mat <- make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE)
-#show shortest paths of graph
-shortest_paths <- shortest.paths(graph)
-#generate expression data directly from graph
-expr <- generate_expression(100, graph, cor = 0.8, mean = 0, comm = FALSE,
-                            dist = TRUE, absolute = FALSE, state = state)
-```
-
-\begin{figure}
-
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating_setup-1} 
-
-}
-
-\end{figure}
-
-
-```r
-
 #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot sigma matrix
@@ -368,7 +344,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-4} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_activating-5} 
 
 }
 
@@ -408,34 +384,12 @@ reference="fig:simulation_inhibiting:fourth"}).
 #generate parameters for inhibitions
 state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
-              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+  cex.node=2, cex.arrow=4, arrow_clip = 0.2)
 mtext(text = "(a) Inhibiting pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
 box()
-#adjacency matrix
-adj_mat <- make_adjmatrix_graph(graph)
-#relationship matrix
-dist_mat <- make_distance_graph(graph, absolute = FALSE)
-#sigma matrix directly from graph
-sigma_mat <- make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE)
-#show shortest paths of graph
-shortest_paths <- shortest.paths(graph)
-#generate expression data directly from graph
-expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm = FALSE,
-                            dist = TRUE, absolute = FALSE)
-```
-
-\begin{figure}
-
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting_setup-1} 
-
-}
-
-\end{figure}
-
-```r
 #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 # #plot sigma matrix
@@ -460,7 +414,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-4} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-5} 
 
 }
 
@@ -499,41 +453,19 @@ functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
 #import graph from data
 graph <- identity(TGFBeta_Smad_graph)
 #generate parameters for inhibitions
-state <- rep(1, length(E(graph)))
-pathway <- get.edgelist(graph)
-state[pathway[,1] %in% c("SMAD6", "SMAD7", "BAMBI", "SMURF1", "SMURF2", "UCHL5", "USP15", "UBB", "UBC", "PMEPA1", "PPP1CA", "PPP1CB", "PPP1CC", "PPP1R15A")] <- 2
+state <- rep(1, length(E(graph))); pathway <- get.edgelist(graph)
+state[pathway[,1] %in% c("SMAD6", "SMAD7", "BAMBI", "SMURF1", "SMURF2", "UCHL5",
+  "USP15", "UBB", "UBC", "PMEPA1", "PPP1CA", "PPP1CB", "PPP1CC", "PPP1R15A")] <- 2
 state[is.na(state)] <- 1
 plot_directed(graph, state = state, layout = layout.kamada.kawai,
-              border.node=scales::alpha("black", 0.75), fill.node="lightblue",
-              col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
-              cex.node = 1.5, cex.label = 0.8, cex.arrow = 2, 
-              sub = expression(paste("(a) TFG-", beta, " activates SMADs")), cex.sub = 1.75)
+  border.node=scales::alpha("black", 0.75), fill.node="lightblue",
+  col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
+  cex.node = 1.5, cex.label = 0.8, cex.arrow = 2, 
+  sub = expression(paste("(a) TFG-", beta, " activates SMADs")), cex.sub = 1.75)
 box()
-#adjacency matrix
-adj_mat <- make_adjmatrix_graph(graph)
-#relationship matrix
-dist_mat <- make_distance_graph(graph, absolute = FALSE)
-#sigma matrix directly from graph
-sigma_mat <- make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE)
-#show shortest paths of graph
-shortest_paths <- shortest.paths(graph)
-#generate expression data directly from graph
-expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0, comm = FALSE,
-                            dist = TRUE, absolute = FALSE)
-```
-
-\begin{figure}
-
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad_setup-1} 
-
-}
-
-\end{figure}
-
-```r
 # #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 # #plot sigma matrix
@@ -542,8 +474,8 @@ scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #simulated data
-expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
-comm = FALSE, dist =TRUE, absolute = FALSE)
+expr <- generate_expression(100, graph, state = state, cor = 0.8,
+  mean = 0,comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
@@ -558,7 +490,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} 
+{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_smad-5} 
 
 }
 

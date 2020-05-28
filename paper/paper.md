@@ -309,7 +309,7 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
+heatmap.2(make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
@@ -375,8 +375,8 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-# #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
@@ -386,7 +386,6 @@ expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
@@ -441,13 +440,13 @@ plot_directed(graph, state = state, layout = layout.kamada.kawai,
   col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
   cex.node = 1.5, cex.label = 0.8, cex.arrow = 2)
 
-# #plot relationship matrix
+#plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 
-# #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 

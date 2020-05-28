@@ -252,7 +252,7 @@ plot_directed(graph, state=state, layout = layout.kamada.kawai,
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimple_graph-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimple_graph-2} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-2} 
 
 }
 
@@ -327,7 +327,7 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_activating-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
 
 }
 
@@ -395,7 +395,7 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_inhibiting-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
 
 }
 
@@ -464,7 +464,7 @@ colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 
 \begin{figure}
 
-{\centering \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.415\linewidth,height=.415\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.830\linewidth,height=.415\linewidth]{Plotsimulation_smad-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
 
 }
 

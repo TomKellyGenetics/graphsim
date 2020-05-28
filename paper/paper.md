@@ -229,7 +229,7 @@ install.packages("graphsim")
 #load required packages (once per R instance)
 library("graphsim")
 #load packages for examples
-library("igraph"); library("gplots")
+library("igraph"); library("gplots"); library("scales")
 ```
 
 
@@ -376,12 +376,12 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
+heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 #simulated data
-expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
+expr <- generate_expression(100, graph, state, cor = 0.8, mean = 0,
   comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
@@ -436,8 +436,8 @@ graph <- identity(TGFBeta_Smad_graph)
 state <- E(graph)$state
 
 plot_directed(graph, state = state, layout = layout.kamada.kawai,
-  border.node=scales::alpha("black", 0.75), fill.node="lightblue",
-  col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
+  border.node=alpha("black", 0.75), fill.node="lightblue",
+  col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[state], 
   cex.node = 1.5, cex.label = 0.8, cex.arrow = 2)
 
 #plot relationship matrix
@@ -446,12 +446,12 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
+heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 
 #simulated data
-expr <- generate_expression(100, graph, state = state, cor = 0.8,
+expr <- generate_expression(100, graph, state, cor = 0.8,
   mean = 0,comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),

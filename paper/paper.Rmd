@@ -235,7 +235,7 @@ install.packages("graphsim")
 #load required packages (once per R instance)
 library("graphsim")
 #load packages for examples
-library("igraph"); library("gplots")
+library("igraph"); library("gplots"); library("scales")
 ```
 
 ```{r simple_graph_hide, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.375\\linewidth', out.width='.375\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, eval=FALSE}
@@ -432,12 +432,12 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
+heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
 #simulated data
-expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
+expr <- generate_expression(100, graph, state, cor = 0.8, mean = 0,
   comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
@@ -461,12 +461,12 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
+heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
 scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #simulated data
-expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
+expr <- generate_expression(100, graph, state, cor = 0.8, mean = 0,
 comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
@@ -528,8 +528,8 @@ graph <- identity(TGFBeta_Smad_graph)
 state <- E(graph)$state
 
 plot_directed(graph, state = state, layout = layout.kamada.kawai,
-  border.node=scales::alpha("black", 0.75), fill.node="lightblue",
-  col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
+  border.node=alpha("black", 0.75), fill.node="lightblue",
+  col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[state], 
   cex.node = 1.5, cex.label = 0.8, cex.arrow = 2)
 
 #plot relationship matrix
@@ -538,12 +538,12 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
+heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 
 #simulated data
-expr <- generate_expression(100, graph, state = state, cor = 0.8,
+expr <- generate_expression(100, graph, state, cor = 0.8,
   mean = 0,comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
@@ -562,8 +562,8 @@ state[pathway[,1] %in% c("SMAD6", "SMAD7", "BAMBI", "SMURF1", "SMURF2", "UCHL5",
   "USP15", "UBB", "UBC", "PMEPA1", "PPP1CA", "PPP1CB", "PPP1CC", "PPP1R15A")] <- 2
 state[is.na(state)] <- 1
 plot_directed(graph, state = state, layout = layout.kamada.kawai,
-  border.node=scales::alpha("black", 0.75), fill.node="lightblue",
-  col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
+  border.node=alpha("black", 0.75), fill.node="lightblue",
+  col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[state], 
   cex.node = 1.5, cex.label = 0.8, cex.arrow = 2, 
   sub = expression(paste("(a) TFG-", beta, " activates SMADs")), cex.sub = 1.75)
 box()
@@ -573,12 +573,12 @@ heatmap.2(make_distance_graph(graph, absolute = FALSE),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state = state, cor = 0.8, absolute = FALSE),
+heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
 scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #simulated data
-expr <- generate_expression(100, graph, state = state, cor = 0.8,
+expr <- generate_expression(100, graph, state, cor = 0.8,
   mean = 0,comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
 heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),

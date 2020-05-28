@@ -337,9 +337,9 @@ heatmap.2(make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE),
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
   comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
 #plot simulated correlations
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+heatmap.2(cor(t(expr)), scale = "none", trace = "none",
+          col = colorpanel(50, "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
-  mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
@@ -440,7 +440,8 @@ heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
 expr <- generate_expression(100, graph, state, cor = 0.8, mean = 0,
   comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+heatmap.2(cor(t(expr)), scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
@@ -546,7 +547,8 @@ heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
 expr <- generate_expression(100, graph, state, cor = 0.8,
   mean = 0,comm = FALSE, dist =TRUE, absolute = FALSE)
 #plot simulated correlations
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", 
+          col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 #plot simulated expression data
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),

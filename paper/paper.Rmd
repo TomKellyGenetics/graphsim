@@ -229,13 +229,33 @@ commands in R:
 ```{r, eval = FALSE}
 #install packages required (once per machine)
 install.packages("graphsim")
+
 ```
-```{r, warning=FALSE, results='hide'}
+```{r, warning=FALSE, results='hide', message=FALSE}
 #load required packages (once per R instance)
-library("graphsim"); library("igraph"); library("gplots")
+library("graphsim")
+#load packages for examples
+library("igraph"); library("gplots")
 ```
 
-```{r simple_graph, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure in Figures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.'}
+```{r simple_graph_hide, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, eval=FALSE}
+#generate graph structure
+graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
+   c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+graph <- graph.edgelist(graph_edges, directed = TRUE)
+
+#plot graph structure (Figure 1a)
+plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
+  cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
+
+#generate parameters for inhibitions for each edge in E(graph)
+state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
+#plot graph structure with inhibitions (Figure 1b)
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+  cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
+```
+
+```{r simple_graph, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure in Figures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.', echo=FALSE}
 #generate graph structure
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
    c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
@@ -247,7 +267,7 @@ plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
 mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.05, adj=0.5, cex=1.75)
 box()
 
-#generate parameters for inhibitions
+#generate parameters for inhibitions for each edge in E(graph)
 state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
 #plot graph structure with inhibitions (Figure 1b)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
@@ -296,7 +316,36 @@ graphics::layout(matrix(c(1:5, 5), nrow = 3, byrow = TRUE))
 set.seed(9000)
 ```
 
-```{r simulation_activating, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.', warning=FALSE}
+
+```{r simulation_activating_hide, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, eval=FALSE, warning=FALSE}
+# activating graph
+state <- rep(1, length(E(graph)))
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+  cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph, absolute = FALSE),
+  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, 0.8, absolute = FALSE),
+  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+
+#simulated data
+expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
+  comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+  mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+```
+
+```{r simulation_activating, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.', warning=FALSE, echo=FALSE}
 # activating graph
 state <- rep(1, length(E(graph)))
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
@@ -370,7 +419,37 @@ reference="fig:simulation_inhibiting:fourth"}).
 set.seed(9000)
 ```
 
-```{r simulation_inhibiting, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.', warning=FALSE}
+
+```{r simulation_inhibiting_hide, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, eval=FALSE, warning=FALSE}
+#generate parameters for inhibitions
+state <- c(1, 1, -1, 1, 1, 1, 1, -1)
+plot_directed(graph, state=state, layout = layout.kamada.kawai,
+  cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph, absolute = FALSE),
+  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+
+# #plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
+  scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+
+#simulated data
+expr <- generate_expression(100, graph, state = state, cor = 0.8, mean = 0,
+  comm = FALSE, dist =TRUE, absolute = FALSE)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
+
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+```
+
+
+```{r simulation_inhibiting, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.', warning=FALSE, echo=FALSE}
 #generate parameters for inhibitions
 state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
@@ -443,7 +522,39 @@ functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
 set.seed(9000)
 ```
 
-```{r simulation_smad, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulating expression from a biological pathway graph structure}. The graph structure (a) of a known biological pathway, the TGF-$\\beta$ receptor signaling activates SMADs (R-HSA-2173789), was used to derive a relationship matrix (b), $\\Sigma$ matrix (c) and correlation structure (d) from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here modules of genes with correlated expression can be clearly discerned.', warning=FALSE}
+```{r simulation_smad_hide, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, eval=FALSE, warning=FALSE}
+#import graph from data
+graph <- identity(TGFBeta_Smad_graph)
+#generate parameters for inhibitions
+state <- E(graph)$state
+
+plot_directed(graph, state = state, layout = layout.kamada.kawai,
+  border.node=scales::alpha("black", 0.75), fill.node="lightblue",
+  col.arrow = c(scales::alpha("navyblue", 0.25), scales::alpha("red", 0.25))[state], 
+  cex.node = 1.5, cex.label = 0.8, cex.arrow = 2)
+
+# #plot relationship matrix
+heatmap.2(make_distance_graph(graph, absolute = FALSE),
+  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+
+# #plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph, state = state, 0.8, absolute = FALSE),
+  scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+
+#simulated data
+expr <- generate_expression(100, graph, state = state, cor = 0.8,
+  mean = 0,comm = FALSE, dist =TRUE, absolute = FALSE)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
+```
+
+```{r simulation_smad, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.415\\linewidth', out.width='.415\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, fig.cap = '\\textbf{Simulating expression from a biological pathway graph structure}. The graph structure (a) of a known biological pathway, the TGF-$\\beta$ receptor signaling activates SMADs (R-HSA-2173789), was used to derive a relationship matrix (b), $\\Sigma$ matrix (c) and correlation structure (d) from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here modules of genes with correlated expression can be clearly discerned.', warning=FALSE, echo=FALSE}
 #import graph from data
 graph <- identity(TGFBeta_Smad_graph)
 #generate parameters for inhibitions
@@ -481,7 +592,6 @@ mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
 mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
 mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 ```
-
 
 
 ```{r, include=FALSE, warning=FALSE}

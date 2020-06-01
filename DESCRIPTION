@@ -21,7 +21,6 @@ Imports:
 Suggests:
     knitr (>= 1.5),
     rmarkdown,
-    animation,
     testthat,
     scales,
     devtools

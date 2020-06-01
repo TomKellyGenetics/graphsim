@@ -309,5 +309,231 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 Here we give some toy examples to show how the simulations behave in simple cases. This serves to understand how modules within a larger graph will translate to correlations in the final simulated datasets.
 
+## Diverging branches
+
+```{r simulation_graph_diverging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+graph_diverging_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
+graph_diverging <- graph.edgelist(graph_diverging_edges, directed = T)
+
+# activating graph
+state <- rep(1, length(E(graph_diverging)))
+plot_directed(graph_diverging, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph_diverging, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph_diverging, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, graph_diverging, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+### Inhibiting relationships
+
+Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
+
+```{r simulation_graph_diverging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+# activating graph
+state <- state <- c(1, 1, -1)
+plot_directed(graph_diverging, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph_diverging, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph_diverging, state, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, graph_diverging, state, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph_diverging)), rowsep = 1:length(V(graph_diverging)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+## Converging branches
+
+
+```{r simulation_graph_converging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+graph_converging_edges <- rbind(c("C", "E"), c("D", "E"), c("E", "F"))
+graph_converging <- graph.edgelist(graph_converging_edges, directed = T)
+
+# activating graph
+state <- rep(1, length(E(graph_converging)))
+plot_directed(graph_converging, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph_converging, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph_converging, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, graph_converging, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+### Inhibiting relationships
+
+Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
+
+```{r simulation_graph_converging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+# activating graph
+state <- state <- c(-1, 1, -1)
+plot_directed(graph_converging, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph_converging, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph_converging, state, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, graph_converging, state, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph_converging)), rowsep = 1:length(V(graph_converging)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+## Reconnecting paths
+
+
+```{r simulation_graph_reconnecting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+graph_reconnecting_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"),c("C", "E"), c("D", "E"), c("E", "F"))
+graph_reconnecting <- graph.edgelist(graph_reconnecting_edges, directed = T)
+
+# activating graph
+state <- rep(1, length(E(graph_reconnecting)))
+plot_directed(graph_reconnecting, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph_reconnecting, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph_reconnecting, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, graph_reconnecting, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+### Inhibiting relationships
+
+Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
+
+```{r simulation_graph_reconnecting_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+# activating graph
+state <- state <- c(1, 1, -1, -1, 1, 1, 1, 1)
+plot_directed(graph_reconnecting, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(graph_reconnecting, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(graph_reconnecting, state, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, graph_reconnecting, state, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(graph_reconnecting)), rowsep = 1:length(V(graph_reconnecting)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
 
 # Empirical examples

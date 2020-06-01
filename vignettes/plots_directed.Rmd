@@ -4,7 +4,7 @@ author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Directed Plots in iGraph}
+  %\VignetteIndexEntry{Directed plots for igraph objects}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---

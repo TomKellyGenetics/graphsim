@@ -25,6 +25,6 @@ Suggests:
     scales,
     devtools
 LazyData: TRUE
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0.9000
 Encoding: UTF-8
 VignetteBuilder: knitr

@@ -229,7 +229,6 @@ commands in R:
 ```{r, eval = FALSE}
 #install packages required (once per machine)
 install.packages("graphsim")
-
 ```
 ```{r, warning=FALSE, results='hide', message=FALSE}
 #load required packages (once per R instance)

@@ -159,7 +159,7 @@ edge_properties <- E(graph)$state
 plot_directed(graph, state = edge_properties, col.arrow = c("#00A9FF", "#F8766D")[edge_properties], fill.node = c("springgreen1"))
 ```
 
-Here we plot the TGF$\\beta$-Smad pathway with inhibitions known. States are imported as edge attributes from the imported graph.
+Here we plot the TGFβ-Smad pathway with inhibitions known. States are imported as edge attributes from the imported graph.
 
 
 ```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}

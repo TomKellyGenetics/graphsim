@@ -44,6 +44,15 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
       state <- rep(1, length(E(graph)))
     }
   }
+  if(is.null(get.edge.attribute(graph, "state"))){
+    E(graph)$state <-  state
+  }
+  # this could also be done with igraph::simplify(graph, remove.multiple = TRUE, remove.loops = TRUE, edge.attr.comb = igraph_opt("edge.attr.comb"))
+  ## to do: migrate to this
+  graph <- as.undirected(graph, mode = "collapse", edge.attr.comb = function(x) ifelse(any(x %in% list(-1, 2, "inhibiting", "inhibition")), -1, 1))
+  # remove duplicate edges (and corresponding states)
+  graph <- as.directed(graph, mode = "arbitrary")
+  state <- get.edge.attribute(graph, "state")
   if(!is.integer(n)){
     if(is.numeric(n)){
       if(floor(n) == n){
@@ -68,7 +77,8 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
   ## migrate state to calling sigma ##
   if(!(is.null(state))){
     if(all(sig >= 0)){
-      sig <- state * sig
+      state_mat <- make_state_matrix(graph, state)
+      sig <- sig * sign(state_mat)
     }
   }
   if(is.symmetric.matrix(sig) == FALSE) {

@@ -149,6 +149,16 @@ make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, absolute =
     }
   }
   mat <- make_distance_graph(graph, absolute = absolute)
-  sig <- make_sigma_mat_dist_adjmat(mat, state, cor)
+  if(!(all(diag(mat) == 1))) stop("distance matrix must have diagonal of zero")
+  if(!(max(mat[mat != 1]) > 0) || !(max(mat[mat!=1]) <= 1)) stop("distance matrix expected, not adjacency matrix")
+  sig <- mat/max(mat[mat != 1]) * cor
+  sig <- ifelse(sig > 0, sig, 0)
+  diag(sig) <- 1
+  #derive states directly from graph if available
+  state_mat <- make_state_matrix(graph, state)
+  sig <- sig * sign(state_mat)
+  rownames(sig) <- rownames(mat)
+  colnames(sig) <- colnames(mat)
+  return(sig)
   return(sig)
 }

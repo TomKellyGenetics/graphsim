@@ -38,8 +38,12 @@ make_state_matrix <- function(graph, state = NULL){
       state <- "activating"
     }
   }
-  graph <- as.undirected(graph, mode = "collapse")
-  E(graph)$state <-  state
+  if(is.null(get.edge.attribute(graph, "state"))){
+    E(graph)$state <-  state
+  }
+  # this could also be done with igraph::simplify(graph, remove.multiple = TRUE, remove.loops = TRUE, edge.attr.comb = igraph_opt("edge.attr.comb"))
+  ## to do: migrate to this
+  graph <- as.undirected(graph, mode = "collapse", edge.attr.comb = function(x) ifelse(any(x %in% list(-1, 2, "inhibiting", "inhibition")), -1, 1))
   # remove duplicate edges (and corresponding states)
   graph <- as.directed(graph, mode = "arbitrary")
   state <- get.edge.attribute(graph, "state")

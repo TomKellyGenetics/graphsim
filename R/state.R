@@ -160,6 +160,11 @@ make_state_matrix <- function(graph, state = NULL){
           #check for multiple edges
           if(length(kk) > 1){
             #check for same edges
+            if(!all(apply(edges[kk,], 2, function(x) all(x == x[1])))){
+              #reverse edge if no match
+              edges[kk,][edges[kk[1],1] != edges[kk,1],] <- edges[kk,][edges[kk[1],1] != edges[kk,1],2:1]
+            }
+              #check is still no match
             if(all(apply(edges[kk,], 2, function(x) all(x == x[1])))){
               #check for same state
               if(all(state[kk] == state[kk][1])){

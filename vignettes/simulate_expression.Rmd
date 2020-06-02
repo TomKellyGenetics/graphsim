@@ -1,7 +1,7 @@
 ---
 title: "Simulating continuous data based on network graph structures"
 author: "Tom Kelly"
-date: "`r Sys.Date()`"
+date: "`r  format(Sys.time(), '%A %d %B %Y')`"
 output: rmarkdown::html_document
 vignette: >
   %\VignetteIndexEntry{Simulating network graph structure in continuous data}
@@ -60,6 +60,7 @@ Once the required packages are installed, we must load the packages required to 
 library("igraph")
 library("gplots")
 library("graphsim")
+library("scales")
 ```
 
 ## Set up simulated graphs
@@ -309,7 +310,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 Here we give some toy examples to show how the simulations behave in simple cases. This serves to understand how modules within a larger graph will translate to correlations in the final simulated datasets.
 
-## Diverging branches
+### Diverging branches
 
 ```{r simulation_graph_diverging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
 graph_diverging_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
@@ -347,7 +348,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 ```
 
-### Inhibiting relationships
+#### Inhibiting relationships
 
 Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
 
@@ -384,7 +385,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 ```
 
-## Converging branches
+### Converging branches
 
 
 ```{r simulation_graph_converging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
@@ -423,7 +424,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 ```
 
-### Inhibiting relationships
+#### Inhibiting relationships
 
 Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
 
@@ -460,7 +461,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 ```
 
-## Reconnecting paths
+### Reconnecting paths
 
 
 ```{r simulation_graph_reconnecting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
@@ -499,7 +500,7 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 ```
 
-### Inhibiting relationships
+#### Inhibiting relationships
 
 Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
 
@@ -537,3 +538,211 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 ```
 
 # Empirical examples
+
+Next we demonstrate the simulation procedure based on real biological pathways from the "Reactome" database. We can import these from the `data` directory included with this package. These graphs are given for examples and convenience.
+
+### Kinase pathways
+
+The following pathways are treated as all relationships are activating.
+
+#### RAF/MAP kinase cascade
+
+Here we generate simulated data for the RAF/MAP kinase cascade pathway.
+
+```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, message = FALSE}
+#RAF_MAP_graph <- identity(RAF_MAP_graph)
+#plot_directed(graph, col.arrow = "#00A9FF", fill.node = "lightblue")
+```
+
+
+```{r simulation_RAF_MAP_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+RAF_MAP_graph <- identity(RAF_MAP_graph)
+
+# activating graph
+state <- rep(1, length(E(RAF_MAP_graph)))
+plot_directed(RAF_MAP_graph, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2,
+              col.arrow = "#00A9FF", fill.node = "lightblue")
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(RAF_MAP_graph, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(RAF_MAP_graph)), rowsep = 1:length(V(RAF_MAP_graph)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(RAF_MAP_graph, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(RAF_MAP_graph)), rowsep = 1:length(V(RAF_MAP_graph)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, RAF_MAP_graph, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(RAF_MAP_graph)), rowsep = 1:length(V(RAF_MAP_graph)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(RAF_MAP_graph)), rowsep = 1:length(V(RAF_MAP_graph)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+#### Phosphoinositide-3-kinase cascade
+
+Here we generate simulated data for the phosphoinositide-3-kinase (Pi3K) cascade pathway.
+
+```{r simulation_Pi3K_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+graph <- identity(Pi3K_graph)
+
+# activating graph
+state <- rep(1, length(E(Pi3K_graph)))
+plot_directed(Pi3K_graph, state=state, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2,
+              col.arrow = "#00A9FF", fill.node = "lightblue")
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(Pi3K_graph, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(Pi3K_graph)), rowsep = 1:length(V(Pi3K_graph)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(Pi3K_graph, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(Pi3K_graph)), rowsep = 1:length(V(Pi3K_graph)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, Pi3K_graph, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(Pi3K_graph)), rowsep = 1:length(V(Pi3K_graph)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(Pi3K_graph)), rowsep = 1:length(V(Pi3K_graph)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+### Pathways with repression
+
+#### The Pi3K/AKT pathway
+
+Here we generate simulated data for the phosphoinositide-3-kinase activation of Protein kinase B (PKB) cascade (also known as Pi3k/AKT) pathway. States are imported as edge attributes from the imported graph.
+
+
+```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, message = FALSE}
+Pi3K_AKT_graph <- identity(Pi3K_AKT_graph)
+edge_properties <- E(Pi3K_AKT_graph)$state
+plot_directed(Pi3K_AKT_graph, state = edge_properties, col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[edge_properties], fill.node = c("lightblue"))
+```
+
+```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+Pi3K_AKT_graph <- identity(Pi3K_AKT_graph)
+edge_properties <- E(Pi3K_AKT_graph)$state
+
+# activating graph
+#state <- rep(1, length(E(Pi3K_AKT_graph)))
+plot_directed(Pi3K_AKT_graph, state = edge_properties, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2,
+              col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[edge_properties],fill.node = "lightblue")
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(Pi3K_AKT_graph, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(Pi3K_AKT_graph, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, Pi3K_AKT_graph, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+#### The TGFβ-Smad pathway
+
+Here we generate simulated data for the TGFβ-Smad gene regulatory pathway with inhibitions known. States are imported as edge attributes from the imported graph.
+
+
+```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
+edge_properties <- E(TGFBeta_Smad_graph)$state
+plot_directed(TGFBeta_Smad_graph, state = edge_properties, col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[edge_properties], fill.node = c("lightblue"))
+```
+
+```{r simulation_TGFBeta_Smad_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
+edge_properties <- E(TGFBeta_Smad_graph)$state
+
+# activating graph
+plot_directed(TGFBeta_Smad_graph, state = edge_properties, layout = layout.kamada.kawai,
+              cex.node=2, cex.arrow=4, arrow_clip = 0.2,
+              col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[edge_properties],fill.node = "lightblue")
+mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj=0.5, cex=1.75)
+box()
+#plot relationship matrix
+heatmap.2(make_distance_graph(TGFBeta_Smad_graph, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(TGFBeta_Smad_graph)), rowsep = 1:length(V(TGFBeta_Smad_graph)))
+mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot sigma matrix
+heatmap.2(make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(TGFBeta_Smad_graph)), rowsep = 1:length(V(TGFBeta_Smad_graph)))
+mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#simulated data
+expr <- generate_expression(100, TGFBeta_Smad_graph, cor = 0.8, mean = 0,
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+#plot simulated correlations
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+          colsep = 1:length(V(TGFBeta_Smad_graph)), rowsep = 1:length(V(TGFBeta_Smad_graph)))
+mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+#plot simulated expression data
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
+          colsep = 1:length(V(TGFBeta_Smad_graph)), rowsep = 1:length(V(TGFBeta_Smad_graph)), labCol = "")
+mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
+mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
+mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
+
+```
+
+# Summary
+
+Here we have demonstrated that simulated datasets can be generated based on graph structures. These can be either constructed networks for modelling purposes or empirical networks such as those from curated biological databases. 
+Various parameters are available and described in the documentation. You can alter these parameters in the examples given here to see the impact they have on the final network. It is encouraged to try different parameters and examine the results carefully, in addition to carefully considering which assumptions are appropriate for your investigations. A model or simulation is never correct, it is a tool to test your assumptions and find weaknesses in your technique, consider which conditions could your method struggle with and model these. Pathway structure in particular should be considered in biological datasets as correlations within a pathway can lead to false positive results and confounding.
+
+The intended application for thse package is modelling RNA-Seq gene expression data. However, other applications are encouraged, provided that they require multivariate normal simulations based on relationships in graph structures.
+
+## Citation
+
+If you use this package, please cite it where appropriate to recognise the efforts of the developers.
+
+```{r echo=TRUE, message=TRUE}
+citation("graphsim")
+```
+
+## Reporting issues
+
+Please see the GitHub repository for reporting problems and requesting changes. Details on how to contribute can be found in the DESCRIPTION and README.

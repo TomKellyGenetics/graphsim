@@ -1,7 +1,7 @@
 ---
 title: "Directed plots for igraph objects"
 author: "Tom Kelly"
-date: "`r Sys.Date()`"
+date: "`r  format(Sys.time(), '%A %d %B %Y')`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Directed plots for igraph objects}
@@ -136,7 +136,7 @@ Here we demonstrate the plotting package to display real biological pathways fro
 Here we plot the RAF/MAP kinase cascade pathway.
 
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, message = FALSE}
 graph <- identity(RAF_MAP_graph)
 plot_directed(graph, col.arrow = "#00A9FF", fill.node = "springgreen1")
 ```

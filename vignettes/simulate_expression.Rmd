@@ -224,6 +224,11 @@ heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "gr
 
 Here we use absolute distance (relationships are arithmetrically weighted to the diameter).
 
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=36}
 #absolute dist
 expr <- generate_expression(100, graph_structure, cor = 0.8, mean = 0, comm = F, dist = T, absolute = T) # unable to generate from adj mat ## fixed PD
@@ -236,7 +241,12 @@ heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = bluered(50), colse
 
 In summary, we compute the following expression dataset but on these underlying relationships in the graph structure. Here we use geometrically decreasing correlations between more distant nodes in the network.
 
-```{r simulation_activating_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_activating_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- rep(1, length(E(graph_structure)))
 plot_directed(graph_structure, state=state, layout = layout.kamada.kawai,
@@ -273,7 +283,12 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
 
-```{r simulation_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 plot_directed(graph_structure, state=state, layout = layout.kamada.kawai,
@@ -312,7 +327,12 @@ Here we give some toy examples to show how the simulations behave in simple case
 
 ### Diverging branches
 
-```{r simulation_graph_diverging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_graph_diverging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_diverging_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_diverging <- graph.edgelist(graph_diverging_edges, directed = T)
 
@@ -352,7 +372,12 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
 
-```{r simulation_graph_diverging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_graph_diverging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(1, 1, -1)
 plot_directed(graph_diverging, state=state, layout = layout.kamada.kawai,
@@ -387,8 +412,12 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 ### Converging branches
 
+```{r, include = FALSE}
+set.seed(9000)
+```
 
-```{r simulation_graph_converging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+
+```{r simulation_graph_converging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_converging_edges <- rbind(c("C", "E"), c("D", "E"), c("E", "F"))
 graph_converging <- graph.edgelist(graph_converging_edges, directed = T)
 
@@ -428,7 +457,12 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
 
-```{r simulation_graph_converging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_graph_converging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(-1, 1, -1)
 plot_directed(graph_converging, state=state, layout = layout.kamada.kawai,
@@ -463,8 +497,12 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 ### Reconnecting paths
 
+```{r, include = FALSE}
+set.seed(9000)
+```
 
-```{r simulation_graph_reconnecting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+
+```{r simulation_graph_reconnecting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_reconnecting_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"),c("C", "E"), c("D", "E"), c("E", "F"))
 graph_reconnecting <- graph.edgelist(graph_reconnecting_edges, directed = T)
 
@@ -504,7 +542,12 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 Here we simulate the same graph structure with inhibiting edges but passing the `"state"` parameter. This takes one argument for each each to identify which are inhibitory (as documented).
 
-```{r simulation_graph_reconnecting_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_graph_reconnecting_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(1, 1, -1, -1, 1, 1, 1, 1)
 plot_directed(graph_reconnecting, state=state, layout = layout.kamada.kawai,
@@ -549,9 +592,13 @@ The following pathways are treated as all relationships are activating.
 
 Here we generate simulated data for the RAF/MAP kinase cascade pathway.
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, message = FALSE}
+```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, eval = FALSE, echo = FALSE, warning=FALSE, message = FALSE}
 #RAF_MAP_graph <- identity(RAF_MAP_graph)
 #plot_directed(graph, col.arrow = "#00A9FF", fill.node = "lightblue")
+```
+
+```{r, include = FALSE}
+set.seed(9000)
 ```
 
 
@@ -595,7 +642,12 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 
 Here we generate simulated data for the phosphoinositide-3-kinase (Pi3K) cascade pathway.
 
-```{r simulation_Pi3K_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_Pi3K_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph <- identity(Pi3K_graph)
 
 # activating graph
@@ -638,14 +690,21 @@ mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0
 Here we generate simulated data for the phosphoinositide-3-kinase activation of Protein kinase B (PKB) cascade (also known as Pi3k/AKT) pathway. States are imported as edge attributes from the imported graph.
 
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, message = FALSE}
+```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, eval = FALSE, echo = FALSE, message = FALSE}
 Pi3K_AKT_graph <- identity(Pi3K_AKT_graph)
 edge_properties <- E(Pi3K_AKT_graph)$state
 plot_directed(Pi3K_AKT_graph, state = edge_properties, col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[edge_properties], fill.node = c("lightblue"))
 ```
 
-```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+
+```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 Pi3K_AKT_graph <- identity(Pi3K_AKT_graph)
+Pi3K_AKT_graph <- simplify(Pi3K_AKT_graph, edge.attr.comb = function(x) ifelse(any(x %in% list(-1, 2, "inhibiting", "inhibition")), 2, 1))
+Pi3K_AKT_graph <- simplify(Pi3K_AKT_graph, edge.attr.comb = "first")
 edge_properties <- E(Pi3K_AKT_graph)$state
 
 # activating graph
@@ -657,24 +716,20 @@ mtext(text = "(a) Activating pathway structure", side=1, line=3.5, at=0.075, adj
 box()
 #plot relationship matrix
 heatmap.2(make_distance_graph(Pi3K_AKT_graph, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
-          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)))
+          scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
 mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(Pi3K_AKT_graph, cor = 0.8, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
-          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)))
+heatmap.2(make_sigma_mat_dist_graph(Pi3K_AKT_graph, state = edge_properties, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #simulated data
 expr <- generate_expression(100, Pi3K_AKT_graph, cor = 0.8, mean = 0,
-                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = edge_properties)
 #plot simulated correlations
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
-          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)))
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot simulated expression data
-heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
-          colsep = 1:length(V(Pi3K_AKT_graph)), rowsep = 1:length(V(Pi3K_AKT_graph)), labCol = "")
+heatmap.2(expr, scale = "none", trace = "none", col = bluered(50), labCol = "")
 mtext(text = "samples", side=1, line=1.5, at=0.2, adj=0.5, cex=1.5)
 mtext(text = "genes", side=4, line=1, at=-0.4, adj=0.5, cex=1.5)
 mtext(text = "(e) Simulated expression data (log scale)", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
@@ -692,7 +747,11 @@ edge_properties <- E(TGFBeta_Smad_graph)$state
 plot_directed(TGFBeta_Smad_graph, state = edge_properties, col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[edge_properties], fill.node = c("lightblue"))
 ```
 
-```{r simulation_TGFBeta_Smad_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r, include = FALSE}
+set.seed(9000)
+```
+
+```{r simulation_TGFBeta_Smad_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 edge_properties <- E(TGFBeta_Smad_graph)$state
 
@@ -708,15 +767,15 @@ heatmap.2(make_distance_graph(TGFBeta_Smad_graph, absolute = FALSE),
           colsep = 1:length(V(TGFBeta_Smad_graph)), rowsep = 1:length(V(TGFBeta_Smad_graph)))
 mtext(text = "(b) Relationship matrix", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE),
-          scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+heatmap.2(make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = edge_properties, cor = 0.8, absolute = FALSE),
+          scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
           colsep = 1:length(V(TGFBeta_Smad_graph)), rowsep = 1:length(V(TGFBeta_Smad_graph)))
 mtext(text = expression(paste("(c) ", Sigma, " matrix")), side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #simulated data
 expr <- generate_expression(100, TGFBeta_Smad_graph, cor = 0.8, mean = 0,
-                            comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
+                            comm = FALSE, dist =TRUE, absolute = FALSE, state = edge_properties)
 #plot simulated correlations
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
+heatmap.2(cor(t(expr)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
           colsep = 1:length(V(TGFBeta_Smad_graph)), rowsep = 1:length(V(TGFBeta_Smad_graph)))
 mtext(text = "(d) Simulated correlation", side=1, line=3.5, at=0, adj=0.5, cex=1.75)
 #plot simulated expression data
@@ -739,7 +798,7 @@ The intended application for thse package is modelling RNA-Seq gene expression d
 
 If you use this package, please cite it where appropriate to recognise the efforts of the developers.
 
-```{r echo=TRUE, message=TRUE}
+```{r echo=TRUE, message=TRUE, warning=FALSE}
 citation("graphsim")
 ```
 

@@ -27,7 +27,7 @@ affiliations:
    index: 1
  - name: "RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan"
    index: 2
-date: 30 April 2020
+date: "02 June 2020"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
@@ -222,7 +222,6 @@ commands in R:
 ```r
 #install packages required (once per machine)
 install.packages("graphsim")
-
 ```
 
 ```r

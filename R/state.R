@@ -166,6 +166,7 @@ make_state_matrix <- function(graph, state = NULL){
                 state[kk] <- state[kk][1]
                 kk <- kk[1]
               } else {
+                warning(paste("Conflicting state for redundant edges", edges[kk[1],1], edges[kk[1],2], "with state", state[kk]))
                 Mode <- function(x) unique(x)[which.max(tabulate(match(x, unique(x))))][1]
                 state[kk] <- Mode(state[kk])
                 kk <- kk[1]

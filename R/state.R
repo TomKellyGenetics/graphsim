@@ -157,8 +157,29 @@ make_state_matrix <- function(graph, state = NULL){
           edges[,1] == names(paths[[ii]])[jj-1] & edges[,2] == names(paths[[ii]])[jj] |
           edges[,2] == names(paths[[ii]])[jj-1] & edges[,1] == names(paths[[ii]])[jj]
           )
+          #check for multiple edges
+          if(length(kk) > 1){
+            #check for same edges
+            if(all(apply(edges[kk,], 2, function(x) all(x == x[1])))){
+              #check for same state
+              if(all(state[kk] == state[kk][1])){
+                state[kk] <- state[kk][1]
+                kk <- kk[1]
+              } else {
+                Mode <- function(x) unique(x)[which.max(tabulate(match(x, unique(x))))][1]
+                state[kk] <- Mode(state[kk])
+                kk <- kk[1]
+              }
+            }
+          }
           #state for edges
-          state_path[jj] <- state[kk]
+          if(length(state_path[jj]) == length(state[kk])){
+            state_path[jj] <- state[kk]
+          } else {
+            print(ii)
+            print(jj)
+            stop("State not compatible with graph paths")
+          }
         }
         #cumulative product changes state along a path (*-1)
         state_path <- cumprod(state_path)

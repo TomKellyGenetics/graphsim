@@ -4,12 +4,14 @@
 \name{TGFBeta_Smad_graph}
 \alias{TGFBeta_Smad_graph}
 \title{TGF-\eqn{\beta} receptor signaling activates SMADs}
-\format{A graph object of 32 vertices and 173 edges:
+\format{
+A graph object of 32 vertices and 173 edges:
 \describe{
   \item{V}{gene symbol (human)}
   \item{E}{directed relationship for pathway}
   \item{state}{type of relationship (activating or inhibiting) as edge attribute}
-}}
+}
+}
 \source{
 PathwayCommons \url{https://reactome.org/content/detail/R-HSA-2173789}
 }

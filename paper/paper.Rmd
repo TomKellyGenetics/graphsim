@@ -105,6 +105,13 @@ of regulatory networks has thus far relied on experimental validation or
 resampling-based approaches to estimate the likelihood of specific
 network modules being predicted [@Markowetz2007; @Hawe2019].
 
+
+GeneNetWeaver @Schaffter2011 - benchmarking of gene regulatory network inference methods
+Splatter @Zappia2017 - simulated single-cell RNA-Seq data (gamma-poisson)
+dyngen @Cannoodt2020 - single-cell multimodal -  Gillespie’s stochastic simulation at single-molecule level
+SERGIO @Dibaeinia2019 - single-cell gene expression (noise with poisson)
+
+
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from
 hypothetical, inferred or known gene networks. Here we present a

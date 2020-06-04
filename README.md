@@ -18,15 +18,48 @@
 
 ###  Simulate Expression Data from 'igraph' Networks 
 
-Functions to develop simulated continuous data (e.g., gene expression) from a sigma covariance matrix derived from a graph structure in 'igraph' objects. Intended to extend 'mvtnorm' to take 'igraph' structures rather than sigma matrices as input. This allows the use of simulated data that correctly accounts for
-pathway relationships and correlations. Here we present a versatile statistical framework to simulate 
-correlated gene expression data from biological pathways, by sampling from a multivariate normal distribution
-derived from a graph structure. This package allows the simulation of biological
-pathways from a graph structure based on a statistical model of gene expression. For example
-methods to infer biological pathways and gene regulatory networks from
-gene expression data can be tested on simulated datasets using this framework. This also allows for
-pathway structures to be considered as a confounding variable when simulating gene expression
-data to test the performance of genomics analyses.
+This package provides functions to develop simulated continuous data 
+(e.g., gene expression) from a sigma covariance matrix derived from a 
+graph structure in 'igraph' objects. Intended to extend 'mvtnorm' to 
+take 'igraph' structures rather than sigma matrices as input. This 
+allows the use of simulated data that correctly accounts for pathway
+relationships and correlations. Here we present a versatile statistical 
+framework to simulate correlated gene expression data from biological 
+pathways, by sampling from a multivariate normal distribution derived 
+from a graph structure. This package allows the simulation of biological
+pathways from a graph structure based on a statistical model of 
+gene expression, such as simulation of expression profiles that
+of log-transformed and normalised data from microarray and RNA-Seq data.
+experiments. 
+
+#### Motivation
+
+Network analysis of molecular biological pathways is important
+for insights into biology and medical genetics. 
+Gene expression profiles capture the regulatory state of a cell
+and can be used to analyse complex molecular states with genome-scale data.
+Biological pathways are more than simply sets of genes involved in functions,
+they are rich in information of relationships defined by pathway structure.
+
+Methods to infer biological pathways and gene regulatory networks from gene
+expression data can be tested on  simulated datasets using this framework. This also allows for
+pathway structures to be considered as a confounding variable when 
+simulating gene expression data to test the performance of genomics analyses.
+
+This package enable the generation of simulated gene expression datasets
+containing pathway relationships from a known underlying network.
+These simulated datasets can be used to evaluate various bioinformatics
+methodologies, including statistical and network inference procedures.
+
+Network analysis techniques have an important role in understanding
+of biological pathways and interpretation of genomics studies.
+Modelling biological pathways allows the evaluation of gene
+regulatory network inference techniques (which so far rely on
+experimental validation or resampling). This technique also
+enables modelling datasets with correlated pathway-structures
+to assess whether other genomics analysis techniques perform
+as expected with the background of complex pathways.
+
 
 ## Installation
 

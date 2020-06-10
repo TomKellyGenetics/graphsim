@@ -116,7 +116,7 @@ specifically for benchmarking gene regulatory network inference techniques.
 There is renewed interest in modelling biological pathways and simulating
 data for benchmarking due to the emergence of single-cell genomics
 technologies and the plethora of bioinformatics techniques developed
-to use this data [@Zappia2017; @Saelens2019]. Packages such as Splatter
+to use this data [@Zappia2017; @Saelens2019]. Packages such as 'splatter'
 [@Zappia2017], which uses the gamma-poisson distribution,
 have been developed to model single-cell data.
 SERGIO [@Dibaeinia2019] and dyngen [@Cannoodt2020] build on

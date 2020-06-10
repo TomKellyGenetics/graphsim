@@ -54,11 +54,81 @@ Compute simulated continuous expression data from a graph network structure. Req
 }
 \examples{
 
+# construct a synthetic graph module
+library("igraph")
+graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
+graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
+
+# compute a simulated dataset for toy example
+# n = 100 samples
+# cor = 0.8 max correlation between samples
+# absolute = FALSE (geometric distance by default)
+test_data <- generate_expression(100, graph_test, cor = 0.8)
+##' # visualise matrix
+library("gplots")
+# expression data
+heatmap.2(test_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+# correlations
+heatmap.2(cor(t(test_data)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+# expected correlations (Σ)
+sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
+heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+
+# compute a simulated dataset for toy example
+# n = 100 samples
+# cor = 0.8 max correlation between samples
+# absolute = TRUE (arithmetic distance)
+test_data <- generate_expression(100, graph_test, cor = 0.8, absolute = TRUE)
+##' # visualise matrix
+library("gplots")
+# expression data
+heatmap.2(test_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+# correlations
+heatmap.2(cor(t(test_data)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+# expected correlations (Σ)
+sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
+heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+
+# construct a synthetic graph network
+graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
+                               c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
+
+# compute a simulated dataset for toy network
+# n = 100 samples
+# state = edge_state (properties of each edge)
+# cor = 0.8 max correlation between samples
+# absolute = FALSE (geometric distance by default)
+edge_state <- c(1, 1, -1, 1, 1, 1, 1, -1)
+structure_data <- generate_expression(100, graph_structure, state = edge_state, cor = 0.8)
+##' # visualise matrix
+library("gplots")
+# expression data
+heatmap.2(structure_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+# correlations
+heatmap.2(cor(t(structure_data)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+# expected correlations (Σ)
+sigma_matrix <- make_sigma_mat_graph(graph_structure, state = edge_state, cor = 0.8)
+heatmap.2(make_sigma_mat_graph(graph_structure, state = edge_state, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+
+# import graph from package for reactome pathway
+# TGF-β receptor signaling activates SMADs (R-HSA-2173789)
+TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
+
+# compute adjacency matrix for TGF-β receptor signaling activates SMADs
+TGFBeta_Smad_adjacency_matrix <- make_adjmatrix_graph(TGFBeta_Smad_graph)
+dim(TGFBeta_Smad_adjacency_matrix)
+TGFBeta_Smad_adjacency_matrix[1:12, 1:12]
 library("igraph")
 graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 n <- 100
 generate_expression(n, graph_test, cor = 0.8)
+
+# compare the states to the sign of final correlations in the simulated matrix
+TFGB_Smad_data <- generate_expression(100, TGFBeta_Smad_graph, cor = 0.8)
+heatmap.2(cor(t(TFGB_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+
 
 adjacency_matrix <- make_adjmatrix_graph(graph_test)
 generate_expression_mat(n, adjacency_matrix, cor = 0.8)

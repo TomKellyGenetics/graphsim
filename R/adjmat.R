@@ -13,10 +13,31 @@
 ##' @import igraph
 ##' @examples 
 ##' 
+##' # construct a synthetic graph module
 ##' library("igraph")
 ##' graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 ##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
+##' 
+##' # compute adjacency matrix for toy example
 ##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
+##' adjacency_matrix
+##' 
+##' # construct a synthetic graph network
+##' graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
+##'                                c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+##' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
+##' # compute adjacency matrix for toy network
+##' graph_structure_adjacency_matrix <- make_adjmatrix_graph(graph_structure)
+##' graph_structure_adjacency_matrix
+##' 
+##' # import graph from package for reactome pathway
+##' # TGF-β receptor signaling activates SMADs (R-HSA-2173789)
+##' TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
+##' 
+##' # compute adjacency matrix for TGF-β receptor signaling activates SMADs
+##' TGFBeta_Smad_adjacency_matrix <- make_adjmatrix_graph(TGFBeta_Smad_graph)
+##' dim(TGFBeta_Smad_adjacency_matrix)
+##' TGFBeta_Smad_adjacency_matrix[1:12, 1:12]
 ##' 
 ##' @return An adjacency matrix compatible with generating an expression matrix
 ##' 

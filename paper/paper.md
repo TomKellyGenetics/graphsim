@@ -267,7 +267,7 @@ plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
   cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
 
 #generate parameters for inhibitions for each edge in E(graph)
-state <- c(1, 1, -1, 1, 1, 1, 1, -1, 1)
+state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 #plot graph structure with inhibitions (Figure 1b)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
   cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)

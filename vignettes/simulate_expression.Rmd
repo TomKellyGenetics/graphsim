@@ -2,7 +2,9 @@
 title: "Simulating continuous data based on network graph structures"
 author: "Tom Kelly"
 date: "`r  format(Sys.time(), '%A %d %B %Y')`"
-output: rmarkdown::html_document
+output: 
+  rmarkdown::html_document:
+    keep_html: TRUE
 vignette: >
   %\VignetteIndexEntry{Simulating network graph structure in continuous data}
    %\VignetteEngine{knitr::knitr}

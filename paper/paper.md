@@ -27,7 +27,7 @@ affiliations:
    index: 1
  - name: "RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan"
    index: 2
-date: "02 June 2020"
+date: "10 June 2020"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
@@ -63,7 +63,7 @@ pathways from a graph structure based on a statistical model of gene expression.
 
 
 Introduction: inference and modelling of biological networks {#sec:intro}
-============================================================
+===============================================================================
 
 Network analysis of molecular biological pathways has the potential to
 lead to new insights into biology and medical genetics
@@ -93,9 +93,33 @@ using gene regulatory modules in state-space models and recursive vector
 autoregressive models [@Hirose2008; @Shimamura2009]. Various approaches
 to gene regulation and networks at the genome-wide scale have led to
 novel biological insights [@Arner2015; @Komatsu2013]. However, inference
-of regulatory networks has thus far relied on experimental validation or
-resampling-based approaches to estimate the likelihood of specific
-network modules being predicted [@Markowetz2007; @Hawe2019].
+of regulatory networks has thus far primarily relied on experimental
+validation or resampling-based approaches to estimate the likelihood
+of specific network modules being predicted [@Markowetz2007; @Hawe2019].
+
+
+Simulated datasets with pathway structure are of particular interest for
+benchmarking regulatory network inference techniques and methods
+being developed for genomics data with complex biological 
+interactions [@Schaffter2011; @Saelens2019]. Dynamical models using
+differential equations have been employed, such as by GeneNetWeaver
+[@Schaffter2011], to generate simulated datasets
+specifically for benchmarking gene regulatory network inference techniques.
+There is renewed interest in modelling biological pathways and simulating
+data for benchmarking due to the emergence of single-cell genomics
+technologies and the plethora of bioinformatics techniques developed
+to use this data [@Zappia2017; @Saelens2019]. Packages such as Splatter
+[@Zappia2017], which uses the gamma-poisson distribution,
+have been developed to model single-cell data.
+SERGIO [@Dibaeinia2019] and dyngen [@Cannoodt2020] build on
+this to include gene regulatory networks and multimodality
+respectively. These methods have been designed based on known
+or modelled reaction states and added stochasticity to determinisitic
+relationships. However, it is computationally-intensive to model
+these reactions at scale over iterations in benchmarking.
+In some cases, it is only necessary to model the statistical
+variability of RNA-Seq data to evaluate methods with these
+correlation structures.
 
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from
@@ -113,7 +137,7 @@ can be used to evaluate various bioinformatics methodologies, including
 statistical and network inference procedures.
 
 Methodology and software {#sec:methods}
-========================
+===============================================================================
 
 Here we present a procedure to simulate gene expression data with
 correlation structure derived from a known graph structure. This
@@ -194,10 +218,10 @@ variance-covariance matrices. The \texttt{graphsim} package gives a warning when
 occurs.
 
 Illustrations {#sec:illustrations}
-=============
+===============================================================================
 
 Generating a Graph Structure {#sec:plot_graph}
-----------------------------
+-------------------------------------------------------------------------------
 
 The graph structure in
 Figure [1a](#fig:simple_graph:first){reference-type="ref"
@@ -482,26 +506,30 @@ in a sample with the background of complex pathway structure.
 
 
 Summary and discussion {#sec:summary}
-======================
+===============================================================================
 
 Biological pathways are of fundamental importance to understanding
 molecular biology. In order to translate findings from genomics studies
 into real-world applications such as improved healthcare, the roles of
 genes must be studied in the context of molecular pathways. Here we
 present a statistical framework to simulate gene expression from
-biological pathways, and provide the \texttt{graphsim} package in R to generate these
-simulated datasets. This approach is versatile and can be fine-tuned for
-modelling existing biological pathways or for testing whether
-constructed pathways can be detected by other means. In particular,
-methods to infer biological pathways and gene regulatory networks from
-gene expression data can be tested on simulated datasets using this
-framework. The package also enables simulation of complex gene
+biological pathways, and provide the \texttt{graphsim} package in R 
+to generate these simulated datasets. This approach is versatile and
+can be fine-tuned for modelling existing biological pathways or for
+testing whether constructed pathways can be detected by other means.
+In particular, methods to infer biological pathways and gene regulatory
+networks from gene expression data can be tested on simulated datasets
+using this framework. The package also enables simulation of complex gene
 expression datasets to test how these pathways impact on statistical
 analysis of gene expression data using existing methods or novel
 statistical methods being developed for gene expression data analysis.
+This approach is intended to be applied to bulk gene expression data
+but could in principle be adapted to modelling single-cell or
+different modalities such as epigenomics data.
+
 
 Computational details {#computational-details .unnumbered .unnumbered}
-=====================
+===============================================================================
 
 The results in this paper were obtained using R 3.6.1 with the \texttt{igraph} 1.2.4.1
 \texttt{Matrix} 1.2-17, \texttt{matrixcalc} 1.0-3, and \texttt{mvtnorm} 1.0-11 packages. R itself and all dependent packages
@@ -515,7 +543,7 @@ information and examples on running functions released in the package.
 The package (\texttt{graphsim} 0.1.2) has been released on CRAN and will be updated.
 
 Acknowledgements {#acknowledgements .unnumbered .unnumbered}
-================
+===============================================================================
 
 This package was developed as part of a PhD research project funded by
 the Postgraduate Tassell Scholarship in Cancer Research Scholarship
@@ -530,7 +558,7 @@ Integrative Medical Sciences for their excellent advice during this
 project.
 
 Author Contributions  {#contributions .unnumbered .unnumbered}
-================
+===============================================================================
 
 S.T.K. and M.A.B. conceived of the presented methodology. S.T.K. developed the theory and performed the computations.
 M.A.B. provided guidance throughout the project and gave feedback on the package. All authors discussed the package and contributed to the final manuscript.

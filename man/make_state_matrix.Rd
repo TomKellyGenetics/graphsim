@@ -71,22 +71,22 @@ state_matrix <- make_state_matrix(graph_test)
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 
 # compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
-TFGB_Smad_state <- E(TGFBeta_Smad_graph)$state
-table(TFGB_Smad_state)
+TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
+table(TFGBeta_Smad_state)
 # states are edge attributes
-state_matrix_TFGB_Smad <- make_state_matrix(TGFBeta_Smad_graph)
+state_matrix_TFGBeta_Smad <- make_state_matrix(TGFBeta_Smad_graph)
 # visualise matrix
 library("gplots")
-heatmap.2(state_matrix_TFGB_Smad , scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(state_matrix_TFGBeta_Smad , scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
 
 # compare the states to the sign of expected correlations in the sigma matrix
-sigma_matrix_TFGB_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
+sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
 # visualise matrix
-heatmap.2(sigma_matrix_TFGB_Smad_inhib, scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
 
 # compare the states to the sign of final correlations in the simulated matrix
-TFGB_Smad_data <- generate_expression(100, TGFBeta_Smad_graph, cor = 0.8)
-heatmap.2(cor(t(TFGB_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+TFGBeta_Smad_data <- generate_expression(100, TGFBeta_Smad_graph, cor = 0.8)
+heatmap.2(cor(t(TFGBeta_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
 
 
 }

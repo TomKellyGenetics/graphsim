@@ -3,16 +3,38 @@
 ##'
 ##' @title Generate Simulated Expression
 ##'
-##' @description Compute simulated continuous expression data from a graph network structure. Requires an \code{\link[igraph]{igraph}} pathway structure and a matrix of states (1 for activating and -1 for inhibiting) for link signed correlations, from a vector of edge states to a signed adjacency matrix for use in \code{\link[graphsim]{generate_expression}}. Uses graph structure to pass a sigma covariance matrix from \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}} on to \code{\link[mvtnorm]{rmvnorm}}.
+##' @description Compute simulated continuous expression data from a graph 
+##' network structure. Requires an \code{\link[igraph]{igraph}} pathway 
+##' structure and a matrix of states (1 for activating and -1 for 
+##' inhibiting) for link signed correlations, from a vector of edge states 
+##' to a signed adjacency matrix for use in 
+##' \code{\link[graphsim]{generate_expression}}. 
+##' Uses graph structure to pass a sigma covariance matrix from 
+##' \code{\link[graphsim]{make_sigma_mat_dist_graph}} or 
+##' \code{\link[graphsim]{make_sigma_mat_graph}} on to 
+##' \code{\link[mvtnorm]{rmvnorm}}. By default data is generated with a mean of
+##'  0 and standard deviation of 1 for each gene (with correlations between 
+##'  derived from the graph structure).
 ##'
 ##' @param n number of observations (simulated samples).
-##' @param mat precomputed adjacency, laplacian, commonlink, or scaled distance matrix.
-##' @param graph An \code{\link[igraph]{igraph}} object. May must be directed if states are used.
-##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.
-##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
-##' @param mean mean value of each simulated gene. Defaults to 0. May be entered as a scalar applying to all genes or a vector with a separate value for each.
-##' @param dist logical. Whether a graph distance (\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix (\code{\link[graphsim]{make_sigma_mat_graph}}) is used to compute the sigma matrix.
-##' @param comm,absolute,laplacian logical. Parameters for Sigma matrix generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} or \code{\link[graphsim]{make_sigma_mat_graph}}.
+##' @param mat precomputed adjacency, laplacian, commonlink, or scaled 
+##' distance matrix.
+##' @param graph An \code{\link[igraph]{igraph}} object. May must be 
+##' directed if states are used.
+##' @param state numeric vector. Vector of length E(graph). Sign used
+##'  to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.
+##' @param cor numeric. Simulated maximum correlation/covariance of two 
+##' adjacent nodes. Default to 0.8.
+##' @param mean mean value of each simulated gene. Defaults to 0 (with 
+##' a standard deviation of 1). May be entered as a scalar applying to 
+##' all genes or a vector with a separate value for each.
+##' @param dist logical. Whether a graph distance 
+##' (\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix
+##'  (\code{\link[graphsim]{make_sigma_mat_graph}}) is used to compute the
+##'   sigma matrix.
+##' @param comm,absolute,laplacian logical. Parameters for Sigma matrix
+##' generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} 
+##' or \code{\link[graphsim]{make_sigma_mat_graph}}.
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @importFrom  mvtnorm rmvnorm
 ##' @importFrom igraph as_adjacency_matrix graph.edgelist
@@ -43,6 +65,11 @@
 ##' sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
 ##' heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
 ##' 
+##' # compute adjacency matrix for toy example
+##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
+##' # generate simulated data from adjacency matrix input
+##' test_data <- generate_expression_mat(100, adjacency_matrix, cor = 0.8)
+##' 
 ##' # compute a simulated dataset for toy example
 ##' # n = 100 samples
 ##' # cor = 0.8 max correlation between samples
@@ -64,12 +91,12 @@
 ##' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 ##' 
 ##' # compute a simulated dataset for toy network
-##' # n = 100 samples
+##' # n = 250 samples
 ##' # state = edge_state (properties of each edge)
-##' # cor = 0.8 max correlation between samples
+##' # cor = 0.95 max correlation between samples
 ##' # absolute = FALSE (geometric distance by default)
 ##' edge_state <- c(1, 1, -1, 1, 1, 1, 1, -1)
-##' structure_data <- generate_expression(100, graph_structure, state = edge_state, cor = 0.8)
+##' structure_data <- generate_expression(250, graph_structure, state = edge_state, cor = 0.95)
 ##' ##' # visualise matrix
 ##' library("gplots")
 ##' # expression data
@@ -80,32 +107,61 @@
 ##' sigma_matrix <- make_sigma_mat_graph(graph_structure, state = edge_state, cor = 0.8)
 ##' heatmap.2(make_sigma_mat_graph(graph_structure, state = edge_state, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 ##' 
-##' # import graph from package for reactome pathway
-##' # TGF-β receptor signaling activates SMADs (R-HSA-2173789)
-##' TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
+##' # compute adjacency matrix for toy network
+##' graph_structure_adjacency_matrix <- make_adjmatrix_graph(graph_structure)
+##' # define states for for each edge
+##' edge_state <- c(1, 1, -1, 1, 1, 1, 1, -1)
+##' # generate simulated data from adjacency matrix input
+##' structure_data <- generate_expression_mat(250, graph_structure_adjacency_matrix, state = edge_state, cor = 0.8)
 ##' 
-##' # compute adjacency matrix for TGF-β receptor signaling activates SMADs
-##' TGFBeta_Smad_adjacency_matrix <- make_adjmatrix_graph(TGFBeta_Smad_graph)
-##' dim(TGFBeta_Smad_adjacency_matrix)
-##' TGFBeta_Smad_adjacency_matrix[1:12, 1:12]
-##' library("igraph")
-##' graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
-##' n <- 100
-##' generate_expression(n, graph_test, cor = 0.8)
+##' # compute a simulated dataset for toy network
+##' # n = 1000 samples
+##' # state = TGFBeta_Smad_state (properties of each edge)
+##' # cor = 0.75 max correlation between samples
+##' # absolute = FALSE (geometric distance by default)
+##'  # compute states directly from graph attributes for TGF-β pathway
+##' TGFBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
+##' table(TGFBeta_Smad_state)
+##' # generate simulated data
+##' TGFBeta_Smad_data <- generate_expression(1000, TGFBeta_Smad_graph, cor = 0.75)
+##' ##' # visualise matrix
+##' library("gplots")
+##' # expression data
+##' heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+##' # correlations
+##' heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+##' # expected correlations (Σ)
+##' sigma_matrix <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75)
+##' heatmap.2(make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
 ##' 
-##' # compare the states to the sign of final correlations in the simulated matrix
-##' TFGB_Smad_data <- generate_expression(100, TGFBeta_Smad_graph, cor = 0.8)
-##' heatmap.2(cor(t(TFGB_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
 ##' 
-##' 
-##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
-##' generate_expression_mat(n, adjacency_matrix, cor = 0.8)
+##' # generate simulated data (absolute distance and shared edges)
+##' TGFBeta_Smad_data <- generate_expression(1000, TGFBeta_Smad_graph, cor = 0.75, absolute = TRUE, comm = TRUE)
+##' ##' # visualise matrix
+##' library("gplots")
+##' # expression data
+##' heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+##' # correlations
+##' heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+##' # expected correlations (Σ)
+##' sigma_matrix <- make_sigma_mat_graph(TGFBeta_Smad_graph, cor = 0.75, comm = TRUE)
+##' heatmap.2(make_sigma_mat_graph(TGFBeta_Smad_graph, cor = 0.75, comm = TRUE), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
 ##' 
 ##' @return numeric matrix of simulated data (log-normalised counts)
 ##' 
 ##' @export
 generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
+  if(missing(graph)){
+    warning(paste("object must be defined for graph input"))
+    get(graph)
+    stop()
+  }
+  if(!exists("graph")){
+    warning(paste("object must be defined for graph input"))
+    get("graph")
+    stop()
+  }
+  if(!is_igraph(graph)) stop("graph must be an igraph class")
   if(!is.null(get.edge.attribute(graph, "state"))){
     state <- get.edge.attribute(graph, "state")
   } else {
@@ -136,20 +192,12 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
     }
   }
   if(length(n) > 1) stop("sample size n must be an integer of length 1")
-  if(!is_igraph(graph)) stop("graph must be an igraph class")
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))
   if(dist){
     sig <- make_sigma_mat_dist_graph(graph, state = state, cor, absolute = absolute)
   } else {
     sig <- make_sigma_mat_graph(graph, state = state, cor, comm = comm, laplacian = laplacian)
-  }
-  ## migrate state to calling sigma ##
-  if(!(is.null(state))){
-    if(all(sig >= 0)){
-      state_mat <- make_state_matrix(graph, state)
-      sig <- sig * sign(state_mat)
-    }
   }
   if(is.symmetric.matrix(sig) == FALSE) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
@@ -167,6 +215,7 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
 
 
 ##' @rdname generate_expression
+##' @importFrom igraph graph_from_adjacency_matrix set_edge_attr E
 ##' @export
 generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
   if(is.null(state)){
@@ -186,7 +235,11 @@ generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, c
   }
   if(length(n) > 1) stop("sample size n must be an integer of length 1")
   if(!is.matrix(mat)) stop("graph must be an igraph class")
-  if(is.vector(state) || length(state) == 1) state <- make_state_matrix(graph, state)
+  if(is.vector(state) || length(state) == 1){
+    graph <- graph_from_adjacency_matrix(mat, mode = "undirected")
+    if(length(state) == 1) state <- rep(state, length(E(graph)))
+    graph <- set_edge_attr(graph, "state", value = state)
+  }
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,ncol(mat))
   if(dist){
     distmat <- make_distance_adjmat(mat)
@@ -204,11 +257,6 @@ generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, c
     if(laplacian){
       mat <- make_laplacian_adjmat(mat)
       sig <- make_sigma_mat_laplacian(mat, state = state, cor)
-    }
-  }
-  if(!(is.null(state))){
-    if(all(sig >= 0)){
-      sig <- state * sig
     }
   }
   if(is.symmetric.matrix(sig) == FALSE) {

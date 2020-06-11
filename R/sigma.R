@@ -5,7 +5,12 @@
 ##'
 ##' @description Compute the Sigma (Σ) matrix from an \code{\link[igraph]{igraph}} structure 
 ##' or pre-computed matrix. These are compatible with \code{\link[mvtnorm]{rmvnorm}} and
-##' \code{\link[graphsim]{generate_expression}}.
+##'  \code{\link[graphsim]{generate_expression}}.
+##' By default data is generated with a mean of 0 and standard deviation of 1 for 
+##' each gene (with correlations between derived from the graph structure).
+##' Thus where the Sigma (Σ) matrix has diagonals of 1 (for the variance of each gene)
+##' then the symmetric non-diagonal terms (for covariance) determine the correlations
+##' between each gene in the output from \code{\link[graphsim]{generate_expression}}.
 ##'
 ##' @param mat precomputed adjacency, laplacian, commonlink, or scaled distance matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
@@ -19,7 +24,7 @@
 ##' relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph mvtnorm
 ##' @importFrom igraph as_adjacency_matrix
-##' @import igraph
+##' @importFrom igraph graph_from_adjacency_matrix set_edge_attr E
 ##' @examples 
 ##' 
 ##' # construct a synthetic graph module
@@ -93,35 +98,35 @@
 ##' TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 ##' 
 ##' # compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
-##' TFGB_Smad_state <- E(TGFBeta_Smad_graph)$state
-##' table(TFGB_Smad_state)
+##' TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
+##' table(TFGBeta_Smad_state)
 ##' # states are edge attributes
-##'  sigma_matrix_TFGB_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
+##'  sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(sigma_matrix_TFGB_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+##' heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 ##' 
 ##' # compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
 ##' TGFBeta_Smad_graph <- remove.edge.attribute(TGFBeta_Smad_graph, "state")
 ##' # compute with states removed (all negative)
-##' sigma_matrix_TFGB_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = -1, cor = 0.8, absolute = FALSE)
+##' sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = -1, cor = 0.8, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(sigma_matrix_TFGB_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+##' heatmap.2(sigma_matrix_TFGBeta_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
 ##' # compute with states removed (all positive)
-##' sigma_matrix_TFGB_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = 1, cor = 0.8, absolute = FALSE)
+##' sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = 1, cor = 0.8, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(sigma_matrix_TFGB_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+##' heatmap.2(sigma_matrix_TFGBeta_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
 ##' 
 ##' #restore edge attributes
-##' TGFBeta_Smad_graph <- set_edge_attr(TGFBeta_Smad_graph, "state", value = TFGB_Smad_state)
-##' TFGB_Smad_state <- E(TGFBeta_Smad_graph)$state
+##' TGFBeta_Smad_graph <- set_edge_attr(TGFBeta_Smad_graph, "state", value = TFGBeta_Smad_state)
+##' TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
 ##' # states are edge attributes
-##'  sigma_matrix_TFGB_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
+##'  sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(sigma_matrix_TFGB_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+##' heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 ##' 
 ##' @return a numeric covariance matrix of values in the range [-1, 1]
 ##' @export
@@ -130,6 +135,9 @@ make_sigma_mat_adjmat <- function(mat, state = NULL, cor = 0.8){
   diag(sig) <- 1
   if(!is.null(state)){
     #pass state parameters sign of sigma
+    graph <- graph_from_adjacency_matrix(mat, mode = "undirected")
+    if(length(state) == 1) state <- rep(state, length(E(graph)))
+    graph <- set_edge_attr(graph, "state", value = state)
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
@@ -148,6 +156,9 @@ make_sigma_mat_comm <- function(mat, state = NULL, cor = 0.8){
   diag(sig) <- 1
   if(!is.null(state)){
     #pass state parameters sign of sigma
+    graph <- graph_from_adjacency_matrix(mat, mode = "undirected")
+    if(length(state) == 1) state <- rep(state, length(E(graph)))
+    graph <- set_edge_attr(graph, "state", value = state)
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
@@ -167,6 +178,9 @@ make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8){
   diag(sig) <- 1
   if(!is.null(state)){
     #pass state parameters sign of sigma
+    graph <- graph_from_adjacency_matrix(mat, mode = "undirected")
+    if(length(state) == 1) state <- rep(state, length(E(graph)))
+    graph <- set_edge_attr(graph, "state", value = state)
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
@@ -179,6 +193,14 @@ make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8){
 ##' @export
 ##' 
 make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, comm = FALSE, laplacian = FALSE, directed = FALSE){
+  if(!is.null(get.edge.attribute(graph, "state"))){
+    state <- get.edge.attribute(graph, "state")
+  } else {
+    # add default state if not specified
+    if(is.null(state)){
+      state <- "activating"
+    }
+  }
   if(comm && laplacian){
     warning("Error: only one of commonlink or laplacian can be used")
     stop()
@@ -186,7 +208,7 @@ make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, comm = FALSE, l
   if(!laplacian) mat <- make_adjmatrix_graph(graph, directed = directed)
   if(comm){
     mat <- make_commonlink_adjmat(mat)
-    diag(mat) <-  max(mat) +1
+    diag(mat) <-  max(mat) + 1
   }
   if(laplacian){
     mat <- make_laplacian_graph(graph, directed = directed)

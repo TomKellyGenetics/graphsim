@@ -54,7 +54,12 @@ a numeric covariance matrix of values in the range [-1, 1]
 \description{
 Compute the Sigma (Σ) matrix from an \code{\link[igraph]{igraph}} structure 
 or pre-computed matrix. These are compatible with \code{\link[mvtnorm]{rmvnorm}} and
-\code{\link[graphsim]{generate_expression}}.
+ \code{\link[graphsim]{generate_expression}}.
+By default data is generated with a mean of 0 and standard deviation of 1 for 
+each gene (with correlations between derived from the graph structure).
+Thus where the Sigma (Σ) matrix has diagonals of 1 (for the variance of each gene)
+then the symmetric non-diagonal terms (for covariance) determine the correlations
+between each gene in the output from \code{\link[graphsim]{generate_expression}}.
 }
 \examples{
 
@@ -129,35 +134,35 @@ heatmap.2(sigma_matrix_graph_structure_inhib, scale = "none", trace = "none", co
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 
 # compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
-TFGB_Smad_state <- E(TGFBeta_Smad_graph)$state
-table(TFGB_Smad_state)
+TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
+table(TFGBeta_Smad_state)
 # states are edge attributes
- sigma_matrix_TFGB_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
+ sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
 # visualise matrix
 library("gplots")
-heatmap.2(sigma_matrix_TFGB_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 
 # compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
 TGFBeta_Smad_graph <- remove.edge.attribute(TGFBeta_Smad_graph, "state")
 # compute with states removed (all negative)
-sigma_matrix_TFGB_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = -1, cor = 0.8, absolute = FALSE)
+sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = -1, cor = 0.8, absolute = FALSE)
 # visualise matrix
 library("gplots")
-heatmap.2(sigma_matrix_TFGB_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+heatmap.2(sigma_matrix_TFGBeta_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
 # compute with states removed (all positive)
-sigma_matrix_TFGB_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = 1, cor = 0.8, absolute = FALSE)
+sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = 1, cor = 0.8, absolute = FALSE)
 # visualise matrix
 library("gplots")
-heatmap.2(sigma_matrix_TFGB_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+heatmap.2(sigma_matrix_TFGBeta_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
 
 #restore edge attributes
-TGFBeta_Smad_graph <- set_edge_attr(TGFBeta_Smad_graph, "state", value = TFGB_Smad_state)
-TFGB_Smad_state <- E(TGFBeta_Smad_graph)$state
+TGFBeta_Smad_graph <- set_edge_attr(TGFBeta_Smad_graph, "state", value = TFGBeta_Smad_state)
+TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
 # states are edge attributes
- sigma_matrix_TFGB_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
+ sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
 # visualise matrix
 library("gplots")
-heatmap.2(sigma_matrix_TFGB_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 
 }
 \keyword{graph}

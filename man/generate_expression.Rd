@@ -11,6 +11,7 @@ generate_expression(
   state = NULL,
   cor = 0.8,
   mean = 0,
+  sd = 1,
   comm = FALSE,
   dist = FALSE,
   absolute = FALSE,
@@ -23,6 +24,7 @@ generate_expression_mat(
   state = NULL,
   cor = 0.8,
   mean = 0,
+  sd = 1,
   comm = FALSE,
   dist = FALSE,
   absolute = FALSE,
@@ -41,8 +43,12 @@ to calculate state matrix, may be an integer state or inferred directly from exp
 \item{cor}{numeric. Simulated maximum correlation/covariance of two 
 adjacent nodes. Default to 0.8.}
 
-\item{mean}{mean value of each simulated gene. Defaults to 0 (with 
-a standard deviation of 1). May be entered as a scalar applying to 
+\item{mean}{mean value of each simulated gene. Defaults to 0.
+May be entered as a scalar applying to 
+all genes or a vector with a separate value for each.}
+
+\item{sd}{standard deviations of each gene. Defaults to 1.
+May be entered as a scalar applying to 
 all genes or a vector with a separate value for each.}
 
 \item{comm, absolute, laplacian}{logical. Parameters for Sigma matrix

@@ -25,8 +25,11 @@
 ##'  to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.
 ##' @param cor numeric. Simulated maximum correlation/covariance of two 
 ##' adjacent nodes. Default to 0.8.
-##' @param mean mean value of each simulated gene. Defaults to 0 (with 
-##' a standard deviation of 1). May be entered as a scalar applying to 
+##' @param mean mean value of each simulated gene. Defaults to 0.
+##' May be entered as a scalar applying to 
+##' all genes or a vector with a separate value for each.
+##' @param sd	 standard deviations of each gene. Defaults to 1.
+##' May be entered as a scalar applying to 
 ##' all genes or a vector with a separate value for each.
 ##' @param dist logical. Whether a graph distance 
 ##' (\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix
@@ -39,7 +42,7 @@
 ##' @importFrom  mvtnorm rmvnorm
 ##' @importFrom igraph as_adjacency_matrix graph.edgelist
 ##' @import igraph
-##' @importFrom igraph is_igraph
+##' @importFrom igraph is_igraph E V
 ##' @importFrom Matrix nearPD
 ##' @importFrom matrixcalc is.symmetric.matrix is.positive.definite
 ##' @importFrom gplots heatmap.2
@@ -150,7 +153,7 @@
 ##' @return numeric matrix of simulated data (log-normalised counts)
 ##' 
 ##' @export
-generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
+generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, sd = 1, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
   if(missing(graph)){
     warning(paste("object must be defined for graph input"))
     get(graph)
@@ -194,10 +197,11 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
   if(length(n) > 1) stop("sample size n must be an integer of length 1")
   if(length(state) == 1) state <- rep(state, length(E(graph)))
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,length(V(graph)))
+  if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,length(V(graph)))
   if(dist){
-    sig <- make_sigma_mat_dist_graph(graph, state = state, cor, absolute = absolute)
+    sig <- make_sigma_mat_dist_graph(graph, state = state, cor, sd = sd, absolute = absolute)
   } else {
-    sig <- make_sigma_mat_graph(graph, state = state, cor, comm = comm, laplacian = laplacian)
+    sig <- make_sigma_mat_graph(graph, state = state, cor, sd = sd, comm = comm, laplacian = laplacian)
   }
   if(is.symmetric.matrix(sig) == FALSE) {
     warning("sigma matrix was not positive definite, nearest approximation used.")
@@ -217,7 +221,7 @@ generate_expression <- function(n, graph, state = NULL, cor = 0.8, mean = 0, com
 ##' @rdname generate_expression
 ##' @importFrom igraph graph_from_adjacency_matrix set_edge_attr E
 ##' @export
-generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
+generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, sd = 1, comm = FALSE, dist = FALSE, absolute = FALSE, laplacian = FALSE){
   if(is.null(state)){
     state <- 1
   }
@@ -234,6 +238,8 @@ generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, c
     }
   }
   if(length(n) > 1) stop("sample size n must be an integer of length 1")
+  if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,ncol(mat))
+  if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
   if(!is.matrix(mat)) stop("graph must be an igraph class")
   if(is.vector(state) || length(state) == 1){
     graph <- graph_from_adjacency_matrix(mat, mode = "undirected")
@@ -243,7 +249,7 @@ generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, c
   if(!(is.vector(mean)) || length(mean) == 1 ) mean <- rep(mean,ncol(mat))
   if(dist){
     distmat <- make_distance_adjmat(mat)
-    sig <- make_sigma_mat_dist_adjmat(distmat, state = state, cor, absolute = absolute)
+    sig <- make_sigma_mat_dist_adjmat(distmat, state = state, cor, sd = sd, absolute = absolute)
   } else {
     if(comm && laplacian){
       warning("Error: only one of commonlink or laplacian can be used")
@@ -252,11 +258,11 @@ generate_expression_mat <- function(n, mat, state = NULL, cor = 0.8, mean = 0, c
     if(!comm && !laplacian) sig <- make_sigma_mat_adjmat(mat, state = state, cor)
     if(comm){
       mat <- make_commonlink_adjmat(mat)
-      sig <- make_sigma_mat_comm(mat, state = state, cor)
+      sig <- make_sigma_mat_comm(mat, state = state, cor, sd = sd)
     }
     if(laplacian){
       mat <- make_laplacian_adjmat(mat)
-      sig <- make_sigma_mat_laplacian(mat, state = state, cor)
+      sig <- make_sigma_mat_laplacian(mat, state = state, cor, sd = sd)
     }
   }
   if(is.symmetric.matrix(sig) == FALSE) {

@@ -16,6 +16,7 @@
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.
 ##' @param cor numeric. Simulated maximum correlation/covariance of two adjacent nodes. Default to 0.8.
+##' @param sd	 standard deviations of each gene. Defaults to 1. May be entered as a scalar applying to all genes or a vector with a separate value for each. 
 ##' @param directed logical. Whether directed information is passed to the distance matrix.
 ##' @param comm logical whether a common link matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).
 ##' @param laplacian logical whether a Laplacian matrix is used to compute sigma. Defaults to FALSE (adjacency matrix).
@@ -24,7 +25,7 @@
 ##' relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph mvtnorm
 ##' @importFrom igraph as_adjacency_matrix
-##' @importFrom igraph graph_from_adjacency_matrix set_edge_attr E
+##' @importFrom igraph graph_from_adjacency_matrix set_edge_attr V E
 ##' @examples 
 ##' 
 ##' # construct a synthetic graph module
@@ -32,35 +33,35 @@
 ##' graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 ##' graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
 ##' # compute sigma (Σ) matrix for toy example
-##' sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
+##' sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8, sd = 1)
 ##' sigma_matrix
 ##' 
 ##' # compute sigma (Σ) matrix  from adjacency matrix for toy example
 ##' adjacency_matrix <- make_adjmatrix_graph(graph_test)
-##' sigma_matrix <- make_sigma_mat_adjmat(adjacency_matrix, cor = 0.8)
+##' sigma_matrix <- make_sigma_mat_adjmat(adjacency_matrix, cor = 0.8, sd = 1)
 ##' sigma_matrix
 ##' 
 ##' # compute sigma (Σ) matrix from shared edges for toy example
 ##' common_link_matrix <- make_commonlink_graph(graph_test)
-##' sigma_matrix <- make_sigma_mat_comm(common_link_matrix, cor = 0.8)
+##' sigma_matrix <- make_sigma_mat_comm(common_link_matrix, cor = 0.8, sd = 1)
 ##' sigma_matrix
 ##' 
 ##' # compute sigma (Σ) matrix from Laplacian for toy example
 ##' laplacian_matrix <- make_laplacian_graph(graph_test)
-##' sigma_matrix <- make_sigma_mat_laplacian(laplacian_matrix, cor = 0.8)
+##' sigma_matrix <- make_sigma_mat_laplacian(laplacian_matrix, cor = 0.8, sd = 1)
 ##' sigma_matrix
 ##' 
 ##' # compute sigma (Σ) matrix from distance matrix for toy example
 ##' distance_matrix <- make_distance_graph(graph_test, absolute = FALSE)
-##' sigma_matrix <- make_sigma_mat_dist_adjmat(distance_matrix, cor = 0.8)
+##' sigma_matrix <- make_sigma_mat_dist_adjmat(distance_matrix, cor = 0.8, sd = 1)
 ##' sigma_matrix
 ##' 
 ##' # compute sigma (Σ) matrix from geometric distance directly from toy example graph
-##' sigma_matrix <- make_sigma_mat_dist_graph(graph_test, cor = 0.8)
+##' sigma_matrix <- make_sigma_mat_dist_graph(graph_test, cor = 0.8, sd = 1)
 ##' sigma_matrix
 ##' 
 ##' # compute sigma (Σ) matrix from absolute distance directly from toy example graph
-##' sigma_matrix <- make_sigma_mat_dist_graph(graph_test, cor = 0.8, absolute = TRUE)
+##' sigma_matrix <- make_sigma_mat_dist_graph(graph_test, cor = 0.8, sd = 1, absolute = TRUE)
 ##' sigma_matrix
 ##' 
 ##' # construct a synthetic graph network
@@ -69,7 +70,7 @@
 ##' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 ##' 
 ##' # compute sigma (Σ) matrix from geometric distance directly from synthetic graph network
-##' sigma_matrix_graph_structure <- make_sigma_mat_dist_graph(graph_structure, cor = 0.8, absolute = FALSE)
+##' sigma_matrix_graph_structure <- make_sigma_mat_dist_graph(graph_structure, cor = 0.8, sd = 1, absolute = FALSE)
 ##' sigma_matrix_graph_structure
 ##' # visualise matrix
 ##' library("gplots")
@@ -78,7 +79,7 @@
 ##' # compute sigma (Σ) matrix from geometric distance directly from synthetic graph network with inhibitions
 ##' edge_state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 ##' # pass edge state as a parameter
-##' sigma_matrix_graph_structure_inhib <- make_sigma_mat_dist_graph(graph_structure, state = edge_state, cor = 0.8, absolute = FALSE)
+##' sigma_matrix_graph_structure_inhib <- make_sigma_mat_dist_graph(graph_structure, state = edge_state, cor = 0.8, sd = 1, absolute = FALSE)
 ##' sigma_matrix_graph_structure_inhib
 ##' # visualise matrix
 ##' library("gplots")
@@ -87,7 +88,7 @@
 ##' # compute sigma (Σ) matrix from geometric distance directly from synthetic graph network with inhibitions
 ##' E(graph_structure)$state <-  c(1, 1, -1, 1, 1, 1, 1, -1)
 ##' # pass edge state as a graph attribute
-##' sigma_matrix_graph_structure_inhib <- make_sigma_mat_dist_graph(graph_structure, cor = 0.8, absolute = FALSE)
+##' sigma_matrix_graph_structure_inhib <- make_sigma_mat_dist_graph(graph_structure, cor = 0.8, sd = 1, absolute = FALSE)
 ##' sigma_matrix_graph_structure_inhib
 ##' # visualise matrix
 ##' library("gplots")
@@ -101,7 +102,7 @@
 ##' TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
 ##' table(TFGBeta_Smad_state)
 ##' # states are edge attributes
-##'  sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
+##'  sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, sd = 1, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
 ##' heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
@@ -109,12 +110,12 @@
 ##' # compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
 ##' TGFBeta_Smad_graph <- remove.edge.attribute(TGFBeta_Smad_graph, "state")
 ##' # compute with states removed (all negative)
-##' sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = -1, cor = 0.8, absolute = FALSE)
+##' sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = -1, cor = 0.8, sd = 1, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
 ##' heatmap.2(sigma_matrix_TFGBeta_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
 ##' # compute with states removed (all positive)
-##' sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = 1, cor = 0.8, absolute = FALSE)
+##' sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, state = 1, cor = 0.8, sd = 1, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
 ##' heatmap.2(sigma_matrix_TFGBeta_Smad, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
@@ -123,14 +124,14 @@
 ##' TGFBeta_Smad_graph <- set_edge_attr(TGFBeta_Smad_graph, "state", value = TFGBeta_Smad_state)
 ##' TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
 ##' # states are edge attributes
-##'  sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, absolute = FALSE)
+##'  sigma_matrix_TFGBeta_Smad_inhib <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.8, sd = 1, absolute = FALSE)
 ##' # visualise matrix
 ##' library("gplots")
 ##' heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
 ##' 
 ##' @return a numeric covariance matrix of values in the range [-1, 1]
 ##' @export
-make_sigma_mat_adjmat <- function(mat, state = NULL, cor = 0.8){
+make_sigma_mat_adjmat <- function(mat, state = NULL, cor = 0.8, sd = 1){
   sig <- ifelse(mat > 0, cor, 0)
   diag(sig) <- 1
   if(!is.null(state)){
@@ -141,6 +142,10 @@ make_sigma_mat_adjmat <- function(mat, state = NULL, cor = 0.8){
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
+  if(sd != 1 || length(sd) != 1){
+    if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
+    sig <- t(sd * t(sig)) * sd
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -148,7 +153,7 @@ make_sigma_mat_adjmat <- function(mat, state = NULL, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_comm <- function(mat, state = NULL, cor = 0.8){
+make_sigma_mat_comm <- function(mat, state = NULL, cor = 0.8, sd = 1){
   mat <- abs(mat)
   mat <- apply(mat, 1, function(x) x/max(x))
   mat <- apply(mat, 2, function(x) x/max(x))
@@ -162,6 +167,10 @@ make_sigma_mat_comm <- function(mat, state = NULL, cor = 0.8){
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
+  if(sd != 1 || length(sd) != 1){
+    if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
+    sig <- t(sd * t(sig)) * sd
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -169,7 +178,7 @@ make_sigma_mat_comm <- function(mat, state = NULL, cor = 0.8){
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8){
+make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8, sd = 1){
   mat <- abs(mat)
   diag(mat)[diag(mat) == 0] <- 1
   mat <- apply(mat, 1, function(x) x/max(x))
@@ -184,6 +193,10 @@ make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8){
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
+  if(sd != 1 || length(sd) != 1){
+    if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
+    sig <- t(sd * t(sig)) * sd
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -192,7 +205,7 @@ make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8){
 ##' @rdname make_sigma
 ##' @export
 ##' 
-make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, comm = FALSE, laplacian = FALSE, directed = FALSE){
+make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, sd = 1, comm = FALSE, laplacian = FALSE, directed = FALSE){
   if(!is.null(get.edge.attribute(graph, "state"))){
     state <- get.edge.attribute(graph, "state")
   } else {
@@ -226,6 +239,10 @@ make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, comm = FALSE, l
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
+  if(sd != 1 || length(sd) != 1){
+    if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,length(V(graph)))
+    sig <- t(sd * t(sig)) * sd
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -233,7 +250,7 @@ make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, comm = FALSE, l
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, absolute = FALSE){
+make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, sd = 1, absolute = FALSE){
   if(!(all(diag(mat) == 1))) stop("distance matrix must have diagonal of zero")
   if(!(max(mat[mat != 1]) > 0) || !(max(mat[mat!=1]) <= 1)) stop("distance matrix expected, not adjacency matrix")
   sig <- mat/max(mat[mat != 1]) * cor
@@ -248,6 +265,10 @@ make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, absolute = 
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
+  if(sd != 1 || length(sd) != 1){
+    if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
+    sig <- t(sd * t(sig)) * sd
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)
@@ -256,7 +277,7 @@ make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, absolute = 
 
 ##' @rdname make_sigma
 ##' @export
-make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, absolute = FALSE){
+make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, sd = 1, absolute = FALSE){
   if(!is.null(get.edge.attribute(graph, "state"))){
     state <- get.edge.attribute(graph, "state")
   } else {
@@ -274,6 +295,10 @@ make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, absolute =
   #derive states directly from graph if available
   state_mat <- make_state_matrix(graph, state)
   sig <- sig * sign(state_mat)
+  if(sd != 1 || length(sd) != 1){
+    if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,length(V(graph)))
+    sig <- t(sd * t(sig)) * sd
+  }
   rownames(sig) <- rownames(mat)
   colnames(sig) <- colnames(mat)
   return(sig)

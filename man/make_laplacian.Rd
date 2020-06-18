@@ -21,7 +21,8 @@ make_laplacian_graph(graph, directed = FALSE)
 An Laplacian matrix compatible with generating an expression matrix
 }
 \description{
-Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph}} structure, preserving node/column/row names (and direction).
+Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph}}
+structure, preserving node/column/row names (and direction).
 }
 \examples{
 
@@ -56,7 +57,8 @@ dim(TGFBeta_Smad_laplacian_matrix)
 TGFBeta_Smad_laplacian_matrix[1:12, 1:12]
 # visualise matrix
 library("gplots")
-heatmap.2(TGFBeta_Smad_laplacian_matrix, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(TGFBeta_Smad_laplacian_matrix, scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 
 }
 \keyword{Laplacian}

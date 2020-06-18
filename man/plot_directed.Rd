@@ -2,7 +2,8 @@
 % Please edit documentation in R/plot_directed.R
 \name{plot_directed}
 \alias{plot_directed}
-\title{Extensions to iGraph for Customising plots}
+\alias{plot.directed}
+\title{Extensions to igraph for Customising plots}
 \usage{
 plot_directed(
   graph,
@@ -88,32 +89,32 @@ Functions to plot_directed or graph structures including customised colours, lay
 }
 \examples{
 
-#generate example graphs
+# generate example graphs
 library("igraph")
 graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
                            c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 
-#plots with igraph defaults
+# plots with igraph defaults
 plot(graph_structure, layout = layout.fruchterman.reingold)
 plot(graph_structure, layout = layout.kamada.kawai)
 
-#plots with scalar states
+# plots with scalar states
 plot_directed(graph_structure, state="activating")
 plot_directed(graph_structure, state="inhibiting")
 
-#plots with vector states
+# plots with vector states
 plot_directed(graph_structure, state = c(1, 1, 1, 1, -1, 1, 1, 1))
 plot_directed(graph_structure, state = c(1, 1, -1, 1, -1, 1, -1, 1))
-plot_directed(graph_structure, state = c(1, 1, -1, 1, 1, 1, 1, -1)
+plot_directed(graph_structure, state = c(1, 1, -1, 1, 1, 1, 1, -1))
 
-#plots states with graph attributes
+# plots states with graph attributes
 E(graph_structure)$state <- 1
 plot_directed(graph_structure)
 E(graph_structure)$state <- c(1, 1, -1, 1, -1, 1, -1, 1)
 plot_directed(graph_structure)
 
-#plot layout customised
+# plot layout customised
 plot_directed(graph_structure, state=c(1, 1, -1, 1, -1, 1, -1, 1), layout = layout.kamada.kawai)
 
 }

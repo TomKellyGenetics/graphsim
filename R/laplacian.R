@@ -4,7 +4,8 @@
 ##'
 ##' @title Generate Laplacian Matrix
 ##' 
-##' @description Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph}} structure, preserving node/column/row names (and direction).
+##' @description Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph}}
+##' structure, preserving node/column/row names (and direction).
 ##'
 ##' @param mat precomputed adjacency matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
@@ -47,7 +48,8 @@
 ##' TGFBeta_Smad_laplacian_matrix[1:12, 1:12]
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(TGFBeta_Smad_laplacian_matrix, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+##' heatmap.2(TGFBeta_Smad_laplacian_matrix, scale = "none", trace = "none",
+##'           col = colorpanel(50, "blue", "white", "red"))
 ##' 
 ##' @return An Laplacian matrix compatible with generating an expression matrix
 ##' 

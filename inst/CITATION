@@ -11,7 +11,7 @@ citHeader("To cite package 'graphsim' in publications use:")
      }
      
      citEntry(entry="Manual",
-              title = "{graphsim}: Simulate Expression data from iGraph networks",
+              title = "{graphsim}: Simulate Expression data from igraph networks",
               author = personList(as.person("S. Thomas Kelly"),
                                   as.person("Michael A. Black")),
               year = year,
@@ -22,7 +22,7 @@ citHeader("To cite package 'graphsim' in publications use:")
               textVersion =
               paste("S. Thomas Kelly and Michael A. Black (",
                     year,
-                    "). graphsim: Simulate Expression data from iGraph networks. ",
+                    "). graphsim: Simulate Expression data from igraph networks. ",
                     vers, ".", " https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986",
                     sep=""))
 

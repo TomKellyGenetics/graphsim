@@ -9,8 +9,9 @@
 #   Test Package:              'Ctrl + Shift + T'
 ##' @name plot_directed
 ##' @rdname plot_directed
+##' @aliases plot.directed
 ##'
-##' @title Extensions to iGraph for Customising plots
+##' @title Extensions to igraph for Customising plots
 ##'
 ##' @description Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
 ##'
@@ -53,32 +54,32 @@
 ##' @import igraph graphics
 ##' @examples
 ##'
-##' #generate example graphs
+##' # generate example graphs
 ##' library("igraph")
 ##' graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
 ##'                            c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 ##' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 ##'
-##' #plots with igraph defaults
+##' # plots with igraph defaults
 ##' plot(graph_structure, layout = layout.fruchterman.reingold)
 ##' plot(graph_structure, layout = layout.kamada.kawai)
 ##'
-##' #plots with scalar states
+##' # plots with scalar states
 ##' plot_directed(graph_structure, state="activating")
 ##' plot_directed(graph_structure, state="inhibiting")
 ##'
-##' #plots with vector states
+##' # plots with vector states
 ##' plot_directed(graph_structure, state = c(1, 1, 1, 1, -1, 1, 1, 1))
 ##' plot_directed(graph_structure, state = c(1, 1, -1, 1, -1, 1, -1, 1))
-##' plot_directed(graph_structure, state = c(1, 1, -1, 1, 1, 1, 1, -1)
+##' plot_directed(graph_structure, state = c(1, 1, -1, 1, 1, 1, 1, -1))
 ##' 
-##' #plots states with graph attributes
+##' # plots states with graph attributes
 ##' E(graph_structure)$state <- 1
 ##' plot_directed(graph_structure)
 ##' E(graph_structure)$state <- c(1, 1, -1, 1, -1, 1, -1, 1)
 ##' plot_directed(graph_structure)
 ##'
-##' #plot layout customised
+##' # plot layout customised
 ##' plot_directed(graph_structure, state=c(1, 1, -1, 1, -1, 1, -1, 1), layout = layout.kamada.kawai)
 ##' 
 ##' @return base R graphics
@@ -173,3 +174,4 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
   text(Xn, Yn, labels=labels, cex = cex.label*cex.node, col=col.label)
 }
 
+plot.directed <- plot_directed

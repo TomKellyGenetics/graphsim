@@ -182,7 +182,7 @@ make_sigma_mat_adjmat <- function(mat, state = NULL, cor = 0.8, sd = 1){
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
-  if(sd != 1 || length(sd) != 1){
+  if(sd[1] != 1 || length(sd) != 1){
     if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
     sig <- t(sd * t(sig)) * sd
   }
@@ -207,7 +207,7 @@ make_sigma_mat_comm <- function(mat, state = NULL, cor = 0.8, sd = 1){
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
-  if(sd != 1 || length(sd) != 1){
+  if(sd[1] != 1 || length(sd) != 1){
     if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
     sig <- t(sd * t(sig)) * sd
   }
@@ -233,7 +233,7 @@ make_sigma_mat_laplacian <- function(mat, state = NULL, cor = 0.8, sd = 1){
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
-  if(sd != 1 || length(sd) != 1){
+  if(sd[1] != 1 || length(sd) != 1){
     if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
     sig <- t(sd * t(sig)) * sd
   }
@@ -279,7 +279,7 @@ make_sigma_mat_graph <- function(graph, state = NULL, cor = 0.8, sd = 1, comm = 
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
-  if(sd != 1 || length(sd) != 1){
+  if(sd[1] != 1 || length(sd) != 1){
     if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,length(V(graph)))
     sig <- t(sd * t(sig)) * sd
   }
@@ -305,7 +305,7 @@ make_sigma_mat_dist_adjmat <- function(mat, state = NULL, cor = 0.8, sd = 1, abs
     state_mat <- make_state_matrix(graph, state)
     sig <- sig * sign(state_mat)
   }
-  if(sd != 1 || length(sd) != 1){
+  if(sd[1] != 1 || length(sd) != 1){
     if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,ncol(mat))
     sig <- t(sd * t(sig)) * sd
   }
@@ -335,7 +335,7 @@ make_sigma_mat_dist_graph <- function(graph, state = NULL, cor = 0.8, sd = 1, ab
   #derive states directly from graph if available
   state_mat <- make_state_matrix(graph, state)
   sig <- sig * sign(state_mat)
-  if(sd != 1 || length(sd) != 1){
+  if(sd[1] != 1 || length(sd) != 1){
     if(!(is.vector(sd)) || length(sd) == 1 ) sd <- rep(sd,length(V(graph)))
     sig <- t(sd * t(sig)) * sd
   }

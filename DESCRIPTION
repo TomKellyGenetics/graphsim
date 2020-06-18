@@ -19,11 +19,12 @@ Imports:
     matrixcalc,
     graphics
 Suggests:
+    devtools,
     knitr (>= 1.5),
     rmarkdown,
     testthat,
     scales,
-    devtools
+    vdiffr
 LazyData: TRUE
 RoxygenNote: 7.1.0.9000
 Encoding: UTF-8

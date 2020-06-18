@@ -74,7 +74,7 @@ test_that("Generate Sigma matrix from distance matrix", {
 
 ## all with graph
 
-test_that("Generate distance relation matrix matrix from graph structure", {
+test_that("Generate Sigma matrix  from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
   graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
@@ -92,7 +92,7 @@ test_that("Generate distance relation matrix matrix from graph structure", {
 })
 
 
-test_that("Generate distance relation matrix matrix from graph structure", {
+test_that("Generate Sigma matrix  from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
   graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
@@ -109,7 +109,7 @@ test_that("Generate distance relation matrix matrix from graph structure", {
   expect_true(all(sigma_matrix1 %in% c(0, 1, 0.8/2^c(0:100))))
 })
 
-test_that("Generate distance relation matrix matrix from graph structure", {
+test_that("Generate Sigma matrix  from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
   graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
   adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
@@ -124,4 +124,37 @@ test_that("Generate distance relation matrix matrix from graph structure", {
   expect_true(all(adjacency_matrix1 == cbind(c(0, 1, 0, 0), c(1, 0, 1, 1), c(0, 1, 0, 0), c(0, 1, 0, 0))))
   expect_true(all(sigma_matrix1 == cbind(c(1, 0, 0.8, 0.8), c(0, 1, 0, 0), c(0.8, 0, 1, 0.8), c(0.8, 0, 0.8, 1))))
   expect_true(all(sigma_matrix1 %in% c(0, 1, 0.8/2^c(0:100))))
+})
+
+test_that("Generate Sigma matrix from graph structure with sd passing scalar", {
+  graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
+  adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
+  common_link_matrix1 <- make_commonlink_graph(graph_test1)
+  distance_matrix1 <- make_distance_graph(graph_test1)
+  sigma_matrix1 <- make_sigma_mat_graph(graph_test1, cor = 0.8, sd = 2)
+  expect_equal(isSymmetric(sigma_matrix1), TRUE)
+  expect_true(all(diag(sigma_matrix1) == rep(4, nrow(adjacency_matrix1))))
+  expect_equal(nrow(sigma_matrix1), length(V(graph_test1)))
+  expect_equal(ncol(sigma_matrix1), length(V(graph_test1)))
+  expect_equal(sum(sigma_matrix1), 35.2)
+  expect_true(all(adjacency_matrix1 == cbind(c(0, 1, 0, 0), c(1, 0, 1, 1), c(0, 1, 0, 0), c(0, 1, 0, 0))))
+  expect_true(all(sigma_matrix1 == 4*cbind(c(1, 0.8, 0, 0), c(0.8, 1, 0.8, 0.8), c(0, 0.8, 1, 0), c(0, 0.8, 0, 1))))
+  expect_true(all(sigma_matrix1 %in% c(0, 4, 4*0.8/2^c(0:100))))
+})
+
+test_that("Generate Sigma matrix from graph structure with sd passing vector", {
+  graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
+  graph_test1 <- graph.edgelist(graph_test1_edges, directed = TRUE)
+  adjacency_matrix1 <- make_adjmatrix_graph(graph_test1)
+  common_link_matrix1 <- make_commonlink_graph(graph_test1)
+  distance_matrix1 <- make_distance_graph(graph_test1)
+  sigma_matrix1 <- make_sigma_mat_graph(graph_test1, cor = 0.8, sd = 1:4)
+  expect_equal(isSymmetric(sigma_matrix1), TRUE)
+  expect_true(all(diag(sigma_matrix1) == rep((1:4)^2, nrow(adjacency_matrix1))))
+  expect_equal(nrow(sigma_matrix1), length(V(graph_test1)))
+  expect_equal(ncol(sigma_matrix1), length(V(graph_test1)))
+  expect_equal(sum(sigma_matrix1), 55.6)
+  expect_true(all(adjacency_matrix1 == cbind(c(0, 1, 0, 0), c(1, 0, 1, 1), c(0, 1, 0, 0), c(0, 1, 0, 0))))
+  expect_true(all(abs(sigma_matrix1 - cbind(c(1, 1.6, 0, 0), c(1.6, 4, 4.8, 6.4), c(0.0, 4.8, 9, 0.0), c(0.0, 6.4, 0.0, 16))) < 1e+16))
 })

@@ -248,7 +248,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_activating_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_activating_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- rep(1, length(E(graph_structure)))
 plot_directed(graph_structure, state=state, layout = layout.kamada.kawai,
@@ -290,7 +290,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 plot_directed(graph_structure, state=state, layout = layout.kamada.kawai,
@@ -334,7 +334,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_graph_diverging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_graph_diverging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_diverging_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_diverging <- graph.edgelist(graph_diverging_edges, directed = T)
 
@@ -379,7 +379,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_graph_diverging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_graph_diverging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(1, 1, -1)
 plot_directed(graph_diverging, state=state, layout = layout.kamada.kawai,
@@ -419,7 +419,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_graph_converging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_graph_converging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_converging_edges <- rbind(c("C", "E"), c("D", "E"), c("E", "F"))
 graph_converging <- graph.edgelist(graph_converging_edges, directed = T)
 
@@ -464,7 +464,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_graph_converging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_graph_converging_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(-1, 1, -1)
 plot_directed(graph_converging, state=state, layout = layout.kamada.kawai,
@@ -504,7 +504,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_graph_reconnecting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_graph_reconnecting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_reconnecting_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"),c("C", "E"), c("D", "E"), c("E", "F"))
 graph_reconnecting <- graph.edgelist(graph_reconnecting_edges, directed = T)
 
@@ -549,7 +549,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_graph_reconnecting_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_graph_reconnecting_inhibiting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 # activating graph
 state <- state <- c(1, 1, -1, -1, 1, 1, 1, 1)
 plot_directed(graph_reconnecting, state=state, layout = layout.kamada.kawai,
@@ -604,7 +604,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_RAF_MAP_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r simulation_RAF_MAP_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
 RAF_MAP_graph <- identity(RAF_MAP_graph)
 
 # activating graph
@@ -649,7 +649,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_Pi3K_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_Pi3K_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph <- identity(Pi3K_graph)
 
 # activating graph
@@ -703,7 +703,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 Pi3K_AKT_graph <- identity(Pi3K_AKT_graph)
 Pi3K_AKT_graph <- simplify(Pi3K_AKT_graph, edge.attr.comb = function(x) ifelse(any(x %in% list(-1, 2, "inhibiting", "inhibition")), 2, 1))
 Pi3K_AKT_graph <- simplify(Pi3K_AKT_graph, edge.attr.comb = "first")
@@ -753,7 +753,7 @@ plot_directed(TGFBeta_Smad_graph, state = edge_properties, col.arrow = c(alpha("
 set.seed(9000)
 ```
 
-```{r simulation_TGFBeta_Smad_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=10, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_TGFBeta_Smad_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=2, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 edge_properties <- E(TGFBeta_Smad_graph)$state
 

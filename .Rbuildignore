@@ -23,6 +23,7 @@
 ^tests/figs
 ^tests/testthat/test-cpp.R$
 ^vignettes/*/*/*RData
+^vignettes/*gif
 ^vignettes/*html
 ^vignettes/figure
 ^vignettes/simulate_expression_cache/html/

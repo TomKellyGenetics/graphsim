@@ -3,6 +3,9 @@
 ^\.Rproj\.user$
 ^appveyor\.yml$
 vignettes/*html
+vignettes/figure
+vignettes/*/*/*RData
+vignettes/simulate_expression_cache/html/
 ^\.circleci/config\.yml$
 ^.circleci
 ^Meta$

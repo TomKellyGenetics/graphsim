@@ -16,7 +16,8 @@ make_adjmatrix_graph(graph, directed = FALSE)
 An adjacency matrix compatible with generating an expression matrix
 }
 \description{
-Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph}} structure, preserving node/column/row names (and direction).
+Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph}}
+structure, preserving node/column/row names (and direction).
 }
 \examples{
 

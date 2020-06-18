@@ -3,7 +3,8 @@
 ##'
 ##' @title Generate Common Link Matrix
 ##'
-##' @description Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}} structure, preserving node / column / row names (and direction).
+##' @description Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}}
+##' structure, preserving node / column / row names (and direction).
 ##'
 ##' @param adj_mat precomputed adjacency matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
@@ -44,7 +45,8 @@
 ##' TGFBeta_Smad_common_link_matrix[1:12, 1:12]
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(TGFBeta_Smad_common_link_matrix, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+##' heatmap.2(TGFBeta_Smad_common_link_matrix, scale = "none", trace = "none",
+##'           col = colorpanel(50, "white", "red"))
 ##' 
 ##' @return An integer matrix of number of links shared between nodes
 ##' 

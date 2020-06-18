@@ -4,7 +4,8 @@
 ##'
 ##' @title Generate Adjacency Matrix
 ##' 
-##' @description Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph}} structure, preserving node/column/row names (and direction).
+##' @description Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph}}
+##' structure, preserving node/column/row names (and direction).
 ##'
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.

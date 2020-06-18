@@ -3,12 +3,16 @@
 ##'
 ##' @title Generate Distance Matrix
 ##'
-##' @description Compute the distance matrix of using shortest paths of a (directed) \code{\link[igraph]{igraph}} structure, normalising by the diameter of the network, preserving node/column/row names (and direction).
+##' @description Compute the distance matrix of using shortest paths of a (directed)
+##' \code{\link[igraph]{igraph}} structure, normalising by the diameter of the network,
+##' preserving node/column/row names (and direction).
 ##'
 ##' @param mat precomputed adjacency or commonlink matrix.
 ##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the distance matrix.
-##' @param absolute logical. Whether distances are scaled as the absolute difference from the diameter (maximum possible). Defaults to TRUE. The alternative is to calculate a relative difference from the diameter for a geometric decay in distance.
+##' @param absolute logical. Whether distances are scaled as the absolute difference
+##' from the diameter (maximum possible). Defaults to TRUE. The alternative is to
+##' calculate a relative difference from the diameter for a geometric decay in distance.
 ##' @keywords graph network igraph adjacency
 ##' @importFrom igraph as_adjacency_matrix
 ##' @import igraph
@@ -45,13 +49,17 @@
 ##' graph_structure_distance_matrix_geom
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(graph_structure_distance_matrix_geom, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+##' heatmap.2(graph_structure_distance_matrix_geom, scale = "none", trace = "none",
+##'           col = colorpanel(50, "white", "red"))
 ##' # compute nodes with relationships between nodes (arithmetically decreasing)
-##' graph_structure_distance_matrix_abs <- make_distance_adjmat(graph_structure_adjacency_matrix, absolute = TRUE)
+##' graph_structure_distance_matrix_abs <- make_distance_adjmat(graph_structure_adjacency_matrix,
+##'                                                             absolute = TRUE)
 ##' graph_structure_distance_matrix_abs
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(graph_structure_distance_matrix_abs, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+##' heatmap.2(graph_structure_distance_matrix_abs,
+##'           scale = "none", trace = "none",
+##'           col = colorpanel(50, "white", "red"))
 ##'           
 ##' # import graph from package for reactome pathway
 ##' # TGF-β receptor signaling activates SMADs (R-HSA-2173789)
@@ -61,12 +69,15 @@
 ##' TGFBeta_Smad_distance_matrix_geom <- make_distance_adjmat(TGFBeta_Smad_adjacency_matrix)
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2( TGFBeta_Smad_distance_matrix_geom, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+##' heatmap.2(TGFBeta_Smad_distance_matrix_geom, scale = "none", trace = "none",
+##'           col = colorpanel(50, "white", "red"))
 ##' # compute nodes with relationships between nodes (arithmetically decreasing)
-##' TGFBeta_Smad_distance_matrix_abs <- make_distance_adjmat(TGFBeta_Smad_adjacency_matrix, absolute = TRUE)
+##' TGFBeta_Smad_distance_matrix_abs <- make_distance_adjmat(TGFBeta_Smad_adjacency_matrix,
+##'                         absolute = TRUE)
 ##' # visualise matrix
 ##' library("gplots")
-##' heatmap.2(TGFBeta_Smad_distance_matrix_abs, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+##' heatmap.2(TGFBeta_Smad_distance_matrix_abs, scale = "none", trace = "none",
+##'           col = colorpanel(50, "white", "red"))
 ##' 
 ##' @return A numeric matrix of values in the range [0, 1] where higher values are closer in the network
 ##' 

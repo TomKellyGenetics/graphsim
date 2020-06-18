@@ -38,7 +38,13 @@ generate_expression_mat(
 directed if states are used.}
 
 \item{state}{numeric vector. Vector of length E(graph). Sign used
-to calculate state matrix, may be an integer state or inferred directly from expected correlations for each edge. May be applied a scalar across all edges or as a vector for each edge respectively. May also be entered as text for "activating" or "inhibiting" or as integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.}
+to calculate state matrix, may be an integer state or inferred directly
+from expected correlations for each edge. May be applied a scalar across
+all edges or as a vector for each edge respectively. May also be entered
+as text for "activating" or "inhibiting" or as integers for activating (0,1)
+or inhibiting (-1,2). Compatible with inputs for \code{\link[graphsim]{plot_directed}}.
+Also takes a pre-computed state matrix from \code{\link[graphsim]{make_state_matrix}}
+if applied to the same graph multiple times.}
 
 \item{cor}{numeric. Simulated maximum correlation/covariance of two 
 adjacent nodes. Default to 0.8.}
@@ -95,12 +101,16 @@ test_data <- generate_expression(100, graph_test, cor = 0.8)
 ##' # visualise matrix
 library("gplots")
 # expression data
-heatmap.2(test_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(test_data, scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 # correlations
-heatmap.2(cor(t(test_data)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+heatmap.2(cor(t(test_data)), scale = "none", trace = "none",
+          col = colorpanel(50, "white", "red"))
 # expected correlations (Σ)
 sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
-heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8),
+          scale = "none", trace = "none", 
+          col = colorpanel(50, "white", "red"))
 
 # compute adjacency matrix for toy example
 adjacency_matrix <- make_adjmatrix_graph(graph_test)
@@ -115,12 +125,17 @@ test_data <- generate_expression(100, graph_test, cor = 0.8, absolute = TRUE)
 ##' # visualise matrix
 library("gplots")
 # expression data
-heatmap.2(test_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(test_data, scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 # correlations
-heatmap.2(cor(t(test_data)), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+heatmap.2(cor(t(test_data)),
+          scale = "none", trace = "none",
+          col = colorpanel(50, "white", "red"))
 # expected correlations (Σ)
 sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
-heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8),
+          scale = "none", trace = "none",
+          col = colorpanel(50, "white", "red"))
 
 # construct a synthetic graph network
 graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
@@ -133,23 +148,31 @@ graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 # cor = 0.95 max correlation between samples
 # absolute = FALSE (geometric distance by default)
 edge_state <- c(1, 1, -1, 1, 1, 1, 1, -1)
-structure_data <- generate_expression(250, graph_structure, state = edge_state, cor = 0.95)
+structure_data <- generate_expression(250, graph_structure,
+                                      state = edge_state, cor = 0.95)
 ##' # visualise matrix
 library("gplots")
 # expression data
-heatmap.2(structure_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(structure_data, scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 # correlations
-heatmap.2(cor(t(structure_data)), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(cor(t(structure_data)), scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 # expected correlations (Σ)
-sigma_matrix <- make_sigma_mat_graph(graph_structure, state = edge_state, cor = 0.8)
-heatmap.2(make_sigma_mat_graph(graph_structure, state = edge_state, cor = 0.8), scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+sigma_matrix <- make_sigma_mat_graph(graph_structure,
+                                     state = edge_state, cor = 0.8)
+heatmap.2(make_sigma_mat_graph(graph_structure,
+                               state = edge_state, cor = 0.8),
+          scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 
 # compute adjacency matrix for toy network
 graph_structure_adjacency_matrix <- make_adjmatrix_graph(graph_structure)
 # define states for for each edge
 edge_state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 # generate simulated data from adjacency matrix input
-structure_data <- generate_expression_mat(250, graph_structure_adjacency_matrix, state = edge_state, cor = 0.8)
+structure_data <- generate_expression_mat(250, graph_structure_adjacency_matrix,
+                                          state = edge_state, cor = 0.8)
 
 # compute a simulated dataset for toy network
 # n = 1000 samples
@@ -164,25 +187,39 @@ TGFBeta_Smad_data <- generate_expression(1000, TGFBeta_Smad_graph, cor = 0.75)
 ##' # visualise matrix
 library("gplots")
 # expression data
-heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 # correlations
-heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none",
+          dendrogram = "none", Rowv = FALSE, Colv = FALSE,
+          col = colorpanel(50, "blue", "white", "red"))
 # expected correlations (Σ)
 sigma_matrix <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75)
-heatmap.2(make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75),
+          scale = "none", trace = "none",
+          dendrogram = "none", Rowv = FALSE, Colv = FALSE,
+          col = colorpanel(50, "blue", "white", "red"))
 
 
 # generate simulated data (absolute distance and shared edges)
-TGFBeta_Smad_data <- generate_expression(1000, TGFBeta_Smad_graph, cor = 0.75, absolute = TRUE, comm = TRUE)
+TGFBeta_Smad_data <- generate_expression(1000, TGFBeta_Smad_graph,
+                                         cor = 0.75, absolute = TRUE, comm = TRUE)
 ##' # visualise matrix
 library("gplots")
 # expression data
-heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none",
+          col = colorpanel(50, "blue", "white", "red"))
 # correlations
-heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none",
+          dendrogram = "none", Rowv = FALSE, Colv = FALSE,
+          col = colorpanel(50, "blue", "white", "red"))
 # expected correlations (Σ)
-sigma_matrix <- make_sigma_mat_graph(TGFBeta_Smad_graph, cor = 0.75, comm = TRUE)
-heatmap.2(make_sigma_mat_graph(TGFBeta_Smad_graph, cor = 0.75, comm = TRUE), scale = "none", trace = "none", dendrogram = "none", Rowv = FALSE, Colv = FALSE, col = colorpanel(50, "blue", "white", "red"))
+sigma_matrix <- make_sigma_mat_graph(TGFBeta_Smad_graph,
+                                     cor = 0.75, comm = TRUE)
+heatmap.2(make_sigma_mat_graph(TGFBeta_Smad_graph, cor = 0.75, comm = TRUE),
+          scale = "none", trace = "none",
+          dendrogram = "none", Rowv = FALSE, Colv = FALSE,
+          col = colorpanel(50, "blue", "white", "red"))
 
 }
 \keyword{graph}

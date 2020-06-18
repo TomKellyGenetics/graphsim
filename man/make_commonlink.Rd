@@ -21,7 +21,8 @@ make_commonlink_graph(graph, directed = FALSE)
 An integer matrix of number of links shared between nodes
 }
 \description{
-Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}} structure, preserving node / column / row names (and direction).
+Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}}
+structure, preserving node / column / row names (and direction).
 }
 \examples{
 
@@ -57,7 +58,8 @@ dim(TGFBeta_Smad_common_link_matrix)
 TGFBeta_Smad_common_link_matrix[1:12, 1:12]
 # visualise matrix
 library("gplots")
-heatmap.2(TGFBeta_Smad_common_link_matrix, scale = "none", trace = "none", col = colorpanel(50, "white", "red"))
+heatmap.2(TGFBeta_Smad_common_link_matrix, scale = "none", trace = "none",
+          col = colorpanel(50, "white", "red"))
 
 }
 \keyword{graph}

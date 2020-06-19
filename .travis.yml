@@ -26,6 +26,20 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y libmagick++-dev
   - sudo apt-get install tk
+  
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:opencpu/imagemagick'
+    packages:
+      - libmagick++-dev
+      - tk
+  homebrew:
+    packages:
+      - php
+      - imagemagick
+      - pkg-config
+    update: true  
 
 r_packages:
   - igraph

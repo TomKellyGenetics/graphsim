@@ -39,10 +39,10 @@ graph_structure_adjacency_matrix <- make_adjmatrix_graph(graph_structure)
 graph_structure_adjacency_matrix
 
 # import graph from package for reactome pathway
-# TGF-β receptor signaling activates SMADs (R-HSA-2173789)
+# TGF-\eqn{\Beta} receptor signaling activates SMADs (R-HSA-2173789)
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 
-# compute adjacency matrix for TGF-β receptor signaling activates SMADs
+# compute adjacency matrix for TGF-\eqn{\Beta} receptor signaling activates SMADs
 TGFBeta_Smad_adjacency_matrix <- make_adjmatrix_graph(TGFBeta_Smad_graph)
 dim(TGFBeta_Smad_adjacency_matrix)
 TGFBeta_Smad_adjacency_matrix[1:12, 1:12]

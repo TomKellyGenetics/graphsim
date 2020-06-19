@@ -58,10 +58,10 @@
 ##' state_matrix <- make_state_matrix(graph_test)
 ##' 
 ##' # import graph from package for reactome pathway
-##' # TGF-β receptor signaling activates SMADs (R-HSA-2173789)
+##' # TGF-\eqn{\Beta} receptor signaling activates SMADs (R-HSA-2173789)
 ##' TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 ##' 
-##' # compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
+##' # compute sigma (\eqn{\Sigma}) matrix from geometric distance directly from TGF-\eqn{\Beta} pathway
 ##' TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
 ##' table(TFGBeta_Smad_state)
 ##' # states are edge attributes

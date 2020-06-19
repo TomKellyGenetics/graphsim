@@ -8,7 +8,7 @@
 \alias{make_sigma_mat_graph}
 \alias{make_sigma_mat_dist_adjmat}
 \alias{make_sigma_mat_dist_graph}
-\title{Generate Sigma (Σ) Matrix}
+\title{Generate Sigma (\eqn{\Sigma}) Matrix}
 \usage{
 make_sigma_mat_adjmat(mat, state = NULL, cor = 0.8, sd = 1)
 
@@ -77,12 +77,12 @@ relative difference from the diameter for a geometric decay in distance.}
 a numeric covariance matrix of values in the range [-1, 1]
 }
 \description{
-Compute the Sigma (Σ) matrix from an \code{\link[igraph]{igraph}} structure 
+Compute the Sigma (\eqn{\Sigma}) matrix from an \code{\link[igraph]{igraph}} structure 
 or pre-computed matrix. These are compatible with \code{\link[mvtnorm]{rmvnorm}} and
  \code{\link[graphsim]{generate_expression}}.
 By default data is generated with a mean of 0 and standard deviation of 1 for 
 each gene (with correlations between derived from the graph structure).
-Thus where the Sigma (Σ) matrix has diagonals of 1 (for the variance of each gene)
+Thus where the Sigma (\eqn{\Sigma}) matrix has diagonals of 1 (for the variance of each gene)
 then the symmetric non-diagonal terms (for covariance) determine the correlations
 between each gene in the output from \code{\link[graphsim]{generate_expression}}.
 }
@@ -92,39 +92,39 @@ between each gene in the output from \code{\link[graphsim]{generate_expression}}
 library("igraph")
 graph_test_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
 graph_test <- graph.edgelist(graph_test_edges, directed = TRUE)
-# compute sigma (Σ) matrix for toy example
+# compute sigma (\eqn{\Sigma}) matrix for toy example
 sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
 sigma_matrix
 
-# compute sigma (Σ) matrix  from adjacency matrix for toy example
+# compute sigma (\eqn{\Sigma}) matrix  from adjacency matrix for toy example
 adjacency_matrix <- make_adjmatrix_graph(graph_test)
 sigma_matrix <- make_sigma_mat_adjmat(adjacency_matrix, cor = 0.8)
 sigma_matrix
 
-# compute sigma (Σ) matrix from shared edges for toy example
+# compute sigma (\eqn{\Sigma}) matrix from shared edges for toy example
 common_link_matrix <- make_commonlink_graph(graph_test)
 sigma_matrix <- make_sigma_mat_comm(common_link_matrix, cor = 0.8)
 sigma_matrix
 
-# compute sigma (Σ) matrix from Laplacian for toy example
+# compute sigma (\eqn{\Sigma}) matrix from Laplacian for toy example
 laplacian_matrix <- make_laplacian_graph(graph_test)
 sigma_matrix <- make_sigma_mat_laplacian(laplacian_matrix, cor = 0.8)
 sigma_matrix
 
-# compute sigma (Σ) matrix from distance matrix for toy example
+# compute sigma (\eqn{\Sigma}) matrix from distance matrix for toy example
 distance_matrix <- make_distance_graph(graph_test, absolute = FALSE)
 sigma_matrix <- make_sigma_mat_dist_adjmat(distance_matrix, cor = 0.8)
 sigma_matrix
 
-# compute sigma (Σ) matrix from geometric distance directly from toy example graph
+# compute sigma (\eqn{\Sigma}) matrix from geometric distance directly from toy example graph
 sigma_matrix <- make_sigma_mat_dist_graph(graph_test, cor = 0.8)
 sigma_matrix
 
-# compute sigma (Σ) matrix from absolute distance directly from toy example graph
+# compute sigma (\eqn{\Sigma}) matrix from absolute distance directly from toy example graph
 sigma_matrix <- make_sigma_mat_dist_graph(graph_test, cor = 0.8, absolute = TRUE)
 sigma_matrix
 
-# compute sigma (Σ) matrix from geometric distance with sd = 2
+# compute sigma (\eqn{\Sigma}) matrix from geometric distance with sd = 2
 sigma_matrix <- make_sigma_mat_dist_graph(graph_test, cor = 0.8, sd = 2)
 sigma_matrix
 
@@ -133,7 +133,7 @@ graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"
                                c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 
-# compute sigma (Σ) matrix from geometric distance directly from synthetic graph network
+# compute sigma (\eqn{\Sigma}) matrix from geometric distance directly from synthetic graph network
 sigma_matrix_graph_structure <- make_sigma_mat_dist_graph(graph_structure,
                                                           cor = 0.8, absolute = FALSE)
 sigma_matrix_graph_structure
@@ -142,7 +142,7 @@ library("gplots")
 heatmap.2(sigma_matrix_graph_structure, scale = "none", trace = "none",
                      col = colorpanel(50, "white", "red"))
 
-# compute sigma (Σ) matrix from geometric distance directly from
+# compute sigma (\eqn{\Sigma}) matrix from geometric distance directly from
 # synthetic graph network with inhibitions
 edge_state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 # pass edge state as a parameter
@@ -156,7 +156,7 @@ library("gplots")
 heatmap.2(sigma_matrix_graph_structure_inhib, scale = "none", trace = "none",
           col = colorpanel(50, "blue", "white", "red"))
 
-# compute sigma (Σ) matrix from geometric distance directly from 
+# compute sigma (\eqn{\Sigma}) matrix from geometric distance directly from 
 # synthetic graph network with inhibitions
 E(graph_structure)$state <-  c(1, 1, -1, 1, 1, 1, 1, -1)
 # pass edge state as a graph attribute
@@ -170,10 +170,10 @@ heatmap.2(sigma_matrix_graph_structure_inhib, scale = "none", trace = "none",
           col = colorpanel(50, "blue", "white", "red"))
 
 # import graph from package for reactome pathway
-# TGF-β receptor signaling activates SMADs (R-HSA-2173789)
+# TGF-\eqn{\Beta} receptor signaling activates SMADs (R-HSA-2173789)
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 
-# compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
+# compute sigma (\eqn{\Sigma}) matrix from geometric distance directly from TGF-\eqn{\Beta} pathway
 TFGBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
 table(TFGBeta_Smad_state)
 # states are edge attributes
@@ -185,7 +185,7 @@ library("gplots")
 heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none",
           col = colorpanel(50, "blue", "white", "red"))
 
-# compute sigma (Σ) matrix from geometric distance directly from TGF-β pathway
+# compute sigma (\eqn{\Sigma}) matrix from geometric distance directly from TGF-\eqn{\Beta} pathway
 TGFBeta_Smad_graph <- remove.edge.attribute(TGFBeta_Smad_graph, "state")
 # compute with states removed (all negative)
 sigma_matrix_TFGBeta_Smad <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph,

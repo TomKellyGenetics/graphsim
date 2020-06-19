@@ -106,7 +106,7 @@ heatmap.2(test_data, scale = "none", trace = "none",
 # correlations
 heatmap.2(cor(t(test_data)), scale = "none", trace = "none",
           col = colorpanel(50, "white", "red"))
-# expected correlations (Σ)
+# expected correlations (\eqn{\Sigma})
 sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
 heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8),
           scale = "none", trace = "none", 
@@ -131,7 +131,7 @@ heatmap.2(test_data, scale = "none", trace = "none",
 heatmap.2(cor(t(test_data)),
           scale = "none", trace = "none",
           col = colorpanel(50, "white", "red"))
-# expected correlations (Σ)
+# expected correlations (\eqn{\Sigma})
 sigma_matrix <- make_sigma_mat_graph(graph_test, cor = 0.8)
 heatmap.2(make_sigma_mat_graph(graph_test, cor = 0.8),
           scale = "none", trace = "none",
@@ -158,7 +158,7 @@ heatmap.2(structure_data, scale = "none", trace = "none",
 # correlations
 heatmap.2(cor(t(structure_data)), scale = "none", trace = "none",
           col = colorpanel(50, "blue", "white", "red"))
-# expected correlations (Σ)
+# expected correlations (\eqn{\Sigma})
 sigma_matrix <- make_sigma_mat_graph(graph_structure,
                                      state = edge_state, cor = 0.8)
 heatmap.2(make_sigma_mat_graph(graph_structure,
@@ -179,7 +179,7 @@ structure_data <- generate_expression_mat(250, graph_structure_adjacency_matrix,
 # state = TGFBeta_Smad_state (properties of each edge)
 # cor = 0.75 max correlation between samples
 # absolute = FALSE (geometric distance by default)
- # compute states directly from graph attributes for TGF-β pathway
+ # compute states directly from graph attributes for TGF-\eqn{\Beta} pathway
 TGFBeta_Smad_state <- E(TGFBeta_Smad_graph)$state
 table(TGFBeta_Smad_state)
 # generate simulated data
@@ -193,7 +193,7 @@ heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none",
 heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none",
           dendrogram = "none", Rowv = FALSE, Colv = FALSE,
           col = colorpanel(50, "blue", "white", "red"))
-# expected correlations (Σ)
+# expected correlations (\eqn{\Sigma})
 sigma_matrix <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75)
 heatmap.2(make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75),
           scale = "none", trace = "none",
@@ -213,7 +213,7 @@ heatmap.2(TGFBeta_Smad_data, scale = "none", trace = "none",
 heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none",
           dendrogram = "none", Rowv = FALSE, Colv = FALSE,
           col = colorpanel(50, "blue", "white", "red"))
-# expected correlations (Σ)
+# expected correlations (\eqn{\Sigma})
 sigma_matrix <- make_sigma_mat_graph(TGFBeta_Smad_graph,
                                      cor = 0.75, comm = TRUE)
 heatmap.2(make_sigma_mat_graph(TGFBeta_Smad_graph, cor = 0.75, comm = TRUE),

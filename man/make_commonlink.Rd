@@ -48,7 +48,7 @@ graph_structure_common_link_matrix <- make_commonlink_adjmat(graph_structure_adj
 graph_structure_common_link_matrix
 
 # import graph from package for reactome pathway
-# TGF-β receptor signaling activates SMADs (R-HSA-2173789)
+# TGF-\eqn{\Beta} receptor signaling activates SMADs (R-HSA-2173789)
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 # compute nodes with shared edges to a 3rd node 
 TGFBeta_Smad_adjacency_matrix <- make_adjmatrix_graph(TGFBeta_Smad_graph)

@@ -23,7 +23,7 @@ authors:
     orcid: 0000-0003-1174-6054
     affiliation: "1"
 affiliations:
- - name: "Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand"
+ - name: "Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand \n"
    index: 1
  - name: "RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan"
    index: 2
@@ -262,10 +262,6 @@ graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
    c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph <- graph.edgelist(graph_edges, directed = TRUE)
 
-#plot graph structure (Figure 1a)
-plot_directed(graph, state ="activating", layout = layout.kamada.kawai,
-  cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
-
 #generate parameters for inhibitions for each edge in E(graph)
 state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 #plot graph structure with inhibitions (Figure 1b)
@@ -273,7 +269,7 @@ plot_directed(graph, state=state, layout = layout.kamada.kawai,
   cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
 ```
 
-\begin{figure}
+\begin{figure}[!htbp]
 
 {\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-2} 
 
@@ -348,9 +344,9 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 ```
 
-\begin{figure}
+\begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
 
 }
 
@@ -416,9 +412,9 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 ```
 
 
-\begin{figure}
+\begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
 
 }
 
@@ -486,9 +482,9 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 ```
 
-\begin{figure}
+\begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
 
 }
 

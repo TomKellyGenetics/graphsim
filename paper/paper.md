@@ -388,18 +388,6 @@ expr <- generate_expression(100, graph, state, cor = 0.8, mean = 0,
   comm = FALSE, dist =TRUE, absolute = FALSE)
 ```
 
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
-
-}
-
-\caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
-\end{figure}
-
-
-
 The simulation procedure is also demonstrated here
 (Figure [4](#fig:simulation_smad){reference-type="ref"
 reference="fig:simulation_smad"}) on a pathway structure for a known
@@ -423,6 +411,17 @@ reference="fig:simulation_smad:fourth"}). Here *SMAD7* exhibits
 negative correlations with the other SMADs consistent with it's
 functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
 
+
+\begin{figure}[!htbp]
+
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
+
+}
+
+\caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
+\end{figure}
+
+
 We can import the graph structure into R as follows and run simulations as above:
 
 
@@ -436,27 +435,6 @@ plot_directed(graph, state = state, layout = layout.kamada.kawai,
   border.node=alpha("black", 0.75), fill.node="lightblue",
   col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[state], 
   cex.node = 1.5, cex.label = 0.8, cex.arrow = 2)
-
-#plot relationship matrix
-heatmap.2(make_distance_graph(graph, absolute = FALSE),
-  scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
-  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
-
-#plot sigma matrix
-heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
-  scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
-  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
-
-#simulated data
-expr <- generate_expression(100, graph, state, cor = 0.8,
-  mean = 0,comm = FALSE, dist =TRUE, absolute = FALSE)
-#plot simulated correlations
-heatmap.2(cor(t(expr)), scale = "none", trace = "none", 
-          col = colorpanel(50, "blue", "white", "red"),
-  colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
-#plot simulated expression data
-heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
-colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 ```
 
 These simulated datasets can also be used for simulating gene 

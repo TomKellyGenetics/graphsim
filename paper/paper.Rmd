@@ -4,7 +4,7 @@ output:
   rmarkdown::pdf_document:
     fig_crop: no
     keep_md: TRUE
-    keep_tex: TRUE
+    #keep_tex: TRUE
     fig_caption: yes
 tags:
   - R
@@ -37,7 +37,7 @@ header-includes:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", width = 68)
 knitr::opts_chunk$set(fig.cap = "", fig.path = "Plot")
-#knitr::opts_chunk$set(fig.pos = "!htbp")
+knitr::opts_chunk$set(fig.pos = "!htbp")
 options(width = 68, cli.unicode = FALSE, cli.width = 68)
 #par(mai=c(2.82, 2.82, 0.82, 0.82)-0.82)
 par(mar=c(7, 10, 4, 2) + 0.1)
@@ -433,6 +433,8 @@ simulated data
 (Figure [3e](#fig:simulation_inhibiting:fourth){reference-type="ref"
 reference="fig:simulation_inhibiting:fourth"}).
 
+The following changes are needed to handle inhibitions:
+
 ```{r, include = FALSE}
 set.seed(9000)
 ```
@@ -535,6 +537,8 @@ data to represent expression with the complexity of a biological pathway
 reference="fig:simulation_smad:fourth"}). Here *SMAD7* exhibits
 negative correlations with the other SMADs consistent with it's
 functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
+
+We can import the graph structure into R as follows and run simulations as above:
 
 ```{r, include = FALSE}
 set.seed(9000)

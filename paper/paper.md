@@ -31,8 +31,9 @@ date: "24 June 2020"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
-  - \include{header.tex}
-  - \let\origfigure\figure \let\endorigfigure\endfigure \renewenvironment{figure}[1][2] { \expandafter\origfigure\expandafter[!htbp] } { \endorigfigure }
+  - \let\origfigure\figure
+  - \let\endorigfigure\endfigure
+  - \renewenvironment{figure}[1][2] { \expandafter\origfigure\expandafter[!htbp] } { \endorigfigure }
 ---
 
 
@@ -274,7 +275,7 @@ plot_directed(graph, state=state, layout = layout.kamada.kawai,
   cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
 ```
 
-\begin{figure}[!htbp]
+\begin{figure}
 
 {\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-2} 
 
@@ -344,9 +345,9 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 ```
 
-\begin{figure}[!htbp]
+\begin{figure}
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
 
 }
 
@@ -412,9 +413,9 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 ```
 
 
-\begin{figure}[!htbp]
+\begin{figure}
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
 
 }
 
@@ -482,9 +483,9 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
 colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 ```
 
-\begin{figure}[!htbp]
+\begin{figure}
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
 
 }
 

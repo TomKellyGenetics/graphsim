@@ -31,15 +31,16 @@ date: "`r  format(Sys.time(), '%d %B %Y')`"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
-  - \include{header.tex}
-  - \let\origfigure\figure \let\endorigfigure\endfigure \renewenvironment{figure}[1][2] { \expandafter\origfigure\expandafter[!htbp] } { \endorigfigure }
+  - \let\origfigure\figure
+  - \let\endorigfigure\endfigure
+  - \renewenvironment{figure}[1][2] { \expandafter\origfigure\expandafter[!htbp] } { \endorigfigure }
 ---
 
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", width = 68)
 knitr::opts_chunk$set(fig.cap = "", fig.path = "Plot")
-knitr::opts_chunk$set(fig.pos = "!htbp")
+#knitr::opts_chunk$set(fig.pos = "!htbp")
 options(width = 68, cli.unicode = FALSE, cli.width = 68)
 #par(mai=c(2.82, 2.82, 0.82, 0.82)-0.82)
 par(mar=c(7, 10, 4, 2) + 0.1)

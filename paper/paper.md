@@ -203,6 +203,7 @@ parameter ($\rho$) and the remaining off-diagonal values in the matrix
 are based on scaling these correlations by the geometrically weighted
 relationship matrix (or the nearest positive definite matrix for
 $\Sigma$ with negative correlations).\
+
 Computing the nearest positive definite matrix is necessary to ensure
 that the variance-covariance matrix could be inverted when used as a
 parameter in multivariate normal simulations, particularly when negative
@@ -231,7 +232,7 @@ visualisation in
 Figure [1](#fig:simple_graph){reference-type="ref"
 reference="fig:simple_graph"} was specifically developed for (directed)
 \texttt{igraph} objects in and is available in the and packages. The
-\texttt{plot_directed} function enables customisation of plot parameters for
+\texttt{plot\_directed} function enables customisation of plot parameters for
 each node or edge, and mixed (directed) edge types for indicating
 activation or inhibition. These inhibition links (which occur frequently
 in biological pathways) are demonstrated in

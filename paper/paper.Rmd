@@ -31,13 +31,14 @@ date: "`r  format(Sys.time(), '%d %B %Y')`"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
- # - \usepackage{subfig}
+  - \include{header.tex}
 ---
 
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", width = 68)
 knitr::opts_chunk$set(fig.cap = "", fig.path = "Plot")
+knitr::opts_chunk$set(fig.pos = "!htbp")
 options(width = 68, cli.unicode = FALSE, cli.width = 68)
 #par(mai=c(2.82, 2.82, 0.82, 0.82)-0.82)
 par(mar=c(7, 10, 4, 2) + 0.1)
@@ -341,11 +342,6 @@ set.seed(9000)
 
 
 ```{r simulation_activating_hide, fig.align='center', fig.show='hold', fig.width='1.0\\linewidth', fig.height='1.0\\linewidth', out.height='.375\\linewidth', out.width='.375\\linewidth', fig.retina=10, fig.margin = FALSE, fig.ncol = 2, eval=FALSE, warning=FALSE}
-# activating graph
-state <- rep(1, length(E(graph)))
-plot_directed(graph, state=state, layout = layout.kamada.kawai,
-  cex.node=2, cex.arrow=4, arrow_clip = 0.2)
-
 #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "white", "red"),

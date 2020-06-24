@@ -27,7 +27,7 @@ affiliations:
    index: 1
  - name: "RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Kanagawa 230-0045, Japan"
    index: 2
-date: "10 June 2020"
+date: "24 June 2020"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
@@ -97,7 +97,6 @@ of regulatory networks has thus far primarily relied on experimental
 validation or resampling-based approaches to estimate the likelihood
 of specific network modules being predicted [@Markowetz2007; @Hawe2019].
 
-
 Simulated datasets with pathway structure are of particular interest for
 benchmarking regulatory network inference techniques and methods
 being developed for genomics data with complex biological 
@@ -112,14 +111,14 @@ to use this data [@Zappia2017; @Saelens2019]. Packages such as 'splatter'
 [@Zappia2017], which uses the gamma-poisson distribution,
 have been developed to model single-cell data.
 SERGIO [@Dibaeinia2019] and dyngen [@Cannoodt2020] build on
-this to include gene regulatory networks and multimodality
+thisby adding gene regulatory networks and multimodality
 respectively. These methods have been designed based on known
-or modelled reaction states and added stochasticity to determinisitic
+or synthetic reaction states and added stochasticity to deterministic
 relationships. However, it is computationally-intensive to model
 these reactions at scale over iterations in benchmarking.
 In some cases, it is only necessary to model the statistical
-variability of RNA-Seq data to evaluate methods with these
-correlation structures.
+variability and ``noise'' of RNA-Seq data to evaluate methods
+with multivariate correlation structures.
 
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from

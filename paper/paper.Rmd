@@ -119,14 +119,14 @@ to use this data [@Zappia2017; @Saelens2019]. Packages such as 'splatter'
 [@Zappia2017], which uses the gamma-poisson distribution,
 have been developed to model single-cell data.
 SERGIO [@Dibaeinia2019] and dyngen [@Cannoodt2020] build on
-this to include gene regulatory networks and multimodality
+thisby adding gene regulatory networks and multimodality
 respectively. These methods have been designed based on known
-or modelled reaction states and added stochasticity to deterministic
+or synthetic reaction states and added stochasticity to deterministic
 relationships. However, it is computationally-intensive to model
 these reactions at scale over iterations in benchmarking.
 In some cases, it is only necessary to model the statistical
-variability of RNA-Seq data to evaluate methods with these
-correlation structures.
+variability and ``noise'' of RNA-Seq data to evaluate methods
+with multivariate correlation structures.
 
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from

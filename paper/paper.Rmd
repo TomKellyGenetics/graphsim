@@ -31,9 +31,6 @@ date: "`r  format(Sys.time(), '%d %B %Y')`"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
-  - \let\origfigure\figure
-  - \let\endorigfigure\endfigure
-  - \renewenvironment{figure}[1][2] { \expandafter\origfigure\expandafter[!htbp] } { \endorigfigure }
 ---
 
 

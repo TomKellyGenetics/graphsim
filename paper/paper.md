@@ -31,9 +31,6 @@ date: "24 June 2020"
 bibliography: paper.bib
 header-includes:
   - \usepackage{caption}
-  - \let\origfigure\figure
-  - \let\endorigfigure\endfigure
-  - \renewenvironment{figure}[1][2] { \expandafter\origfigure\expandafter[!htbp] } { \endorigfigure }
 ---
 
 
@@ -219,6 +216,16 @@ definite matrix is computed using the `nearPD` function of the \texttt{Matrix} R
 variance-covariance matrices. The \texttt{graphsim} package gives a warning when this
 occurs.
 
+
+\begin{figure}
+
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-2} 
+
+}
+
+\caption{\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure in Figures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.}\label{fig:simple_graph}
+\end{figure}
+
 Illustrations {#sec:illustrations}
 ===============================================================================
 
@@ -275,14 +282,6 @@ plot_directed(graph, state=state, layout = layout.kamada.kawai,
   cex.node = 2, cex.arrow = 4, arrow_clip = 0.2)
 ```
 
-\begin{figure}
-
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimple_graph-2} 
-
-}
-
-\caption{\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure in Figures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.}\label{fig:simple_graph}
-\end{figure}
 
 Generating a Simulated Expression Dataset {#sec:graphsim_demo}
 -----------------------------------------
@@ -300,7 +299,19 @@ normally-distributed) log-expression profile for each node
 (Figure [2e](#fig:simulation_activating:fourth){reference-type="ref"
 reference="fig:simulation_activating:fourth"}) with a corresponding
 correlation structure (Figure [2d](#fig:simulation_activating:fifth){reference-type="ref"
-reference="fig:simulation_activating:fifth"}). The simulated correlation
+reference="fig:simulation_activating:fifth"}).
+
+
+\begin{figure}
+
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
+
+}
+
+\caption{\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.}\label{fig:simulation_activating}
+\end{figure}
+
+The simulated correlation
 structure closely resembled the expected correlation structure ($\Sigma$
 in Figure [2c](#fig:simulation_activating:third){reference-type="ref"
 reference="fig:simulation_activating:third"}) even for the relatively
@@ -315,11 +326,6 @@ test procedures designed for analysis of empirical gene expression data
 normalised on a log-scale.
 
 The simulated dataset can be generated using the following code:
-
-
-
-
-
 
 
 ```r
@@ -344,15 +350,6 @@ heatmap.2(cor(t(expr)), scale = "none", trace = "none",
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 ```
-
-\begin{figure}
-
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
-
-}
-
-\caption{\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.}\label{fig:simulation_activating}
-\end{figure}
 
 
 
@@ -389,7 +386,18 @@ reference="fig:simulation_inhibiting:fourth"}).
 state <- c(1, 1, -1, 1, 1, 1, 1, -1)
 plot_directed(graph, state=state, layout = layout.kamada.kawai,
   cex.node=2, cex.arrow=4, arrow_clip = 0.2)
+```
 
+\begin{figure}
+
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
+
+}
+
+\caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
+\end{figure}
+
+```r
 #plot relationship matrix
 heatmap.2(make_distance_graph(graph, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
@@ -412,15 +420,6 @@ heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)), labCol = "")
 ```
 
-
-\begin{figure}
-
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
-
-}
-
-\caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
-\end{figure}
 
 
 

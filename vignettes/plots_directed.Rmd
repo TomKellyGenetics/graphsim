@@ -1,8 +1,18 @@
 ---
 title: "Directed plots for igraph objects"
-author: "Tom Kelly"
+author: "S. Thomas Kelly^1,2^, Michael A. Black^2^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
 date: "`r  format(Sys.time(), '%A %d %B %Y')`"
-output: rmarkdown::html_vignette
+output:
+  prettydoc::html_pretty:
+       theme: cayman
+  #html_document:
+       #theme: united
+       number_sections: true
+       toc: true
+       toc_depth: 4
+       #toc_float: true
+       #code_folding: show
+       keep_html: true
 vignette: >
   %\VignetteIndexEntry{Directed plots for igraph objects}
   %\VignetteEngine{knitr::knitr}
@@ -20,13 +30,36 @@ par(bty="o")
 #captioner::captioner(prefix = "Fig.")
 ```
 
-## Motivations for directed graph plots
+
+<!-- <h1 class="title toc-ignore">Using the graphsim package:  Directed plots for igraph objects</h1> -->
+
+<!-- <h4 class="author">S. Thomas Kelly^1,2^, Michael A. Black^2^</h4> **** -->
+
+<!-- ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand -->
+
+<!-- ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama -->
+
+<!-- <h4 class="date">`r  format(Sys.time(), '%A %d %B %Y')`</h4> -->
+
+<!-- ---------------------------------------------------------- -->
+
+**Abstract**
+
+Guide on how to plot directed graphs from `igraph` objects to display activating and repressive states.
+
+**Package**
+
+graphsim 0.1.2
+
+# Directed graph plots
+
+## Motivations
 
 Here we demonstrate the plotting functions that come built-in with `graphsim` and compare them them to the `plot.igraph` method provided by the `igraph` package. With all due respect to the efforts of the `igraph` developers, their plotting functions leave some things to be desired in terms of aesthetics. Here we provide additional functionality to plot directed graphs. This draws upon many functions provided by `igraph` including layout settings.
 
 In particular, graph and network represenations in biology often require displaying edge properties. Here we have the "state" parameter which can be used to differentiate these and plot activating and inhibiting or repressing relationships differently. We use different arrowheads as per convention in biochemistry and molecular genetics. 
 
-## Import packages
+## Getting started
 
 To display these plots the following packages must be imported.
 
@@ -35,18 +68,22 @@ library("igraph")
 library("graphsim")
 ```
 
-## Toy example
+# Toy example
 
 Here we demonstrate the plot functions on a small toy graph.
 
-### Set up simulated graph
+## Set up simulated graph
+
+First we generate a graph object using the `igraph` package.
 
 ```{r}
 graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"), c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph <- graph.edgelist(graph_edges, directed = T)
 ```
 
-### Plotting
+## Plotting
+
+Then we compare plotting functions to the built-in `plot.igraph` S3 method provided for igraph objects by the `igraph` package.
 
 `plot_directed` with default settings uses the `layout.fruchterman.reingold` as does the default `igraph::graphsim`.
 
@@ -59,7 +96,7 @@ plot_directed(graph)
 
 Here you can see that the plotting functions display graphs in a similar layout with different aesthetic parameters. We suggest that you choose the function that suits your needs and datasets.
 
-#### Custom aesthetics
+### Custom aesthetics
 
 We support various aesthetic parameters to control the colour and relative size of nodes and edges.
 
@@ -127,11 +164,11 @@ edge_properties <- c(1, 1, -1, -1, 1, -1, 1, -1)/2 + 1.5
 plot_directed(graph, state = edge_properties, col.arrow = c("#F8766D", "#CD9600", "#7CAE00", "#00BE67", "#00BFC4", "#00A9FF", "#C77CFF", "#FF61CC"), fill.node = c("#F8766D", "#CD9600", "#7CAE00", "#00BE67", "#00BFC4", "#00A9FF", "#C77CFF", "#FF61CC", "#F8766D"))
 ```
 
-## Empirical examples
+# Empirical examples
 
-Here we demonstrate the plotting package to display real biological pathways from the "Reactome" database. We can import these from the `data` directory included with this package. These graphs are given for examples and convenience.
+Here we demonstrate the plotting package to display real biological pathways from the "Reactome" database. We can import these from the `data` directory included with this package. These graphs are given for examples and convenience. Any empirical data that consists of a list of directed edges can be imported as an igraph object and handled similarly. Below are some demonstrations.
 
-
+## RAF/MAP kinase cascade
 
 Here we plot the RAF/MAP kinase cascade pathway.
 
@@ -141,14 +178,16 @@ graph <- identity(RAF_MAP_graph)
 plot_directed(graph, col.arrow = "#00A9FF", fill.node = "springgreen1")
 ```
 
-Here we plot the phosphoinositide-3-kinase (Pi3K) cascade pathway.
+## Pi3K cascade
 
+Here we plot the phosphoinositide-3-kinase (Pi3K) cascade pathway.
 
 ```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
 graph <- identity(Pi3K_graph)
 plot_directed(graph, col.arrow = "#00A9FF", fill.node = "springgreen1")
 ```
 
+### Pi3k/AKT pathway
 
 Here we plot the phosphoinositide-3-kinase activation of Protein kinase B (PKB) cascade (also known as Pi3k/AKT) pathway. States are imported as edge attributes from the imported graph.
 
@@ -159,6 +198,8 @@ edge_properties <- E(graph)$state
 plot_directed(graph, state = edge_properties, col.arrow = c("#00A9FF", "#F8766D")[edge_properties], fill.node = c("springgreen1"))
 ```
 
+## TGFβ-Smad pathway
+
 Here we plot the TGFβ-Smad pathway with inhibitions known. States are imported as edge attributes from the imported graph.
 
 
@@ -168,3 +209,12 @@ edge_properties <- E(graph)$state
 plot_directed(graph, state = edge_properties, col.arrow = c("#00A9FF", "#F8766D")[edge_properties], fill.node = c("springgreen1"))
 ```
 
+
+----------------------------------------------------------
+
+# Session info
+Here is the output of `sessionInfo()` on the system on which this document was compiled running pandoc 2.1:
+
+```{r, echo = FALSE}
+sessionInfo()
+```

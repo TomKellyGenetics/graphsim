@@ -1,10 +1,18 @@
 ---
 title: "Simulating continuous data based on network graph structures"
-author: "Tom Kelly"
+author: "S. Thomas Kelly^1,2^, Michael A. Black^2^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
 date: "`r  format(Sys.time(), '%A %d %B %Y')`"
-output: 
-  rmarkdown::html_document:
-    keep_html: TRUE
+output:
+  prettydoc::html_pretty:
+       theme: cayman
+  #html_document:
+       #theme: united
+       number_sections: true
+       toc: true
+       toc_depth: 4
+       #toc_float: true
+       #code_folding: show
+       keep_html: true
 vignette: >
   %\VignetteIndexEntry{Simulating network graph structure in continuous data}
    %\VignetteEngine{knitr::knitr}
@@ -20,6 +28,14 @@ par(mar=c(7, 10, 4, 2) + 0.1)
 par(bty="o")
 #captioner::captioner(prefix = "Fig.")
 ```
+
+**Abstract**
+
+Guide on how to simulate gene expression data from pathway strucutres defined by graphs from `igraph` objects.
+
+**Package**
+
+graphsim 0.1.2
 
 # Overview of graphsim
 

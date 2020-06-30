@@ -1,5 +1,5 @@
 ---
-title: "Directed plots for igraph objects"
+title: "graphsim: directed plots for igraph objects"
 author: "S. Thomas Kelly^1,2^, Michael A. Black^2^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
 date: "`r  format(Sys.time(), '%A %d %B %Y')`"
 output:
@@ -43,28 +43,29 @@ par(bty="o")
 
 <!-- ---------------------------------------------------------- -->
 
-**Abstract**
+**Summary**
 
 Guide on how to plot directed graphs from `igraph` objects to display activating and repressive states.
 
 **Package**
 
-graphsim 0.1.2
+graphsim 1.0.0
 
 # Directed graph plots
 
 ## Motivations
 
-Here we demonstrate the plotting functions that come built-in with `graphsim` and compare them them to the `plot.igraph` method provided by the `igraph` package. With all due respect to the efforts of the `igraph` developers, their plotting functions leave some things to be desired in terms of aesthetics. Here we provide additional functionality to plot directed graphs. This draws upon many functions provided by `igraph` including layout settings.
+Here we demonstrate the plotting functions that come built-in with `graphsim`, an alternative to the `plot.igraph` provided by the `igraph` package. Here we provide additional functionality for plotting directed graphs. This draws upon many functions provided by `igraph`, including layout settings <span class="citation">(Csardi and Nepusz 2006)</span>.
 
-In particular, graph and network represenations in biology often require displaying edge properties. Here we have the "state" parameter which can be used to differentiate these and plot activating and inhibiting or repressing relationships differently. We use different arrowheads as per convention in biochemistry and molecular genetics. 
+In particular, graph and network representations in biology often require displaying edge properties <span class="citation">(Barabási and Oltvai 2004)</span>. Here we have the "state" parameter which can be used to differentiate these, and allow us to represent activating and inhibiting or repressing relationships differently. We use different arrowheads as per convention in molecular biology. 
 
 ## Getting started
 
-To display these plots the following packages must be imported.
+To generate these plots, the following packages must be imported.
 
 ```{r, message=F}
 library("igraph")
+library("scales")
 library("graphsim")
 ```
 
@@ -77,96 +78,114 @@ Here we demonstrate the plot functions on a small toy graph.
 First we generate a graph object using the `igraph` package.
 
 ```{r}
-graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"), c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
-graph <- graph.edgelist(graph_edges, directed = T)
+graph_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"), c("D", "E"),
+                     c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+graph <- graph.edgelist(graph_edges, directed = TRUE)
 ```
 
 ## Plotting
 
-Then we compare plotting functions to the built-in `plot.igraph` S3 method provided for igraph objects by the `igraph` package.
+We next demonstrate the plotting function for directed graph objects. `plot_directed` with default settings uses the `layout.fruchterman.reingold` as does built-in plotting function `igraph::plot.igraph`.
 
-`plot_directed` with default settings uses the `layout.fruchterman.reingold` as does the default `igraph::graphsim`.
-
-```{r,  fig.align='center', out.width="80%", fig.height = 10, fig.width = 10}
-plot(graph)
-```
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 plot_directed(graph)
 ```
 
-Here you can see that the plotting functions display graphs in a similar layout with different aesthetic parameters. We suggest that you choose the function that suits your needs and datasets.
+Here you can see that the plotting function display a graph in a similar layout to `plot.igraph` with different aesthetic parameters. We suggest that you choose the function that suits your needs and datasets. We demonstrate the features available for `plot_directed` below.
 
 ### Custom aesthetics
 
 We support various aesthetic parameters to control the colour and relative size of nodes and edges.
 
-`plot_directed` supports customised layouts and colours:
+`plot_directed` supports customised layouts:
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 plot_directed(graph, layout = layout.kamada.kawai)
+```
+
+In addition, custom colouts are supported:
+
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 plot_directed(graph, fill.node = "lightblue", border.node = "royalblue")
 ```
 
-#### Vectorisation
+#### Vectorisation of aesthetics
 
 Colours may also be entered as a vector for each node in `V(graph)`:
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 names(V(graph))
 colour_vector <- ifelse(names(V(graph)) %in% c("A", "D", "I"), 1, 2)
 plot_directed(graph, fill.node = c("lightblue", "grey")[colour_vector], border.node = c("royalblue", "black")[colour_vector])
 ```
 
-This functionality allow highlighting particular groups based on known properties of the graph. For examples `V(graph)$type` for bipartite graphs or partitions from Louvain (`igraph::cluster_louvain`) or Leiden (`leiden::leiden`) clustering algorithms.
+This functionality allows highlighting of particular groups based on known properties of the graph. For examples `V(graph)$type` for bipartite graphs or partitions from Louvain (`igraph::cluster_louvain`) or Leiden (`leiden::leiden`) clustering algorithms.
 
 ### Arrow customisation
 
-The `state` parameter controls whether the links are "activating" or "inhibiting". These can denote activation and repression, positive and negative regulation, or kinase and phosphatase activity. These may be applied globally as a character or numeric:
+The `state` parameter controls whether the links are "activating" or "inhibiting". These can denote activation and repression: foe example, positive and negative regulation of genes or kinase and phosphatase activity of proteins. These may be specified globally as either a character string or numeric:
 
-Activating links are displated with any of the following.
+Activating links are displated with any of the following:
 
 - "activating"
 - `1`
 - `0`
 
-Inhibiting links are displated with any of the following.
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
+plot_directed(graph, state = "activating")
+```
+
+Note that activating states can also be specified as follows:
+
+```{r,  fig.align='center', out.width="80%", fig.height = 6, fig.width = 6, fig.retina=6, eval=FALSE}
+plot_directed(graph, state = 1)
+plot_directed(graph, state = 0)
+```
+
+Inhibiting links are displated with any of the following:
+
 - "inhibiting"
 - `-1`
 - `2`
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
-plot_directed(graph, state = "activating")
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 plot_directed(graph, state = "inhibiting")
-plot_directed(graph, state = 1)
+```
+
+Note that inhibiting states can also be specified as follows:
+
+```{r,  fig.align='center', out.width="80%", fig.height = 6, fig.width = 6, fig.retina=6, eval=FALSE}
 plot_directed(graph, state = -1)
-plot_directed(graph, state = 0)
 plot_directed(graph, state = 2)
 ```
 
-#### Vectorisation
+#### Vectorisation of edge properties
 
-The state parameter may also apply as a vector to each edge in `E(graph)` respectively.
+The state parameter may also be applied as a vector to each edge in `E(graph)` respectively.
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 E(graph)
 plot_directed(graph, state = c(1, 1, -1, -1, 1, -1, 1, -1))
 ```
 
-Note that by default, inhibiting relationships are highlighted with different `col.arrow` which can be controlled by the input parameter.
+Note that by default, inhibiting relationships are highlighted with a different `col.arrow` value, which can be controlled by the input parameter.
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 edge_properties <- c(1, 1, -1, -1, 1, -1, 1, -1)/2 + 1.5
-plot_directed(graph, state = edge_properties, col.arrow = c("#00BE67", "#F8766D")[edge_properties])
+plot_directed(graph, state = edge_properties, col.arrow = c("darkgreen", "red")[edge_properties])
 ```
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 edge_properties <- c(1, 1, -1, -1, 1, -1, 1, -1)/2 + 1.5
-plot_directed(graph, state = edge_properties, col.arrow = c("#F8766D", "#CD9600", "#7CAE00", "#00BE67", "#00BFC4", "#00A9FF", "#C77CFF", "#FF61CC"), fill.node = c("#F8766D", "#CD9600", "#7CAE00", "#00BE67", "#00BFC4", "#00A9FF", "#C77CFF", "#FF61CC", "#F8766D"))
+ggplot_colours <- c("#F8766D", "#CD9600", "#7CAE00", "#00BE67",
+                    "#00BFC4", "#00A9FF", "#C77CFF", "#FF61CC")
+plot_directed(graph, state = edge_properties,
+              col.arrow = ggplot_colours, fill.node =  ggplot_colours)
 ```
 
 # Empirical examples
 
-Here we demonstrate the plotting package to display real biological pathways from the "Reactome" database. We can import these from the `data` directory included with this package. These graphs are given for examples and convenience. Any empirical data that consists of a list of directed edges can be imported as an igraph object and handled similarly. Below are some demonstrations.
+Here we demonstrate using the plotting package to display real biological pathways from the "Reactome" database <span class="citation">(Croft _et al_., 2014)</span>. We can import these from the `data` directory included with this package. These graphs are given for examples and convenience. Any empirical data that consists of a list of directed edges can be imported as an igraph object and handled similarly. Below are some demonstrations.
 
 ## RAF/MAP kinase cascade
 
@@ -175,38 +194,36 @@ Here we plot the RAF/MAP kinase cascade pathway.
 
 ```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, message = FALSE}
 graph <- identity(RAF_MAP_graph)
-plot_directed(graph, col.arrow = "#00A9FF", fill.node = "springgreen1")
+plot_directed(graph,col.arrow = alpha("#00A9FF", 0.25),
+              fill.node = "lightblue",
+              layout = layout.kamada.kawai)
 ```
 
 ## Pi3K cascade
 
+
 Here we plot the phosphoinositide-3-kinase (Pi3K) cascade pathway.
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 graph <- identity(Pi3K_graph)
-plot_directed(graph, col.arrow = "#00A9FF", fill.node = "springgreen1")
+plot_directed(graph, col.arrow = alpha("#00A9FF", 0.25),
+              fill.node = "lightblue",
+              layout = layout.kamada.kawai)
 ```
 
-### Pi3k/AKT pathway
-
-Here we plot the phosphoinositide-3-kinase activation of Protein kinase B (PKB) cascade (also known as Pi3k/AKT) pathway. States are imported as edge attributes from the imported graph.
-
-
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5, warning=FALSE, message = FALSE}
-graph <- identity(Pi3K_AKT_graph)
-edge_properties <- E(graph)$state
-plot_directed(graph, state = edge_properties, col.arrow = c("#00A9FF", "#F8766D")[edge_properties], fill.node = c("springgreen1"))
-```
 
 ## TGFβ-Smad pathway
 
 Here we plot the TGFβ-Smad pathway with inhibitions known. States are imported as edge attributes from the imported graph.
 
 
-```{r,  fig.align='center', out.width="80%", fig.height = 5, fig.width = 5}
+```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 graph <- identity(TGFBeta_Smad_graph)
 edge_properties <- E(graph)$state
-plot_directed(graph, state = edge_properties, col.arrow = c("#00A9FF", "#F8766D")[edge_properties], fill.node = c("springgreen1"))
+plot_directed(graph, state = edge_properties,
+              col.arrow = c(alpha("navyblue", 0.25), alpha("red", 0.25))[edge_properties],
+              fill.node = c("lightblue"),
+              layout = layout.kamada.kawai)
 ```
 
 
@@ -218,3 +235,14 @@ Here is the output of `sessionInfo()` on the system on which this document was c
 ```{r, echo = FALSE}
 sessionInfo()
 ```
+
+
+----------------------------------------------------------
+
+# References
+
+<p>Barabási, A. L., and Z. N. Oltvai. 2004. “Network Biology: Understanding the Cell’s Functional Organization.” <em>Nat Rev Genet</em> 5 (2): 101–13.</p>
+
+<p>Croft, D, A F Mundo, R Haw, M Milacic, J Weiser, G Wu, M Caudy, et al. 2014. “The Reactome pathway knowledgebase.” Journal Article. <em>Nucleic Acids Res</em> 42 (database issue): D472–D477. <a href="https://doi.org/10.1093/nar/gkt1102">https://doi.org/10.1093/nar/gkt1102</a>.</p>
+
+<p>Csardi, Gabor, and Tamas Nepusz. 2006. “The Igraph Software Package for Complex Network Research.” <em>InterJournal</em> Complex Systems: 1695. <a href="http://igraph.org">http://igraph.org</a>.</p>

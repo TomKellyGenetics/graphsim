@@ -25,6 +25,7 @@
 ^vignettes/*/*/*RData
 ^vignettes/*gif
 ^vignettes/*html
+^vignettes/import_reactome.Rmd$
 ^vignettes/figure
 ^vignettes/simulate_expression_cache/html/
 pdf

@@ -26,5 +26,5 @@
   "keywords": "gene-expression, simulation, genomics, pathway, network, \\proglang{R}",
   "license": "GPL v3.0",
   "title": "graphsim",
-  "version": "v0.1.2"
+  "version": "v1.0.0"
 }

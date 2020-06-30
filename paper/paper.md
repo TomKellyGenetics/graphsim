@@ -1,7 +1,12 @@
 ---
 title: 'graphsim: An R package for simulating gene expression data from graph structures of biological pathways'
 output:
-  rmarkdown::pdf_document:
+#  rmarkdown::pdf_document:
+#    fig_crop: no
+#    keep_md: TRUE
+#    #keep_tex: TRUE
+#    fig_caption: yes
+  rmarkdown::html_document:
     fig_crop: no
     keep_md: TRUE
     #keep_tex: TRUE
@@ -489,7 +494,7 @@ tools for \texttt{igraph} analysis. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
 systems. The package GitHub repository also contains vignettes with more
 information and examples on running functions released in the package.
-The package (\texttt{graphsim} 0.1.2) has been released on CRAN and will be updated.
+The package (\texttt{graphsim} 1.0.0) has been released on CRAN and will be updated.
 
 Acknowledgements {#acknowledgements .unnumbered .unnumbered}
 ===============================================================================

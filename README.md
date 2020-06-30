@@ -16,6 +16,8 @@
 
 # graphsim
 
+## Version 1.0.0
+
 ###  Simulate Expression Data from 'igraph' Networks 
 
 This package provides functions to develop simulated continuous data 
@@ -92,7 +94,7 @@ Please see the vignettes for demonstrations of this package on examples of simpl
 To cite the graphsim package in publications use:
 
   S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression data from iGraph networks 
-  R package version 0.1.2. https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986
+  R package version 1.0.0. https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986
 
 A BibTeX entry for LaTeX users is
 
@@ -101,7 +103,7 @@ A BibTeX entry for LaTeX users is
     title = {{graphsim}: Simulate Expression data from {iGraph} networks},
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version 0.1.2},
+    note = {R package version 1.0.0},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.1313986},
   }

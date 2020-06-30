@@ -1,4 +1,22 @@
-# graphsim 0.1.2
+# graphsim 1.0.0
+
+* Major stable release: note changes to results are possible! (legacy code should run without breaking)
+
+* Expanded documentation and examples
+
+* Resolves errors handling inhibiting edges
+
+* Efficiently compute a state matrix from a vector of edge properties from paths
+
+* Enables passing "sd" (standard deviation) to alter covariance of Sigma matrix
+
+* Adds methods for computing using Laplacian matrices
+
+* Adds function to compute simulations directly from an adjacency matrix
+
+* Migrates computing states to sigma (these matrices include inhibitions)
+
+# graphsim 0.1.1
 
 * Initial CRAN release
 

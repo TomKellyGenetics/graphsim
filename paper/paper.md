@@ -1,16 +1,16 @@
 ---
 title: 'graphsim: An R package for simulating gene expression data from graph structures of biological pathways'
 output:
-#  rmarkdown::pdf_document:
-#    fig_crop: no
-#    keep_md: TRUE
-#    #keep_tex: TRUE
-#    fig_caption: yes
-  rmarkdown::html_document:
-    fig_crop: no
-    keep_md: TRUE
-    #keep_tex: TRUE
-    fig_caption: yes
+ rmarkdown::pdf_document:
+   fig_crop: no
+   keep_md: TRUE
+   #keep_tex: TRUE
+   fig_caption: yes
+# rmarkdown::html_document:
+#  fig_crop: no
+#  keep_md: TRUE
+#  #keep_tex: TRUE
+#  fig_caption: yes
 tags:
   - R
   - gene-expression
@@ -48,13 +48,14 @@ identifying alterations in activity at the level of individual genes,
 understanding changes in the gene networks that regulate fundamental
 biological mechanisms is also an important objective of molecular 
 analysis. As a result, databases that describe biological pathways 
-are increasingly relied on to assist with the interpretation of results
+are increasingly uesad to assist with the interpretation of results
 from large-scale genomics studies. Incorporating information from 
 biological pathways and gene regulatory networks into a genomic data
 analysis is a popular strategy, and there are many methods that provide
 this functionality for gene expression data. When developing or comparing
 such methods, it is important to gain an accurate assessment of their 
-performance, with simulation-based validation studies a popular choice.
+performance. Simulation-based validation studies are frequently used
+for this.
 This necessitates the use of simulated data that correctly accounts for
 pathway relationships and correlations. Here we present a versatile
 statistical framework to simulate correlated gene expression data from
@@ -80,49 +81,50 @@ of genes involved in particular functions, despite the fact that the
 relationships defined by pathway structure could further inform gene
 expression analyses. In many cases, the pathway relationships are
 well-defined, experimentally-validated, and are available in public
-databases [@Reactome]. As a result, network analysis techniques could
+databases [@Reactome]. As a result, network analysis techniques can
 play an important role in furthering our understanding of biological
 pathways and aiding in the interpretation of genomics studies.
 
 Gene networks provide insights into how cells are regulated, by mapping
 regulatory interactions between target genes and transcription factors,
 enhancers, and sites of epigenetic marks or chromatin structures
-[@Barabasi2004; @Yamaguchi2007]. Inference of these regulatory
-interactions for genomics investigations has the potential to radically
+[@Barabasi2004; @Yamaguchi2007]. Inference using these regulatory
+interactions genomic analysis has the potential to radically
 expand the range of candidate biological pathways to be further
 explored, or to improve the accuracy of bioinformatics and functional
-genomic analysis. A number of methods have already been developed to
-utilise timecourse gene expression data [@Arner2015; @Yamaguchi2007]
+genomic analysis. A number of methods have been developed to
+utilise timecourse gene expression data [@Yamaguchi2007; @Arner2015]
 using gene regulatory modules in state-space models and recursive vector
 autoregressive models [@Hirose2008; @Shimamura2009]. Various approaches
 to gene regulation and networks at the genome-wide scale have led to
-novel biological insights [@Arner2015; @Komatsu2013]. However, inference
+novel biological insights [@Arner2015; @Komatsu2013], however, inference
 of regulatory networks has thus far primarily relied on experimental
 validation or resampling-based approaches to estimate the likelihood
 of specific network modules being predicted [@Markowetz2007; @Hawe2019].
 
-Simulated datasets with pathway structure are of particular interest for
-benchmarking regulatory network inference techniques and methods
-being developed for genomics data with complex biological 
+Simulating datasets that account for pathway structure are of particular
+interest for benchmarking regulatory network inference techniques
+and methods being developed for genomics data containing complex biological 
 interactions [@Schaffter2011; @Saelens2019]. Dynamical models using
 differential equations have been employed, such as by GeneNetWeaver
 [@Schaffter2011], to generate simulated datasets
 specifically for benchmarking gene regulatory network inference techniques.
-There is renewed interest in modelling biological pathways and simulating
+There is also renewed interest in modelling biological pathways and simulating
 data for benchmarking due to the emergence of single-cell genomics
-technologies and the plethora of bioinformatics techniques developed
+technologies and the growing number of bioinformatics techniques developed
 to use this data [@Zappia2017; @Saelens2019]. Packages such as 'splatter'
 [@Zappia2017], which uses the gamma-poisson distribution,
 have been developed to model single-cell data.
 SERGIO [@Dibaeinia2019] and dyngen [@Cannoodt2020] build on
-thisby adding gene regulatory networks and multimodality
+this by adding gene regulatory networks and multimodality
 respectively. These methods have been designed based on known
-or synthetic reaction states and added stochasticity to deterministic
-relationships. However, it is computationally-intensive to model
-these reactions at scale over iterations in benchmarking.
+deterministic relationships or synthetic reaction states,
+to which stochasticity is then added.
+However, it is computationally-intensive to model
+these reactions at scale or run many iterations for benchmarking.
 In some cases, it is only necessary to model the statistical
-variability and ``noise'' of RNA-Seq data to evaluate methods
-with multivariate correlation structures.
+variability and "noise" of RNA-Seq data in order to evaluate
+methods in the presence of multivariate correlation structures.
 
 There is a need, therefore, for a systematic framework for statistical
 modelling and simulation of gene expression data derived from
@@ -132,11 +134,12 @@ distribution are used to generate normally-distributed log-expression
 data, with correlations between genes derived from the structure of the
 underlying pathway or gene regulatory network. This methodology enables
 simulation of expression profiles that approximate the log-transformed
-and normalised data from microarray and bulk or single-cell RNA-Seq
-experiments. This procedure has been released as the package to enable
-the generation of simulated gene expression datasets containing pathway
-relationships from a known underlying network. These simulated datasets
-can be used to evaluate various bioinformatics methodologies, including
+and normalised data from microarray studies, as well as, bulk or single-cell RNA-Seq
+experiments. This procedure has been released as the \texttt{graphsim}
+package to enable the generation of simulated gene expression datasets
+containing pathway relationships from a known underlying network.
+These simulated datasets can be used to evaluate various bioinformatics
+methodologies, including
 statistical and network inference procedures.
 
 Methodology and software {#sec:methods}
@@ -154,7 +157,7 @@ expression matches the assumptions of the popular \texttt{limma} package [@limma
 often used for the analysis of intensity-based data from gene expression
 microarray studies and count-based data from RNA-Seq experiments. This
 approach has also been applied for modelling UMI-based count data from
-single-cell RNA-Seq experiments in the package [@Wang2018].
+single-cell RNA-Seq experiments in the \texttt{DESCEND} R package [@Wang2018].
 
 In order to simulate transcriptomic data, a pathway is first constructed
 as a graph structure, using the \texttt{igraph} R package [@igraph], with the status of
@@ -209,17 +212,17 @@ relationship matrix (or the nearest positive definite matrix for
 $\Sigma$ with negative correlations).\
 
 Computing the nearest positive definite matrix is necessary to ensure
-that the variance-covariance matrix could be inverted when used as a
+that the variance-covariance matrix can be inverted when used as a
 parameter in multivariate normal simulations, particularly when negative
 correlations are included for inhibitions (as shown below). Matrices
-that could not be inverted occurred rarely with biologically plausible
+that cannot be inverted occur rarely with biologically plausible
 graph structures but this approach allows for the computation of a
 plausible correlation matrix when the given graph structure is
 incomplete or contains loops. When required, the nearest positive
-definite matrix is computed using the `nearPD` function of the \texttt{Matrix} R package
-[@Matrix] to perform Higham's algorithm [@Higham2002] on
-variance-covariance matrices. The \texttt{graphsim} package gives a warning when this
-occurs.
+definite matrix is computed using the `nearPD` function of
+the \texttt{Matrix} R package [@Matrix] to perform
+Higham's algorithm [@Higham2002] on variance-covariance matrices.
+The \texttt{graphsim} package gives a warning when this occurs.
 
 
 Illustrations {#sec:illustrations}
@@ -232,11 +235,11 @@ The graph structure in
 Figure [1a](#fig:simple_graph:first){reference-type="ref"
 reference="fig:simple_graph:first"} was used to simulate correlated gene
 expression data by sampling from a multivariate normal distribution
-using the R package [@Genz2009; @mvtnorm]. The graph structure
+using the \texttt{mvtnorm} R package [@Genz2009; @mvtnorm]. The graph structure
 visualisation in
 Figure [1](#fig:simple_graph){reference-type="ref"
 reference="fig:simple_graph"} was specifically developed for (directed)
-\texttt{igraph} objects in and is available in the and packages. The
+\texttt{igraph} objects in and is available in the \texttt{graphsim} package. The
 \texttt{plot\_directed} function enables customisation of plot parameters for
 each node or edge, and mixed (directed) edge types for indicating
 activation or inhibition. These inhibition links (which occur frequently
@@ -250,7 +253,7 @@ reference="fig:simple_graph:second"}.
 
 }
 
-\caption{\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure in Figures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. Inhibiting edges have been highlighted in red.}\label{fig:simple_graph}
+\caption{\textbf{Simulated graph structures}. A constructed graph structure used as an example to demonstrate the simulation procedure in Figures 2 and 3. Activating links are denoted by black arrows and inhibiting links by red edges. }\label{fig:simple_graph}
 \end{figure}
 
 A graph structure can be generated and plotted using the following
@@ -258,7 +261,7 @@ commands in R:
 
 
 ```r
-#install packages required (once per machine)
+#install packages required (once per computer)
 install.packages("graphsim")
 ```
 
@@ -315,11 +318,11 @@ normalised on a log-scale.
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
 
 }
 
-\caption{\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$. This $\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.}\label{fig:simulation_activating}
+\caption{\textbf{Simulating expression from a graph structure}. An example of a graph structure (a) that has been used to derive a relationship matrix (b), $\Sigma$  matrix (c) and correlation structure (d) from the relative distances between the nodes. Non-negative values are coloured white to red from $0$ to $1$ (e). The $\Sigma$ matrix has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here genes with closer relationships in the pathway structure show a higher correlation between simulated values.}\label{fig:simulation_activating}
 \end{figure}
 
 The simulated dataset can be generated using the following code:
@@ -336,7 +339,7 @@ heatmap.2(make_sigma_mat_dist_graph(graph, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-#simulated data
+#simulate data
 expr <- generate_expression(100, graph, cor = 0.8, mean = 0,
   comm = FALSE, dist =TRUE, absolute = FALSE, state = state)
 #plot simulated correlations
@@ -388,7 +391,7 @@ heatmap.2(make_sigma_mat_dist_graph(graph, state, cor = 0.8, absolute = FALSE),
   scale = "none", trace = "none", col = colorpanel(50, "blue", "white", "red"),
   colsep = 1:length(V(graph)), rowsep = 1:length(V(graph)))
 
-#simulated data for inhibitions
+#simulate data for inhibitions
 expr <- generate_expression(100, graph, state, cor = 0.8, mean = 0,
   comm = FALSE, dist =TRUE, absolute = FALSE)
 ```
@@ -396,11 +399,11 @@ expr <- generate_expression(100, graph, state, cor = 0.8, mean = 0,
 The simulation procedure is also demonstrated here
 (Figure [4](#fig:simulation_smad){reference-type="ref"
 reference="fig:simulation_smad"}) on a pathway structure for a known
-biological pathway (from reactome R-HSA-2173789) of TGF-$\beta$ receptor
-signaling activates SMADs
+biological pathway (Reactome pathway R-HSA-2173789): "TGF-$\beta$ receptor
+signaling activates SMADs"
 (Figure [4a](#fig:simulation_smad:first){reference-type="ref"
 reference="fig:simulation_smad:first"}) derived from the Reactome
-database version 52 `[@Reactome]`. Distances are calculated in the same
+database version 52 [@Reactome]. Distances are calculated in the same
 manner as before
 (Figure [4b](#fig:simulation_smad:second){reference-type="ref"
 reference="fig:simulation_smad:second"}) producing blocks of correlated
@@ -408,22 +411,22 @@ genes
 (Figures [4c](#fig:simulation_smad:third){reference-type="ref"
 reference="fig:simulation_smad:third"}
 and [4d](#fig:simulation_smad:fifth){reference-type="ref"
-reference="fig:simulation_smad:fifth"}). This shows that
+reference="fig:simulation_smad:fifth"}). This shows that the
 multivariate normal distribution can be sampled to generate simulated
 data to represent expression with the complexity of a biological pathway
 (Figure [4e](#fig:simulation_smad:fourth){reference-type="ref"
 reference="fig:simulation_smad:fourth"}). Here *SMAD7* exhibits
-negative correlations with the other SMADs consistent with it's
-functions as as an "inhibitor SMAD" with competitively inhibits *SMAD4*.
+negative correlations with the other SMADs consistent with its
+functions as an "inhibitor SMAD" which competitively inhibits *SMAD4*.
 
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
 
 }
 
-\caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
+\caption{\textbf{Simulating expression from graph structure with inhibitions}. An example of a graph structure (a), that has been used to derive a relationship matrix (b), $\Sigma$ matrix (c), and correlation structure (d), from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$ (e). This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here the inhibitory relationships between genes are reflected in negatively correlated simulated  values.}\label{fig:simulation_inhibiting}
 \end{figure}
 
 
@@ -444,18 +447,18 @@ plot_directed(graph, state = state, layout = layout.kamada.kawai,
 
 These simulated datasets can also be used for simulating gene 
 expression data within a graph network to test genomic analysis techniques.
-Correlation structure can be included into datasets generated
-when testing whether true positive genes or samples can be detected
+Correlation structure can be included in datasets generated
+for testing whether true positive genes or samples can be detected
 in a sample with the background of complex pathway structure.
 
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
+{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
 
 }
 
-\caption{\textbf{Simulating expression from a biological pathway graph structure}. The graph structure (a) of a known biological pathway, the TGF-$\beta$ receptor signaling activates SMADs (R-HSA-2173789), was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlation structure (d) from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$. This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here modules of genes with correlated expression can be clearly discerned.}\label{fig:simulation_smad}
+\caption{\textbf{Simulating expression from a biological pathway graph structure}. The graph structure (a) of a known biological pathway, "TGF-$\beta$ receptor signaling activates SMADs" (R-HSA-2173789), was used to derive a relationship matrix (b), $\Sigma$ matrix (c) and correlation structure (d) from the relative distances between the nodes. These values are coloured blue to red from $-1$ to $1$ (e). This has been used to generate a simulated expression dataset of 100 samples (coloured blue to red from low to high) via sampling from the multivariate normal distribution. Here modules of genes with correlated expression can be clearly discerned.}\label{fig:simulation_smad}
 \end{figure}
 
 
@@ -479,23 +482,33 @@ analysis of gene expression data using existing methods or novel
 statistical methods being developed for gene expression data analysis.
 This approach is intended to be applied to bulk gene expression data
 but could in principle be adapted to modelling single-cell or
-different modalities such as epigenomics data.
+different modalities such as genome-wide epigenetic data.
 
 
 Computational details {#computational-details .unnumbered .unnumbered}
 ===============================================================================
 
-The results in this paper were obtained using R 3.6.1 with the \texttt{igraph} 1.2.4.1
-\texttt{Matrix} 1.2-17, \texttt{matrixcalc} 1.0-3, and \texttt{mvtnorm} 1.0-11 packages. R itself and all dependent packages
+The results in this paper were obtained using R 4.0.2 with the \texttt{igraph} 1.2.5
+\texttt{Matrix} 1.2-17,
+\texttt{matrixcalc} 1.0-3, and \texttt{mvtnorm} 1.1-1 packages.
+R itself and all dependent packages
 used are available from the Comprehensive Archive Network (CRAN) at
-\url{https://CRAN.R-project.org}. The \texttt{graphsim} package presented can be
-installed from CRAN and the issues can  be reported to the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}). This package is included in the library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions}) which installs various
+\url{https://CRAN.R-project.org}. The \texttt{graphsim} 1.0.0 package
+presented can be installed from CRAN and the issues can  be reported to
+the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}).
+This package is included in the \texttt{igraph.extensions} library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions})
+which installs various
 tools for \texttt{igraph} analysis. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
 systems. The package GitHub repository also contains vignettes with more
 information and examples on running functions released in the package.
-The package (\texttt{graphsim} 1.0.0) has been released on CRAN and will be updated.
+Updates to the  package (\texttt{graphsim} 1.0.0) will be released on CRAN.
 
+Complete examples of code needed to produce the figures in this paper are
+available in the Rmarkdown version in the package GitHub repository
+ (\url{https://github.com/TomKellyGenetics/graphsim/paper}).
+ Further details are available in the vignettes as well.
+ 
 Acknowledgements {#acknowledgements .unnumbered .unnumbered}
 ===============================================================================
 
@@ -504,7 +517,7 @@ the Postgraduate Tassell Scholarship in Cancer Research Scholarship
 awarded to STK. We thank members of the Laboratory of Professor Satoru
 Miyano at the University of Tokyo, Institute for Medical Science,
 Professor Seiya Imoto, Associate Professor Rui Yamaguchi, and Dr Paul
-Sheridan (Assistant Professor at Hirosaki University,CSO at Tupac Bio)
+Sheridan (Assistant Professor at Hirosaki University, CSO at Tupac Bio)
 for helpful discussions in this field. We also thank Professor Parry
 Guilford at the University of Otago, Professor Cristin Print at the
 University of Auckland, and Dr Erik Arner at the RIKEN Center for

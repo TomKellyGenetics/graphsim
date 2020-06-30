@@ -85,13 +85,13 @@ graph <- graph.edgelist(graph_edges, directed = TRUE)
 
 ## Plotting
 
-We next demonstrate the plotting function for directed graph objects. `plot_directed` with default settings uses the `layout.fruchterman.reingold` as does built-in plotting function `igraph::plot.igraph`.
+We next demonstrate the plotting function for directed graph objects. `plot_directed` with default settings uses the `layout.fruchterman.reingold` as does built-in plotting function `igraph::plot.igraph`. This function provides additional functionality to displaying directed graphs in particular.
 
 ```{r,  fig.align='center', out.width="80%",fig.height = 6, fig.width = 6, fig.retina=1.5}
 plot_directed(graph)
 ```
 
-Here you can see that the plotting function display a graph in a similar layout to `plot.igraph` with different aesthetic parameters. We suggest that you choose the function that suits your needs and datasets. We demonstrate the features available for `plot_directed` below.
+Here you can see that the plotting function displays a graph in a similar layout to `plot.igraph` with different aesthetic parameters. We suggest that you choose the function that suits your needs and datasets. We demonstrate the features available for `plot_directed` below.
 
 ### Custom aesthetics
 
@@ -185,7 +185,7 @@ plot_directed(graph, state = edge_properties,
 
 # Empirical examples
 
-Here we demonstrate using the plotting package to display real biological pathways from the "Reactome" database <span class="citation">(Croft _et al_., 2014)</span>. We can import these from the `data` directory included with this package. These graphs are given for examples and convenience. Any empirical data that consists of a list of directed edges can be imported as an igraph object and handled similarly. Below are some demonstrations.
+Here we demonstrate using the plotting package to display real biological pathways from the "Reactome" database <span class="citation">(Croft _et al_. 2014)</span>. We can import these from the `data` directory included with this package. These graphs are given for examples and convenience. Any empirical data that consists of a list of directed edges can be imported as an igraph object and handled similarly. Below are some demonstrations.
 
 ## RAF/MAP kinase cascade
 
@@ -241,8 +241,8 @@ sessionInfo()
 
 # References
 
-<p>Barabási, A. L., and Z. N. Oltvai. 2004. “Network Biology: Understanding the Cell’s Functional Organization.” <em>Nat Rev Genet</em> 5 (2): 101–13.</p>
+<p>Barabási, A. L., and Oltvai, Z. N.  2004. “Network Biology: Understanding the Cell’s Functional Organization.” <em>Nat Rev Genet</em> 5 (2): 101–13.</p>
 
-<p>Croft, D, A F Mundo, R Haw, M Milacic, J Weiser, G Wu, M Caudy, et al. 2014. “The Reactome pathway knowledgebase.” Journal Article. <em>Nucleic Acids Res</em> 42 (database issue): D472–D477. <a href="https://doi.org/10.1093/nar/gkt1102">https://doi.org/10.1093/nar/gkt1102</a>.</p>
+<p>Croft, D., Mundo, A.F., Haw, R., Milacic, M., Weiser, J., Wu, G., Caudy, M., et al. 2014. “The Reactome pathway knowledgebase.” Journal Article. <em>Nucleic Acids Res</em> 42 (database issue): D472–D477. <a href="https://doi.org/10.1093/nar/gkt1102">https://doi.org/10.1093/nar/gkt1102</a>.</p>
 
-<p>Csardi, Gabor, and Tamas Nepusz. 2006. “The Igraph Software Package for Complex Network Research.” <em>InterJournal</em> Complex Systems: 1695. <a href="http://igraph.org">http://igraph.org</a>.</p>
+<p>Csardi, G., and Nepusz, T. 2006. “The Igraph Software Package for Complex Network Research.” <em>InterJournal</em> Complex Systems: 1695. <a href="http://igraph.org">http://igraph.org</a>.</p>

@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^.circleci
 ^.github$
+^.install_extras$
 ^CODE_OF_CONDUCT.md$
 ^CONTRIBUTING.md$
 ^CRAN-RELEASE$

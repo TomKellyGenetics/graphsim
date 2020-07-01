@@ -13,9 +13,9 @@
 ##'
 ##' @title Extensions to igraph for Customising plots
 ##'
-##' @description Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
+##' @description Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph-package}}. Designed for plotting directed graphs.
 ##'
-##' @param graph An \code{\link[igraph]{igraph}} object. Must be directed with known states.
+##' @param graph An \code{\link[igraph]{igraph-package}} object. Must be directed with known states.
 ##' @param state character or integer. Defaults to "activating" if no "state" edge attribute 
 ##' found. May be applied a scalar across all edges or as a vector for each edge respectively. 
 ##' Accepts non-integer values for weighted edges provided that the sign indicates whether links

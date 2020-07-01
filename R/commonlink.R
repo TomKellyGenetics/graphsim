@@ -3,13 +3,13 @@
 ##'
 ##' @title Generate Common Link Matrix
 ##'
-##' @description Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}}
+##' @description Compute the common link matrix of a (directed) \code{\link[igraph]{igraph-package}}
 ##' structure, preserving node / column / row names (and direction). We can compute the common 
 ##' inks between each pair of nodes. This shows how many nodes are mutually connected to both
 ##' of the nodes in the matrix (how many paths of length 2 exist between them).
 ##'
 ##' @param adj_mat precomputed adjacency matrix.
-##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
+##' @param graph An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.
 ##' @keywords graph network igraph neighbourhood
 ##' @import igraph

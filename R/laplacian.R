@@ -4,11 +4,11 @@
 ##'
 ##' @title Generate Laplacian Matrix
 ##' 
-##' @description Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph}}
+##' @description Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph-package}}
 ##' structure, preserving node/column/row names (and direction).
 ##'
 ##' @param mat precomputed adjacency matrix.
-##' @param graph An \code{\link[igraph]{igraph}} object. May be directed or weighted.
+##' @param graph An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the Laplacian matrix.
 ##' @keywords graph network igraph Laplacian
 ##' @importFrom igraph laplacian_matrix graph.edgelist as.undirected graph_from_adjacency_matrix

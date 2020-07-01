@@ -17,8 +17,11 @@
 ^demo2.gif^doc$
 ^doc
 ^fig*
+^graphsim$
 ^graphsim_0.1.1.tar.gz
 ^graphsim_0.1.2.tar.gz
+^graphsim_1.0.0.tar.gz$
+^graphsim_1.0.0.tar.zip$
 ^paper$
 ^paper\.(bib|html|md|Rmd)$
 ^tests/figs

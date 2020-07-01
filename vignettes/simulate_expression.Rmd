@@ -13,9 +13,10 @@ output:
        #toc_float: true
        #code_folding: show
        keep_html: true
+toc-title: "Table of Contents"
 vignette: >
   %\VignetteIndexEntry{Simulating network graph structure in continuous data}
-   %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 

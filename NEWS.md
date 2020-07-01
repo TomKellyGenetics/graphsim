@@ -2,7 +2,7 @@
 
 * Major stable release: note changes to results are possible! (legacy code should run without breaking)
 
-* Expanded documentation and examples
+* Expanded documentation and examples (consolidate into fewer vignettes for clarity)
 
 * Resolves errors handling inhibiting edges
 

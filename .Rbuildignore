@@ -21,13 +21,15 @@
 ^graphsim_0.1.1.tar.gz
 ^graphsim_0.1.2.tar.gz
 ^graphsim_1.0.0.tar.gz$
-^graphsim_1.0.0.tar.zip$
+^graphsim_1.0.0.zip$
+^*html
 ^paper$
 ^paper\.(bib|html|md|Rmd)$
 ^tests/figs
 ^tests/testthat/test-cpp.R$
 ^vignettes/*/*/*RData
 ^vignettes/*gif
+^vignettes/cache$
 ^vignettes/*html
 ^vignettes/import_reactome.Rmd$
 ^vignettes/figure

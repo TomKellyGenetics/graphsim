@@ -21,7 +21,12 @@ R CMD check succeeded
 
 Reactome.org urls have been checked and direct to the correct database. These are only needed for documentation.
 
-graphsim/tests/figs is used exclusively for testing plotting functions.
+graphsim/tests/figs is used exclusively for testing plotting functions with "vdiffr".
+
+Link to local file works on GitHub.
+
+Vignettes build with knitr::rmarkdown as used for this CRAN package: https://github.com/yixuan/prettydoc/
+
 
 ## Release
 

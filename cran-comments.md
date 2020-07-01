@@ -27,6 +27,9 @@ Link to local file works on GitHub.
 
 Vignettes build with knitr::rmarkdown as used for this CRAN package: https://github.com/yixuan/prettydoc/
 
+Building vignettes that contain real biological datasets are important to
+demonstrate functionality of the package (requested by reviewers for JOSS).
+Unfortunately, this means checks take considerable time to build vignettes.
 
 ## Release
 

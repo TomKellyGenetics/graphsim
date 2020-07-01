@@ -4,12 +4,15 @@
 \alias{make_distance_graph}
 \alias{make_relationship}
 \alias{make_distance_adjmat}
+\alias{make_distance_comm}
 \alias{make_distance_laplacian}
 \title{Generate Distance Matrix}
 \usage{
 make_distance_graph(graph, directed = FALSE, absolute = FALSE)
 
 make_distance_adjmat(mat, directed = FALSE, absolute = FALSE)
+
+make_distance_comm(mat, directed = FALSE, absolute = FALSE)
 
 make_distance_laplacian(mat, directed = FALSE, absolute = FALSE)
 }

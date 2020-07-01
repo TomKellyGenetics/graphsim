@@ -22,7 +22,9 @@ An integer matrix of number of links shared between nodes
 }
 \description{
 Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}}
-structure, preserving node / column / row names (and direction).
+structure, preserving node / column / row names (and direction). We can compute the common 
+inks between each pair of nodes. This shows how many nodes are mutually connected to both
+of the nodes in the matrix (how many paths of length 2 exist between them).
 }
 \examples{
 

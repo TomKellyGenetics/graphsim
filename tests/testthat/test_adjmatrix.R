@@ -1,6 +1,6 @@
 library("graphsim")
 library("igraph")
-context("Make Adjancency Matrix")
+context("Make Adjacency Matrix")
 
 test_that("Generate adjacency matrix from graph structure", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))

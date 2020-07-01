@@ -121,6 +121,24 @@ make_distance_adjmat <- function(mat, directed = FALSE, absolute = FALSE){
 }
 
 ##' @rdname make_distance
+##' @export
+make_distance_comm <- function(mat, directed = FALSE, absolute = FALSE){
+  diag(mat) <- 0
+  if (absolute){
+    mat <- mat / max (mat)
+    diag(mat) <- 1
+  } else {
+    diam <- max(mat)
+    mat[mat == 0] <- NA
+    mat <- 1^-1/mat
+    mat[is.na(mat)] <- 0
+    diag(mat) <- 1
+  }
+  rownames(mat) <- colnames(mat) <- names(V(graph))
+  return(mat)
+}
+
+##' @rdname make_distance
 ##' @importFrom igraph graph_from_adjacency_matrix laplacian_matrix
 ##' @export
 make_distance_laplacian <- function(mat, directed = FALSE, absolute = FALSE){

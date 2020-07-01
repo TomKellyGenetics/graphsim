@@ -27,10 +27,10 @@ test_that("Generate distance relation matrix from commonlink matrix", {
   expect_true(all(diag(distance_matrix1) == rep(1, nrow(adjacency_matrix1))))
   expect_equal(nrow(distance_matrix1), length(V(graph_test1)))
   expect_equal(ncol(distance_matrix1), length(V(graph_test1)))
-  expect_equal(sum(distance_matrix1), 10)
+  expect_equal(sum(distance_matrix1), length(V(graph_test1)))
   expect_true(all(adjacency_matrix1 == cbind(c(0, 1, 0, 0), c(1, 0, 1, 1), c(0, 1, 0, 0), c(0, 1, 0, 0))))
   expect_true(all(common_link_matrix1 == cbind(c(1, 0, 1, 1), c(0, 3, 0, 0), c(1, 0, 1, 1), c(1, 0, 1, 1))))
-  expect_true(all(distance_matrix1 == cbind(c(1, 0, 1, 1), c(0, 1, 0, 0), c(1, 0, 1, 1), c(1, 0, 1, 1))))
+  expect_true(all(distance_matrix1 == diag(4)))
   expect_true(all(distance_matrix1 %in% c(0, 1/2^c(0:100))))
 })
 

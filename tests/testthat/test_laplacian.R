@@ -1,6 +1,6 @@
 library("graphsim")
 library("igraph")
-context("Make Commonlink Matrix")
+context("Make Laplacian Matrix")
 
 test_that("Generate Laplacian matrix from adjacency matrix", {
   graph_test1_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))

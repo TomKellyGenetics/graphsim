@@ -34,7 +34,7 @@ generate_expression_mat(
 \arguments{
 \item{n}{number of observations (simulated samples).}
 
-\item{graph}{An \code{\link[igraph]{igraph}} object. May must be 
+\item{graph}{An \code{\link[igraph]{igraph-package}} object. May must be 
 directed if states are used.}
 
 \item{state}{numeric vector. Vector of length E(graph). Sign used
@@ -58,12 +58,12 @@ May be entered as a scalar applying to
 all genes or a vector with a separate value for each.}
 
 \item{comm, absolute, laplacian}{logical. Parameters for Sigma matrix
-generation. Passed on to \code{\link[graphsim]{make_sigma_mat_dist_graph}} 
-or \code{\link[graphsim]{make_sigma_mat_graph}}.}
+generation. Passed on to \code{\link[graphsim]{make_sigma}} 
+or \code{\link[graphsim]{make_sigma}}.}
 
 \item{dist}{logical. Whether a graph distance 
-(\code{\link[graphsim]{make_sigma_mat_dist_graph}}) or derived matrix
- (\code{\link[graphsim]{make_sigma_mat_graph}}) is used to compute the
+(\code{\link[graphsim]{make_sigma}}) or derived matrix
+ (\code{\link[graphsim]{make_sigma}}) is used to compute the
   sigma matrix.}
 
 \item{mat}{precomputed adjacency, laplacian, commonlink, or scaled 
@@ -74,15 +74,15 @@ numeric matrix of simulated data (log-normalised counts)
 }
 \description{
 Compute simulated continuous expression data from a graph 
-network structure. Requires an \code{\link[igraph]{igraph}} pathway 
+network structure. Requires an \code{\link[igraph]{igraph-package}} pathway 
 structure and a matrix of states (1 for activating and -1 for 
 inhibiting) for link signed correlations, from a vector of edge states 
 to a signed adjacency matrix for use in 
 \code{\link[graphsim]{generate_expression}}. 
 Uses graph structure to pass a sigma covariance matrix from 
-\code{\link[graphsim]{make_sigma_mat_dist_graph}} or 
-\code{\link[graphsim]{make_sigma_mat_graph}} on to 
-\code{\link[mvtnorm]{rmvnorm}}. By default data is generated with a mean of
+\code{\link[graphsim]{make_sigma}} or 
+\code{\link[graphsim]{make_sigma}} on to 
+\code{\link[mvtnorm]{Mvnorm}}. By default data is generated with a mean of
  0 and standard deviation of 1 for each gene (with correlations between 
  derived from the graph structure).
 }

@@ -13,7 +13,7 @@ make_commonlink_graph(graph, directed = FALSE)
 \arguments{
 \item{adj_mat}{precomputed adjacency matrix.}
 
-\item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}
+\item{graph}{An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.}
 
 \item{directed}{logical. Whether directed information is passed to the adjacency matrix.}
 }
@@ -21,7 +21,7 @@ make_commonlink_graph(graph, directed = FALSE)
 An integer matrix of number of links shared between nodes
 }
 \description{
-Compute the common link matrix of a (directed) \code{\link[igraph]{igraph}}
+Compute the common link matrix of a (directed) \code{\link[igraph]{igraph-package}}
 structure, preserving node / column / row names (and direction). We can compute the common 
 inks between each pair of nodes. This shows how many nodes are mutually connected to both
 of the nodes in the matrix (how many paths of length 2 exist between them).

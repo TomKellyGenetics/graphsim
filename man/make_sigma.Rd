@@ -59,7 +59,7 @@ Default to 0.8.}
 \item{sd}{standard deviations of each gene. Defaults to 1. May be entered as a scalar
 applying to all genes or a vector with a separate value for each.}
 
-\item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}
+\item{graph}{An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.}
 
 \item{comm}{logical whether a common link matrix is used to compute sigma.
 Defaults to FALSE (adjacency matrix).}
@@ -77,8 +77,8 @@ relative difference from the diameter for a geometric decay in distance.}
 a numeric covariance matrix of values in the range [-1, 1]
 }
 \description{
-Compute the Sigma (\eqn{\Sigma}) matrix from an \code{\link[igraph]{igraph}} structure 
-or pre-computed matrix. These are compatible with \code{\link[mvtnorm]{rmvnorm}} and
+Compute the Sigma (\eqn{\Sigma}) matrix from an \code{\link[igraph]{igraph-package}} structure 
+or pre-computed matrix. These are compatible with \code{\link[mvtnorm]{Mvnorm}} and
  \code{\link[graphsim]{generate_expression}}.
 By default data is generated with a mean of 0 and standard deviation of 1 for 
 each gene (with correlations between derived from the graph structure).

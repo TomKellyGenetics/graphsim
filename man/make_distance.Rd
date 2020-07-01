@@ -17,7 +17,7 @@ make_distance_comm(mat, directed = FALSE, absolute = FALSE)
 make_distance_laplacian(mat, directed = FALSE, absolute = FALSE)
 }
 \arguments{
-\item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}
+\item{graph}{An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.}
 
 \item{directed}{logical. Whether directed information is passed to the distance matrix.}
 
@@ -32,7 +32,7 @@ A numeric matrix of values in the range [0, 1] where higher values are closer in
 }
 \description{
 Compute the distance matrix of using shortest paths of a (directed)
-\code{\link[igraph]{igraph}} structure, normalising by the diameter of the network,
+\code{\link[igraph]{igraph-package}} structure, normalising by the diameter of the network,
 preserving node/column/row names (and direction).
 }
 \examples{

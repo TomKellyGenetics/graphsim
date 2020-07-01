@@ -8,7 +8,7 @@
 make_adjmatrix_graph(graph, directed = FALSE)
 }
 \arguments{
-\item{graph}{An \code{\link[igraph]{igraph}} object. May be directed or weighted.}
+\item{graph}{An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.}
 
 \item{directed}{logical. Whether directed information is passed to the adjacency matrix.}
 }
@@ -16,7 +16,7 @@ make_adjmatrix_graph(graph, directed = FALSE)
 An adjacency matrix compatible with generating an expression matrix
 }
 \description{
-Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph}}
+Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph-package}}
 structure, preserving node/column/row names (and direction).
 }
 \examples{

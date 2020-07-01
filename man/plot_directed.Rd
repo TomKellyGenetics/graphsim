@@ -29,7 +29,7 @@ plot_directed(
 )
 }
 \arguments{
-\item{graph}{An \code{\link[igraph]{igraph}} object. Must be directed with known states.}
+\item{graph}{An \code{\link[igraph]{igraph-package}} object. Must be directed with known states.}
 
 \item{state}{character or integer. Defaults to "activating" if no "state" edge attribute 
 found. May be applied a scalar across all edges or as a vector for each edge respectively. 
@@ -85,7 +85,7 @@ Defaults to par("fg").  May take a scalar applied to all edges or a vector
 base R graphics
 }
 \description{
-Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph}}. Designed for plotting directed graphs.
+Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph-package}}. Designed for plotting directed graphs.
 }
 \examples{
 

@@ -318,7 +318,7 @@ normalised on a log-scale.
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
+{\centering \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_activating-5} 
 
 }
 
@@ -422,7 +422,7 @@ functions as an "inhibitor SMAD" which competitively inhibits *SMAD4*.
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
+{\centering \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_inhibiting-5} 
 
 }
 
@@ -454,7 +454,7 @@ in a sample with the background of complex pathway structure.
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=.375\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
+{\centering \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-1} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-2} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-3} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-4} \includegraphics[width=.750\linewidth,height=.375\linewidth]{Plotsimulation_smad-5} 
 
 }
 

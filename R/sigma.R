@@ -3,8 +3,8 @@
 ##'
 ##' @title Generate Sigma (\eqn{\Sigma}) Matrix
 ##'
-##' @description Compute the Sigma (\eqn{\Sigma}) matrix from an \code{\link[igraph]{igraph-package}} structure 
-##' or pre-computed matrix. These are compatible with \code{\link[mvtnorm]{Mvnorm}} and
+##' @description Compute the Sigma (\eqn{\Sigma}) matrix from an \code{\link[igraph:aaa-igraph-package]{igraph}} structure 
+##' or pre-computed matrix. These are compatible with \code{\link[mvtnorm:Mvnorm]{rmvnorm}} and
 ##'  \code{\link[graphsim]{generate_expression}}.
 ##' By default data is generated with a mean of 0 and standard deviation of 1 for 
 ##' each gene (with correlations between derived from the graph structure).
@@ -13,7 +13,7 @@
 ##' between each gene in the output from \code{\link[graphsim]{generate_expression}}.
 ##'
 ##' @param mat precomputed adjacency, laplacian, commonlink, or scaled distance matrix.
-##' @param graph An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.
+##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May be directed or weighted.
 ##' @param state numeric vector. Vector of length E(graph). Sign used to calculate 
 ##' state matrix, may be an integer state or inferred directly from expected correlations
 ##' for each edge. May be applied a scalar across all edges or as a vector for each edge

@@ -15,13 +15,13 @@ make_laplacian_graph(graph, directed = FALSE)
 
 \item{directed}{logical. Whether directed information is passed to the Laplacian matrix.}
 
-\item{graph}{An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.}
+\item{graph}{An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May be directed or weighted.}
 }
 \value{
 An Laplacian matrix compatible with generating an expression matrix
 }
 \description{
-Compute the Laplacian matrix of a (directed) \code{\link[igraph]{igraph-package}}
+Compute the Laplacian matrix of a (directed) \code{\link[igraph:aaa-igraph-package]{igraph}}
 structure, preserving node/column/row names (and direction).
 }
 \examples{

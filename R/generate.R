@@ -4,22 +4,22 @@
 ##' @title Generate Simulated Expression
 ##'
 ##' @description Compute simulated continuous expression data from a graph 
-##' network structure. Requires an \code{\link[igraph]{igraph-package}} pathway 
+##' network structure. Requires an \code{\link[igraph:aaa-igraph-package]{igraph}} pathway 
 ##' structure and a matrix of states (1 for activating and -1 for 
 ##' inhibiting) for link signed correlations, from a vector of edge states 
 ##' to a signed adjacency matrix for use in 
 ##' \code{\link[graphsim]{generate_expression}}. 
 ##' Uses graph structure to pass a sigma covariance matrix from 
-##' \code{\link[graphsim]{make_sigma}} or 
-##' \code{\link[graphsim]{make_sigma}} on to 
-##' \code{\link[mvtnorm]{Mvnorm}}. By default data is generated with a mean of
+##' \code{\link[graphsim:make_sigma]{make_sigma_mat_graph}} or 
+##' \code{\link[graphsim:make_sigma]{make_sigma_mat_dist_graph}} on to 
+##' \code{\link[mvtnorm:Mvnorm]{rmvnorm}}. By default data is generated with a mean of
 ##'  0 and standard deviation of 1 for each gene (with correlations between 
 ##'  derived from the graph structure).
 ##'
 ##' @param n number of observations (simulated samples).
 ##' @param mat precomputed adjacency, laplacian, commonlink, or scaled 
 ##' distance matrix.
-##' @param graph An \code{\link[igraph]{igraph-package}} object. May must be 
+##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May must be 
 ##' directed if states are used.
 ##' @param state numeric vector. Vector of length E(graph). Sign used
 ##' to calculate state matrix, may be an integer state or inferred directly

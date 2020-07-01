@@ -22,7 +22,6 @@
 ^graphsim_0.1.2.tar.gz
 ^graphsim_1.0.0.tar.gz$
 ^graphsim_1.0.0.zip$
-^*html
 ^paper$
 ^paper\.(bib|html|md|Rmd)$
 ^tests/figs
@@ -37,3 +36,16 @@
 pdf
 png
 sty
+.DS_Store
+._.DS_Store
+inst/.DS_Store
+inst/._.DS_Store
+inst/doc/.DS_Store
+inst/doc/._.DS_Store
+inst/doc/._plots_directed.html
+inst/doc/._simulate_expression.html
+inst/doc/._vignettes.zip
+vignettes/.DS_Store
+vignettes/._.DS_Store
+plots_directed.html
+simulate_expression.html

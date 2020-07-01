@@ -24,6 +24,7 @@ vignette: >
 #knitr::opts_chunk$set(collapse = TRUE, comment = "#>", width = 68)
 knitr::opts_chunk$set(fig.cap = "", fig.path = "Plot")
 options(width = 68, cli.unicode = FALSE, cli.width = 68)
+knitr::opts_chunk$set(dev.args = list(type = "cairo"))
 #par(mai=c(2.82, 2.82, 0.82, 0.82)-0.82)
 par(mar=c(7, 10, 4, 2) + 0.1)
 par(bty="o")

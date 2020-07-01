@@ -130,4 +130,4 @@ Please also acknowledge the manuscript describing use of this package once it is
 Please submit [issues](https://github.com/TomKellyGenetics/graphsim/issues) on GitHub to report
 problems or suggest features. [Pull requests](https://github.com/TomKellyGenetics/graphsim/pulls)
 to the `dev` branch on GitHub are also welcome to add features or correct problems. Please see
-the [contributor guide](CONTRIBUTING.md) for more details.
+the [contributor guide](https://github.com/TomKellyGenetics/graphsim/blob/master/CONTRIBUTING.md) for more details.

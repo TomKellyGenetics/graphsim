@@ -8,7 +8,7 @@
 ##' in \code{\link[graphsim]{generate_expression}}. This resolves edge states to determine the sign
 ##' of all correlations between nodes in a network. These are computed interally for sigma matrices
 ##' as required.
-##' @param graph An \code{\link[igraph]{igraph-package}} object. May be directed or weighted as long as
+##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May be directed or weighted as long as
 ##' a shortest path can be computed.
 ##' @param state numeric vector. Vector of length E(graph). Sign used to calculate state matrix,
 ##' may be an integer state or inferred directly from expected correlations for each edge. May be

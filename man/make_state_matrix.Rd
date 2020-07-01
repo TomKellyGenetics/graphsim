@@ -7,7 +7,7 @@
 make_state_matrix(graph, state = NULL)
 }
 \arguments{
-\item{graph}{An \code{\link[igraph]{igraph-package}} object. May be directed or weighted as long as
+\item{graph}{An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May be directed or weighted as long as
 a shortest path can be computed.}
 
 \item{state}{numeric vector. Vector of length E(graph). Sign used to calculate state matrix,

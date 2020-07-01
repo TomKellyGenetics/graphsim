@@ -4,11 +4,11 @@
 ##' @title Generate Distance Matrix
 ##'
 ##' @description Compute the distance matrix of using shortest paths of a (directed)
-##' \code{\link[igraph]{igraph-package}} structure, normalising by the diameter of the network,
+##' \code{\link[igraph:aaa-igraph-package]{igraph}} structure, normalising by the diameter of the network,
 ##' preserving node/column/row names (and direction).
 ##'
 ##' @param mat precomputed adjacency or commonlink matrix.
-##' @param graph An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.
+##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the distance matrix.
 ##' @param absolute logical. Whether distances are scaled as the absolute difference
 ##' from the diameter (maximum possible). Defaults to TRUE. The alternative is to

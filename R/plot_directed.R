@@ -13,9 +13,9 @@
 ##'
 ##' @title Extensions to igraph for Customising plots
 ##'
-##' @description Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph-package}}. Designed for plotting directed graphs.
+##' @description Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph:aaa-igraph-package]{igraph}}. Designed for plotting directed graphs.
 ##'
-##' @param graph An \code{\link[igraph]{igraph-package}} object. Must be directed with known states.
+##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. Must be directed with known states.
 ##' @param state character or integer. Defaults to "activating" if no "state" edge attribute 
 ##' found. May be applied a scalar across all edges or as a vector for each edge respectively. 
 ##' Accepts non-integer values for weighted edges provided that the sign indicates whether links
@@ -25,7 +25,7 @@
 ##'  package \url{https://github.com/TomKellyGenetics/graphsim}. Vector input is supported 
 ##' @param labels character vector. For labels to plot nodes. Defaults to vertex names in 
 ##' graph object. Entering "" would yield unlabelled nodes.
-##' @param layout function. Layout function as selected from \code{\link[igraph]{layout_}}. 
+##' @param layout function. Layout function as selected from \code{\link[igraph:aaa-igraph-package]{layout_}}. 
 ##' Defaults to layout.fruchterman.reingold. Alternatives include layout.kamada.kawai, 
 ##' layout.reingold.tilford, layout.sugiyama, and layout.davidson.harel. A 2-column 
 ##' layout matrix giving x and y co-ordinates of each node can be given.

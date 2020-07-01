@@ -29,7 +29,7 @@ plot_directed(
 )
 }
 \arguments{
-\item{graph}{An \code{\link[igraph]{igraph-package}} object. Must be directed with known states.}
+\item{graph}{An \code{\link[igraph:aaa-igraph-package]{igraph}} object. Must be directed with known states.}
 
 \item{state}{character or integer. Defaults to "activating" if no "state" edge attribute 
 found. May be applied a scalar across all edges or as a vector for each edge respectively. 
@@ -42,7 +42,7 @@ Accepts non-integer values for weighted edges provided that the sign indicates w
 \item{labels}{character vector. For labels to plot nodes. Defaults to vertex names in 
 graph object. Entering "" would yield unlabelled nodes.}
 
-\item{layout}{function. Layout function as selected from \code{\link[igraph]{layout_}}. 
+\item{layout}{function. Layout function as selected from \code{\link[igraph:aaa-igraph-package]{layout_}}. 
 Defaults to layout.fruchterman.reingold. Alternatives include layout.kamada.kawai, 
 layout.reingold.tilford, layout.sugiyama, and layout.davidson.harel. A 2-column 
 layout matrix giving x and y co-ordinates of each node can be given.}
@@ -85,7 +85,7 @@ Defaults to par("fg").  May take a scalar applied to all edges or a vector
 base R graphics
 }
 \description{
-Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph]{igraph-package}}. Designed for plotting directed graphs.
+Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph:aaa-igraph-package]{igraph}}. Designed for plotting directed graphs.
 }
 \examples{
 

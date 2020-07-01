@@ -4,10 +4,10 @@
 ##'
 ##' @title Generate Adjacency Matrix
 ##' 
-##' @description Compute the adjacency matrix of a (directed) \code{\link[igraph]{igraph-package}}
+##' @description Compute the adjacency matrix of a (directed) \code{\link[igraph:aaa-igraph-package]{igraph}}
 ##' structure, preserving node/column/row names (and direction).
 ##'
-##' @param graph An \code{\link[igraph]{igraph-package}} object. May be directed or weighted.
+##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.
 ##' @keywords graph network igraph adjacency
 ##' @importFrom igraph as_adjacency_matrix graph.edgelist as.undirected

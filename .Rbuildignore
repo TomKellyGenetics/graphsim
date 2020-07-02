@@ -12,6 +12,7 @@
 ^\.circleci/config\.yml$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^build/vignette.rds$
 ^cran-comments\.md$
 ^demo.gif
 ^demo2.gif^doc$

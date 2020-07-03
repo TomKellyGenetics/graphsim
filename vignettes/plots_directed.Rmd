@@ -1,6 +1,6 @@
 ---
 title: "graphsim: directed plots for igraph objects"
-author: "S. Thomas Kelly^1,2^, Michael A. Black^2^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
+author: "S. Thomas Kelly^1,2^, Michael A. Black^1^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
 date: "`r  format(Sys.time(), '%A %d %B %Y')`"
 output:
   prettydoc::html_pretty:

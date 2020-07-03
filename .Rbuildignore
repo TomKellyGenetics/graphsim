@@ -19,6 +19,7 @@
 ^doc
 ^fig*
 ^graphsim$
+^graphsim.tar.gz$
 ^graphsim_0.1.1.tar.gz
 ^graphsim_0.1.2.tar.gz
 ^graphsim_1.0.0.tar.gz$

@@ -488,26 +488,25 @@ different modalities such as genome-wide epigenetic data.
 Computational details {#computational-details .unnumbered .unnumbered}
 ===============================================================================
 
+Complete examples of code needed to produce the figures in this paper are
+available in the Rmarkdown version in the package GitHub repository
+ (\url{https://github.com/TomKellyGenetics/graphsim}).
+ Further details are available in the vignettes as well.
+
 The results in this paper were obtained using R 4.0.2 with the \texttt{igraph} 1.2.5
 \texttt{Matrix} 1.2-17,
 \texttt{matrixcalc} 1.0-3, and \texttt{mvtnorm} 1.1-1 packages.
 R itself and all dependent packages
 used are available from the Comprehensive Archive Network (CRAN) at
 \url{https://CRAN.R-project.org}. The \texttt{graphsim} 1.0.0 package
-presented can be installed from CRAN and the issues can  be reported to
-the development version on GitHub (\url{https://github.com/TomKellyGenetics/graphsim}).
+can be installed from CRAN and the issues can  be reported to
+the development version on GitHub.
 This package is included in the \texttt{igraph.extensions} library on GitHub (\url{https://github.com/TomKellyGenetics/igraph.extensions})
 which installs various
 tools for \texttt{igraph} analysis. This software is cross-platform and
 compatible with installations on Windows, Mac, and Linux operating
-systems. The package GitHub repository also contains vignettes with more
-information and examples on running functions released in the package.
+systems. 
 Updates to the  package (\texttt{graphsim} 1.0.0) will be released on CRAN.
-
-Complete examples of code needed to produce the figures in this paper are
-available in the Rmarkdown version in the package GitHub repository
- (\url{https://github.com/TomKellyGenetics/graphsim/paper}).
- Further details are available in the vignettes as well.
  
 Acknowledgements {#acknowledgements .unnumbered .unnumbered}
 ===============================================================================

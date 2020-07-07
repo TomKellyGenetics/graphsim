@@ -138,7 +138,7 @@ distribution are used to generate normally-distributed log-expression
 data, with correlations between genes derived from the structure of the
 underlying pathway or gene regulatory network. This methodology enables
 simulation of expression profiles that approximate the log-transformed
-and normalised data from microarray studies, as well as, bulk or single-cell RNA-Seq
+and normalised data from microarray studies, as well as bulk or single-cell RNA-Seq
 experiments. This procedure has been released as the \texttt{graphsim}
 package to enable the generation of simulated gene expression datasets
 containing pathway relationships from a known underlying network.

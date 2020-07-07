@@ -32,7 +32,6 @@ from a graph structure. This package allows the simulation of biological
 pathways from a graph structure based on a statistical model of 
 gene expression, such as simulation of expression profiles that
 of log-transformed and normalised data from microarray and RNA-Seq data.
-experiments. 
 
 #### Motivation
 

@@ -942,7 +942,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE, eval = TRUE}
+```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE, eval = FALSE}
 Pi3K_AKT_graph <- identity(Pi3K_AKT_graph)
 Pi3K_AKT_graph <- simplify(Pi3K_AKT_graph,
       edge.attr.comb = function(x){

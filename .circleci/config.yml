@@ -52,4 +52,4 @@ jobs:
       - save_cache:
           key: r-pkg-cache--
           paths:
-            - "~/R/Library"
+            - "/usr/local/lib/R/site-library"

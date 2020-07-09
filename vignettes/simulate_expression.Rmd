@@ -810,7 +810,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_RAF_MAP_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE}
+```{r simulation_RAF_MAP_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, eval=FALSE}
 RAF_MAP_graph <- identity(RAF_MAP_graph)
 
 # activating graph
@@ -871,7 +871,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_Pi3K_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_Pi3K_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, eval=FALSE}
 graph <- identity(Pi3K_graph)
 
 # activating graph
@@ -942,7 +942,7 @@ set.seed(9000)
 ```
 
 
-```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE, eval = FALSE}
+```{r simulation_Pi3K_AKT_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, eval = FALSE}
 Pi3K_AKT_graph <- identity(Pi3K_AKT_graph)
 Pi3K_AKT_graph <- simplify(Pi3K_AKT_graph,
       edge.attr.comb = function(x){
@@ -1011,7 +1011,7 @@ plot_directed(TGFBeta_Smad_graph, state = edge_properties,
 set.seed(9000)
 ```
 
-```{r simulation_TGFBeta_Smad_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
+```{r simulation_TGFBeta_Smad_graph_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, eval=FALSE}
 TGFBeta_Smad_graph <- identity(TGFBeta_Smad_graph)
 edge_properties <- E(TGFBeta_Smad_graph)$state
 

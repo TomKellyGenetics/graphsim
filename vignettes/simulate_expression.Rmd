@@ -16,7 +16,7 @@ output:
 toc-title: "Table of Contents"
 vignette: >
   %\VignetteIndexEntry{Simulating network graph structure in continuous data}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 

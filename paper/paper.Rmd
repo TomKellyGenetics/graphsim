@@ -52,7 +52,7 @@ identifying alterations in activity at the level of individual genes,
 understanding changes in the gene networks that regulate fundamental
 biological mechanisms is also an important objective of molecular 
 analysis. As a result, databases that describe biological pathways 
-are increasingly uesad to assist with the interpretation of results
+are increasingly used to assist with the interpretation of results
 from large-scale genomics studies. Incorporating information from 
 biological pathways and gene regulatory networks into a genomic data
 analysis is a popular strategy, and there are many methods that provide

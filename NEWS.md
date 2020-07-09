@@ -1,3 +1,11 @@
+# graphsim 1.0.1
+
+* Update citation to reflect acceptance at JOSS
+
+* Update documentation (package help page, links and cross-references)
+
+* Critical changes to vignettes to reduce build time (required for regular CRAN checks)
+
 # graphsim 1.0.0
 
 * Major stable release: note changes to results are possible! (legacy code should run without breaking)

@@ -12,11 +12,15 @@
 [![DOI](https://zenodo.org/badge/67395230.svg)](https://zenodo.org/badge/latestdoi/67395230)
 [![bioRxiv](https://img.shields.io/badge/biorXiv-10.1101%2F2020.03.02.972471-blue)](https://doi.org/10.1101/2020.03.02.972471)
 [![status](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6/status.svg)](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6)
-[![](https://img.shields.io/badge/Altmetric-71-blue.svg)](https://www.altmetric.com/details/77053356)
+[![](https://img.shields.io/badge/Altmetric-72-blue.svg)](https://www.altmetric.com/details/77053356)
+
+--------------------------------------------------
 
 # graphsim
 
-## Version 1.0.0
+## Version 1.0.1
+
+--------------------------------------------------
 
 ###  Simulate Expression Data from 'igraph' Networks 
 
@@ -86,29 +90,54 @@ devtools::install_github("TomKellyGenetics/graphsim", ref = "dev")
 
 ## Usage
 
-Please see the vignettes for demonstrations of this package on examples of simple simulated networks and the reactome pathway TGF-&beta; receptor signaling activates SMADs (R-HSA-2173789). A manuscript with further details has been submitted for peer-review.
+Please see the vignettes for demonstrations of this package on examples of simple simulated networks and the reactome pathway TGF-&beta; receptor signaling activates SMADs (R-HSA-2173789). A manuscript with further details has been published in the 
+_Journal of Open Source Software_.
+
+--------------------------------------------------
 
 ## Citation
 
-To cite the graphsim package in publications use:
+To cite package 'graphsim' in publications use:
 
-  S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression data from iGraph networks 
-  R package version 1.0.0. https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.1313986
+>S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression Data from
+>'igraph' Networks. R package version 1.0.1.
+>https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.391288
 
-A BibTeX entry for LaTeX users is
+A BibTeX entry for LaTeX users is:
 
 ```
   @Manual{,
-    title = {{graphsim}: Simulate Expression data from {iGraph} networks},
+    title = {{graphsim}: Simulate Expression Data from 'igraph' Networks },
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version 1.0.0},
+    note = {R package version R package version 1.0.q1.},
     url = {https://github.com/TomKellyGenetics/graphsim},
-    doi = {10.5281/zenodo.1313986},
+    doi = {10.5281/zenodo.391288},
   }
 ```
 
-Please also acknowledge the manuscript describing use of this package once it is published. It is currently avaliable as a preprint.
+Please also cite the publication describing use of this package where appropriate.
+
+>Kelly, S.T. and Black, M.A. (2020). graphsim: An R package for simulating gene
+>expression data from graph structures of biological pathways.
+>_Journal of Open Source Software_, **5**(51), 2161, https://doi.org/10.21105/joss.02161
+
+
+```
+  @article{Kelly2020joss02161,
+    doi = {10.21105/joss.02161},
+    url ={https://doi.org/10.21105/joss.02161},
+    year = {2020},
+    publisher = {The Open Journal},
+    volume = {5},
+    number = {51},
+    pages = {2161},
+    author = {S. Thomas Kelly and Michael A. Black},
+    title = {graphsim: An R package for simulating gene expression data from graph structures of biological pathways},
+    journal = {Journal of Open Source Software} }
+```
+
+This article is also avaliable as a preprint.
 
 ```
 @article {Kelly2020.03.02.972471,
@@ -123,6 +152,8 @@ Please also acknowledge the manuscript describing use of this package once it is
 	journal = {bioRxiv}
 }
 ```
+
+--------------------------------------------------
 
 ## Contributions and Bug Reports
 

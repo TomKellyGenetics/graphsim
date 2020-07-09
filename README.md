@@ -19,7 +19,6 @@
 
 ## Version 1.0.1
 
---------------------------------------------------
 
 ###  Simulate Expression Data from 'igraph' Networks 
 
@@ -89,7 +88,7 @@ devtools::install_github("TomKellyGenetics/graphsim", ref = "dev")
 
 ## Usage
 
-Please see the vignettes for demonstrations of this package on examples of simple simulated networks and the reactome pathway TGF-&beta; receptor signaling activates SMADs (R-HSA-2173789). A manuscript with further details has been published in the 
+Please see the vignettes for demonstrations of this package on examples of simple simulated networks and the reactome pathway TGF-&beta; receptor signaling activates SMADs (R-HSA-2173789). An [article](https://doi.org/10.21105/joss.02161) with further details has been published in the 
 _Journal of Open Source Software_.
 
 --------------------------------------------------
@@ -109,7 +108,7 @@ A BibTeX entry for LaTeX users is:
     title = {{graphsim}: Simulate Expression Data from 'igraph' Networks },
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version R package version 1.0.q1.},
+    note = {R package version R package version 1.0.1.},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.391288},
   }

@@ -12,7 +12,10 @@ BugReports: https://github.com/TomKellyGenetics/graphsim/issues/
 Depends: R (>= 2.10)
 Imports:
     utils,
+<<<<<<< HEAD
     gplots,
+=======
+>>>>>>> 556370e... enable citation call
     igraph,
     mvtnorm,
     Matrix,

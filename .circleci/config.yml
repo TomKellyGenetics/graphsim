@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: rocker/verse:latest
+      - image: tomkellygenetics/r-igraph:latest
     environment:
       R_LIBS: ~/R/Library
     steps:

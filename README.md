@@ -110,7 +110,7 @@ A BibTeX entry for LaTeX users is:
     title = {{graphsim}: Simulate Expression Data from 'igraph' Networks },
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version R package version 1.0.1.},
+    note = {R package version R package version 1.0.q1.},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.391288},
   }

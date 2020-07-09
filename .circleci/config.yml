@@ -12,6 +12,10 @@ jobs:
             - r-pkg-cache--
       - checkout
       - run:
+          name: Install igraph dependencies
+          command: |
+            apt-get update && apt-get install -y r-cran-igraph
+      - run:
           name: Install package dependencies
           command: |
             mkdir -p ~/R/Library

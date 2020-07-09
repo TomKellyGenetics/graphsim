@@ -138,6 +138,10 @@ Please also cite the publication describing use of this package where appropriat
 
 This article is also avaliable as a preprint.
 
+>S. Thomas Kelly, Michael A. Black (2020)
+> graphsim: An R package for simulating gene expression data from graph structures of biological pathways
+> bioRxiv 2020.03.02.972471; doi:https://doi.org/10.1101/2020.03.02.972471
+
 ```
 @article {Kelly2020.03.02.972471,
 	author = {Kelly, S Thomas and Black, Michael A},

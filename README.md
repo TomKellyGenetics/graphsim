@@ -49,7 +49,7 @@ expression data can be tested on  simulated datasets using this framework. This 
 pathway structures to be considered as a confounding variable when 
 simulating gene expression data to test the performance of genomics analyses.
 
-This package enable the generation of simulated gene expression datasets
+This package enables the generation of simulated gene expression datasets
 containing pathway relationships from a known underlying network.
 These simulated datasets can be used to evaluate various bioinformatics
 methodologies, including statistical and network inference procedures.

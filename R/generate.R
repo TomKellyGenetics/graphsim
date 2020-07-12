@@ -38,9 +38,9 @@
 ##' May be entered as a scalar applying to 
 ##' all genes or a vector with a separate value for each.
 ##' @param dist logical. Whether a graph distance 
-##' (\code{\link[graphsim]{make_sigma}}) or derived matrix
-##'  (\code{\link[graphsim]{make_sigma}}) is used to compute the
-##'   sigma matrix.
+##' \code{\link[graphsim:make_sigma]{make_sigma_mat_graph}} or derived matrix
+##' \code{\link[graphsim:make_sigma]{make_sigma_mat_dist_graph}} is used to compute the
+##' sigma matrix (using \code{\link[graphsim]{make_distance}}).
 ##' @param comm,absolute,laplacian logical. Parameters for Sigma matrix
 ##' generation. Passed on to \code{\link[graphsim]{make_sigma}} 
 ##' or \code{\link[graphsim]{make_sigma}}.

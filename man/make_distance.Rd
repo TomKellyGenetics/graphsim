@@ -33,7 +33,9 @@ A numeric matrix of values in the range [0, 1] where higher values are closer in
 \description{
 Compute the distance matrix of using shortest paths of a (directed)
 \code{\link[igraph:aaa-igraph-package]{igraph}} structure, normalising by the diameter of the network,
-preserving node/column/row names (and direction).
+preserving node/column/row names (and direction). This is used to compute the
+simulatted data for \code{\link[graphsim]{generate_expression}} (when \code{dist = TRUE})
+by \code{\link[graphsim:make_sigma]{make_sigma_mat_dist_graph}}.
 }
 \examples{
 

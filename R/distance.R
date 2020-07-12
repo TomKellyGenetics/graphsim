@@ -5,8 +5,10 @@
 ##'
 ##' @description Compute the distance matrix of using shortest paths of a (directed)
 ##' \code{\link[igraph:aaa-igraph-package]{igraph}} structure, normalising by the diameter of the network,
-##' preserving node/column/row names (and direction).
-##'
+##' preserving node/column/row names (and direction). This is used to compute the
+##' simulatted data for \code{\link[graphsim]{generate_expression}} (when \code{dist = TRUE})
+##' by \code{\link[graphsim:make_sigma]{make_sigma_mat_dist_graph}}.
+##' 
 ##' @param mat precomputed adjacency or commonlink matrix.
 ##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. May be directed or weighted.
 ##' @param directed logical. Whether directed information is passed to the distance matrix.

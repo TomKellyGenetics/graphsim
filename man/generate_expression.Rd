@@ -62,9 +62,9 @@ generation. Passed on to \code{\link[graphsim]{make_sigma}}
 or \code{\link[graphsim]{make_sigma}}.}
 
 \item{dist}{logical. Whether a graph distance 
-(\code{\link[graphsim]{make_sigma}}) or derived matrix
- (\code{\link[graphsim]{make_sigma}}) is used to compute the
-  sigma matrix.}
+\code{\link[graphsim:make_sigma]{make_sigma_mat_graph}} or derived matrix
+\code{\link[graphsim:make_sigma]{make_sigma_mat_dist_graph}} is used to compute the
+sigma matrix (using \code{\link[graphsim]{make_distance}}).}
 
 \item{mat}{precomputed adjacency, laplacian, commonlink, or scaled 
 distance matrix.}

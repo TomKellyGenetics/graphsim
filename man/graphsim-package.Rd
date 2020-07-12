@@ -41,33 +41,33 @@ distribution.
 
 \section{Getting Started}{
 
-lorem ipsum
+lorem ipsum (generate expression)
 }
 
 \section{Creating Input Data}{
 
-lorem ipsum
+lorem ipsum (igraph / matrix functions / import from pkg data)
 }
 
 \section{Internal Functions}{
 
-lorem ipsum
+lorem ipsum (sigma, dist, state)
 }
 
 \section{Examining Step-by-Step}{
 
-lorem ipsum
+lorem ipsum (plotting sigma and \code{cor(t(expr))})
 }
 
 \section{Visualization}{
 
-lorem ipsum
+lorem ipsum (plot_directed)
 }
 
 \section{Further information}{
 
-  The graphsim pacakge is published in the \emph{Journal of Open Source Software}.
-  See the paper here for more details:
+  The graphsim package is published in the \emph{Journal of Open Source Software}.
+  See the paper hereqq for more details:
    \href{https://doi.org/10.21105/joss.02161}{doi: 10.21105/joss.02161}
   
   The graphsim GitHub repository is here:

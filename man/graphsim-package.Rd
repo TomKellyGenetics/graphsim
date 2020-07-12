@@ -24,3 +24,39 @@ covariance matrix and 4) using this to sample a multivariate normal
 distribution.
 }
 
+\section{Getting Started}{
+
+lorem ipsum
+}
+
+\section{Creating Input Data}{
+
+lorem ipsum
+
+#' @section Internal Functions:
+lorem ipsum
+}
+
+\section{Examining Step-by-Step}{
+
+lorem ipsum
+}
+
+\section{Visualization}{
+
+lorem ipsum
+}
+
+\section{Further information}{
+
+  The graphsim pacakge is published in the \emph{Journal of Open Source
+   Software}. See the paper here for more details:
+   \href{https://doi.org/10.21105/joss.02161}{doi: 10.21105/joss.02161}
+  
+  The graphsim GitHub repository is here:
+  \href{https://github.com/TomKellyGenetics/graphsim}{TomKellyGenetics/graphsim}
+  You can find the development version and submit an
+  \href{https://github.com/TomKellyGenetics/graphsim/issues/new/choose}{issue}
+  if you have questions or comments.
+}
+

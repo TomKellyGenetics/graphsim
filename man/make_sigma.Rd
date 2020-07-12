@@ -51,7 +51,7 @@ for each edge. May be applied a scalar across all edges or as a vector for each 
 respectively. May also be entered as text for "activating" or "inhibiting" or as
 integers for activating (0,1) or inhibiting (-1,2). Compatible with inputs for 
 \code{\link[graphsim]{plot_directed}}. Also takes a pre-computed state matrix from
-\code{\link[graphsim]{make_state_matrix}} if applied to the same graph multiple times.}
+\code{\link[graphsim]{make_state}} if applied to the same graph multiple times.}
 
 \item{cor}{numeric. Simulated maximum correlation/covariance of two adjacent nodes.
 Default to 0.8.}
@@ -220,6 +220,39 @@ heatmap.2(sigma_matrix_TFGBeta_Smad_inhib, scale = "none", trace = "none",
           col = colorpanel(50, "blue", "white", "red"))
 
 }
+\seealso{
+See also \code{\link[graphsim]{generate_expression}} for computing the simulated data,
+\code{\link[graphsim]{make_distance}} for computing distance from a graph object,
+and
+\code{\link[graphsim]{make_state}} for resolving inhibiting states.
+
+See also \code{\link[graphsim]{plot_directed}} for plotting graphs or 
+\code{\link[gplots]{heatmap.2}} for plotting matrices.
+
+See also \code{\link[graphsim]{make_laplacian}}, \code{\link[graphsim]{make_commonlink}}, 
+or \code{\link[graphsim]{make_adjmatrix}} for computing input matrices.
+
+See also \code{\link[igraph:aaa-igraph-package]{igraph}} for handling graph objects.
+
+Other graphsim functions: 
+\code{\link{generate_expression}()},
+\code{\link{make_adjmatrix}},
+\code{\link{make_commonlink}},
+\code{\link{make_distance_graph}()},
+\code{\link{make_laplacian}},
+\code{\link{make_state_matrix}()},
+\code{\link{plot_directed}()}
+
+Other generate simulated expression functions: 
+\code{\link{generate_expression}()},
+\code{\link{make_distance_graph}()},
+\code{\link{make_state_matrix}()}
+}
+\author{
+Tom Kelly \email{tom.kelly@riken.jp}
+}
+\concept{generate simulated expression functions}
+\concept{graphsim functions}
 \keyword{graph}
 \keyword{igraph}
 \keyword{mvtnorm}

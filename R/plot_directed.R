@@ -52,6 +52,25 @@
 ##' @param frame.plot logical. Whether to frame plot with a box. Defaults to FALSE.
 ##' @keywords graph igraph igraph plot
 ##' @import igraph graphics
+##' 
+##' @family graphsim functions
+##' @family graph plotting functions
+##' @seealso
+##' See also \code{\link[graphsim]{generate_expression}} for computing the simulated data,
+##' \code{\link[graphsim]{make_sigma}} for computing the Sigma (\eqn{\Sigma}) matrix,
+##' \code{\link[graphsim]{make_distance}} for computing distance from a graph object,
+##' \code{\link[graphsim]{make_state}} for resolving inhibiting states.
+##' 
+##' See also \code{\link[gplots]{heatmap.2}} for plotting matrices.
+##' 
+##' See also \code{\link[graphsim]{make_laplacian}}, \code{\link[graphsim]{make_commonlink}}, 
+##' or \code{\link[graphsim]{make_adjmatrix}} for computing input matrices.
+##' 
+##' See also \code{\link[igraph:aaa-igraph-package]{igraph}} for handling graph objects
+##' and \code{\link[igraph:plot.igraph]{plot.igraph}} for base R \code{\link[base]{plot}} methods.
+##'
+##' @author Tom Kelly \email{tom.kelly@@riken.jp}
+##' 
 ##' @examples
 ##'
 ##' # generate example graphs

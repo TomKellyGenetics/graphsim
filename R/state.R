@@ -1,5 +1,6 @@
 ##' @name make_state_matrix
-##' @rdname make_state_matrix
+##' @aliases make_state
+##' @rdname make_state
 ##'
 ##' @title Make State Matrix
 ##' 
@@ -21,6 +22,25 @@
 ##' @keywords graph network igraph mvtnorm simulation
 ##' @importFrom igraph graph.edgelist get.edge.attribute get.edgelist
 ##' @import igraph
+##' 
+##' @family graphsim functions
+##' @family generate simulated expression functions
+##' @seealso
+##' See also \code{\link[graphsim]{generate_expression}} for computing the simulated data,
+##' \code{\link[graphsim]{make_sigma}} for computing the Sigma (\eqn{\Sigma}) matrix,
+##' and
+##' \code{\link[graphsim]{make_distance}} for computing distance from a graph object.
+##' 
+##' See also \code{\link[graphsim]{plot_directed}} for plotting graphs or 
+##' \code{\link[gplots]{heatmap.2}} for plotting matrices.
+##' 
+##' See also \code{\link[graphsim]{make_laplacian}}, \code{\link[graphsim]{make_commonlink}}, 
+##' or \code{\link[graphsim]{make_adjmatrix}} for computing input matrices.
+##' 
+##' See also \code{\link[igraph:aaa-igraph-package]{igraph}} for handling graph objects.
+##'
+##' @author Tom Kelly \email{tom.kelly@@riken.jp}
+##' 
 ##' @examples 
 ##' 
 ##' # construct a synthetic graph module

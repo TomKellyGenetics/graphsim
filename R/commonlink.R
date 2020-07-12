@@ -13,6 +13,25 @@
 ##' @param directed logical. Whether directed information is passed to the adjacency matrix.
 ##' @keywords graph network igraph neighbourhood
 ##' @import igraph
+##' 
+##' @family graphsim functions
+##' @family graph conversion functions
+##' @seealso
+##' See also \code{\link[graphsim]{generate_expression}} for computing the simulated data,
+##' \code{\link[graphsim]{make_sigma}} for computing the Sigma (\eqn{\Sigma}) matrix,
+##' \code{\link[graphsim]{make_distance}} for computing distance from a graph object,
+##' \code{\link[graphsim]{make_state}} for resolving inhibiting states.
+##' 
+##' See also \code{\link[graphsim]{plot_directed}} for plotting graphs or 
+##' \code{\link[gplots]{heatmap.2}} for plotting matrices.
+##' 
+##' See also \code{\link[graphsim]{make_laplacian}}
+##' or \code{\link[graphsim]{make_adjmatrix}} for computing input matrices.
+##' 
+##' See also \code{\link[igraph:aaa-igraph-package]{igraph}} for handling graph objects.
+##'
+##' @author Tom Kelly \email{tom.kelly@@riken.jp}
+##' 
 ##' @examples 
 ##' 
 ##' # construct a synthetic graph module

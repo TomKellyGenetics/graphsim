@@ -55,7 +55,7 @@
 #' 
 #' @section Further information:
 #'   The graphsim package is published in the \emph{Journal of Open Source Software}.
-#'   See the paper hereqq for more details:
+#'   See the paper here for more details:
 #'    \href{https://doi.org/10.21105/joss.02161}{doi: 10.21105/joss.02161}
 #'   
 #'   The graphsim GitHub repository is here:

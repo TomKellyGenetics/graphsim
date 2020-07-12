@@ -8,7 +8,24 @@
 #' @name graphsim-package
 #' @aliases graphsim-package graphsim
 #' @docType package
-#'
+#' 
+#' @author \bold{Maintainer}:  Tom Kelly \email{tom.kelly@@riken.jp} (\href{https://orcid.org/0000-0003-3904-6690}{ORCID})
+#' @author Mik Black (\href{0000-0003-1174-6054}{ORCID})
+#' 
+#' @details This package provides functions to develop simulated continuous data 
+#' (e.g., gene expression) from a sigma covariance matrix derived from a 
+#' graph structure in \sQuote{\code{igraph}} objects. Intended to extend 
+#' \sQuote{\code{mvtnorm}} to take 'igraph' structures rather than sigma 
+#' matrices as input. This allows the use of simulated data that correctly
+#' accounts for pathway relationships and correlations. Here we present
+#' a versatile statistical framework to simulate correlated gene expression
+#' data from biological pathways, by sampling from a multivariate normal
+#' distribution derived from a graph structure. This package allows the
+#' simulation of biologicalpathways from a graph structure based on a
+#' statistical model of gene expression, such as simulation of expression
+#' profiles that of log-transformed and normalised data from microarray
+#' and RNA-Seq data.
+#' 
 #' @section Introduction:
 #' This package enables the generation of simulated gene expression datasets 
 #' containing pathway relationships from a known underlying network.
@@ -27,7 +44,7 @@
 #' @section Creating Input Data:
 #' lorem ipsum
 #' 
-#' #' @section Internal Functions:
+#' @section Internal Functions:
 #' lorem ipsum
 #' 
 #' @section Examining Step-by-Step:
@@ -37,8 +54,8 @@
 #' lorem ipsum
 #' 
 #' @section Further information:
-#'   The graphsim pacakge is published in the \emph{Journal of Open Source
-#'    Software}. See the paper here for more details:
+#'   The graphsim pacakge is published in the \emph{Journal of Open Source Software}.
+#'   See the paper here for more details:
 #'    \href{https://doi.org/10.21105/joss.02161}{doi: 10.21105/joss.02161}
 #'   
 #'   The graphsim GitHub repository is here:
@@ -46,5 +63,28 @@
 #'   You can find the development version and submit an
 #'   \href{https://github.com/TomKellyGenetics/graphsim/issues/new/choose}{issue}
 #'   if you have questions or comments.
-#' 
+#'   
+#' @section Citation:
+#'   
+#'   To cite package 'graphsim' in publications use:
+#'   
+#'   Kelly, S.T. and Black, M.A. (2020). graphsim: An R package for simulating gene
+#'   expression data from graph structures of biological pathways.
+#'   \emph{Journal of Open Source Software}, \bold{5}(51), 2161,
+#'   \url{https://doi.org/10.21105/joss.02161}
+#'   
+#'   A BibTeX entry for LaTeX users is: \preformatted{
+#'   @article{Kelly2020joss02161,
+#'      doi = {10.21105/joss.02161},
+#'      url ={https://doi.org/10.21105/joss.02161},
+#'      year = {2020},
+#'      publisher = {The Open Journal},
+#'      volume = {5},
+#'      number = {51},
+#'      pages = {2161},
+#'      author = {S. Thomas Kelly and Michael A. Black},
+#'      title = {graphsim: An R package for simulating gene expression data from graph structures of biological pathways},
+#'      journal = {Journal of Open Source Software} 
+#'    }
+#'  }
 NULL

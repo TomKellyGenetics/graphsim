@@ -79,7 +79,7 @@ Other graphsim functions:
 \code{\link{generate_expression}()},
 \code{\link{make_adjmatrix}},
 \code{\link{make_commonlink}},
-\code{\link{make_distance_graph}()},
+\code{\link{make_distance}},
 \code{\link{make_sigma}},
 \code{\link{make_state_matrix}()},
 \code{\link{plot_directed}()}

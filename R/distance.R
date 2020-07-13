@@ -1,3 +1,4 @@
+##' @name make_distance
 ##' @rdname make_distance
 ##' @aliases make_relationship
 ##'

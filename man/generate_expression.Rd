@@ -239,14 +239,14 @@ See also \code{\link[igraph:aaa-igraph-package]{igraph}} for handling graph obje
 Other graphsim functions: 
 \code{\link{make_adjmatrix}},
 \code{\link{make_commonlink}},
-\code{\link{make_distance_graph}()},
+\code{\link{make_distance}},
 \code{\link{make_laplacian}},
 \code{\link{make_sigma}},
 \code{\link{make_state_matrix}()},
 \code{\link{plot_directed}()}
 
 Other generate simulated expression functions: 
-\code{\link{make_distance_graph}()},
+\code{\link{make_distance}},
 \code{\link{make_sigma}},
 \code{\link{make_state_matrix}()}
 }

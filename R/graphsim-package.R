@@ -20,7 +20,7 @@
 #' Reviewers:
 #' \itemize{
 #' \item Cory Brunson (UConn) (\href{0000-0003-3126-9494}{ORCID})
-#' \item Mik Black (Otago University) (\href{0000-0003-1174-6054}{ORCID})
+#' \item Robrecht Cannoodt (Ghent University) (\href{0000-0003-3641-729X}{ORCID})
 #' }
 #' 
 #' Editor: Mark Jensen (Frederick National Laboratory for Cancer Research)
@@ -80,7 +80,10 @@
 #'                             laplacian = FALSE)
 #' }
 #' 
-#' Here we can see the final result.
+#' Here we can see the final result. The graph
+#' structure defines the covariance matrix used
+#' by \code{\link[mvtnorm:Mvnorm]{rmvnorm}} to
+#' generate a multivariate distribution.
 #' 
 #' \preformatted{
 #' dim(expr)
@@ -102,7 +105,162 @@
 #' function.
 #' 
 #' @section Creating Input Data:
-#' lorem ipsum (igraph / matrix functions / import from pkg data)
+#' Graph structures can be passed directly from the
+#' \code{\link[igraph:aaa-igraph-package]{igraph}} package.
+#' Using this package, you can create an \sQuote{\code{igraph}}
+#' class object.
+#' 
+#' 
+#' \preformatted{
+#' > class(graph_structure)
+#' [1] "igraph"
+#' 
+#' > graph_structure
+#' IGRAPH ba7fa2f DN-- 9 8 -- 
+#'   + attr: name (v/c)
+#'   + edges from ba7fa2f (vertex names):
+#'     [1] A->C B->C C->D D->E D->F F->G F->I H->I
+#' }
+#' 
+#' This \sQuote{\code{igraph}} object class can be passed
+#' directly to \code{\link[graphsim:generate_expression]{generate_expression}}
+#' shown above and internal functions described below:
+#' \code{\link[graphsim:make_sigma]{make_sigma_mat_graph}},
+#' \code{\link[graphsim:make_sigma]{make_sigma_mat_dist_graph}},
+#' \code{\link[graphsim:make_distance]{make_distance_graph}},
+#' and
+#' \code{\link[graphsim:make_state]{make_state_matrix}}.
+#' 
+#' The \sQuote{\code{graphsim}} package also supports various
+#' matrix formats and has functions to handle these.
+#' The following functions will compute matrices from an
+#' \sQuote{\code{igraph}} object class:
+#' 
+#' \itemize{
+#' 
+#' \item  \code{\link[graphsim:make_adjmatrix]{make_adjmatrix_graph}}
+#' to derive the adjacency matrix for a graph structure.
+#' 
+#' \item  \code{\link[graphsim:make_commonlink]{make_commonlink_graph}}
+#' to derive the \sQuote{common link} matrix for a graph structure of
+#' mutually shared neighbours.
+#' 
+#' \item  \code{\link[graphsim:make_laplacian]{make_laplacian_graph}}
+#' to derive the Laplacian matrix for a graph structure.
+#' 
+#' } 
+#' 
+#' The following functions will compute matrices from an
+#' \code{\link[graphsim:make_adjmatrix]{adjcacency matrix}}:
+#' 
+#' \itemize{
+#' 
+#' \item  \code{\link[graphsim:make_commonlink]{make_commonlink_adjmat}}
+#' to derive the \sQuote{common link} matrix for a graph structure of
+#' mutually shared neighbours.
+#' 
+#' \item  \code{\link[graphsim:make_laplacian]{make_laplacian_adjmat}}
+#' to derive the Laplacian matrix for a graph structure.
+#' 
+#' } 
+#' 
+#' We provide some pre-generate pathways from Reactoem database
+#' for testing and demonstrations:
+#' 
+#' \itemize{
+#' 
+#' \item  \code{\link[graphsim:RAF_MAP_graph]{RAF_MAP_graph }}
+#' for the interactions in the \dQuote{RAF/MAP kinase} cascade (17 vertices
+#'  and 121 edges).
+#' 
+#' \item  \code{\link[graphsim:Pi3K_graph]{Pi3K_graph}}
+#' for the phosphoinositide-3-kinase cascade (35 vertices and 251 edges).
+#' 
+#' \item  \code{\link[graphsim:Pi3K_AKT_graph]{Pi3K_AKT_graph}}
+#' for the phosphoinositide-3-kinase activation of Protein kinase B
+#' pathway \dQuote{PI3K/AKT activation} (275 vertices and 21106 edges).
+#' 
+#' 
+#' \item  \code{\link[graphsim:TGFBeta_Smad_graph]{TGFBeta_Smad_graph}}
+#' for the TGF-\eqn{\beta} receptor signaling activates SMADs
+#' pathway (32 vertices and 173 edges).
+#' } 
+#' 
+#' Please note that demonstrations on larger graph objects. These
+#' can be called directly from the pakage:
+#' 
+#' \preformatted{
+#' > graphsim::Pi3K_graph
+#' IGRAPH 21437e3 DN-- 35 251 -- 
+#'   + attr: name (v/c)
+#'   + edges from 21437e3 (vertex names):
+#'      [1] AKT1->AKT2  AKT1->AKT3  AKT1->CASP9 AKT1->CASP9
+#'      [5] AKT1->CASP9 AKT1->FOXO1 AKT1->FOXO1 AKT1->FOXO1
+#'      [9] AKT1->FOXO3 AKT1->FOXO3 AKT1->FOXO3 AKT1->FOXO4
+#'      [13] AKT1->FOXO4 AKT1->FOXO4 AKT1->GSK3B AKT1->GSK3B
+#'      [17] AKT1->GSK3B AKT1->NOS1  AKT1->NOS2  AKT1->NOS3 
+#'      [21] AKT1->PDPK1 AKT2->AKT3  AKT2->CASP9 AKT2->CASP9
+#'      [25] AKT2->CASP9 AKT2->FOXO1 AKT2->FOXO1 AKT2->FOXO1
+#'      [29] AKT2->FOXO3 AKT2->FOXO3 AKT2->FOXO3 AKT2->FOXO4
+#'      + ... omitted several edges
+#'      + ... omitted several edges
+#' }
+#' 
+#' They can also be imported into R:
+#' 
+#' \preformatted{
+#' data(Pi3K_graph)
+#' }
+#' 
+#' You can assign them to your local environment
+#' by calling with from the package:
+#' 
+#' \preformatted{
+#' graph_object <- identity(Pi3K_graph)
+#' }
+#' 
+#' You can also change the object class directly
+#' from the package:
+#' 
+#' \preformatted{
+#' library("igraph")
+#' Pi3K_adjmat <- as_adjacency_matrix(Pi3K_graph)
+#' }
+#' 
+#'  \code{\link[graphsim:Pi3K_AKT_graph]{Pi3K_AKT_graph}} and 
+#'  \code{\link[graphsim:TGFBeta_Smad_graph]{TGFBeta_Smad_graph}}
+#'  contain graph edge attributes for the \sQuote{state} parameter
+#'  described below.
+#'  
+#'  \preformatted{
+#'  > TGFBeta_Smad_graph
+#'  IGRAPH f3eac04 DN-- 32 173 -- 
+#'    + attr: name (v/c), state (e/n)
+#'    + edges from f3eac04 (vertex names):
+#'      [1] BAMBI ->SMAD7  BAMBI ->TGFB1  BAMBI ->TGFBR1 BAMBI ->TGFBR2
+#'      [5] CBL   ->NEDD8  CBL   ->NEDD8  CBL   ->TGFBR2 CBL   ->TGFBR2
+#'      [9] CBL   ->UBE2M  CBL   ->UBE2M  FKBP1A->TGFB1  FKBP1A->TGFBR1
+#'      [13] FKBP1A->TGFBR2 FURIN ->TGFB1  FURIN ->TGFB1  MTMR4 ->SMAD2 
+#'      [17] MTMR4 ->SMAD2  MTMR4 ->SMAD3  MTMR4 ->SMAD3  NEDD4L->RPS27A
+#'      [21] NEDD4L->SMAD7  NEDD4L->SMURF1 NEDD4L->SMURF2 NEDD4L->TGFB1 
+#'      [25] NEDD4L->TGFBR1 NEDD4L->TGFBR2 NEDD4L->UBA52  NEDD4L->UBB   
+#'      [29] NEDD4L->UBC    NEDD8 ->TGFBR2 NEDD8 ->UBE2M  PMEPA1->SMAD2 
+#'      + ... omitted several edges
+#'      
+#'  > E(TGFBeta_Smad_graph)$state
+#'  [1] 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#'  [32] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+#'  [63] 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#'  [94] 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+#'  [125] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#'  [156] 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 1 1 1
+#'  
+#'  > states <- E(TGFBeta_Smad_graph)$state
+#'  > table(states)
+#'  states
+#'  1   2 
+#'  103  70 
+#'  }
 #' 
 #' @section Internal Functions:
 #' lorem ipsum (sigma, dist, state)

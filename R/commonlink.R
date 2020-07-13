@@ -5,7 +5,7 @@
 ##'
 ##' @description Compute the common link matrix of a (directed) \code{\link[igraph:aaa-igraph-package]{igraph}}
 ##' structure, preserving node / column / row names (and direction). We can compute the common 
-##' inks between each pair of nodes. This shows how many nodes are mutually connected to both
+##' links between each pair of nodes. This shows how many nodes are mutually connected to both
 ##' of the nodes in the matrix (how many paths of length 2 exist between them).
 ##'
 ##' @param adj_mat precomputed adjacency matrix.

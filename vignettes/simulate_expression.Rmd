@@ -91,7 +91,7 @@ Here we set up a simple graph to demonstrate how connections in the graph struct
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', fig.height = 6, fig.width = 6, fig.retina=1.5}
 graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"),c("D", "E"),
                                c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
-graph_structure <- graph.edgelist(graph_structure_edges, directed = T)
+graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 plot_directed(graph_structure, layout = layout.kamada.kawai)
 ```
 
@@ -131,7 +131,7 @@ heatmap.2(make_adjmatrix_graph(graph_structure),
 For a directed graph, the adjacency matrix may be assymetric. A non-zero element `adjmat[i,j]` represents the presence or weight of the edge from gene `i` (matrix rows)  to gene `j`  (matrix columns).
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
-heatmap.2(make_adjmatrix_graph(graph_structure, directed = T),
+heatmap.2(make_adjmatrix_graph(graph_structure, directed = TRUE),
           scale = "none", trace = "none",
           col = colorpanel(3, "grey75", "white", "blue"),
           colsep = 1:4, rowsep = 1:4)
@@ -192,7 +192,7 @@ heatmap.2(relative_dist, scale = "none", trace = "none",
 These relationships are used to create a distance graph relative to the diameter. A relative geometrically decreasing distance is computed as follows. In this case every connected node is weighted in fractions of the diameter.
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
-dist_mat <- make_distance_graph(graph_structure, absolute = F)
+dist_mat <- make_distance_graph(graph_structure, absolute = FALSE)
 dist_mat
 heatmap.2(dist_mat, scale = "none", trace = "none",
           col = colorpanel(50, "grey75", "red"),
@@ -203,7 +203,7 @@ An arithmetically decreasing distance is computed as follows. In this case every
 
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
-dist_mat <- make_distance_graph(graph_structure, absolute = T)
+dist_mat <- make_distance_graph(graph_structure, absolute = TRUE)
 dist_mat
 heatmap.2(dist_mat, scale = "none", trace = "none",
           col = colorpanel(50, "grey75", "red"),
@@ -229,7 +229,7 @@ A commonlink matrix can also be used to compute a Σ matrix.
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
 #sigma from comm mat
-sigma_mat <- make_sigma_mat_graph(graph_structure, 0.8, comm = T)
+sigma_mat <- make_sigma_mat_graph(graph_structure, 0.8, comm = TRUE)
 sigma_mat
 heatmap.2(sigma_mat, scale = "none", trace = "none",
           col = colorpanel(50, "grey75", "red"),
@@ -241,8 +241,8 @@ It is recommended to compute the distance relationships and use these. This is s
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
 # sigma from geometric distance matrix
-make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = F)
-heatmap.2(make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = F),
+make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = FALSE)
+heatmap.2(make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = FALSE),
           scale = "none", trace = "none",
           col = colorpanel(50, "grey75", "red"),
           colsep = 1:4, rowsep = 1:4)
@@ -252,7 +252,7 @@ heatmap.2(make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = F),
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
 # sigma from absolute distance matrix
-sigma_mat <- make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = T)
+sigma_mat <- make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = TRUE)
 heatmap.2(sigma_mat, scale = "none", trace = "none", 
           col = colorpanel(50, "grey75", "red"),
           colsep = 1:4, rowsep = 1:4)
@@ -269,7 +269,7 @@ For example, the adjacency matrix is derived to generate the following dataset. 
 #simulate expression data
 #adj mat
 expr <- generate_expression(100, graph_structure, cor = 0.8,
-                            mean = 0, comm = F)
+                            mean = 0, comm = FALSE)
 heatmap.2(expr, scale = "none", trace = "none",
           col = bluered(50), colsep = 1:4, rowsep = 1:4)
 heatmap.2(cor(t(expr)), scale = "none", trace = "none",
@@ -294,7 +294,7 @@ Here we use relative distance (relationships are geometrically weighted to the d
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
 # relative dist
 expr <- generate_expression(100, graph_structure, cor = 0.8,mean = 0,
-                            comm = F, dist = T, absolute = F)
+                            comm = FALSE, dist = TRUE, absolute = FALSE)
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
           colsep = 1:4, rowsep = 1:4)
 heatmap.2(cor(t(expr)), scale = "none", trace = "none",
@@ -312,7 +312,7 @@ set.seed(9000)
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54, warning=FALSE}
 #absolute dist
 expr <- generate_expression(100, graph_structure, cor = 0.8, mean = 0,
-                            comm = F, dist = T, absolute = T) 
+                            comm = FALSE, dist = TRUE, absolute = TRUE) 
 heatmap.2(expr, scale = "none", trace = "none", col = bluered(50),
           colsep = 1:4, rowsep = 1:4)
 heatmap.2(cor(t(expr)), scale = "none", trace = "none",
@@ -447,7 +447,7 @@ set.seed(9000)
 
 ```{r simulation_graph_diverging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_diverging_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"))
-graph_diverging <- graph.edgelist(graph_diverging_edges, directed = T)
+graph_diverging <- graph.edgelist(graph_diverging_edges, directed = TRUE)
 
 # activating graph
 state <- rep(1, length(E(graph_diverging)))
@@ -563,7 +563,7 @@ set.seed(9000)
 
 ```{r simulation_graph_converging_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_converging_edges <- rbind(c("C", "E"), c("D", "E"), c("E", "F"))
-graph_converging <- graph.edgelist(graph_converging_edges, directed = T)
+graph_converging <- graph.edgelist(graph_converging_edges, directed = TRUE)
 
 # activating graph
 state <- rep(1, length(E(graph_converging)))
@@ -681,7 +681,7 @@ set.seed(9000)
 ```{r simulation_graph_reconnecting_hide, fig.show='hold', out.width = '50%', out.height  = '50%', fig.align='center', dpi=36, fig.retina=1, fig.margin = FALSE, fig.ncol = 2, warning=FALSE, message=FALSE, cache=TRUE}
 graph_reconnecting_edges <- rbind(c("A", "B"), c("B", "C"), c("B", "D"),
                                   c("C", "E"), c("D", "E"), c("E", "F"))
-graph_reconnecting <- graph.edgelist(graph_reconnecting_edges, directed = T)
+graph_reconnecting <- graph.edgelist(graph_reconnecting_edges, directed = TRUE)
 
 # activating graph
 state <- rep(1, length(E(graph_reconnecting)))

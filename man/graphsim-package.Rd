@@ -103,6 +103,31 @@ lorem ipsum (plot_directed)
  }
 }
 
+\seealso{
+Publication at \emph{Journal of Open Source Software}:
+ 
+ \itemize{
+ \item \url{https://doi.org/10.21105/joss.02161}
+ }
+ 
+ GitHub repository:
+ 
+ \itemize{
+ \item \url{https://github.com/TomKellyGenetics/graphsim/}
+ }
+ 
+ Report bugs:
+ 
+ \itemize{
+ \item \url{https://github.com/TomKellyGenetics/graphsim/issues}
+ }
+ 
+ Contributions:
+ 
+ \itemize{
+ \item \url{https://github.com/TomKellyGenetics/graphsim/blob/master/CONTRIBUTING.md}
+ }
+}
 \author{
 \bold{Maintainer}:  Tom Kelly  \email{tom.kelly@riken.jp}
 

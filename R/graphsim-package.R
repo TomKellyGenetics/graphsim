@@ -9,8 +9,21 @@
 #' @aliases graphsim-package graphsim
 #' @docType package
 #' 
-#' @author \bold{Maintainer}:  Tom Kelly \email{tom.kelly@@riken.jp} (\href{https://orcid.org/0000-0003-3904-6690}{ORCID})
-#' @author Mik Black (\href{0000-0003-1174-6054}{ORCID})
+#' @author \bold{Maintainer}:  Tom Kelly  \email{tom.kelly@@riken.jp}
+#' 
+#' Authors:
+#' \itemize{
+#' \item Tom Kelly (RIKEN IMS) \href{https://orcid.org/0000-0003-3904-6690}{ORCID})
+#' \item Mik Black (Otago University) (\href{0000-0003-1174-6054}{ORCID})
+#' }
+#' 
+#' Reviewers:
+#' \itemize{
+#' \item Cory Brunson (UConn) (\href{0000-0003-3126-9494}{ORCID})
+#' \item Mik Black (Otago University) (\href{0000-0003-1174-6054}{ORCID})
+#' }
+#' 
+#' Editor: Mark Jensen (Frederick National Laboratory for Cancer Research)
 #' 
 #' @details This package provides functions to develop simulated continuous data 
 #' (e.g., gene expression) from a sigma covariance matrix derived from a 

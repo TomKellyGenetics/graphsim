@@ -104,7 +104,19 @@ lorem ipsum (plot_directed)
 }
 
 \author{
-\bold{Maintainer}:  Tom Kelly \email{tom.kelly@riken.jp} (\href{https://orcid.org/0000-0003-3904-6690}{ORCID})
+\bold{Maintainer}:  Tom Kelly  \email{tom.kelly@riken.jp}
 
-Mik Black (\href{0000-0003-1174-6054}{ORCID})
+Authors:
+\itemize{
+\item Tom Kelly (RIKEN IMS) \href{https://orcid.org/0000-0003-3904-6690}{ORCID})
+\item Mik Black (Otago University) (\href{0000-0003-1174-6054}{ORCID})
+}
+
+Reviewers:
+\itemize{
+\item Cory Brunson (UConn) (\href{0000-0003-3126-9494}{ORCID})
+\item Mik Black (Otago University) (\href{0000-0003-1174-6054}{ORCID})
+}
+
+Editor: Mark Jensen (Frederick National Laboratory for Cancer Research)
 }

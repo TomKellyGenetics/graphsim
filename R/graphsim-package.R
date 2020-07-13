@@ -263,7 +263,40 @@
 #'  }
 #' 
 #' @section Internal Functions:
-#' lorem ipsum (sigma, dist, state)
+#' 
+#' The following functions are used by
+#' \code{\link[graphsim:generate_expression]{generate_expression}}
+#' to compute a simulated dataset. They can be called separately
+#' to summarise the steps used to compute the final data matrix
+#' or for troubleshooting.
+#' 
+#' \itemize{
+#' 
+#' \item \code{\link[graphsim:make_sigma]{make_sigma_mat_adjmat}},
+#' \code{\link[graphsim:make_sigma]{make_sigma_mat_comm}}, 
+#' \code{\link[graphsim:make_sigma]{make_sigma_mat_laplacian}}, and
+#' \code{\link[graphsim:make_sigma]{make_sigma_mat_graph}} will
+#' compute a Sigma (\eqn{\Sigma}) covariance matrix from an
+#' adjacency matrix, common link matrix, Laplacian matrix,
+#' or an \sQuote{igraph} object. There are computed as above
+#' and passed to \code{\link[mvtnorm:Mvnorm]{rmvnorm}}.
+#' 
+#' \item \code{\link[graphsim:make_distance]{make_distance_adjmat}},
+#' \code{\link[graphsim:make_distance]{make_distance_comm}}, 
+#' \code{\link[graphsim:make_distance]{make_distance_laplacian}}, and
+#' \code{\link[graphsim:make_distance]{make_distance_graph}} will
+#' compute a distance matrix of relationships from an
+#' adjacency matrix, common link matrix, Laplacian matrix,
+#' or an \sQuote{igraph} object. There are computed as above
+#' and passed to \code{\link[graphsim:make_sigma]{make_sigma}}.
+#' 
+#' \item \code{\link[graphsim:make_state]{make_state_matrix}}
+#' will compute a \dQuote{state matrix} resolving positive and
+#' negative correlations from a vector of edge properties. This
+#' is called by \code{\link[graphsim:make_sigma]{make_sigma}}
+#' and \code{\link[graphsim:generate_expression]{generate_expression}}
+#' to ensure that the signs of correlations are consistent.
+#' }
 #' 
 #' @section Examining Step-by-Step:
 #' lorem ipsum (plotting sigma and \code{cor(t(expr))})

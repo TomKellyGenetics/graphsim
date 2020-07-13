@@ -1,5 +1,5 @@
-##' @name make_state_matrix
-##' @aliases make_state
+##' @name make_state
+##' @aliases make_state_matrix
 ##' @rdname make_state
 ##'
 ##' @title Make State Matrix

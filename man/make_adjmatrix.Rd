@@ -68,7 +68,7 @@ Other graphsim functions:
 \code{\link{make_distance}},
 \code{\link{make_laplacian}},
 \code{\link{make_sigma}},
-\code{\link{make_state_matrix}()},
+\code{\link{make_state}},
 \code{\link{plot_directed}()}
 
 Other graph conversion functions: 

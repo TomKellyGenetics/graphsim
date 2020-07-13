@@ -52,7 +52,49 @@
 #' distribution.
 #' 
 #' @section Getting Started:
-#' lorem ipsum (generate expression)
+#' The \code{\link[graphsim]{generate_expression}} function is a wrapper 
+#' around all necessary functions to give a final simulated dataset.
+#' 
+#' Here we set up an example graph object using the 
+#' \code{\link[igraph:aaa-igraph-package]{igraph}} package.
+#' 
+#' \preformatted{
+#' library("igraph")
+#' graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"),c("D", "E"),
+#'                                c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+#' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
+#' }
+#' 
+#' Then we can call \code{\link[graphsim]{generate_expression}} to return
+#' the simulated data based on the relationships defined in the graph
+#' structure. Various options are available to fine-tune this.
+#' 
+#' \preformatted{
+#' expr <- generate_expression(100, graph_structure,
+#'                             cor = 0.8,
+#'                             mean = 0,
+#'                             sd = 1,
+#'                             comm = FALSE,
+#'                             dist = TRUE,
+#'                             absolute = FALSE,
+#'                             laplacian = FALSE)
+#' }
+#' 
+#' Here we can see the final result.
+#' 
+#' \preformatted{
+#' library("gplots")
+#' heatmap.2(expr,
+#'           scale = "none",
+#'           trace = "none",
+#'           col = bluered(50),
+#'           colsep = 1:4,
+#'           rowsep = 1:4)
+#' }
+#' 
+#' Input with an adjacency matrix is available using the
+#' \code{\link[graphsim:generate_expression]{generate_expression_mat}}
+#' function.
 #' 
 #' @section Creating Input Data:
 #' lorem ipsum (igraph / matrix functions / import from pkg data)

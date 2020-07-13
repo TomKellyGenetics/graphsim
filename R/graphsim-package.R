@@ -83,6 +83,8 @@
 #' Here we can see the final result.
 #' 
 #' \preformatted{
+#' dim(expr)
+#' 
 #' library("gplots")
 #' heatmap.2(expr,
 #'           scale = "none",
@@ -91,6 +93,9 @@
 #'           colsep = 1:4,
 #'           rowsep = 1:4)
 #' }
+#' 
+#' This dataset consists of 9 rows (one for each vertex or gene)
+#' in the graph and 100 columns (one for each sample or observation).
 #' 
 #' Input with an adjacency matrix is available using the
 #' \code{\link[graphsim:generate_expression]{generate_expression_mat}}

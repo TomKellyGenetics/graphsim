@@ -50,7 +50,7 @@ Here we set up an example graph object using the
 \preformatted{
 library("igraph")
 graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"),c("D", "E"),
-   c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+                               c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
 graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
 }
 
@@ -72,10 +72,19 @@ expr <- generate_expression(100, graph_structure,
 Here we can see the final result.
 
 \preformatted{
+dim(expr)
+
 library("gplots")
-heatmap.2(expr, scale = "none", trace = "none",
-          col = bluered(50), colsep = 1:4, rowsep = 1:4)
+heatmap.2(expr,
+          scale = "none",
+          trace = "none",
+          col = bluered(50),
+          colsep = 1:4,
+          rowsep = 1:4)
 }
+
+This dataset consists of 9 rows (one for each vertex or gene)
+in the graph and 100 columns (one for each sample or observation).
 
 Input with an adjacency matrix is available using the
 \code{\link[graphsim:generate_expression]{generate_expression_mat}}

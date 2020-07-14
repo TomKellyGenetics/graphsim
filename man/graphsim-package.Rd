@@ -440,7 +440,47 @@ These functions are demonstrated in more detail
 in the \link[../html/simulate_expression.html]{main} vignette.
 }
 
-\section{Visualization}{
+\section{Data Visualization}{
+
+
+Heatmaps can be used from the \code{\link[gplots::heatmap.2]{gplots}}
+package to display these simulated datasets.
+
+\preformatted{
+library("gplots")
+heatmap.2(adjacency_matrix, scale = "none", trace = "none",
+          col = colorpanel(50, "white", "black"), key = FALSE)
+          
+heatmap.2(relationship_matrix, scale = "none", trace = "none",
+          col = colorpanel(50, "white", "red"))
+          
+heatmap.2(state_matrix, scale = "none", trace = "none",
+          col = colorpanel(50, "royalblue", "palevioletred"),
+          colsep = 1:length(V(graph_structure)),
+          rowsep = 1:length(V(graph_structure)))
+
+heatmap.2(sigma_matrix, scale = "none", trace = "none",
+          col = colorpanel(50, "royalblue", "white", "palevioletred"),
+          colsep = 1:length(V(graph_structure)),
+          rowsep = 1:length(V(graph_structure)))
+          
+heatmap.2(expression_data, scale = "none", trace = "none",
+          col = colorpanel(50, "royalblue", "white", "palevioletred"),
+          colsep = 1:length(V(graph_structure)),
+         rowsep = 1:length(V(graph_structure)))
+
+heatmap.2(cor_data, scale = "none", trace = "none",
+          col = colorpanel(50, "royalblue", "white", "palevioletred"),
+          colsep = 1:length(V(graph_structure)),
+          rowsep = 1:length(V(graph_structure)))
+}
+
+In particular we can see here that the expected correlations
+show by the \code{sigma_matrix} are similar to the observed
+correlations in the \code{cor_data}.
+}
+
+\section{Graph Visualization}{
 
 
 The \sQuote{graphsim} package comes with a built-in plotting

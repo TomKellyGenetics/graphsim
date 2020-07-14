@@ -91,6 +91,18 @@ devtools::install_github("TomKellyGenetics/graphsim", ref = "dev")
 Please see the vignettes for demonstrations of this package on examples of simple simulated networks and the reactome pathway TGF-&beta; receptor signaling activates SMADs (R-HSA-2173789). An [article](https://doi.org/10.21105/joss.02161) with further details has been published in the 
 _Journal of Open Source Software_.
 
+A help menu can also be accessed within the R environment:
+
+```
+?graphsim
+```
+
+```
+help("graphsim-package")
+```
+
+This will display a help page and link to documentation for each function.
+
 --------------------------------------------------
 
 ## Citation

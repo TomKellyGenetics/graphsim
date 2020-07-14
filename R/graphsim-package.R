@@ -299,11 +299,52 @@
 #' }
 #' 
 #' @section Examining Step-by-Step:
+#'
+#'
 #' lorem ipsum (plotting sigma and \code{cor(t(expr))})
 #' 
 #' @section Visualization:
-#' lorem ipsum (plot_directed)
+#'
+#' The \sQuote{graphsim} package comes with a built-in plotting
+#' function to display graph objects. 
 #' 
+#' \preformatted{
+#' graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"),c("D", "E"),
+#'                                c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+#' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
+#' plot_directed(graph_structure, layout = layout.kamada.kawai)
+#' }
+#'
+#' This supports the \sQuote{state} parameter to display
+#' activating relationships (with positive correlations)
+#' and inhibiting or repressive relationships (with
+#' negative correlations).
+#'
+#' \preformatted{
+#' edge_states <- c(1, 1, -1, -1, 1, -1, 1, -1)
+#' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
+#' plot_directed(graph_structure, state = edge_states,
+#'               col.arrow = c("darkgreen", "red")[edge_states / 2 + 1.5]
+#'               layout = layout.kamada.kawai)
+#' }
+#'
+#' These states can also be passed from the \sQuote{state} edge
+#' attribute of the graph object.
+#'
+#' \preformatted{
+#" library("scales")
+#' graph_pathway <- identity(TGFBeta_Smad_graph)
+#' edge_properties <- E(graph_pathway)$state
+#' plot_directed(graph_pathway,
+#'               col.arrow = c(alpha("navyblue", 0.25),
+#'                             alpha("red", 0.25))[edge_properties],
+#'               fill.node = c("lightblue"),
+#'               layout = layout.kamada.kawai)
+#' }
+#' 
+#' This plotting function is demonstrated in more detail
+#' in the \link[../html/plots_directed.html]{plotting} vignette.
+#'
 #' @section Further information:
 #'   The graphsim package is published in the \emph{Journal of Open Source Software}.
 #'   See the paper here for more details:

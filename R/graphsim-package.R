@@ -26,7 +26,7 @@
 #' Editor: Mark Jensen (Frederick National Laboratory for Cancer Research)
 #' 
 #' @details This package provides functions to develop simulated continuous data 
-#' (e.g., gene expression) from a sigma covariance matrix derived from a 
+#' (e.g., gene expression) from a Sigma (\eqn{\Sigma}) covariance matrix derived from a 
 #' graph structure in \sQuote{\code{igraph}} objects. Intended to extend 
 #' \sQuote{\code{mvtnorm}} to take 'igraph' structures rather than sigma 
 #' matrices as input. This allows the use of simulated data that correctly
@@ -151,7 +151,7 @@
 #' } 
 #' 
 #' The following functions will compute matrices from an
-#' \code{\link[graphsim:make_adjmatrix]{adjcacency matrix}}:
+#' \code{\link[graphsim:make_adjmatrix]{adjacency matrix}}:
 #' 
 #' \itemize{
 #' 
@@ -300,9 +300,150 @@
 #' 
 #' @section Examining Step-by-Step:
 #'
-#'
-#' lorem ipsum (plotting sigma and \code{cor(t(expr))})
+#' These internal functions can be called to compute steps of
+#' the simulation procedure and examine the results.
 #' 
+#' 1. first we create a graph structure and define the input parameters
+#' 
+#' \preformatted{
+#' library("igraph")
+#' graph_structure_edges <- rbind(c("A", "C"), c("B", "C"), c("C", "D"),c("D", "E"),
+#'                                c("D", "F"), c("F", "G"), c("F", "I"), c("H", "I"))
+#' graph_structure <- graph.edgelist(graph_structure_edges, directed = TRUE)
+#' #sample size
+#' data.n <- 100
+#' #data distributions
+#' data.cor <- 0.75
+#' data.mean <- 3
+#' data.sd <- 1.5
+#' #inhibition states
+#' edge_states <- c(1, 1, -1, -1, 1, 1, 1, 1)
+#' }
+#' 
+#' 2. examine the relationships between the genes.
+#' 
+#' Here we can see which nodes share an edge:
+#' 
+#' \preformatted{
+#' > adjacency_matrix <- make_adjmatrix_graph(graph_structure)
+#' > adjacency_matrix
+#'   A C B D E F G I H
+#' A 0 1 0 0 0 0 0 0 0
+#' C 1 0 1 1 0 0 0 0 0
+#' B 0 1 0 0 0 0 0 0 0
+#' D 0 1 0 0 1 1 0 0 0
+#' E 0 0 0 1 0 0 0 0 0
+#' F 0 0 0 1 0 0 1 1 0
+#' G 0 0 0 0 0 1 0 0 0
+#' I 0 0 0 0 0 1 0 0 1
+#' H 0 0 0 0 0 0 0 1 0
+#' }
+#' 
+#' Here we define a geometrically decreasing series of relationships
+#' between genes based on distance by paths in the graph:
+#' 
+#' \preformatted{
+#' > relationship_matrix <- make_distance_graph(graph_structure, absolute = FALSE)
+#' > relationship_matrix
+#'   A          C          B          D          E          F          G          I          H
+#' A 1.00000000 0.20000000 0.10000000 0.10000000 0.06666667 0.06666667 0.05000000 0.05000000 0.04000000
+#' C 0.20000000 1.00000000 0.20000000 0.20000000 0.10000000 0.10000000 0.06666667 0.06666667 0.05000000
+#' B 0.10000000 0.20000000 1.00000000 0.10000000 0.06666667 0.06666667 0.05000000 0.05000000 0.04000000
+#' D 0.10000000 0.20000000 0.10000000 1.00000000 0.20000000 0.20000000 0.10000000 0.10000000 0.06666667
+#' E 0.06666667 0.10000000 0.06666667 0.20000000 1.00000000 0.10000000 0.06666667 0.06666667 0.05000000
+#' F 0.06666667 0.10000000 0.06666667 0.20000000 0.10000000 1.00000000 0.20000000 0.20000000 0.10000000
+#' G 0.05000000 0.06666667 0.05000000 0.10000000 0.06666667 0.20000000 1.00000000 0.10000000 0.06666667
+#' I 0.05000000 0.06666667 0.05000000 0.10000000 0.06666667 0.20000000 0.10000000 1.00000000 0.20000000
+#' H 0.04000000 0.05000000 0.04000000 0.06666667 0.05000000 0.10000000 0.06666667 0.20000000 1.00000000
+#' }
+#'
+#' Here we can see the resolved edge states through paths in the
+#' adjacency matrix:
+#' 
+#' \preformatted{
+#' > names(edge_states) <- apply(graph_structure_edges, 1, paste, collapse = "-")
+#' > edge_states
+#' A-C B-C C-D D-E D-F F-G F-I H-I 
+#' 1   1  -1  -1   1   1   1   1 
+#' > state_matrix <- make_state_matrix(graph_structure, state = edge_states)
+#' > state_matrix
+#'    A  C  B  D  E  F  G  I  H
+#' A  1  1  1 -1  1 -1 -1 -1 -1
+#' C  1  1  1 -1  1 -1 -1 -1 -1
+#' B  1  1  1 -1  1 -1 -1 -1 -1
+#' D -1 -1 -1  1 -1  1  1  1  1
+#' E  1  1  1 -1  1 -1 -1 -1 -1
+#' F -1 -1 -1  1 -1  1  1  1  1
+#' G -1 -1 -1  1 -1  1  1  1  1
+#' I -1 -1 -1  1 -1  1  1  1  1
+#' H -1 -1 -1  1 -1  1  1  1  1
+#' }
+#' 
+#' 3. define a Sigma (\eqn{\Sigma}) covariance matrix
+#' 
+#' Here we can see that the signs match the \code{state_matrix}
+#' and the covariance is based on the \code{relationship_matrix}
+#' weighted by the correlation (\code{cor}) and standard
+#' deviation (\code{sd}) parameters.
+#' 
+#' Note that where \code{sd = 1}, the diagonals will be \code{1}
+#' and the off-diagonal terms will be correlations.
+#' 
+#' \preformatted{
+#' > sigma_matrix <- make_sigma_mat_dist_graph(
+#' +     graph_structure,
+#' +     state = edge_states,
+#' +     cor = data.cor,
+#' +     sd = data.sd,
+#' +     absolute = FALSE
+#' + )
+#' > sigma_matrix
+#'    A         C         B        D         E        F         G         I         H
+#' A  2.250000  1.687500  0.843750 -0.84375  0.562500 -0.56250 -0.421875 -0.421875 -0.337500
+#' C  1.687500  2.250000  1.687500 -1.68750  0.843750 -0.84375 -0.562500 -0.562500 -0.421875
+#' B  0.843750  1.687500  2.250000 -0.84375  0.562500 -0.56250 -0.421875 -0.421875 -0.337500
+#' D -0.843750 -1.687500 -0.843750  2.25000 -1.687500  1.68750  0.843750  0.843750  0.562500
+#' E  0.562500  0.843750  0.562500 -1.68750  2.250000 -0.84375 -0.562500 -0.562500 -0.421875
+#' F -0.562500 -0.843750 -0.562500  1.68750 -0.843750  2.25000  1.687500  1.687500  0.843750
+#' G -0.421875 -0.562500 -0.421875  0.84375 -0.562500  1.68750  2.250000  0.843750  0.562500
+#' I -0.421875 -0.562500 -0.421875  0.84375 -0.562500  1.68750  0.843750  2.250000  1.687500
+#' H -0.337500 -0.421875 -0.337500  0.56250 -0.421875  0.84375  0.562500  1.687500  2.250000
+#' }
+#' 
+#' 4. generate an expression dataset using this sigma matrix
+#' 
+#' We use \code{generate_expression} to compute and expression
+#' dataset, simulated using these parameters:
+#' 
+#' \preformatted{
+#' > expression_data <- generate_expression(
+#' +     n = data.n,
+#' +     graph_structure,
+#' +     state = edge_states,
+#' +     cor = data.cor,
+#' +     mean = data.mean,
+#' +     sd = data.sd,
+#' +     comm = FALSE,
+#' +     dist = FALSE,
+#' +     absolute = FALSE,
+#' +     laplacian = FALSE
+#' + )
+#' > dim(expression_data)
+#' [1]   9 100
+#' }
+#' 
+#' Here we also compute the final observed correlations
+#' in the simulated dataset:
+#' 
+#' \preformatted{
+#' > cor_data <- cor(t(expression_data))
+#' > dim(cor_data)
+#' [1] 9 9
+#' }
+#' 
+#' These functions are demonstrated in more detail
+#' in the \link[../html/simulate_expression.html]{main} vignette.
+#'  
 #' @section Visualization:
 #'
 #' The \sQuote{graphsim} package comes with a built-in plotting

@@ -248,7 +248,7 @@ heatmap.2(make_sigma_mat_dist_graph(graph_structure, 0.8, absolute = FALSE),
           colsep = 1:4, rowsep = 1:4)
 ```
 
-Σ can also be computed for arithmetically computed distances.
+Sigma (Σ) can also be computed for arithmetically computed distances.
 
 ```{r, out.width = '50%', out.height  = '50%', fig.align='center', dpi=54}
 # sigma from absolute distance matrix

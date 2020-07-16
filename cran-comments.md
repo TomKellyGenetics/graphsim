@@ -33,14 +33,14 @@ Unfortunately, this means checks take considerable time to build vignettes.
 
 ## Release
 
-This package has also been submitted to the Journal of Open-Source Software for peer-review. This release accompanies a revised version of the manuscript (currently under review). This manuscript has also been subitted to the biorxiv preprint server.
-
-A minor release will be needed in the future to address reviewer comments and update citation information to the publication should it be accepted. 
+This package has also been accepted at the Journal of Open-Source Software for peer-review. This release updates citation information to the publication. 
 
 ## Vignettes
 
 Vignettes are pregenerated to preserve headers, table of contents, and HTML style.
 
-## Major Release
+Vignettes in Rmarkdown have been marked as eval=FALSE in some cases (to avoid checks timing out on CRAN).
+
+## Minor Release
 
 I will maintain this package at my current address <tom.kelly[at]riken.jp>

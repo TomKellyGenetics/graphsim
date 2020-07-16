@@ -50,4 +50,8 @@ inst/doc/._vignettes.zip
 vignettes/.DS_Store
 vignettes/._.DS_Store
 plots_directed.html
+plots_directed.Rmd
+plots_directed.md
 simulate_expression.html
+simulate_expression.Rmd
+simulate_expression.md

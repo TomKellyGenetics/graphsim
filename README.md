@@ -8,7 +8,7 @@
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/graphsim?color=orange)](https://CRAN.R-project.org/package=graphsim)
 [![GitHub Views](http://hits.dwyl.com/tomkellygenetics/graphsim.svg)](http://hits.dwyl.com/tomkellygenetics/graphsim)
 
-[![DOI](https://zenodo.org/badge/3931288.svg)](https://zenodo.org/badge/latestdoi/3931288)
+[![DOI](https://zenodo.org/badge/67395230.svg)](https://zenodo.org/badge/latestdoi/67395230)
 [![bioRxiv](https://img.shields.io/badge/biorXiv-10.1101%2F2020.03.02.972471-blue)](https://doi.org/10.1101/2020.03.02.972471)
 [![status](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6/status.svg)](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6)
 [![](https://img.shields.io/badge/Altmetric-72-blue.svg)](https://www.altmetric.com/details/77053356)

@@ -442,7 +442,7 @@
 #' }
 #' 
 #' These functions are demonstrated in more detail
-#' in the \href{https://cran.r-project.org/web/packages/graphsim/vignettes/simulate_expression.html}{main} vignette.
+#' in the \href{https://CRAN.R-project.org/package=graphsim/vignettes/simulate_expression.html}{main} vignette.
 #'  
 #' @section Data Visualization:
 #' 
@@ -522,7 +522,7 @@
 #' }
 #' 
 #' This plotting function is demonstrated in more detail
-#' in the \href{https://cran.r-project.org/web/packages/graphsim/vignettes/plots_directed.html}{plotting} vignette.
+#' in the \href{https://CRAN.R-project.org/package=graphsim/vignettes/plots_directed.html}{plotting} vignette.
 #'
 #' @section Further information:
 #'   The graphsim package is published in the \emph{Journal of Open Source Software}.

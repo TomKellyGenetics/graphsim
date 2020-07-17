@@ -16,7 +16,7 @@ output:
 toc-title: "Table of Contents"
 vignette: >
   %\VignetteIndexEntry{Directed plots for igraph objects}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{R.rsp::asis}
   %\VignetteEncoding{UTF-8}
 ---
 

@@ -17,14 +17,14 @@ citHeader("To cite package 'graphsim' in publications use:")
               year = year,
               note = paste0("R package version ", vers, "."),
               url = "https://github.com/TomKellyGenetics/graphsim",
-              doi = "10.5281/zenodo.391288",
+              doi = "10.5281/zenodo.3931288",
 
               textVersion =
               paste("S. Thomas Kelly and Michael A. Black (",
                     year,
                     "). graphsim: Simulate Expression Data from 'igraph' Networks. ",
                     vers, ".",
-                    " https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.391288",
+                    " https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.3931288",
                     sep="")
               )
 

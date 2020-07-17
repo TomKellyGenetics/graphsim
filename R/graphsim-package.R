@@ -14,13 +14,13 @@
 #' Authors:
 #' \itemize{
 #' \item Tom Kelly (RIKEN IMS) \href{https://orcid.org/0000-0003-3904-6690}{ORCID})
-#' \item Mik Black (Otago University) (\href{0000-0003-1174-6054}{ORCID})
+#' \item Mik Black (Otago University) (\href{https://orcid.org/0000-0003-1174-6054}{ORCID})
 #' }
 #' 
 #' Reviewers:
 #' \itemize{
-#' \item Cory Brunson (UConn) (\href{0000-0003-3126-9494}{ORCID})
-#' \item Robrecht Cannoodt (Ghent University) (\href{0000-0003-3641-729X}{ORCID})
+#' \item Cory Brunson (UConn) (\href{https://orcid.org/0000-0003-3126-9494}{ORCID})
+#' \item Robrecht Cannoodt (Ghent University) (\href{https://orcid.org/0000-0003-3641-729X}{ORCID})
 #' }
 #' 
 #' Editor: Mark Jensen (Frederick National Laboratory for Cancer Research)
@@ -442,11 +442,11 @@
 #' }
 #' 
 #' These functions are demonstrated in more detail
-#' in the \link[../html/simulate_expression.html]{main} vignette.
+#' in the \href{https://cran.r-project.org/web/packages/graphsim/vignettes/simulate_expression.html}{main} vignette.
 #'  
 #' @section Data Visualization:
 #' 
-#' Heatmaps can be used from the \code{\link[gplots::heatmap.2]{gplots}}
+#' Heatmaps can be used from the \code{\link[gplots:heatmap.2]{gplots}}
 #' package to display these simulated datasets.
 #' 
 #' \preformatted{
@@ -522,7 +522,7 @@
 #' }
 #' 
 #' This plotting function is demonstrated in more detail
-#' in the \link[../html/plots_directed.html]{plotting} vignette.
+#' in the \href{https://cran.r-project.org/web/packages/graphsim/vignettes/plots_directed.html}{plotting} vignette.
 #'
 #' @section Further information:
 #'   The graphsim package is published in the \emph{Journal of Open Source Software}.

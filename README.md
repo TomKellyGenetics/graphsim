@@ -8,7 +8,7 @@
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/graphsim?color=orange)](https://CRAN.R-project.org/package=graphsim)
 [![GitHub Views](http://hits.dwyl.com/tomkellygenetics/graphsim.svg)](http://hits.dwyl.com/tomkellygenetics/graphsim)
 
-[![DOI](https://zenodo.org/badge/67395230.svg)](https://zenodo.org/badge/latestdoi/67395230)
+[![DOI](https://zenodo.org/badge/3931288.svg)](https://zenodo.org/badge/latestdoi/3931288)
 [![bioRxiv](https://img.shields.io/badge/biorXiv-10.1101%2F2020.03.02.972471-blue)](https://doi.org/10.1101/2020.03.02.972471)
 [![status](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6/status.svg)](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6)
 [![](https://img.shields.io/badge/Altmetric-72-blue.svg)](https://www.altmetric.com/details/77053356)
@@ -111,7 +111,7 @@ To cite package 'graphsim' in publications use:
 
 >S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression Data from
 >'igraph' Networks. R package version 1.0.1.
->https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.391288
+>https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.3931288
 
 A BibTeX entry for LaTeX users is:
 
@@ -122,7 +122,7 @@ A BibTeX entry for LaTeX users is:
     year = {2020},
     note = {R package version R package version 1.0.1.},
     url = {https://github.com/TomKellyGenetics/graphsim},
-    doi = {10.5281/zenodo.391288},
+    doi = {10.5281/zenodo.3931288},
   }
 ```
 

@@ -1,3 +1,9 @@
+# graphsim 1.0.2
+
+* Bug fixes in plotting function
+
+* Vignette guide for importing pathways
+
 # graphsim 1.0.1
 
 * Update citation to reflect acceptance at JOSS

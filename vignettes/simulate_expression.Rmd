@@ -38,7 +38,7 @@ Guide on how to simulate gene expression data from pathway structures defined by
 
 **Package**
 
-graphsim 1.0.0
+graphsim 1.0.2
 
 # Overview of graphsim
 

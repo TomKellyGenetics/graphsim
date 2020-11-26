@@ -1,0 +1,323 @@
+---
+title: "graphsim: directed plots for igraph objects"
+author: "S. Thomas Kelly^1,2^, Michael A. Black^1^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
+date: "`r  format(Sys.time(), '%A %d %B %Y')`"
+output:
+  prettydoc::html_pretty:
+       theme: cayman
+  #html_document:
+       #theme: united
+       number_sections: true
+       toc: true
+       toc_depth: 4
+       #toc_float: true
+       #code_folding: show
+       keep_html: true
+vignette: >
+  %\VignetteIndexEntry{Directed plots for igraph objects}
+  %\VignetteEngine{R.rsp::asis}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", width = 68)
+knitr::opts_chunk$set(fig.cap = "", fig.path = "Plot")
+knitr::opts_chunk$set(fig.align = "center")
+options(width = 68, cli.unicode = FALSE, cli.width = 68)
+#par(mai=c(2.82, 2.82, 0.82, 0.82)-0.82)
+par(mar=c(7, 10, 4, 2) + 0.1)
+par(bty="o")
+#captioner::captioner(prefix = "Fig.")
+```
+
+
+<!-- <h1 class="title toc-ignore">Using the graphsim package:  Directed plots for igraph objects</h1> -->
+
+<!-- <h4 class="author">S. Thomas Kelly^1,2^, Michael A. Black^2^</h4> **** -->
+
+<!-- ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand -->
+
+<!-- ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama -->
+
+<!-- <h4 class="date">`r  format(Sys.time(), '%A %d %B %Y')`</h4> -->
+
+<!-- ---------------------------------------------------------- -->
+
+**Summary**
+
+Guide on how to create `igraph` objects from pathways imported from Pathway Commons.
+
+**Package**
+
+graphsim 1.0.2
+
+# Importing Pathways
+
+## Motivations
+
+Here we demonstrate how to create `igraph` objects <span class="citation">(Csardi and Nepusz 2006)</span>  for pathways compatible with `graphsim`. We provide example objects with the package and these examples contain additional details showing how these are imported into R. This uses the `paxtoolsr` package class="citation">(Luna et al 2015)</span> from Bioconductor.
+
+Graph object have edge properties <span class="citation">(Barabási and Oltvai 2004)</span>. Here we show how to define the "state" parameter which can be used to differentiate inhibitions. We use different arrowheadsto show these as per convention in molecular biology. 
+
+## Getting started
+
+The bioconductor package to import data can be installed as follows.
+
+```{r, include=FALSE, eval = TRUE, message=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("paxtoolsr", update = FALSE)
+```
+
+```{r, eval = FALSE, message=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("paxtoolsr")
+```
+
+To generate perform these step the following packages must be imported.
+
+```{r, message = FALSE}
+library("igraph")
+library("graphsim")
+library("paxtoolsr")
+```
+
+
+## Importing data
+
+We will demonstrate downloading <a href="https://reactome.org/>Reactome</a> pathway <span class="citation">(Croft _et al_. 2014)</span> from the <a href="http://www.pathwaycommons.org/>Pathway Commons</a>. Reactome pathways are also available in the href="https://bioconductor.org/packages/release/data/annotation/html/reactome.db.html>reactome.db</a> package <span class="citation">(Fabregat _et al_. 2017; Ligtenberg 2019)</span> but this only contains the gene set information. We use Pathway Commons as it contains direction graph structure information for the edges.
+
+We downlaad the Pathway Commons release into Extended Simple Interaction Format (SIF) Network format. We use a legacy version (y) to reproduce the results.
+
+```{r, eval = TRUE}
+# Importing data
+results <- downloadPc2(version = 7, selectedFileName = "Pathway%20Commons.7.Reactome.BIOPAX.owl.gz")
+```
+
+However we recommend using the latest version which is:
+
+```{r, include=FALSE}
+latest_version <- sort(as.numeric(sapply(strsplit(grep("<a href=\"v", readLines("http://www.pathwaycommons.org/archives/PC2/"), value = TRUE), "v"), function(x)  strsplit(x[3], "/")[[1]][1])), decreasing = TRUE)[1]
+```
+```{r}
+print(latest_version)
+```
+
+Run the following code to download the new version.
+
+```{r, include = FALSE}
+# Importing data
+print(paste0("results <- downloadPc2(version = ", latest_version,", selectedFileName = \"PathwayCommons", latest_version, ".reactome.BIOPAX.owl.gz\")"))
+```
+
+The results will be cached here:
+
+```{r, eval = FALSE, include = TRUE}
+Sys.getenv("PAXTOOLSR_CACHE")
+```
+```{r, eval = TRUE, include = FALSE}
+print(paste0("$HOME/.paxtoolsRCache"))
+```
+
+### Searching results
+
+We then query the results to find the pathways of interest. See the paxtoolsr vignette for details.
+
+```{r, warning = FALSE, message = FALSE}
+## Search Pathway Commons for 'PI3K'-related pathways
+searchResults <- searchPc(q = "PI3K", type = "pathway", verbose = TRUE)
+pathways <- xpathSApply(searchResults, "/searchResponse/searchHit/name", xmlValue)
+length(pathways)
+head(pathways)
+```
+
+### Downloading a Pathway
+
+We can create a local OWL file in this manner.
+
+
+```{r, warning = FALSE, message = FALSE}
+## Search Pathway Commons for 'PI3K'-related pathways
+searchResults <- searchPc(q = "PI3K Cascade", type = "pathway", verbose = TRUE)
+pathways <- xpathSApply(searchResults, "/searchResponse/searchHit/name", xmlValue)
+length(pathways)
+head(pathways)
+```
+
+We then select the first pathway.
+
+```{r}
+pathway <- pathways[1]
+pathway
+```
+
+We save it to a temporary OWL file. First we extract the required columns.
+
+```{r}
+library("plyr")
+
+#convert to data frame
+searchResultsDf <- ldply(xmlToList(searchResults), data.frame)
+dim(searchResultsDf)
+# Simplified results
+simplifiedSearchResultsDf <- searchResultsDf[, c("name", "uri", "biopaxClass")]
+head(simplifiedSearchResultsDf)
+```
+
+Then we write to a temp file.
+
+```{r}
+## Use an XPath expression to extract the results of interest. In this case, the
+## URIs (IDs) for the pathways from the results
+tmpSearchResults <- xpathSApply(searchResults, "/searchResponse/searchHit/uri", xmlValue)
+
+## Generate temporary file to save content into
+biopaxFile <- "bioxpax-reactome-pi3k-cascade.owl"
+
+## Extract a URI for a pathway in the search results and save into a file
+idx <- which(grepl("reactome", simplifiedSearchResultsDf$uri) & grepl("PI3K Cascade", 
+    simplifiedSearchResultsDf$name, ignore.case = TRUE))
+uri <- simplifiedSearchResultsDf$uri[idx]
+saveXML(getPc(uri, format = "BIOPAX"), file = biopaxFile)
+```
+
+### Create SIF object
+
+We convert to th eExtended Simple Interaction Format (SIF) Network format. This gives a matrix of nodes for genes and edges for relationships bewteen.
+
+```{r}
+resultsSIF <- toSifnx(inputFile = biopaxFile)
+print(paste(c("nodes:", nrow(resultsSIF$nodes))))
+print(paste(c("edges:", nrow(resultsSIF$edges))))
+```
+
+With node properties:
+
+```{r}
+results.nodesDF <- as.data.frame(resultsSIF$nodes) 
+head(results.nodesDF)
+```
+
+With edge properties:
+
+```{r}
+results.edgesDF <- as.data.frame(resultsSIF$edges) 
+head(results.edgesDF)
+```
+
+We see that all genes and edges belong to the same Reactome pathway.
+
+```{r}
+table(results.edgesDF$PATHWAY_NAMES)
+table(results.edgesDF$INTERACTION_DATA_SOURCE)
+```
+
+Edges are defined in several ways (some directional).
+
+```{r}
+table(results.edgesDF$INTERACTION_TYPE)
+```
+### Filtering genes and metabolites
+
+We can then optionally filter out edges that are not related to genes or proteins.
+
+Either by filtering edges involving metabolites.
+
+```{r}
+results.edgesDF <- results.edgesDF[results.edgesDF$INTERACTION_TYPE != "chemical-affects",]
+results.edgesDF <- results.edgesDF[results.edgesDF$INTERACTION_TYPE != "reacts-with",]
+results.edgesDF <- results.edgesDF[results.edgesDF$INTERACTION_TYPE != "used-to-produce",]
+table(results.edgesDF$INTERACTION_TYPE)
+```
+
+Ions can be removed as follows while retaining other metabolites.
+
+```{R}
+results.edgesDF <- results.edgesDF[results.edgesDF[,1] != "2+",1:3]
+results.edgesDF <- results.edgesDF[results.edgesDF[,3] != "2+",1:3]
+results.edgesDF <- results.edgesDF[results.edgesDF[,1] != "3+",1:3]
+results.edgesDF <- results.edgesDF[results.edgesDF[,3] != "3+",1:3]
+```
+
+Alternatively by screening the nodes for proteins.
+
+```{r}
+table(results.nodesDF$PARTICIPANT_TYPE)
+```
+```{r}
+#extract protein nodes
+results.nodesDF <- results.nodesDF[results.nodesDF$PARTICIPANT_TYPE == "ProteinReference",]
+#match to edges
+results.edgesDF <- results.edgesDF[results.edgesDF$PARTICIPANT_A %in% results.nodesDF$PARTICIPANT,]
+results.edgesDF <- results.edgesDF[results.edgesDF$PARTICIPANT_B %in% results.nodesDF$PARTICIPANT,]
+print(paste(c("nodes:", nrow(results.nodesDF))))
+print(paste(c("edges:", nrow(results.edgesDF))))
+```
+
+### Creating an igraph object
+
+Then we create and edge list from the SIF object. First we match names between edges and participants to gene symbols.
+
+```{r}
+#extract names
+gene_names <- resultsSIF$nodes$PARTICIPANT_NAME
+#replace with gene symbol (if defined)
+gene_names[grep("hgnc symbol:", resultsSIF$nodes$RELATIONSHIP_XREF)] <- sapply(strsplit(grep("hgnc symbol:", resultsSIF$nodes$RELATIONSHIP_XREF, value = TRUE), ":"), function(x) x[2])
+gene_names
+```
+
+Match gene symbols to edge participants
+
+```{r}
+results.edgesDF$PARTICIPANT_A <- gene_names[match(results.edgesDF$PARTICIPANT_A, results.nodesDF$PARTICIPANT)]
+results.edgesDF$PARTICIPANT_B <- gene_names[match(results.edgesDF$PARTICIPANT_B, results.nodesDF$PARTICIPANT)]
+```
+
+```{r}
+head(results.edgesDF[,c(1, 3)])
+```
+
+Create edge list with SIF edges.
+
+```{r}
+library("igraph")
+g <- graph_from_edgelist(as.matrix(results.edgesDF[,c(1, 3)]))
+g
+```
+
+```{r}
+library("graphsim")
+plot_directed(g, arrow_clip = 0.25, col.arrow = "grey75", cex.arrow = 0.5, fill.node = "lightblue", cex.node = 1.25)
+```
+
+
+
+
+----------------------------------------------------------
+
+# Session info
+Here is the output of `sessionInfo()` on the system on which this document was compiled running pandoc 2.1:
+
+```{r, echo = FALSE}
+sessionInfo()
+```
+
+
+----------------------------------------------------------
+
+# References
+
+<p>Barabási, A. L., and Oltvai,  Z. N. 2004. “Network Biology: Understanding the Cell’s Functional Organization.” <em>Nat Rev Genet</em> 5 (2): 101–13.</p>
+
+<p>Croft, D., Mundo, A. F., Haw, R.,  Milacic, M., Weiser, J., Wu, G., Caudy, M., et al. 2014. “The Reactome pathway knowledgebase.” Journal Article. <em>Nucleic Acids Res</em> 42 (database issue): D472–D477. <a href="https://doi.org/10.1093/nar/gkt1102">https://doi.org/10.1093/nar/gkt1102</a>.</p>
+
+<p>Csardi, G., and Nepusz, T. 2006. “The Igraph Software Package for Complex Network Research.” <em>InterJournal</em> Complex Systems: 1695. <a href="http://igraph.org">http://igraph.org</a>.</p>
+
+<p>Fabregat, A., Sidiropoulos, K., Viteri, G. et al. 2017. “Reactome pathway analysis: a high-performance in-memory approach.” <em>BMC Bioinformatics</em> 18: 1695. <a href="https://doi.org/10.1186/s12859-017-1559-2">https://doi.org/10.1186/s12859-017-1559-2</a>.</p>
+
+<p>Ligtenberg W. 2019. “reactome.db: A set of annotation maps for reactome.” R package version 1.68.0. <a href="https://bioconductor.org/packages/release/data/annotation/html/reactome.db.html>https://bioconductor.org/packages/release/data/annotation/html/reactome.db.html</a>.</p>
+
+<p>Luna, A., Babur, Ö., Aksoy, A. B, Demir, E., Sander, C. 2016. “PaxtoolsR: Pathway Analysis in R Using Pathway Commons.” <em>Bioinformaticsl</em> 32 (8): 1262-4. <a href="https://doi.org/10.1093/bioinformatics/btv733>https://doi.org/10.1093/bioinformatics/btv733</a>.</p>

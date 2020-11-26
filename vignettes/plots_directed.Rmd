@@ -51,7 +51,7 @@ Guide on how to plot directed graphs from `igraph` objects to display activating
 
 **Package**
 
-graphsim 1.0.0
+graphsim 1.0.2
 
 # Directed graph plots
 

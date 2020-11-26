@@ -32,12 +32,12 @@
 ^vignettes/*/*/*RData
 ^vignettes/*gif
 ^vignettes/cache$
-^vignettes/import_reactome.Rmd$
 ^vignettes/figure
 ^vignettes/simulate_expression_files$
 ^vignettes/simulate_expression_cache/html/
-^vignettes/simulate_expression.md
-^vignettes/plot_directed.md
+^vignettes/import_reactome.md#
+^vignettes/simulate_expression.md#
+^vignettes/plot_directed.md#
 pdf
 png
 sty
@@ -50,3 +50,5 @@ inst/doc/._.DS_Store
 inst/doc/._plots_directed.html
 inst/doc/._simulate_expression.html
 inst/doc/._vignettes.zip
+^./*html$
+^./*owl$

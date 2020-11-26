@@ -1,5 +1,5 @@
 ---
-title: "graphsim: directed plots for igraph objects"
+title: "graphsim: importing pathways from databases"
 author: "S. Thomas Kelly^1,2^, Michael A. Black^1^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
 date: "`r  format(Sys.time(), '%A %d %B %Y')`"
 output:
@@ -14,7 +14,7 @@ output:
        #code_folding: show
        keep_html: true
 vignette: >
-  %\VignetteIndexEntry{Directed plots for igraph objects}
+  %\VignetteIndexEntry{Importing pathways from databases}
   %\VignetteEngine{R.rsp::asis}
   %\VignetteEncoding{UTF-8}
 ---
@@ -292,8 +292,6 @@ g
 library("graphsim")
 plot_directed(g, arrow_clip = 0.25, col.arrow = "grey75", cex.arrow = 0.5, fill.node = "lightblue", cex.node = 1.25)
 ```
-
-
 
 
 ----------------------------------------------------------

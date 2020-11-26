@@ -1,7 +1,7 @@
 Package: graphsim
 Type: Package
 Title: Simulate Expression Data from 'igraph' Networks 
-Version: 1.0.1
+Version: 1.0.2
 Date: 2020-07-22
 Authors@R: c(person("S. Thomas", "Kelly",email = "tom.kelly@postgrad.otago.ac.nz", role = c("ctb")),
              person("S. Thomas", "Kelly",email = "tom.kelly@riken.jp", role = c("aut", "cre")),
@@ -24,7 +24,9 @@ Suggests:
     devtools,
     knitr (>= 1.5),
     markdown,
+    paxtoolsr,
     prettydoc,
+    plyr,
     R.rsp,
     rmarkdown,
     testthat,

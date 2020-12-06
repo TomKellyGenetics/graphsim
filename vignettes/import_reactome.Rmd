@@ -13,6 +13,7 @@ output:
        #toc_float: true
        #code_folding: show
        keep_html: true
+toc-title: "Table of Contents"
 vignette: >
   %\VignetteIndexEntry{Importing pathways from databases}
   %\VignetteEngine{R.rsp::asis}
@@ -94,7 +95,7 @@ We downlaad the Pathway Commons release into Extended Simple Interaction Format 
 
 ```{r, eval = TRUE}
 # Importing data
-results <- downloadPc2(version = 7, selectedFileName = "Pathway%20Commons.7.Reactome.BIOPAX.owl.gz")
+results <- downloadPc2(version = 8, selectedFileName = "Pathway%20Commons.7.Reactome.BIOPAX.owl.gz")
 ```
 
 However we recommend using the latest version which is:
@@ -121,6 +122,8 @@ Sys.getenv("PAXTOOLSR_CACHE")
 ```{r, eval = TRUE, include = FALSE}
 print(paste0("$HOME/.paxtoolsRCache"))
 ```
+
+## Importing the PI3K Casade
 
 ### Searching results
 
@@ -235,7 +238,7 @@ table(results.edgesDF$INTERACTION_TYPE)
 
 Ions can be removed as follows while retaining other metabolites.
 
-```{R}
+```{r}
 results.edgesDF <- results.edgesDF[results.edgesDF[,1] != "2+",1:3]
 results.edgesDF <- results.edgesDF[results.edgesDF[,3] != "2+",1:3]
 results.edgesDF <- results.edgesDF[results.edgesDF[,1] != "3+",1:3]
@@ -293,7 +296,200 @@ library("graphsim")
 plot_directed(g, arrow_clip = 0.25, col.arrow = "grey75", cex.arrow = 0.5, fill.node = "lightblue", cex.node = 1.25)
 ```
 
+Thus we have generated a graph structure for the Pi3K Cascade. Below we show other examples and how to set up edge states. 
 
+## Importing the RAF/MAP kinase cascade
+
+### Repeating steps for new pathway
+
+To repeat the above steps we define a function.
+
+```{r}
+getGraph <- function(pathway, chemicals = FALSE){
+  
+  query <- strsplit(pathway, "/")[[1]][1]
+  query <- gsub("/", "%2F", pathway)
+  query <- gsub(" ", "%20", query)
+  ## Search Pathway Commons for 'PI3K'-related pathways
+  searchResults <- searchPc(q = query, type = "pathway")
+  pathways <- xpathSApply(searchResults, "/searchResponse/searchHit/name", xmlValue)
+  length(pathways)
+  head(pathways)
+  #pathway <- pathways[match(pathway, pathways)[1]]
+  print(pathway)
+  #convert to data frame
+  searchResultsDf <- ldply(xmlToList(searchResults), data.frame)
+  dim(searchResultsDf)
+  # Simplified results
+  simplifiedSearchResultsDf <- searchResultsDf[, c("name", "uri", "biopaxClass")]
+  head(simplifiedSearchResultsDf)
+  ## Use an XPath expression to extract the results of interest. In this case, the
+  ## URIs (IDs) for the pathways from the results
+  tmpSearchResults <- xpathSApply(searchResults, "/searchResponse/searchHit/uri", xmlValue)
+  
+  ## Generate temporary file to save content into
+  biopaxFile <- "bioxpax-file.owl"
+  
+  ## Extract a URI for a pathway in the search results and save into a file
+  idx <- which(grepl("reactome", simplifiedSearchResultsDf$uri) & grepl(pathway, simplifiedSearchResultsDf$name, ignore.case = TRUE))
+  uri <- simplifiedSearchResultsDf$uri[idx]
+  saveXML(getPc(uri, format = "BIOPAX"), file = biopaxFile)
+  
+  ### Create SIF file 
+  resultsSIF <- toSifnx(inputFile = biopaxFile)
+  system("rm -rf bioxpax-file.owl")
+  print(paste(c("nodes:", nrow(resultsSIF$nodes))))
+  print(paste(c("edges:", nrow(resultsSIF$edges))))
+  
+  results.nodesDF <- as.data.frame(resultsSIF$nodes) 
+  results.edgesDF <- as.data.frame(resultsSIF$edges) 
+  
+  print(table(results.edgesDF$PATHWAY_NAMES))
+  print(table(results.edgesDF$INTERACTION_DATA_SOURCE))
+  print(table(results.edgesDF$INTERACTION_TYPE))
+  
+  if(chemicals == FALSE){
+    results.edgesDF <- results.edgesDF[results.edgesDF$INTERACTION_TYPE != "chemical-affects",]
+    results.edgesDF <- results.edgesDF[results.edgesDF$INTERACTION_TYPE != "consumption-controlled-by",]
+    print(table(results.edgesDF$INTERACTION_TYPE))
+    
+    results.edgesDF <- results.edgesDF[results.edgesDF[,1] != "2+",1:3]
+    results.edgesDF <- results.edgesDF[results.edgesDF[,3] != "2+",1:3]
+    results.edgesDF <- results.edgesDF[results.edgesDF[,1] != "3+",1:3]
+    results.edgesDF <- results.edgesDF[results.edgesDF[,3] != "3+",1:3]
+    print(table(results.nodesDF$PARTICIPANT_TYPE))
+    
+    #extract protein nodes
+    results.nodesDF <- results.nodesDF[results.nodesDF$PARTICIPANT_TYPE == "ProteinReference",]
+    #match to edges
+    results.edgesDF <- results.edgesDF[results.edgesDF$PARTICIPANT_A %in% results.nodesDF$PARTICIPANT,]
+    results.edgesDF <- results.edgesDF[results.edgesDF$PARTICIPANT_B %in% results.nodesDF$PARTICIPANT,]
+  }
+  print(paste(c("nodes:", nrow(results.nodesDF))))
+  print(paste(c("edges:", nrow(results.edgesDF))))
+  
+  #extract names
+  gene_names <- resultsSIF$nodes$PARTICIPANT_NAME
+  #replace with gene symbol (if defined)
+  gene_names[grep("hgnc symbol:", resultsSIF$nodes$RELATIONSHIP_XREF)] <- sapply(strsplit(grep("hgnc symbol:", resultsSIF$nodes$RELATIONSHIP_XREF, value = TRUE), ":"), function(x) x[2])
+  
+  results.edgesDF$PARTICIPANT_A <- gene_names[match(results.edgesDF$PARTICIPANT_A, results.nodesDF$PARTICIPANT)]
+  results.edgesDF$PARTICIPANT_B <- gene_names[match(results.edgesDF$PARTICIPANT_B, results.nodesDF$PARTICIPANT)]
+  
+  results.edgesDF <- results.edgesDF[!is.na(results.edgesDF$PARTICIPANT_A) & !is.na(results.edgesDF$PARTICIPANT_B),]
+  
+  g <- graph_from_edgelist(as.matrix(results.edgesDF[,c(1, 3)]))
+  return(g)
+}
+```
+
+Then we can give the name of any pathway to construct an igraph object from edges matching the query pathway. For PI3K/AKT Signaling.
+
+```{r}
+g <- getGraph("RAF/MAP kinase cascade", chemicals = FALSE)
+class(g)
+g
+```
+
+Thus we can plot the RAF/MAP cascade pathway.
+
+```{r}
+plot_directed(g, arrow_clip = 0.25, col.arrow = "grey75", cex.arrow = 0.5, fill.node = "lightblue", cex.node = 1.25, layout = layout.kamada.kawai)
+```
+
+## Importing the TGFβ-Smad pathway
+
+Enter the name of any pathway in Reactome to import it to R.
+
+```{r}
+g <- getGraph("TGF-beta receptor signaling activates SMADs", chemicals = FALSE)
+class(g)
+g
+```
+
+Thus we can plot the RAF/MAP cascade pathway.
+
+```{r}
+plot_directed(g, arrow_clip = 0.25, col.arrow = "grey75", cex.arrow = 0.5, fill.node = "lightblue", cex.node = 1.25, layout = layout.kamada.kawai)
+```
+
+```{r}
+state <- rep(1, length(E(g)))
+state[get.edgelist(g)[,1] %in% c("SMAD6", "SMAD7", "BAMBI", "SMURF1", "SMURF2", "UCHL5", "USP15", "UBB", "UBC", "PMEPA1", "PPP1CA", "PPP1CB", "PPP1CC", "PPP1R15A")] <- 2
+state[is.na(state)] <- 1
+table(state)
+```
+
+We can then plot these states.
+
+```{r}
+#makes things easier for plotting (either accepted)
+state[state == -1] <- 2
+inhibitors <- as.numeric(names(V(g)) %in% c("SMAD6", "SMAD7", "BAMBI", "SMURF1", "SMURF2", "UCHL5", "USP15", "UBB", "UBC", "PMEPA1", "PPP1CA", "PPP1CB", "PPP1CC", "PPP1R15A")) + 1
+
+plot_directed(g, state = state, arrow_clip = 0.25, col.arrow = c(alpha("grey75", 0.25), alpha("red", 0.25))[state], cex.arrow = 0.5, fill.node = c(alpha("lightblue", 0.25), alpha("red", 0.25))[inhibitors], cex.node = 1.25, layout = layout.kamada.kawai)
+```
+
+## Importing the GPCRs
+
+Enter the name of any pathway in Reactome to import it to R.
+
+```{r}
+#Signaling by GPCR
+g <- getGraph("R-HSA-372790", chemicals = TRUE)
+class(g)
+g
+```
+
+Thus we can plot the large GCPR signaling pathway.
+
+```{r}
+plot_directed(g, arrow_clip = 0.25, col.arrow = "grey75", cex.arrow = 0.5, fill.node = "lightblue", cex.node = 1.25, layout = layout.kamada.kawai)
+```
+
+
+
+```{r}
+g <- getGraph("PI3K/AKT activation", chemicals = FALSE)
+class(g)
+g
+```
+
+Thus we can plot the PI3K/AKT signaling pathway.
+
+```{r}
+plot_directed(g, arrow_clip = 0.25, col.arrow = "grey75", cex.arrow = 0.5, fill.node = "lightblue", cex.node = 1.25)
+```
+
+We define `state` as `1` for activation and `-1` for inhibition. Inhibitions are defined for edges between known repressors.
+
+```{r}
+pathway <- as_edgelist(g)
+state <- rep(1, length(E(g)))
+state[pathway[,1] %in% c("AKT1", "AKT2", "AKT3") & pathway[,2] %in% c("FOXO1", "GSK3B")] <- -1
+state[pathway[,1] %in% c("AKT1", "AKT2", "AKT3") & pathway[,2] == "PTEN"] <- -1
+state[pathway[,1] %in% c("AKT1", "AKT2", "AKT3") & pathway[,2] %in% c("TSC1", "TSC2", "PDCD4", "FOXO1", "GSK3A", "GSK3B", "GSK2", "GAB2", "GAB1", "IRS1")] <- -1
+state[pathway[,1] %in% c("IRS1") & "PI3KA" %in% pathway[,2]] <- -1
+state[pathway[,1] %in% c("IRS1") & "PI3KC" %in% pathway[,2]] <- -1
+state[pathway[,1] %in% c("TSC1", "TSC2") & pathway[,2] == "PTEN"] <- -1
+state <- na.omit(state)
+table(state)
+```
+
+We can then plot these states.
+
+```{r}
+#makes things easier for plotting (either accepted)
+state[state == -1] <- 2
+inhibitors <- as.numeric(names(V(g)) %in% c("AKT1", "AKT2", "AKT3", "ISR1", "TSC1", "TSC2")) + 1
+
+#transparent colours
+library("scales")
+
+plot_directed(g, state = state, arrow_clip = 0.25, col.arrow = c(alpha("grey75", 0.25), alpha("red", 0.25))[state], cex.arrow = 0.5, fill.node = c(alpha("lightblue", 0.25), alpha("red", 0.25))[inhibitors], cex.node = 1.25, layout = layout.kamada.kawai)
+```
+
+##
 ----------------------------------------------------------
 
 # Session info

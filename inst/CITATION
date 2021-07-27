@@ -4,7 +4,7 @@ citHeader("To cite package 'graphsim' in publications use:")
      desc <- packageDescription("graphsim")
      if(is.na(desc[1])){
              year <- "2020"
-             vers  <- "1.0.1"
+             vers  <- "1.0.2"
      } else {
              year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
             vers <- paste("R package version", desc$Version)

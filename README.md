@@ -17,7 +17,7 @@
 
 # graphsim
 
-## Version 1.0.1
+## Version 1.0.2
 
 
 ###  Simulate Expression Data from 'igraph' Networks 
@@ -110,7 +110,7 @@ This will display a help page and link to documentation for each function.
 To cite package 'graphsim' in publications use:
 
 >S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression Data from
->'igraph' Networks. R package version 1.0.1.
+>'igraph' Networks. R package version 1.0.2.
 >https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.3931288
 
 A BibTeX entry for LaTeX users is:
@@ -120,7 +120,7 @@ A BibTeX entry for LaTeX users is:
     title = {{graphsim}: Simulate Expression Data from 'igraph' Networks },
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version R package version 1.0.1.},
+    note = {R package version R package version 1.0.2.},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.3931288},
   }

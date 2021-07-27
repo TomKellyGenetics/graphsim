@@ -1,3 +1,7 @@
+# graphsim 1.0.2
+
+Updates maintainer contact details.
+
 # graphsim 1.0.1
 
 * Update citation to reflect acceptance at JOSS

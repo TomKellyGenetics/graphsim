@@ -547,7 +547,6 @@
 #'   A BibTeX entry for LaTeX users is: \preformatted{
 #'   @article{Kelly2020joss02161,
 #'      doi = {10.21105/joss.02161},
-#'      url ={https://doi.org/10.21105/joss.02161},
 #'      year = {2020},
 #'      publisher = {The Open Journal},
 #'      volume = {5},

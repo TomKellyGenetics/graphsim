@@ -1,7 +1,7 @@
 [![Travis-CI Build Status](https://travis-ci.com/TomKellyGenetics/graphsim.svg?branch=master)](https://travis-ci.com/TomKellyGenetics/graphsim)
 [![CircleCI build status](https://circleci.com/gh/TomKellyGenetics/graphsim.svg?style=svg)](https://circleci.com/gh/TomKellyGenetics/graphsim)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/graphsim?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/graphsim)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/graphsim)](https://cran.r-project.org/package=graphsim)
 [![Downloads](https://cranlogs.r-pkg.org/badges/graphsim)](https://CRAN.R-project.org/package=graphsim)
@@ -9,7 +9,7 @@
 
 [![DOI](https://zenodo.org/badge/67395230.svg)](https://zenodo.org/badge/latestdoi/67395230)
 [![bioRxiv](https://img.shields.io/badge/biorXiv-10.1101%2F2020.03.02.972471-blue)](https://doi.org/10.1101/2020.03.02.972471)
-[![status](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6/status.svg)](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6)
+[![status](https://joss.theoj.org/papers/96016c6a55d7f74bacebd187c6ededd6/status.svg)](https://joss.theoj.org/papers/10.21105/joss.02161)
 [![](https://img.shields.io/badge/Altmetric-72-blue.svg)](https://www.altmetric.com/details/77053356)
 
 --------------------------------------------------

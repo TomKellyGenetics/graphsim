@@ -12,7 +12,7 @@
 ## Local R CMD check results
 
 ── R CMD check results ───────────────────────────────────── graphsim 1.0.2 ────
-Duration: 1m 12.2s
+Duration: 57.9s
 
 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 

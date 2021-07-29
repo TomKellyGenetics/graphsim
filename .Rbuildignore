@@ -14,8 +14,8 @@
 ^cran-comments\.md$
 ^cache$
 ^demo.gif
-^demo2.gif^doc$
-^doc
+^demo2.gif
+^doc$
 ^fig*
 ^graphsim$
 ^graphsim.tar.gz$

@@ -3,18 +3,17 @@ title: "graphsim: simulating continuous data based on network graph structures"
 author: "S. Thomas Kelly^1,2^, Michael A. Black^1^ <br> ^1^ Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand <br> ^2^ RIKEN Center for Integrative Medical Sciences, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama"
 date: "`r  format(Sys.time(), '%A %d %B %Y')`"
 output:
-    html_document
-#  prettydoc::html_pretty:
-#  #     theme: cayman
-#  html_document
+  prettydoc::html_pretty:
+       theme: cayman
+  #html_document:
        #theme: united
-       #number_sections: true
-       #toc: true
-       #toc_depth: 4
+       number_sections: true
+       toc: true
+       toc_depth: 4
        #toc_float: true
        #code_folding: show
-       #keep_html: true
-#toc-title: "Table of Contents"
+       keep_html: true
+toc-title: "Table of Contents"
 vignette: >
   %\VignetteIndexEntry{Simulating network graph structure in continuous data}
   %\VignetteEngine{R.rsp::asis}
@@ -50,7 +49,7 @@ If you have problems or feedback, sumbmitting an issue to the the GitHub reposit
 
 Pathway and graph structures have a wide array of applications. Here we consider the simulation of (log-normalised) gene expression data from a biological pathway. If you have another use for this software you are welcome to apply it to your problem but please bear in mind that it was designed with this application in mind. In principle, normally-distributed continuous data can be generated based on any defined relationships. This package uses the graph structure to define a ∑ covariance matrix and generate simulated data by sampling from a multivariate normal distribution.
 
-Crucially, this allows the simulation of negative correlations based on inhibitory or repressive relationships, as commonly occur in biology <span class="citation">(Barabási and Oltvai 2004)</span>. A custom plotting function `plot_directed` is provided to visualise these relationships using the "state" parameter. This plotting function has a [dedicated vignette](./plots_directed.html).
+Crucially, this allows the simulation of negative correlations based on inhibitory or repressive relationships, as commonly occur in biology <span class="citation">(Barabási and Oltvai 2004)</span>. A custom plotting function `plot_directed` is provided to visualise these relationships using the "state" parameter. This plotting function has a [dedicated vignette](plots_directed.html).
 
 For more details on the background of this package, see the [paper](https://github.com/TomKellyGenetics/graphsim/blob/master/paper/paper.Rmd) included with the package on GitHub. This vignette provides more detail on the code needed to reproduce the figures presented in the manuscript.
   

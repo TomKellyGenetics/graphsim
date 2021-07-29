@@ -1,6 +1,6 @@
 Package: graphsim
 Type: Package
-Title: Simulate Expression Data from 'igraph' Networks 
+Title: Simulate Expression Data from 'igraph' Networks
 Version: 1.0.2
 Date: 2020-07-22
 Authors@R: c(person("S. Thomas", "Kelly",email = "tomkellygenetics@gmail.com", role = c("aut", "cre")),
@@ -12,25 +12,17 @@ License: GPL-3
 URL: https://github.com/TomKellyGenetics/graphsim/
 BugReports: https://github.com/TomKellyGenetics/graphsim/issues/
 Depends: R (>= 2.10)
-Imports:
-    utils,
-    gplots,
-    igraph,
-    mvtnorm,
-    Matrix,
-    matrixcalc,
-    graphics
-Suggests:
-    devtools,
-    knitr (>= 1.5),
-    markdown,
-    prettydoc,
-    R.rsp,
-    rmarkdown,
-    testthat,
-    scales,
-    vdiffr
+Imports: utils, gplots, igraph, mvtnorm, Matrix, matrixcalc, graphics
+Suggests: devtools, knitr (>= 1.5), markdown, prettydoc, R.rsp,
+        rmarkdown, testthat, scales, vdiffr
 LazyData: TRUE
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 VignetteBuilder: R.rsp
+NeedsCompilation: no
+Packaged: 2021-07-28 08:18:50 UTC; tom
+Author: S. Thomas Kelly [aut, cre],
+  Michael A. Black [aut, ths],
+  Robrecht Cannoodt [ctb],
+  Jason Cory Brunson [ctb]
+Maintainer: S. Thomas Kelly <tomkellygenetics@gmail.com>

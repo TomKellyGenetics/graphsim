@@ -17,6 +17,7 @@
 ^demo2.gif
 ^doc$
 ^fig*
+CITATION.cff
 ^graphsim$
 ^graphsim.tar.gz$
 ^graphsim_0.1.1.tar.gz

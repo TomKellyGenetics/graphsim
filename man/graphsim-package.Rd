@@ -520,7 +520,7 @@ plot_directed(graph_pathway,
 }
 
 This plotting function is demonstrated in more detail
-in the \href{https://CRAN.R-project.org/package=graphsim/vignettes/plots_directed.html}{plotting} vignette.
+in the plots_directed.Rmd plotting vignette.
 }
 
 \section{Further information}{

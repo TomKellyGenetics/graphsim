@@ -1,5 +1,5 @@
-[![Travis-CI Build Status](https://travis-ci.com/TomKellyGenetics/graphsim.svg?branch=master)](https://travis-ci.com/TomKellyGenetics/graphsim)
-[![CircleCI build status](https://circleci.com/gh/TomKellyGenetics/graphsim.svg?style=svg)](https://circleci.com/gh/TomKellyGenetics/graphsim)
+[![Travis-CI Build Status](https://www.travis-ci.com/TomKellyGenetics/graphsim.svg?branch=master)](https://app.travis-ci.com/github/mikblacklab/graphsim)
+[![CircleCI build status](https://app.circleci.com/pipelines/github/TomKellyGenetics/graphsim.svg?style=svg)](https://app.circleci.com/pipelines/github/TomKellyGenetics/graphsim)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/graphsim?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/graphsim)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
@@ -16,7 +16,7 @@
 
 # graphsim
 
-## Version 1.0.2
+## Version 1.0.3
 
 
 ###  Simulate Expression Data from 'igraph' Networks 
@@ -109,7 +109,7 @@ This will display a help page and link to documentation for each function.
 To cite package 'graphsim' in publications use:
 
 >S. Thomas Kelly and Michael A. Black (2020). graphsim: Simulate Expression Data from
->'igraph' Networks. R package version 1.0.2.
+>'igraph' Networks. R package version 1.0.3.
 >https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.3931288
 
 A BibTeX entry for LaTeX users is:
@@ -119,7 +119,7 @@ A BibTeX entry for LaTeX users is:
     title = {{graphsim}: Simulate Expression Data from 'igraph' Networks },
     author = {S. Thomas Kelly and Michael A. Black},
     year = {2020},
-    note = {R package version R package version 1.0.2.},
+    note = {R package version R package version 1.0.3.},
     url = {https://github.com/TomKellyGenetics/graphsim},
     doi = {10.5281/zenodo.3931288},
   }

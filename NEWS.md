@@ -1,3 +1,13 @@
+# graphsim 1.0.3
+
+Minor update to pass CRAN checks
+
+- removed imports for unused packages
+
+- removed dependency on deprecated sparse matrices
+
+- correct links in citations and vignettes
+
 # graphsim 1.0.2
 
 Updates maintainer contact details.

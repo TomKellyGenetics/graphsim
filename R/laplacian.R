@@ -13,8 +13,6 @@
 ##' @keywords graph network igraph Laplacian
 ##' @importFrom igraph laplacian_matrix graph.edgelist as.undirected graph_from_adjacency_matrix
 ##' @import igraph
-##' @importFrom Matrix Matrix
-##' @importClassesFrom Matrix dgCMatrix
 ##' 
 ##' @family graphsim functions
 ##' @family graph conversion functions

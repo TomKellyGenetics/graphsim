@@ -522,7 +522,7 @@
 #' }
 #' 
 #' This plotting function is demonstrated in more detail
-#' in the \href{https://CRAN.R-project.org/package=graphsim/vignettes/plots_directed.html}{plotting} vignette.
+#' in the plots_directed.Rmd plotting vignette.
 #'
 #' @section Further information:
 #'   The graphsim package is published in the \emph{Journal of Open Source Software}.

@@ -16,7 +16,7 @@ Imports: utils, gplots, igraph, mvtnorm, Matrix, matrixcalc, graphics
 Suggests: devtools, knitr (>= 1.5), markdown, prettydoc, R.rsp,
         rmarkdown, testthat, scales, vdiffr
 LazyData: TRUE
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8
 VignetteBuilder: R.rsp
 NeedsCompilation: no

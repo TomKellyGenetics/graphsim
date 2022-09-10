@@ -527,7 +527,7 @@
 #' @section Further information:
 #'   The graphsim package is published in the \emph{Journal of Open Source Software}.
 #'   See the paper here for more details:
-#'    \href{https://doi.org/10.21105/joss.02161}{doi: 10.21105/joss.02161}
+#'    \doi{10.21105/joss.02161}
 #'   
 #'   The graphsim GitHub repository is here:
 #'   \href{https://github.com/TomKellyGenetics/graphsim}{TomKellyGenetics/graphsim}
@@ -542,7 +542,7 @@
 #'   Kelly, S.T. and Black, M.A. (2020). graphsim: An R package for simulating gene
 #'   expression data from graph structures of biological pathways.
 #'   \emph{Journal of Open Source Software}, \bold{5}(51), 2161,
-#'   \url{https://doi.org/10.21105/joss.02161}
+#'   \doi{10.21105/joss.02161}
 #'   
 #'   A BibTeX entry for LaTeX users is: \preformatted{
 #'   @article{Kelly2020joss02161,
@@ -563,7 +563,7 @@
 #'  Publication at \emph{Journal of Open Source Software}:
 #'  
 #'  \itemize{
-#'  \item \url{https://doi.org/10.21105/joss.02161}
+#'  \item \doi{10.21105/joss.02161}
 #'  }
 #'  
 #'  GitHub repository:

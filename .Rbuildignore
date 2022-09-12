@@ -17,6 +17,7 @@
 ^demo2.gif
 ^doc$
 ^fig*
+CITATION.cff
 ^graphsim$
 ^graphsim.tar.gz$
 ^graphsim_0.1.1.tar.gz
@@ -50,6 +51,7 @@ inst/doc/._.DS_Store
 inst/doc/._plots_directed.html
 inst/doc/._simulate_expression.html
 inst/doc/._vignettes.zip
+^inst/citation.cff$
 Pathway_Structure_2017.R
 bioxpax-reactome-pi3k-cascade.owl
 downloadPc2.R

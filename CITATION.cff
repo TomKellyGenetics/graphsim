@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: >-
+  graphsim: An R package for simulating gene
+  expression data from graph structures of biological
+  pathways
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+version: 1.0.3
+authors:
+  - given-names: S. Thomas
+    family-names: Kelly
+    email: tom.kelly@postgrad.otago.ac.nz
+    affiliation1: Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand
+    affiliation2: Center for Integrative Medical Sciences, RIKEN, Suehiro-cho-1-7-22, Tsurumi Ward, Yokohama, Japan
+    orcid: 'https://orcid.org/0000-0003-3904-6690'
+  - given-names: Michael A.
+    family-names: Black
+    email: mik.black@otago.ac.nz
+    affiliation1: Department of Biochemistry, University of Otago, PO Box 56, Dunedin 9054, New Zealand
+    orcid: 'https://orcid.org/0000-0003-1174-6054'
+doi: 10.21105/joss.02161
+date-released: 2020-07-09
+url: "https://github.com/TomKellyGenetics/graphsim"

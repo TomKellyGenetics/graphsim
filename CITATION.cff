@@ -7,7 +7,7 @@ message: >-
   If you use this software, please cite it using the
   metadata from this file.
 type: software
-version: 1.0.3
+version: 1.0.4
 authors:
   - given-names: S. Thomas
     family-names: Kelly

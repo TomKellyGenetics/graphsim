@@ -16,13 +16,15 @@ Imports: gplots, igraph, mvtnorm, matrixcalc, Matrix, graphics
 Suggests: devtools, knitr (>= 1.5), markdown, prettydoc, R.rsp,
         rmarkdown, testthat, scales, vdiffr
 LazyData: TRUE
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 VignetteBuilder: R.rsp
 NeedsCompilation: no
-Packaged: 2021-07-28 08:18:50 UTC; tom
+Packaged: 2025-05-02 00:56:17 UTC; tom
 Author: S. Thomas Kelly [aut, cre],
   Michael A. Black [aut, ths],
   Robrecht Cannoodt [ctb],
   Jason Cory Brunson [ctb]
 Maintainer: S. Thomas Kelly <tomkellygenetics@gmail.com>
+Repository: CRAN
+Date/Publication: 2025-05-02 06:12:54 UTC

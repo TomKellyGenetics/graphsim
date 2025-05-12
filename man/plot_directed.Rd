@@ -6,7 +6,7 @@
 \title{Extensions to igraph for Customising plots}
 \usage{
 plot_directed(
-  graph,
+  x,
   state = NULL,
   labels = NULL,
   layout = layout.fruchterman.reingold,
@@ -25,11 +25,12 @@ plot_directed(
   sub = NULL,
   xlab = "",
   ylab = "",
-  frame.plot = F
+  frame.plot = F,
+  ...
 )
 }
 \arguments{
-\item{graph}{An \code{\link[igraph:aaa-igraph-package]{igraph}} object. Must be directed with known states.}
+\item{x}{An \code{\link[igraph:aaa-igraph-package]{igraph}} object. Must be directed with known states.}
 
 \item{state}{character or integer. Defaults to "activating" if no "state" edge attribute 
 found. May be applied a scalar across all edges or as a vector for each edge respectively. 
@@ -80,6 +81,8 @@ Defaults to par("fg").  May take a scalar applied to all edges or a vector
 \item{main, sub, xlab, ylab}{Plotting parameters to specify plot titles or axes labels}
 
 \item{frame.plot}{logical. Whether to frame plot with a box. Defaults to FALSE.}
+
+\item{...}{arguments passed to plot}
 }
 \value{
 base R graphics

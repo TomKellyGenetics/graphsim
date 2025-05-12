@@ -1,6 +1,13 @@
 ^.*\.Rproj$
 ^.circleci
+^.git$
 ^.github$
+.travis.yml
+..Rcheck
+.Rcheck
+.circleci
+.git
+.github
 ^.install_extras$
 ^CODE_OF_CONDUCT.md$
 ^CONTRIBUTING.md$

@@ -1,32 +1,24 @@
-citHeader("To cite package 'graphsim' in publications use:")
+citHeader("To cite the graphsim package in publications use:")
 
-     desc <- NA
-     desc <- packageDescription("graphsim")
-     if(is.na(desc[1])){
-             year <- "2025"
-             vers  <- "1.0.4"
-     } else {
-             year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
-            vers <- paste("R package version", desc$Version)
-     }
-     
-     citEntry(entry="Manual",
-              title = "{graphsim}: Simulate Expression Data from 'igraph' Networks ",
-              author = c(as.person("S. Thomas Kelly"),
-                                  as.person("Michael A. Black")),
-              year = year,
-              note = paste0("R package version ", vers, "."),
-              url = "https://github.com/TomKellyGenetics/graphsim",
-              doi = "10.5281/zenodo.3931288",
+year <- sub("-.*", "", Sys.Date())
+version <- "1.0.4"
+note <- sprintf("R package version %s", version)
 
-              textVersion =
-              paste("S. Thomas Kelly and Michael A. Black (",
-                    year,
-                    "). graphsim: Simulate Expression Data from 'igraph' Networks. ",
-                    vers, ".",
-                    " https://github.com/TomKellyGenetics/graphsim doi:10.5281/zenodo.3931288",
-                    sep="")
-              )
+bibentry(
+  bibtype = "Manual",
+  title = "graphsim: An R package for simulating gene expression data from graph structures of biological pathways",
+  author = c(
+    person("S. Thomas", "Kelly"),
+    person("Michael A.", "Black")
+  ),
+  year = year,
+  note = note,
+  url = "https://CRAN.R-project.org/package=graphsim",
+  textVersion = sprintf(
+    "Kelly, S.T. (%s). graphsim: An R package for simulating gene expression data from graph structures of biological pathways. %s. https://CRAN.R-project.org/package=graphsim",
+    year, note
+  )
+)
 
 citFooter("Please also cite the publication describing use of this package where appropriate.
 

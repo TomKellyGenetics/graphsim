@@ -15,7 +15,7 @@
 ##'
 ##' @description Functions to plot_directed or graph structures including customised colours, layout, states, arrows. Uses graphs functions as an extension of \code{\link[igraph:aaa-igraph-package]{igraph}}. Designed for plotting directed graphs.
 ##'
-##' @param graph An \code{\link[igraph:aaa-igraph-package]{igraph}} object. Must be directed with known states.
+##' @param x An \code{\link[igraph:aaa-igraph-package]{igraph}} object. Must be directed with known states.
 ##' @param state character or integer. Defaults to "activating" if no "state" edge attribute 
 ##' found. May be applied a scalar across all edges or as a vector for each edge respectively. 
 ##' Accepts non-integer values for weighted edges provided that the sign indicates whether links
@@ -50,6 +50,7 @@
 ##'  with colours for each edge respectively.
 ##' @param main,sub,xlab,ylab Plotting parameters to specify plot titles or axes labels
 ##' @param frame.plot logical. Whether to frame plot with a box. Defaults to FALSE.
+##' @param ... arguments passed to plot
 ##' @keywords graph igraph igraph plot
 ##' @import igraph graphics
 ##' 
@@ -104,26 +105,26 @@
 ##' @return base R graphics
 ##' 
 ##' @export
-plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, cex.sub=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=NULL, main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F){
-  if(is.null(V(graph)$name)) V(graph)$name <- as.character(V(graph))
+plot_directed <- function(x, state = NULL, labels = NULL, layout = layout.fruchterman.reingold, cex.node = 1, cex.label = 0.75, cex.arrow=1.25, cex.main=0.8, cex.sub=0.8, arrow_clip = 0.075, pch=21, border.node="grey33", fill.node="grey66", col.label = NULL, col.arrow=NULL, main=NULL, sub=NULL, xlab="", ylab="", frame.plot=F, ...){
+  if(is.null(V(x)$name)) V(x)$name <- as.character(V(x))
   if(is.function(layout)){
-    L <-  layout(graph)
+    L <-  layout(x)
   } else {
-    if(is.matrix(layout) && nrow(layout) == length(V(graph)) && ncol(layout) == 2){
+    if(is.matrix(layout) && nrow(layout) == length(V(x)) && ncol(layout) == 2){
       L <- as.matrix(layout)
     } else {
-      warning(paste0("layout must be specified as an igraph function or ", length(V(graph)), " by 2 matrix"))
+      warning(paste0("layout must be specified as an igraph function or ", length(V(x)), " by 2 matrix"))
     }
   }
-  vs <- V(graph)
-  es <- as.data.frame(get.edgelist(graph))
+  vs <- V(x)
+  es <- as.data.frame(get.edgelist(x))
   Nv <- length(vs)
   Ne <- length(es[1]$V1)
   Xn <- L[,1]
   Yn <- L[,2]
   plot(Xn, Yn, xaxt="n", yaxt="n", xlab=xlab, ylab=ylab, xlim = mean(Xn)+c(-1,1 )*1.2*(max(Xn)-min(Xn))/2, ylim = mean(Yn)+c(-1,1 )*1.2*(max(Yn)-min(Yn))/2, frame.plot=frame.plot, cex = 2 * cex.node, pch=1, col=par()$bg, main=main, sub=sub, cex.main=cex.main, cex.sub=cex.sub)
-  if(!is.null(get.edge.attribute(graph, "state"))){
-    state <- get.edge.attribute(graph, "state")
+  if(!is.null(get.edge.attribute(x, "state"))){
+    state <- get.edge.attribute(x, "state")
   } else {
     # add default state if not specified
     if(is.null(state)){
@@ -162,7 +163,7 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
       if(is.null(col.arrow)) col.arrow <- "red"
       arrows(x0 = (1-arrow_clip) * Xn[match(as.character(es$V1), names(vs))] + arrow_clip * Xn[match(as.character(es$V2), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(es$V1), names(vs))] + arrow_clip * Yn[match(as.character(es$V2), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(es$V2), names(vs))] + arrow_clip * Xn[match(as.character(es$V1), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(es$V2), names(vs))]  + arrow_clip * Yn[match(as.character(es$V1), names(vs))], lwd=cex.arrow, col=col.arrow, length=0.1, angle=90)
     } else{
-      warning("Please give state as a scalar or vector of length(E(graph)): input must be 'activating', 'inhibiting' or an integer")
+      warning("Please give state as a scalar or vector of length(E(x)): input must be 'activating', 'inhibiting' or an integer")
       stop()
     }
   } else{
@@ -184,7 +185,7 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
         if(is.null(col.arrow[i])) col.arrow[i] <- "red"
         arrows(x0 = (1-arrow_clip) * Xn[match(as.character(v0), names(vs))] + arrow_clip * Xn[match(as.character(v1), names(vs))], y0 = (1-arrow_clip) * Yn[match(as.character(v0), names(vs))] + arrow_clip * Yn[match(as.character(v1), names(vs))],  x1 = (1-arrow_clip) * Xn[match(as.character(v1), names(vs))] + arrow_clip * Xn[match(as.character(v0), names(vs))],  y1 = (1-arrow_clip) * Yn[match(as.character(v1), names(vs))]  + arrow_clip * Yn[match(as.character(v0), names(vs))], lwd=cex.arrow[i], col=col.arrow[i], length=0.1, angle=90)
       } else{
-        warning("please give state as a scalar or vector of length(E(graph))")
+        warning("please give state as a scalar or vector of length(E(x))")
         stop()
       }
     }
@@ -194,4 +195,5 @@ plot_directed <- function(graph, state = NULL, labels = NULL, layout = layout.fr
   text(Xn, Yn, labels=labels, cex = cex.label*cex.node, col=col.label)
 }
 
+##' @export
 plot.directed <- plot_directed

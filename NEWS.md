@@ -5,6 +5,8 @@ Minor update to pass CRAN checks
 
 - updates citation for retain on CRAN
 
+- avoids deprecated use of S3 methods
+
 # graphsim 1.0.3
 
 Minor update to pass CRAN checks
